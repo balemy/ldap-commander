@@ -29,6 +29,7 @@ final class LDAPConnect implements MiddlewareInterface
 
     )
     {
+        
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface

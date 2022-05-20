@@ -13,7 +13,9 @@ vendor/bin/codecept run
 
 ### Static analysis
 
-The code is statically analyzed with [Psalm](https://psalm.dev/). To run static analysis:
+The code is statically analyzed with [Psalm](https://psalm.dev/). 
+
+To run static analysis:
 
 ```shell
 ./vendor/bin/psalm
