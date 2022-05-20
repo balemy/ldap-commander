@@ -10,6 +10,7 @@ use RecursiveIteratorIterator as RIterator;
 
 final class Installer
 {
+    
     /**
      * @psalm-suppress UndefinedClass
      */
