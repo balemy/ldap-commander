@@ -20,6 +20,9 @@ jobs:
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
+
+    - name: Install Git
+      run: sudo apt-get install -y git        
         
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag balemy/ldap-commander:latest
