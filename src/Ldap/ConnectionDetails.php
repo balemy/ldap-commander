@@ -60,9 +60,9 @@ class ConnectionDetails
     {
         foreach (static::ENV_CONFIG_MAP as $attribute => $envVar) {
             assert(is_string($envVar));
-            if (isset($_SERVER[$envVar]) && is_string($_SERVER[$envVar])) {
+            if (isset($_ENV[$envVar]) && is_string($_ENV[$envVar])) {
                 assert(is_string($attribute));
-                $this->$attribute = $_SERVER[$envVar];
+                $this->$attribute = $_ENV[$envVar];
             }
         }
     }

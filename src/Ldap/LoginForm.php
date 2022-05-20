@@ -80,7 +80,7 @@ final class LoginForm extends FormModel
     public function isAttributeFixed(string $attribute): bool
     {
         if (isset(ConnectionDetails::ENV_CONFIG_MAP[$attribute]) &&
-            !empty($_SERVER[ConnectionDetails::ENV_CONFIG_MAP[$attribute]])
+            !empty($_ENV[ConnectionDetails::ENV_CONFIG_MAP[$attribute]])
         ) {
             return true;
         }

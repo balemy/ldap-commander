@@ -22,4 +22,16 @@ To run static analysis:
 ```
 
 
+## Docker
+
+```
+docker build -t commander1 . 
+docker run -it --net='host' \
+    -e CMDA_DSN='ldap://localhost:1389' \
+    -e CMDA_BASE_DN='dc=example,dc=org' \
+    -e CMDA_ADMIN_DN='cn=admin,dc=example,dc=org' \
+    -e CMDA_ADMIN_PASSWORD= \
+    -p 8080:8080 commander1 
+```
+
 
