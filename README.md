@@ -10,6 +10,13 @@ LDAP Commander is a web interface for managing LDAP servers. Currently only Open
 
 ## Quickstart with Docker
 
+**Docker Compose (with LDAP Server):**
+```
+./docker-compose up
+```
+
+**Standalone:**
+
 ```
 docker run -it --net='host' \
 -e CMDA_DSN='ldap://localhost:389' \
