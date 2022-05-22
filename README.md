@@ -11,7 +11,9 @@ LDAP Commander is a web interface for managing LDAP servers. Currently only Open
 ## Quickstart with Docker
 
 **Docker Compose (with LDAP Server):**
+
 ```
+curl https://raw.githubusercontent.com/balemy/ldap-commander/main/docker-compose.yml --output docker-compose.yml
 ./docker-compose up
 ```
 
