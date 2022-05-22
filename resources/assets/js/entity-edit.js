@@ -32,12 +32,15 @@ $(".add-input").click(function () {
     $inputsRow = $(this).closest('.attribute-row').find('.attribute-row-inputs');
     currentInputCount = $inputsRow.find('input').length;
 
-    $input = $(this).closest('.attribute-row').find('.attribute-row-inputs').find('input').first().clone();
+    $inputGroup = $(this).closest('.attribute-row').find('.attribute-row-inputs').find('.input-group').first();
+    $inputGroupNew = $inputGroup.clone();
+
+    $input = $inputGroupNew.find('input').first();
     $input.attr("name", $(this).data('input-name').replace('replace-with-id', currentInputCount));
     $input.attr("id", $(this).data('input-id').replace('replace-with-id', currentInputCount));
     $input.attr("value", '');
 
-    $inputsRow.append($input).slideDown();
+    $inputsRow.append($inputGroupNew).slideDown();
 });
 
 
@@ -98,4 +101,28 @@ function addAttributeToDnPicker(id, label, current) {
         var newOption = new Option(label, id, false, isSelected);
         $picker.append(newOption).trigger('change');
     }
+}
+
+
+
+$('#setPassButton').on('click', function () {
+    var newPassword = $('#new-password-input').val();
+    sha256(newPassword).then(function (result) {
+        $('#' + $('#setPassButton').data('target-input-id')).val(result);
+    })
+
+    $('#staticSetPassword').modal('hide');
+});
+
+var setPasswordModal = document.getElementById('staticSetPassword')
+setPasswordModal.addEventListener('show.bs.modal', function (event) {
+    // Button that triggered the modal
+    var button = event.relatedTarget
+    var id = $(button).prev().attr('id');
+    $('#setPassButton').data('target-input-id', id);
+})
+
+async function sha256(m) {
+    const hash = await crypto.subtle.digest("SHA-256", (new TextEncoder()).encode(m))
+    return "{sha256}" + btoa(String.fromCharCode(...new Uint8Array(hash)))
 }

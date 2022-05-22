@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App;
+namespace App\Widget;
 
 use InvalidArgumentException;
 use Yiisoft\Form\Widget\Attribute\InputAttributes;
@@ -10,7 +10,6 @@ use Yiisoft\Form\Widget\Attribute\PlaceholderInterface;
 use Yiisoft\Form\Widget\Validator\HasLengthInterface;
 use Yiisoft\Form\Widget\Validator\RegexInterface;
 use Yiisoft\Html\Tag\Input;
-
 use function is_string;
 
 /**
