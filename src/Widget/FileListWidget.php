@@ -17,7 +17,7 @@ use function is_string;
  *
  * @link https://www.w3.org/TR/2012/WD-html-markup-20120329/input.text.html#input.text
  */
-final class TextListWidget extends InputAttributes implements HasLengthInterface, RegexInterface, PlaceholderInterface
+final class FileListWidget extends InputAttributes implements HasLengthInterface, RegexInterface, PlaceholderInterface
 {
     /**
      * Enables submission of a value for the directionality of the element, and gives the name of the field that
@@ -25,7 +25,7 @@ final class TextListWidget extends InputAttributes implements HasLengthInterface
      *
      * @param string $value Any string that is not empty.
      *
-     * @return TextListWidget
+     * @return FileListWidget
      *
      * @link https://www.w3.org/TR/2012/WD-html-markup-20120329/input.text.html#input.text.attrs.dirname
      */
@@ -101,14 +101,6 @@ final class TextListWidget extends InputAttributes implements HasLengthInterface
         $attributes = $this->build($this->attributes);
         $attributes['class'] = 'form-control';
 
-        /** @link https://www.w3.org/TR/2012/WD-html-markup-20120329/input.text.html#input.text.attrs.value */
-        $value = $attributes['value'] ?? $this->getAttributeValue();
-        unset($attributes['value']);
-
-        if (null !== $value && !is_string($value)) {
-            throw new InvalidArgumentException('Text widget must be a string or null value.' . $this->getAttribute());
-        }
-
-        return Input::tag()->type('text')->attributes($attributes)->value($value === '' ? null : $value)->render();
+        return Input::tag()->type('file')->attributes($attributes)->render();
     }
 }

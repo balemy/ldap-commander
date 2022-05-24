@@ -21,6 +21,11 @@ $(document).ready(function () {
         $el = $('[data-attribute="' + data.id.toLowerCase() + '"');
         $el.detach().appendTo("#attributeList").slideDown();
 
+        // For files
+        $el.find('input').prop("disabled", false);
+
+
+
         $('#add-attribute-picker').val('');
         $('#add-attribute-picker').trigger('change');
     });
@@ -40,9 +45,24 @@ $(".add-input").click(function () {
     $input.attr("id", $(this).data('input-id').replace('replace-with-id', currentInputCount));
     $input.attr("value", '');
 
+    // In case of file input: do not show download/delete button
+    $inputGroupNew.find('.download-binary-button').hide();
+    $inputGroupNew.find('.delete-binary-button').hide();
+    $input.show();
+    $input.prop("disabled", false);
+
     $inputsRow.append($inputGroupNew).slideDown();
 });
 
+$(".delete-binary-button").click(function () {
+    $inputsRow = $(this).closest('.input-group');
+    $inputsRow.find('.download-binary-button').hide();
+    $inputsRow.find('.delete-binary-button').hide();
+
+    $input = $inputsRow.find('input').first();
+    $input.show();
+    $input.prop("disabled", false);
+});
 
 function rebuildForm() {
     var selectedRdnAttribute = $('#entityform-rdnattribute').val();
@@ -73,7 +93,7 @@ function rebuildForm() {
         $.each(ldapSchema.objectClasses[objectClass].may, function (index, attributeLabel) {
             var attributeName = attributeLabel.toLowerCase();
             var $attribute = $("[data-attribute='" + attributeName + "']");
-            if ($attribute.find('input').val()) {
+            if ($attribute.find('input').val() || $attribute.find('a.download-binary-button').length) {
                 $attribute.show();
             } else {
                 addAttributeToAddPicker($attribute.data('attribute'), $attribute.data('attribute-label'));
@@ -102,7 +122,6 @@ function addAttributeToDnPicker(id, label, current) {
         $picker.append(newOption).trigger('change');
     }
 }
-
 
 
 $('#setPassButton').on('click', function () {

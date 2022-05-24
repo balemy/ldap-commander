@@ -7,14 +7,19 @@ namespace App\Controller;
 use App\Ldap\EntityForm;
 use App\Ldap\LdapService;
 use App\Service\WebControllerService;
+use HttpSoft\Message\StreamFactory;
+use HttpSoft\Message\UploadedFile;
 use LdapRecord\LdapRecordException;
 use LdapRecord\Models\Entry;
-use LdapRecord\Models\Model;
 use LdapRecord\Models\ModelDoesNotExistException;
+use LdapRecord\Support\Arr;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Assets\AssetManager;
+use Yiisoft\Http\Header;
 use Yiisoft\Http\Method;
+use Yiisoft\Http\Status;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Session\Flash\FlashInterface;
 use Yiisoft\Yii\View\ViewRenderer;
@@ -87,8 +92,26 @@ final class EntityController
         }
 
         if ($request->getMethod() === Method::POST) {
-            /** @var array<string, string|array> $body */
+            /** @var array<string, array> $body */
             $body = $request->getParsedBody();
+
+            if (isset($request->getUploadedFiles()['EntityForm']) && is_array($request->getUploadedFiles()['EntityForm'])) {
+                /** @var array $files */
+                foreach ($request->getUploadedFiles()['EntityForm'] as $attribute => $files) {
+                    assert(is_string($attribute));
+                    $body['EntityForm'][$attribute] = [];
+
+                    /** @var UploadedFile $uploadedFile */
+                    foreach ($files as $index => $uploadedFile) {
+                        if ($uploadedFile->getError() === 0) {
+                            /** @var int $index */
+                            $body['EntityForm'][$attribute][$index] = $uploadedFile->getStream()->getContents();
+                        } else {
+                            $body['EntityForm'][$attribute][$index] = '';
+                        }
+                    }
+                }
+            }
 
             /*&& $validator->validate($form)->isValid()*/
             if ($entity->load($body)) {
@@ -145,11 +168,43 @@ final class EntityController
         );
     }
 
+    public function downloadBinaryAttribute(ServerRequestInterface $request, ResponseFactoryInterface $responseFactory): ResponseInterface
+    {
+        $dn = $this->getDnByRequest($request);
+
+        $attribute = null;
+        if (isset($request->getQueryParams()['attribute']) && is_string($request->getQueryParams()['attribute'])) {
+            $attribute = (string)$request->getQueryParams()['attribute'];
+        }
+
+        $index = null;
+        if (isset($request->getQueryParams()['i']) && is_string($request->getQueryParams()['i'])) {
+            $index = (int)$request->getQueryParams()['i'];
+        }
+
+
+        if ($index !== null && $attribute !== null && $dn !== null) {
+            $entry = Entry::query()->find($dn);
+
+            if ($entry !== null) {
+                $attr = Arr::wrap($entry->getAttributeValue($attribute));
+
+                if (isset($attr[$index])) {
+                    return $responseFactory
+                        ->createResponse(Status::OK)
+                        ->withHeader(Header::CONTENT_TYPE, 'application/octet-stream')
+                        ->withBody((new StreamFactory())->createStream((string)$attr[$index]));
+                }
+            }
+        }
+
+        return $responseFactory->createResponse(Status::NOT_FOUND);
+    }
+
     private function getDnByRequest(ServerRequestInterface $request): string|null
     {
         if (isset($request->getQueryParams()['dn']) && is_string($request->getQueryParams()['dn'])) {
             return (string)$request->getQueryParams()['dn'];
-
         }
 
         return null;

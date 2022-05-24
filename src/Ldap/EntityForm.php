@@ -53,6 +53,19 @@ class EntityForm extends FormModel
             } elseif (is_string($value)) {
                 $this->rdnAttribute = $value;
             }
+        } elseif ($this->isBinaryAttribute($name) && is_array($value)) {
+            $currentValue = $this->entry->getAttributeValue($name);
+            assert(is_array($currentValue));
+
+            /** @var array<int, string> $value */
+            foreach ($value as $i => $v) {
+                if (empty($v)) {
+                    unset($currentValue[$i]);
+                } else {
+                    $currentValue[$i] = $v;
+                }
+            }
+            $this->entry->$name = $currentValue;
         } else {
             $this->entry->$name = $value;
         }
@@ -155,6 +168,17 @@ class EntityForm extends FormModel
             $this->entry->setDn($newDn);
             $this->entry->insert($newDn, $this->getEntryAttributesAsArray());
         } else {
+            // It's not possible to modify/add/del binary data. So make sure to delete and recreate it.
+            foreach (array_keys($this->schema->getBinaryAttributes()) as $attribute) {
+                assert(is_string($attribute));
+                if ($this->entry->isDirty($attribute) && !empty($this->entry->getOriginal()[$attribute])) {
+                    /** @var string $binaryData */
+                    $binaryData = $this->entry->getAttributeValue($attribute);
+                    $this->entry->deleteAttribute($attribute);
+                    $this->entry->addAttributeValue($attribute, $binaryData);
+                }
+            }
+
             $this->entry->save();
         }
     }
@@ -173,6 +197,15 @@ class EntityForm extends FormModel
         }
 
         return true;
+    }
+
+    /**
+     * @param $attributeId
+     * @return bool
+     */
+    public function isBinaryAttribute(string $attributeId): bool
+    {
+        return in_array($attributeId, array_keys($this->schema->getBinaryAttributes()));
     }
 
     /**

@@ -19,6 +19,7 @@ return [
             Route::methods([Method::GET, Method::POST], '/edit')->action([EntityController::class, 'edit'])->name('entity-edit'),
             Route::get('/browse')->action([EntityController::class, 'list'])->name('entity-list'),
             Route::get('/delete')->action([EntityController::class, 'delete'])->name('entity-delete'),
+            Route::get('/entity-bin-download')->action([EntityController::class, 'downloadBinaryAttribute'])->name('entity-attribute-download'),
         ),
     Route::methods([Method::GET, Method::POST], '/login')->action([AuthController::class, 'login'])->name('login'),
     Route::methods([Method::GET, Method::POST], '/logout')->action([AuthController::class, 'logout'])->name('logout'),

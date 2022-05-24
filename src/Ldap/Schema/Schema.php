@@ -23,6 +23,10 @@ class Schema
      */
     public $syntaxes = [];
 
+    /**
+     * @var AttributeType[]|null
+     */
+    private $_attributeTypesBinary = null;
 
     public function __construct(public LdapService $ldapService)
     {
@@ -59,6 +63,37 @@ class Schema
         }
 
         return $this->attributeTypes[strtolower($id)];
+    }
+
+    public function getBinaryAttributes(): array
+    {
+        if ($this->_attributeTypesBinary !== null) {
+            return $this->_attributeTypesBinary;
+        }
+
+        $this->_attributeTypesBinary = [];
+        foreach ($this->attributeTypes as $attributeId => $attributeType) {
+            if (!empty($attributeType->syntax)) {
+                $syntax = $this->getSyntax($attributeType->syntax);
+                if ($syntax !== null) {
+                    if ($syntax->isNotHumanReadable || $syntax->isBinaryTransferRequired) {
+                        $this->_attributeTypesBinary[$attributeId] = $attributeType;
+                    }
+                }
+            }
+        }
+
+        return $this->_attributeTypesBinary;
+    }
+
+
+    public function getSyntax(string $oid): ?Syntax
+    {
+        if (!isset($this->syntaxes[strtolower($oid)])) {
+            return null;
+        }
+
+        return $this->syntaxes[strtolower($oid)];
     }
 
     public function resolveAttributeIdByName(string $name): string

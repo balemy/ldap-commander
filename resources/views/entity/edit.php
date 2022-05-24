@@ -15,6 +15,7 @@ declare(strict_types=1);
  */
 
 use App\Asset\EntityEditAsset;
+use App\Widget\FileListWidget;
 use App\Widget\TextListWidget;
 use App\Widget\EntitySidebar;
 use App\Widget\EntitySidebarLocation;
@@ -89,9 +90,31 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
                                 <div class="input-group mb-3">
                                     <?= TextListWidget::widget()->for($entity, $attribute . '[' . $i . ']')->attributes(['value' => $val]) ?>
                                     <button class="btn btn-outline-secondary" type="button" id="button-addon2"
-                                            data-bs-toggle="modal" data-bs-target="#staticSetPassword">Set new
-                                        Password
+                                            data-bs-toggle="modal" data-bs-target="#staticSetPassword">
+                                        Set new
                                     </button>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php elseif ($entity->isBinaryAttribute($attribute)): ?>
+                        <div class="col-sm-7 attribute-row-inputs">
+                            <?php foreach ($values as $i => $val): ?>
+                                <div class="input-group mb-3">
+                                    <?php if (!empty($val)): ?>
+                                        <a class="btn btn-outline-secondary download-binary-button" type="button"
+                                           target="_blank"
+                                           href="<?= $urlGenerator->generate('entity-attribute-download', ['dn' => $dn, 'attribute' => $attribute, 'i' => $i]); ?>">
+                                            Download (<?= strlen($val) ?> bytes)
+                                        </a>
+                                        <a class="btn btn-outline-secondary delete-binary-button" type="button"
+                                           href="javascript:void();">
+                                            Delete
+                                        </a>
+                                    <?php endif; ?>
+                                    <?= FileListWidget::widget()->for($entity, $attribute . '[' . $i . ']')
+                                        ->attributes(['style' => (!empty($val)) ? "display:none" : ''])
+                                        ->disabled()
+                                    ?>
                                 </div>
                             <?php endforeach; ?>
                         </div>
@@ -139,16 +162,14 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
                     ->optionsData($attributeTypes)
                     ->attributes([
                         'class' => 'form-select',
-                        'data-placeholer' => 'Choose RDN attribute',
+                        'data-placeholder' => 'Choose RDN attribute',
                     ])
                 ?>
                 <?php if (!$entity->isNewRecord): ?>
                     <small>Current DN: <?= $entity->getDn() ?></small>
                 <?php endif; ?>
             </div>
-
         </div>
-
 
         <?= Field::widget()
             ->class('btn btn-primary btn-lg mt-3')
@@ -183,7 +204,6 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
                     <input type="password" class="form-control" id="floatingPassword" placeholder="New Password">
                     <label for="floatingPassword">New Password</label>
                 </div>
-
 
             </div>
             <div class="modal-footer">
