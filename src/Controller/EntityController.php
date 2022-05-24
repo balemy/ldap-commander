@@ -22,6 +22,7 @@ use Yiisoft\Http\Method;
 use Yiisoft\Http\Status;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Session\Flash\FlashInterface;
+use Yiisoft\Validator\ValidatorInterface;
 use Yiisoft\Yii\View\ViewRenderer;
 
 final class EntityController
@@ -31,7 +32,8 @@ final class EntityController
                                 public WebControllerService  $webService,
                                 public UrlGeneratorInterface $urlGenerator,
                                 public AssetManager          $assetManager,
-                                public FlashInterface        $flash
+                                public FlashInterface        $flash,
+                                public ValidatorInterface    $validator
     )
     {
         $this->viewRenderer = $viewRenderer->withControllerName('entity');
@@ -113,8 +115,7 @@ final class EntityController
                 }
             }
 
-            /*&& $validator->validate($form)->isValid()*/
-            if ($entity->load($body)) {
+            if ($entity->load($body) && $this->validator->validate($entity)->isValid()) {
                 try {
                     $entity->save();
                     $this->flash->add('success', ['body' => 'Entity successfully saved!']);

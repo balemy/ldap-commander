@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Widget;
 
+use App\Ldap\EntityForm;
 use InvalidArgumentException;
 use Yiisoft\Form\Widget\Attribute\InputAttributes;
 use Yiisoft\Form\Widget\Attribute\PlaceholderInterface;
@@ -101,6 +102,17 @@ final class TextListWidget extends InputAttributes implements HasLengthInterface
         $attributes = $this->build($this->attributes);
         $attributes['class'] = 'form-control';
 
+        /** @var EntityForm $form */
+        $form = $this->getFormModel();
+
+        $errorMessage = '';
+        $errors = $form->formValidationErrorsIndexed[$this->getAttribute()] ?? [];
+
+        if (!empty($errors)) {
+            $attributes['class'] = 'form-control is-invalid';
+            $errorMessage = '<div class="invalid-feedback">' . implode(', ', $errors) . '</div>';
+        }
+
         /** @link https://www.w3.org/TR/2012/WD-html-markup-20120329/input.text.html#input.text.attrs.value */
         $value = $attributes['value'] ?? $this->getAttributeValue();
         unset($attributes['value']);
@@ -109,6 +121,6 @@ final class TextListWidget extends InputAttributes implements HasLengthInterface
             throw new InvalidArgumentException('Text widget must be a string or null value.' . $this->getAttribute());
         }
 
-        return Input::tag()->type('text')->attributes($attributes)->value($value === '' ? null : $value)->render();
+        return Input::tag()->type('text')->attributes($attributes)->value($value === '' ? null : $value)->render() . $errorMessage;
     }
 }

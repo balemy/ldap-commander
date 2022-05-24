@@ -21,6 +21,7 @@ use App\Widget\EntitySidebar;
 use App\Widget\EntitySidebarLocation;
 use App\Widget\RdnBreadcrumbs;
 use Yiisoft\Form\Helper\HtmlForm;
+use Yiisoft\Form\Widget\ErrorSummary;
 use Yiisoft\Form\Widget\Field;
 use Yiisoft\Form\Widget\FieldPart\Label;
 use Yiisoft\Form\Widget\Form;
@@ -39,8 +40,8 @@ foreach ($entity->getAttributeValueAsArray('objectclass') as $oc) {
 }
 
 $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
-
 ?>
+
 <div class="row">
     <div class="col-md-9">
         <?= RdnBreadcrumbs::widget(['$dn' => $dn]); ?>
@@ -55,6 +56,14 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
             ->action($urlGenerator->generate('entity-edit', ['dn' => $dn, 'new' => intval($entity->isNewRecord)]))
             ->begin() ?>
 
+        <!--
+        <?php if (!empty($entity->getFormErrors()->hasErrors())): ?>
+            <div class="alert alert-danger">
+                <pre><?= print_r($entity->getFormErrors()->getAllErrors()); ?></pre>
+                <?= ErrorSummary::widget()->model($entity) ?>
+            </div>
+        <?php endif; ?>
+        -->
 
         <div id="attributeList">
             <?php foreach ($attributeTypes as $attribute => $attributeType): ?>

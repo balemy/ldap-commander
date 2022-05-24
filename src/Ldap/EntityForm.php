@@ -6,13 +6,27 @@ use App\Helper\DnHelper;
 use App\Ldap\Schema\Schema;
 use LdapRecord\LdapRecordException;
 use LdapRecord\Models\Entry;
+use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Form\FormModel;
+use Yiisoft\Validator\Result;
+use Yiisoft\Validator\Rule\Each;
+use Yiisoft\Validator\Rule\Number;
+use Yiisoft\Validator\Rule\Required;
 
 class EntityForm extends FormModel
 {
     private string $rdnAttribute = '';
 
-    public function __construct(public Schema $schema, public Entry $entry, public bool $isNewRecord = false, public string $parentDn = '')
+    /**
+     * @var array<string, array<array-key, string>>
+     */
+    public array $formValidationErrorsIndexed = [];
+
+    public function __construct(
+        public Schema $schema,
+        public Entry  $entry,
+        public bool   $isNewRecord = false,
+        public string $parentDn = '')
     {
         parent::__construct();
     }
@@ -134,15 +148,9 @@ class EntityForm extends FormModel
         }
 
         $validAttributes = ['rdnAttribute', 'objectclass'];
-
         if (is_array($rawData['objectclass'])) {
             /** @var string $objectClassName */
-            foreach ($rawData['objectclass'] as $objectClassName) {
-                $objectClass = $this->schema->getObjectClass($objectClassName);
-                if ($objectClass !== null) {
-                    $validAttributes = array_merge($validAttributes, $objectClass->getAttributeIds());
-                }
-            }
+            $validAttributes = $this->getValidAttributes($rawData['objectclass']);
         }
 
         $rawData = array_filter($rawData, function ($_v, $k) use ($validAttributes) {
@@ -150,6 +158,19 @@ class EntityForm extends FormModel
         }, ARRAY_FILTER_USE_BOTH);
 
         return parent::load($rawData, '');
+    }
+
+    private function getValidAttributes(array $objectClasses = []): array
+    {
+        $validAttributes = ['rdnAttribute', 'objectclass'];
+        /** @var string $objectClassName */
+        foreach ($objectClasses as $objectClassName) {
+            $objectClass = $this->schema->getObjectClass($objectClassName);
+            if ($objectClass !== null) {
+                $validAttributes = array_merge($validAttributes, $objectClass->getAttributeIds());
+            }
+        }
+        return $validAttributes;
     }
 
     /**
@@ -233,4 +254,52 @@ class EntityForm extends FormModel
         return $attr;
     }
 
+
+    public function getRules(): array
+    {
+        //TODO: Add more rules
+        //TODO: Check Single Value
+
+        $rules = [];
+
+        $validAttributes = $this->getValidAttributes($this->getAttributeValueAsArray('objectclass'));
+        $requiredAttributes = [];
+        /** @var string $objectClassName */
+        foreach ($this->getAttributeValueAsArray('objectclass') as $objectClassName) {
+            $objectClass = $this->schema->getObjectClass($objectClassName);
+            if ($objectClass !== null) {
+                $requiredAttributes = ArrayHelper::merge($requiredAttributes, $objectClass->mustAttributes);
+            }
+        }
+
+        foreach ($this->schema->attributeTypes as $attribute => $attributeType) {
+            $r = [];
+            if (in_array($attribute, $validAttributes)) {
+                if ($attributeType->syntax === '1.3.6.1.4.1.1466.115.121.1.27') {
+                    $r[] = new Number(asInteger: true, skipOnEmpty: true);
+                }
+                if (in_array($attribute, $requiredAttributes)) {
+                    $r[] = new Required();
+                }
+            }
+            if (!empty($r)) {
+                $rules[$attribute] = [new Each($r)];
+            }
+        }
+
+        return $rules;
+
+    }
+
+    public function processValidationResult(Result $result): void
+    {
+        foreach ($result->getErrorMessagesIndexedByPath() as $name => $errors) {
+            if (str_contains($name, '.')) {
+                list($attributeName, $attributeIndex) = explode('.', $name, 2);
+                $this->formValidationErrorsIndexed[$attributeName . '[' . $attributeIndex . ']'] = $errors;
+            }
+        }
+
+        parent::processValidationResult($result);
+    }
 }
