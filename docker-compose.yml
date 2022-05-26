@@ -13,8 +13,9 @@ services:
       - LDAP_ADMIN_PASSWORD=password
     volumes:
       - 'openldap_data:/bitnami/openldap'
+# Uncomment below to use from GitHub Repo
       - './example.ldif:/ldifs/example-quickstart.ldif'
-      - './resources/ldap/example.ldif:/ldifs/example.ldif'
+#      - './resources/ldap/example.ldif:/ldifs/example.ldif'
   ldap-commander:
     image: balemy/ldap-commander:latest
     container_name: ldap-commander
