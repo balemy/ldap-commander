@@ -7,7 +7,8 @@ namespace App;
 final class ApplicationParameters
 {
     private string $charset = 'UTF-8';
-    private string $name = 'My Project';
+    private string $name = 'LDAP Commander';
+    private string $version = '0.0.0';
 
     public function getCharset(): string
     {
@@ -17,6 +18,11 @@ final class ApplicationParameters
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getVersion(): string
+    {
+        return $this->version;
     }
 
     public function charset(string $value): self
@@ -30,6 +36,13 @@ final class ApplicationParameters
     {
         $new = clone $this;
         $new->name = $value;
+        return $new;
+    }
+
+    public function version(string $value): self
+    {
+        $new = clone $this;
+        $new->version = $value;
         return $new;
     }
 }

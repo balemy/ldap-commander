@@ -105,6 +105,7 @@ $this->beginPage()
 <footer class="footer mt-auto py-3 text-muted">
     <div class="container">
         <p>
+            <?= $applicationParameters->getVersion() ?>
         </p>
     </div>
 </footer>
