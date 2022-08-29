@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-use Yiisoft\Form\FormModelInterface;
-use Yiisoft\Form\Widget\Field;
-use Yiisoft\Form\Widget\Form;
+use Yiisoft\Form\Field;
+use Yiisoft\Html\Tag\Form;
 
 /**
  * @var \Yiisoft\View\WebView $this
@@ -24,24 +23,36 @@ $error = $error ?? null;
                     <h1 class="fw-normal h3 text-center">LDAP Login</h1>
                 </div>
                 <div class="card-body p-5 text-center">
-                    <?= Form::widget()
-                        ->action($urlGenerator->generate('login'))
+
+                    <?= Form::tag()
+                        ->post($urlGenerator->generate('login'))
                         ->csrf($csrf)
                         ->id('loginForm')
-                        ->begin() ?>
-                    <?= Field::widget()->text($formModel, 'dsn')->hint('Example: ldaps://localhost:636')->attributes(['disabled' => $formModel->isAttributeFixed('dsn')]) ?>
-                    <?= Field::widget()->text($formModel, 'baseDn')->hint('Example: dc=example,dc=org')->attributes(['disabled' => $formModel->isAttributeFixed('baseDn')]) ?>
-                    <?= Field::widget()->autofocus()->text($formModel, 'adminDn')->hint('Example: cn=admin,dc=example,dc=org')->attributes(['disabled' => $formModel->isAttributeFixed('adminDn')]) ?>
-                    <?= Field::widget()->password($formModel, 'adminPassword')->attributes(['disabled' => $formModel->isAttributeFixed('adminPasswordadm,')]) ?>
+                        ->open() ?>
 
-                    <?= Field::widget()
-                        ->id('login-button')
+                    <?= Field::text($formModel, 'dsn')
+                        ->hint('Example: ldaps://localhost:636')
+                        ->addInputAttributes(['disabled' => $formModel->isAttributeFixed('dsn')])
+                        ->autofocus() ?>
+
+                    <?= Field::text($formModel, 'baseDn')
+                        ->hint('Example: dc=example,dc=org')
+                        ->addInputAttributes(['disabled' => $formModel->isAttributeFixed('baseDn')]) ?>
+
+                    <?= Field::text($formModel, 'adminDn')
+                        ->hint('Example: cn=admin,dc=example,dc=org')
+                        ->addInputAttributes(['disabled' => $formModel->isAttributeFixed('adminDn')]) ?>
+
+                    <?= Field::password($formModel, 'adminPassword')
+                        ->addInputAttributes(['disabled' => $formModel->isAttributeFixed('adminPasswordadm,')]) ?>
+
+                    <?= Field::submitButton()
                         ->name('login-button')
-                        ->submitButton()
-                        ->value('Login')
+                        ->content('Login')
                     ?>
 
-                    <?= Form::end() ?>
+                    <?= Form::tag()->close() ?>
+
                 </div>
             </div>
         </div>
