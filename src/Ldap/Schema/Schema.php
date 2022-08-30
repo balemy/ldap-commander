@@ -182,8 +182,8 @@ class Schema
             $json['objectClasses'][strtolower($objectClass->name)] = [
                 'name' => $objectClass->name,
                 'sups' => $objectClass->sups,
-                'must' => $objectClass->mustAttributes,
-                'may' => $objectClass->mayAttributes
+                'must' => $objectClass->mustAttributes, // should be lower case
+                'may' => $objectClass->mayAttributes // should be lower case
             ];
         }
 

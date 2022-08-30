@@ -69,6 +69,17 @@ return [
                     ],
                 ],
             ],
+            'entity' => [
+                'containerClass' => 'row mb-3',
+                'labelClass' => 'col-sm-4 col-form-label',
+                'inputContainerClass' => 'col-sm-8',
+                'inputContainerTag' => 'div',
+                'invalidClass' => 'is-invalid',
+                'errorClass' => 'text-danger fst-italic',
+                'hintClass' => 'form-text',
+                'inputClass' => 'form-control',
+                'validClass' => 'is-valid',
+            ],
         ],
     ],
 

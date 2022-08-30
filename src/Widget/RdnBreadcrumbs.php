@@ -43,6 +43,8 @@ class RdnBreadcrumbs extends Widget
             ];
         }
 
+        $links = array_reverse($links);
+
         return Breadcrumbs::widget()->links($links)->homeLink([])->render();
     }
 }

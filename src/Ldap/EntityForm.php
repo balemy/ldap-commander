@@ -45,6 +45,10 @@ class EntityForm extends FormModel
 
                 return '';
             }
+        } elseif ($attribute === 'objectclass' && is_array($this->entry->$attribute)) {
+            // We're working only with lowerclass objectclass names.
+            // Schema returns  objectclass keys as lc
+            return array_map('strtolower', $this->entry->$attribute);
         }
 
         return $this->entry->$attribute;
@@ -135,8 +139,12 @@ class EntityForm extends FormModel
     }
 
 
-    public function load(array $data, ?string $formName = null): bool
+    public function load(object|array|null $data, ?string $formName = null): bool
     {
+        if (!is_array($data)) {
+            return false;
+        }
+
         $scope = $formName ?? $this->getFormName();
 
         $rawData = [];

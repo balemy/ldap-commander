@@ -10,36 +10,30 @@ declare(strict_types=1);
  * @var \App\Ldap\Schema\AttributeType[] $attributeTypes
  * @var \App\Ldap\EntityForm $entity
  * @var string $dn
+ * @var Csrf $csrf
  * @var string $schemaJsonInfo
  * @var array $objectClassNames
  */
 
 use App\Asset\EntityEditAsset;
-use App\Widget\FileListWidget;
-use App\Widget\TextListWidget;
+use App\Fields\MultiPasswordField;
+use App\Fields\MultiTextField;
+use App\Fields\MultiFileField;
 use App\Widget\EntitySidebar;
 use App\Widget\EntitySidebarLocation;
 use App\Widget\RdnBreadcrumbs;
-use Yiisoft\Form\Helper\HtmlForm;
-use Yiisoft\Form\Widget\ErrorSummary;
-use Yiisoft\Form\Widget\Field;
-use Yiisoft\Form\Widget\FieldPart\Label;
-use Yiisoft\Form\Widget\Form;
-use Yiisoft\Form\Widget\Select;
+use Yiisoft\Form\Field;
+use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Label as LabelTag;
+use Yiisoft\Html\Tag\Option;
 use Yiisoft\View\WebView;
+use Yiisoft\Yii\View\Csrf;
 
 $assetManager->register(EntityEditAsset::class);
 
 $this->setTitle($applicationParameters->getName());
-
-
-$entityObjectClasses = [];
-foreach ($entity->getAttributeValueAsArray('objectclass') as $oc) {
-    $entityObjectClasses[strtolower($oc)] = $oc;
-}
-
 $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
+
 ?>
 
 <div class="row">
@@ -52,98 +46,30 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
         <?php endif; ?>
         <br>
 
-        <?= Form::widget()
-            ->action($urlGenerator->generate('entity-edit', ['dn' => $dn, 'new' => intval($entity->isNewRecord)]))
-            ->begin() ?>
+        <?= Html::form()
+            ->post($urlGenerator->generate('entity-edit', ['dn' => $dn, 'new' => intval($entity->isNewRecord)]))
+            ->enctype('multipart/form-data')
+            ->csrf($csrf)
+            ->open() ?>
 
-        <!--
-        <?php if (!empty($entity->getFormErrors()->hasErrors())): ?>
-            <div class="alert alert-danger">
-                <pre><?= print_r($entity->getFormErrors()->getAllErrors()); ?></pre>
-                <?= ErrorSummary::widget()->model($entity) ?>
-            </div>
-        <?php endif; ?>
-        -->
-
-        <div id="attributeList">
+        <div id="attribute-list">
             <?php foreach ($attributeTypes as $attribute => $attributeType): ?>
-                <?php
-                $values = $entity->getAttributeValueAsArray($attribute);
-
-                // Make sure to have at least on empty value to draw input obx
-                if (empty($values)) {
-                    $values[0] = '';
-                }
-                ?>
-                <div class="row mb-3 attribute-row"
-                     data-attribute='<?= $attribute ?>'
+                <div class="attribute-row" data-attribute='<?= $attribute ?>'
                      data-attribute-label='<?= $entity->getAttributeLabel($attribute) ?>'>
 
-                    <?= Label::widget()
-                        ->attributes(['class' => 'col-sm-4 col-form-label'])
-                        ->for($entity, $attribute)
-                        ->render(); ?>
-
                     <?php if ($attribute === 'objectclass'): ?>
-                        <div class="col-sm-7">
-                            <?= Select::widget()->for($entity, 'objectclass')
-                                ->items($objectClassNames)
-                                ->value(array_keys($entityObjectClasses))
-                                ->multiple(true)
-                                ->attributes(['class' => 'form-select']);
-                            ?>
-                        </div>
+                        <?= Field::getFactory('entity')->select($entity, 'objectclass')
+                            ->optionsData($objectClassNames)
+                            ->multiple(true) ?>
                     <?php elseif ($attribute === 'userpassword'): ?>
-                        <div class="col-sm-7 attribute-row-inputs">
-                            <?php foreach ($values as $i => $val): ?>
-                                <div class="input-group mb-3">
-                                    <?= TextListWidget::widget()->for($entity, $attribute . '[' . $i . ']')->attributes(['value' => $val]) ?>
-                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"
-                                            data-bs-toggle="modal" data-bs-target="#staticSetPassword">
-                                        Set new
-                                    </button>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
+                        <?= Field::getFactory('entity')->input(MultiPasswordField::class, $entity, $attribute) ?>
                     <?php elseif ($entity->isBinaryAttribute($attribute)): ?>
-                        <div class="col-sm-7 attribute-row-inputs">
-                            <?php foreach ($values as $i => $val): ?>
-                                <div class="input-group mb-3">
-                                    <?php if (!empty($val)): ?>
-                                        <a class="btn btn-outline-secondary download-binary-button" type="button"
-                                           target="_blank"
-                                           href="<?= $urlGenerator->generate('entity-attribute-download', ['dn' => $dn, 'attribute' => $attribute, 'i' => $i]); ?>">
-                                            Download (<?= strlen($val) ?> bytes)
-                                        </a>
-                                        <a class="btn btn-outline-secondary delete-binary-button" type="button"
-                                           href="javascript:void();">
-                                            Delete
-                                        </a>
-                                    <?php endif; ?>
-                                    <?= FileListWidget::widget()->for($entity, $attribute . '[' . $i . ']')
-                                        ->attributes(['style' => (!empty($val)) ? "display:none" : ''])
-                                        ->disabled()
-                                    ?>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
+                        <?= Field::getFactory('entity')->input(MultiFileField::class, $entity, $attribute,
+                            ['$urlGenerator' => $urlGenerator, '$dn' => $entity->getDn()]) ?>
                     <?php else: ?>
-                        <div class="col-sm-7 attribute-row-inputs">
-                            <?php foreach ($values as $i => $val): ?>
-                                <div class="input-group mb-3">
-                                    <?= TextListWidget::widget()->for($entity, $attribute . '[' . $i . ']')->attributes(['value' => $val]) ?>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
+                        <?= Field::getFactory('entity')->input(MultiTextField::class, $entity, $attribute) ?>
                     <?php endif; ?>
-                    <div class="col-sm-1">
-                        <?php if ($entity->isMultiValueAttribute($attribute) && $attribute !== 'objectclass'): ?>
-                            <a class="btn btn-light add-input"
-                               data-input-id="<?= HtmlForm::getInputId($entity, $attribute . '[replace-with-id]') ?>"
-                               data-input-name="<?= HtmlForm::getInputName($entity, $attribute . '[replace-with-id]') ?>"
-                            >+</a>
-                        <?php endif; ?>
-                    </div>
+
                 </div>
             <?php endforeach; ?>
         </div>
@@ -151,44 +77,28 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
         <hr>
 
         <div class="row mb-3">
-            <?= LabelTag::tag()->attributes(['class' => 'col-sm-4 col-form-label'])->content()->render() ?>
+            <?= LabelTag::tag()->addAttributes(['class' => 'col-sm-4 col-form-label'])->content('Add Attribute')->render() ?>
 
-            <div class="col-sm-7 attribute-row-inputs">
+            <div class="col-sm-8 attribute-row-inputs">
                 <select class="form-select" id="add-attribute-picker" data-placeholder="Choose attribute"></select>
             </div>
 
         </div>
 
         <hr>
+        <?= Field::getFactory('entity')->select($entity, 'rdnAttribute')
+            ->label('RDN Attribute')
+            ->optionsData($attributeTypes)
+            ->hint(($entity->isNewRecord) ? '' : 'Current DN: ' . $entity->getDn())
+            ->multiple(false) ?>
+        <hr>
 
-        <div class="row mb-3">
-            <?= LabelTag::tag()->attributes(['class' => 'col-sm-4 col-form-label'])->content('RDN Attribute')->render() ?>
+        <?= Field::submitButton()
+            ->buttonClass('btn btn-primary btn-lg mt-3')
+            ->content('Submit') ?>
 
-            <div class="col-sm-7 attribute-row-inputs">
-                <?= Select::widget()->for($entity, 'rdnAttribute')
-                    ->for($entity, 'rdnAttribute')
-                    ->value($entity->getAttributeValue('rdnAttribute'))
-                    ->optionsData($attributeTypes)
-                    ->attributes([
-                        'class' => 'form-select',
-                        'data-placeholder' => 'Choose RDN attribute',
-                    ])
-                ?>
-                <?php if (!$entity->isNewRecord): ?>
-                    <small>Current DN: <?= $entity->getDn() ?></small>
-                <?php endif; ?>
-            </div>
-        </div>
+        <?= '</form>' ?>
 
-        <?= Field::widget()
-            ->class('btn btn-primary btn-lg mt-3')
-            ->containerClass('d-grid gap-2 form-floating')
-            ->id('login-button')
-            ->submitButton()
-            ->tabindex(3)
-            ->value("Submit")
-        ?>
-        <?= Form::end() ?>
     </div>
     <div class="col-md-3">
         <?= EntitySidebar::widget(['$dn' => $dn, '$location' => ($entity->isNewRecord) ? EntitySidebarLocation::Add : EntitySidebarLocation::Edit]); ?>
@@ -210,7 +120,7 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
                 <br/>
 
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="New Password">
+                    <input type="password" class="form-control" id="new-password-input" placeholder="New Password">
                     <label for="floatingPassword">New Password</label>
                 </div>
 

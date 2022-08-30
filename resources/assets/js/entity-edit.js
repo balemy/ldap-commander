@@ -1,17 +1,38 @@
 $(document).ready(function () {
+
     $('#entityform-objectclass').select2({
         theme: 'bootstrap-5'
     });
+
     $('#entityform-objectclass').on('change', function (evt) {
-        console.log("changexxx");
+        // e.g. on remove of an item
         rebuildForm();
     });
 
-    $('#entityform-rdnattribute').select2({
-        theme: 'bootstrap-5'
-    });
+
     $('#add-attribute-picker').select2({
         theme: 'bootstrap-5',
+    });
+
+    $('#add-attribute-picker').on('select2:select', function (evt) {
+        var data = evt.params.data;
+        var element = evt.params.data.element;
+        var $element = $(element);
+        $element.detach();
+
+        $el = $('.attribute-row[data-attribute="' + data.id + '"');
+        $el.detach().appendTo("#attribute-list").slideDown();
+
+        // For files
+        //$el.find('input').prop("disabled", false);
+
+        $('#add-attribute-picker').val('');
+        $('#add-attribute-picker').trigger('change');
+    });
+
+
+    $('#entityform-rdnattribute').select2({
+        theme: 'bootstrap-5'
     });
     $('#add-attribute-picker').on('select2:select', function (evt) {
         var data = evt.params.data;
@@ -19,12 +40,7 @@ $(document).ready(function () {
         var $element = $(element);
         $element.detach();
         $el = $('[data-attribute="' + data.id.toLowerCase() + '"');
-        $el.detach().appendTo("#attributeList").slideDown();
-
-        // For files
-        $el.find('input').prop("disabled", false);
-
-
+        $el.detach().appendTo("#attribute-list").slideDown();
 
         $('#add-attribute-picker').val('');
         $('#add-attribute-picker').trigger('change');
@@ -34,24 +50,20 @@ $(document).ready(function () {
 });
 
 $(".add-input").click(function () {
-    $inputsRow = $(this).closest('.attribute-row').find('.attribute-row-inputs');
-    currentInputCount = $inputsRow.find('input').length;
+    $lastInput = $(this).siblings('div.inputRow').last();
+    currentInputCount = $(this).siblings('div.inputRow').length;
 
-    $inputGroup = $(this).closest('.attribute-row').find('.attribute-row-inputs').find('.input-group').first();
-    $inputGroupNew = $inputGroup.clone();
-
-    $input = $inputGroupNew.find('input').first();
-    $input.attr("name", $(this).data('input-name').replace('replace-with-id', currentInputCount));
-    $input.attr("id", $(this).data('input-id').replace('replace-with-id', currentInputCount));
-    $input.attr("value", '');
+    $newInput = $lastInput.clone();
+    $newInput.find('input').attr('value', '');
+    $newInput.find('input').attr('name', $(this).data('input-name').replace('replace-with-id', currentInputCount));
 
     // In case of file input: do not show download/delete button
-    $inputGroupNew.find('.download-binary-button').hide();
-    $inputGroupNew.find('.delete-binary-button').hide();
-    $input.show();
-    $input.prop("disabled", false);
+    $newInput.find('.download-binary-button').hide();
+    $newInput.find('.delete-binary-button').hide();
+    $newInput.find('input').show();
+    $newInput.find('input').prop("disabled", false);
 
-    $inputsRow.append($inputGroupNew).slideDown();
+    $newInput.insertAfter($lastInput);
 });
 
 $(".delete-binary-button").click(function () {
@@ -65,6 +77,7 @@ $(".delete-binary-button").click(function () {
 });
 
 function rebuildForm() {
+
     var selectedRdnAttribute = $('#entityform-rdnattribute').val();
     $('#entityform-rdnattribute').find("option").remove();
     $('#entityform-rdnattribute').val(null).trigger('change');
@@ -73,9 +86,9 @@ function rebuildForm() {
     $('#add-attribute-picker').val(null).trigger('change');
 
     $('.attribute-row').hide();
-    $("[data-attribute='objectclass']").show();
+    $(".attribute-row[data-attribute='objectclass']").show();
 
-    // Get current object classes
+    // Collect current object classes
     var activeObjectClasses = [];
     $.each($('#entityform-objectclass').select2('data'), function (index, obj) {
         activeObjectClasses.push(obj.id)
@@ -85,21 +98,23 @@ function rebuildForm() {
     });
 
     $.each(activeObjectClasses, function (index, objectClass) {
-        $.each(ldapSchema.objectClasses[objectClass].must, function (index, attributeLabel) {
-            $el = $("[data-attribute='" + attributeLabel.toLowerCase() + "']");
+        $.each(ldapSchema.objectClasses[objectClass].must, function (index, attributeId) {
+            var $el = $(".attribute-row[data-attribute='" + attributeId + "']");
             $el.show();
             addAttributeToDnPicker($el.data('attribute'), $el.data('attribute-label'), selectedRdnAttribute)
         });
-        $.each(ldapSchema.objectClasses[objectClass].may, function (index, attributeLabel) {
-            var attributeName = attributeLabel.toLowerCase();
-            var $attribute = $("[data-attribute='" + attributeName + "']");
-            if ($attribute.find('input').val() || $attribute.find('a.download-binary-button').length) {
-                $attribute.show();
+        $.each(ldapSchema.objectClasses[objectClass].may, function (index, attributeId) {
+            var $el = $(".attribute-row[data-attribute='" + attributeId + "']");
+            if ($el.find('input').val() || $el.find('a.download-binary-button').length) {
+                // May Attribute is not empty
+                $el.show();
             } else {
-                addAttributeToAddPicker($attribute.data('attribute'), $attribute.data('attribute-label'));
+                // Add Attribute to picker
+                addAttributeToAddPicker($el.data('attribute'), $el.data('attribute-label'));
             }
         });
     });
+
 }
 
 function addAttributeToAddPicker(id, label) {
@@ -123,11 +138,10 @@ function addAttributeToDnPicker(id, label, current) {
     }
 }
 
-
 $('#setPassButton').on('click', function () {
     var newPassword = $('#new-password-input').val();
     sha256(newPassword).then(function (result) {
-        $('#' + $('#setPassButton').data('target-input-id')).val(result);
+        $('#setPassButton').data('target-input').val(result);
     })
 
     $('#staticSetPassword').modal('hide');
@@ -137,8 +151,7 @@ var setPasswordModal = document.getElementById('staticSetPassword')
 setPasswordModal.addEventListener('show.bs.modal', function (event) {
     // Button that triggered the modal
     var button = event.relatedTarget
-    var id = $(button).prev().attr('id');
-    $('#setPassButton').data('target-input-id', id);
+    $('#setPassButton').data('target-input', $(button).prev());
 })
 
 async function sha256(m) {
