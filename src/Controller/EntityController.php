@@ -152,7 +152,6 @@ final class EntityController
         }
 
         try {
-            /** @var string|null $parentDn */
             $parentDn = $entry->getParentDn();
 
             $entry->delete();
@@ -210,6 +209,4 @@ final class EntityController
 
         return null;
     }
-
-
 }

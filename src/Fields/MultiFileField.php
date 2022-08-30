@@ -7,17 +7,15 @@ use Yiisoft\Router\UrlGeneratorInterface;
 
 final class MultiFileField extends MultiTextField
 {
-    /**
-     * @var UrlGeneratorInterface
-     */
-    public $urlGenerator;
 
-    /**
-     * @var string
-     */
-    public $dn;
+    public function __construct(public UrlGeneratorInterface $urlGenerator,
+                                public string                $dn = '',
+    )
+    {
+    }
 
-    protected function generateInputWithIndex($i, $val)
+
+    protected function generateInputWithIndex(int $i, ?string $val): string
     {
         $fileControls = '';
 
@@ -36,7 +34,7 @@ final class MultiFileField extends MultiTextField
                 );
         }
 
-        return Html::div(
+        return (string)Html::div(
             $fileControls .
             Html::file(
                 name: $this->getInputName() . '[' . $i . ']',

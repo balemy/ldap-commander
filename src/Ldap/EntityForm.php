@@ -45,10 +45,13 @@ class EntityForm extends FormModel
 
                 return '';
             }
-        } elseif ($attribute === 'objectclass' && is_array($this->entry->$attribute)) {
+        } elseif ($attribute === 'objectclass' && is_array($this->entry->getAttribute($attribute))) {
+
             // We're working only with lowerclass objectclass names.
             // Schema returns  objectclass keys as lc
-            return array_map('strtolower', $this->entry->$attribute);
+            /** @var string[] $val */
+            $val = $this->entry->$attribute;
+            return array_map('strtolower', $val);
         }
 
         return $this->entry->$attribute;

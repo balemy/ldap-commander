@@ -6,24 +6,6 @@ $(document).ready(function () {
 
     $('#entityform-objectclass').on('change', function (evt) {
         rebuildForm();
-        /*
-        var activeObjectClasses = [];
-
-        // Collect also sub objectclasses
-        $.each($('#entityform-objectclass').select2('data'), function (index, obj) {
-            activeObjectClasses = collectSupObjectClasses(obj.id);
-        });
-        activeObjectClasses = activeObjectClasses.filter(onlyUnique);
-
-        // Only rebuild the form if all activeObjectClasses are selected in the select2 field
-        // If not, change the value of the select 2 field, and trigger change. (This recalls this method)
-        if (activeObjectClasses.length == $('#entityform-objectclass').val().length) {
-            rebuildForm();
-        } else {
-            $('#entityform-objectclass').val(activeObjectClasses);
-            $('#entityform-objectclass').trigger('change');
-        }
-        */
     });
 
 
@@ -40,6 +22,9 @@ $(document).ready(function () {
         $el = $('.attribute-row[data-attribute="' + data.id + '"');
         $el.detach().appendTo("#attribute-list").slideDown();
 
+        // For files
+        $el.find('input').prop("disabled", false);
+
         $('#add-attribute-picker').val('');
         $('#add-attribute-picker').trigger('change');
     });
@@ -47,17 +32,6 @@ $(document).ready(function () {
 
     $('#entityform-rdnattribute').select2({
         theme: 'bootstrap-5'
-    });
-    $('#add-attribute-picker').on('select2:select', function (evt) {
-        var data = evt.params.data;
-        var element = evt.params.data.element;
-        var $element = $(element);
-        $element.detach();
-        $el = $('[data-attribute="' + data.id.toLowerCase() + '"');
-        $el.detach().appendTo("#attribute-list").slideDown();
-
-        $('#add-attribute-picker').val('');
-        $('#add-attribute-picker').trigger('change');
     });
 
     rebuildForm();
@@ -95,7 +69,7 @@ function rebuildForm() {
 
     // Collect also sub objectclasses
     $.each($('#entityform-objectclass').select2('data'), function (index, obj) {
-        activeObjectClasses = collectSupObjectClasses(obj.id);
+        activeObjectClasses = activeObjectClasses.concat(collectSupObjectClasses(obj.id));
     });
 
     var selectedRdnAttribute = $('#entityform-rdnattribute').val();

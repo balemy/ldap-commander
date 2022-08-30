@@ -65,7 +65,7 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
                         <?= Field::getFactory('entity')->input(MultiPasswordField::class, $entity, $attribute) ?>
                     <?php elseif ($entity->isBinaryAttribute($attribute)): ?>
                         <?= Field::getFactory('entity')->input(MultiFileField::class, $entity, $attribute,
-                            ['$urlGenerator' => $urlGenerator, '$dn' => $entity->getDn()]) ?>
+                            ['$dn' => $entity->getDn()]) ?>
                     <?php else: ?>
                         <?= Field::getFactory('entity')->input(MultiTextField::class, $entity, $attribute) ?>
                     <?php endif; ?>

@@ -8,9 +8,9 @@ use Yiisoft\Html\Html;
 
 final class MultiPasswordField extends MultiTextField
 {
-    protected function generateInputWithIndex($i, $val)
+    protected function generateInputWithIndex(int $i, ?string $val) : string
     {
-        return Html::div(
+        return (string) Html::div(
             Html::textInput(
                 name: $this->getInputName() . '[' . $i . ']',
                 value: $val,
