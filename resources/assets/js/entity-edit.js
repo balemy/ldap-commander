@@ -5,6 +5,8 @@ $(document).ready(function () {
     });
 
     $('#entityform-objectclass').on('change', function (evt) {
+        rebuildForm();
+        /*
         var activeObjectClasses = [];
 
         // Collect also sub objectclasses
@@ -21,6 +23,7 @@ $(document).ready(function () {
             $('#entityform-objectclass').val(activeObjectClasses);
             $('#entityform-objectclass').trigger('change');
         }
+        */
     });
 
 
@@ -88,11 +91,12 @@ $(".delete-binary-button").click(function () {
 });
 
 function rebuildForm() {
-    var activeObjectClasses = $('#entityform-objectclass').val();
-    if (activeObjectClasses === null) {
-        activeObjectClasses = [];
-    }
-    console.log(activeObjectClasses)
+    var activeObjectClasses = [];
+
+    // Collect also sub objectclasses
+    $.each($('#entityform-objectclass').select2('data'), function (index, obj) {
+        activeObjectClasses = collectSupObjectClasses(obj.id);
+    });
 
     var selectedRdnAttribute = $('#entityform-rdnattribute').val();
     $('#entityform-rdnattribute').find("option").remove();

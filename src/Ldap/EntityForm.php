@@ -175,9 +175,10 @@ class EntityForm extends FormModel
         foreach ($objectClasses as $objectClassName) {
             $objectClass = $this->schema->getObjectClass($objectClassName);
             if ($objectClass !== null) {
-                $validAttributes = array_merge($validAttributes, $objectClass->getAttributeIds());
+                $validAttributes = array_merge($validAttributes, $objectClass->getAttributeIds(true));
             }
         }
+
         return $validAttributes;
     }
 
