@@ -1,6 +1,6 @@
 # LDAP Commander
 
-## 0.1.1 (2022-08-30)
+## 0.1.1 (2022-08-31)
 
 - Migration to new Yii Forms component
 
