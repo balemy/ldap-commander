@@ -6,12 +6,12 @@ COPY . .
 RUN apt-get update
 
 #--------------------------------------------------------------------------
-# Install PHP LDAP Extension
+# Install PHP Extensions
 #--------------------------------------------------------------------------
 RUN \
-    apt-get install libldap2-dev -y && \
-    docker-php-ext-configure ldap && \
-    docker-php-ext-install ldap && \
+    apt-get install libldap2-dev libicu-dev -y && \
+    docker-php-ext-configure ldap intl pdo_sqlite && \
+    docker-php-ext-install ldap intl pdo_sqlite && \
     php -m
 
 #--------------------------------------------------------------------------
