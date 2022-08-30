@@ -5,8 +5,22 @@ $(document).ready(function () {
     });
 
     $('#entityform-objectclass').on('change', function (evt) {
-        // e.g. on remove of an item
-        rebuildForm();
+        var activeObjectClasses = [];
+
+        // Collect also sub objectclasses
+        $.each($('#entityform-objectclass').select2('data'), function (index, obj) {
+            activeObjectClasses = collectSupObjectClasses(obj.id);
+        });
+        activeObjectClasses = activeObjectClasses.filter(onlyUnique);
+
+        // Only rebuild the form if all activeObjectClasses are selected in the select2 field
+        // If not, change the value of the select 2 field, and trigger change. (This recalls this method)
+        if (activeObjectClasses.length == $('#entityform-objectclass').val().length) {
+            rebuildForm();
+        } else {
+            $('#entityform-objectclass').val(activeObjectClasses);
+            $('#entityform-objectclass').trigger('change');
+        }
     });
 
 
@@ -22,9 +36,6 @@ $(document).ready(function () {
 
         $el = $('.attribute-row[data-attribute="' + data.id + '"');
         $el.detach().appendTo("#attribute-list").slideDown();
-
-        // For files
-        //$el.find('input').prop("disabled", false);
 
         $('#add-attribute-picker').val('');
         $('#add-attribute-picker').trigger('change');
@@ -77,6 +88,11 @@ $(".delete-binary-button").click(function () {
 });
 
 function rebuildForm() {
+    var activeObjectClasses = $('#entityform-objectclass').val();
+    if (activeObjectClasses === null) {
+        activeObjectClasses = [];
+    }
+    console.log(activeObjectClasses)
 
     var selectedRdnAttribute = $('#entityform-rdnattribute').val();
     $('#entityform-rdnattribute').find("option").remove();
@@ -88,14 +104,6 @@ function rebuildForm() {
     $('.attribute-row').hide();
     $(".attribute-row[data-attribute='objectclass']").show();
 
-    // Collect current object classes
-    var activeObjectClasses = [];
-    $.each($('#entityform-objectclass').select2('data'), function (index, obj) {
-        activeObjectClasses.push(obj.id)
-        $.each(ldapSchema.objectClasses[obj.id].sups, function (index, subObjectClassName) {
-            activeObjectClasses.push(subObjectClassName.toLowerCase());
-        });
-    });
 
     $.each(activeObjectClasses, function (index, objectClass) {
         $.each(ldapSchema.objectClasses[objectClass].must, function (index, attributeId) {
@@ -116,6 +124,20 @@ function rebuildForm() {
     });
 
 }
+
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+}
+
+function collectSupObjectClasses(objectClass) {
+    res = [objectClass.toLowerCase()];
+    $.each(ldapSchema.objectClasses[objectClass.toLowerCase()].sups, function (index, subObjectClass) {
+        res.push(subObjectClass.toLowerCase());
+        res = res.concat(collectSupObjectClasses(subObjectClass))
+    });
+    return res;
+}
+
 
 function addAttributeToAddPicker(id, label) {
     $picker = $('#add-attribute-picker');
