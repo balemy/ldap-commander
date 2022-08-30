@@ -26,3 +26,5 @@ $_ENV['YII_DEBUG'] = filter_var(
         FILTER_NULL_ON_FAILURE
     ) ?? true;
 $_SERVER['YII_DEBUG'] = $_ENV['YII_DEBUG'];
+
+// test
