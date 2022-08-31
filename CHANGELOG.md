@@ -1,6 +1,6 @@
 # LDAP Commander
 
-## 0.1.2 (2022-08-31)
+## 0.1.3 (2022-08-31)
 
 - Docker PHP Extension Fixes
 
