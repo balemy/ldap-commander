@@ -16,7 +16,6 @@ on:
       - 'README.md'
       - 'CHANGELOG.md'
       - '.gitignore'
-      - '.env.example'
       - '.gitattributes'
       - 'infection.json.dist'
       - 'psalm.xml'
@@ -27,25 +26,24 @@ on:
 name: build
 
 jobs:
-  tests:
-    name: PHP ${{ matrix.php }}-${{ matrix.os }}
+  codeception-tests:
+
+    name: Codeception Tests
 
     env:
-      extensions: fileinfo, ldap, intl, pdo_sqlite 
-      key: cache-v1
+      extensions: fileinfo, ldap, intl, pdo_sqlite
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        os:
-          - ubuntu-latest
-          - windows-latest
-
-        php:
-#          - 8.0
-          - 8.1
-
+    services:
+      ldap:
+        image: bitnami/openldap
+        ports:
+          - 1389:1389
+        env:
+          LDAP_CONFIG_ADMIN_ENABLED: true
+          LDAP_ADMIN_USERNAME: admin
+          LDAP_ADMIN_PASSWORD: secret
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -53,26 +51,14 @@ jobs:
       - name: Install PHP with extensions
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
+          php-version: 8.1
           extensions: ${{ env.extensions }}
           ini-values: date.timezone='UTC'
           tools: composer:v2
 
-      - name: Determine composer cache directory on Linux
-        if: matrix.os == 'ubuntu-latest'
-        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
-
-      - name: Determine composer cache directory on Windows
-        if: matrix.os == 'windows-latest'
-        run: echo "COMPOSER_CACHE_DIR=~\AppData\Local\Composer" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-
-      - name: Cache dependencies installed with composer
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.COMPOSER_CACHE_DIR }}
-          key: php${{ matrix.php }}-composer-${{ hashFiles('**/composer.json') }}
-          restore-keys: |
-            php${{ matrix.php }}-composer-
+      - name: Start Selenium
+        run: |
+          docker run --detach --net=host selenium/standalone-chrome
 
       - name: Update composer
         run: composer self-update

@@ -9,7 +9,7 @@ final class MultiFileField extends MultiTextField
 {
 
     public function __construct(public UrlGeneratorInterface $urlGenerator,
-                                public string                $dn = '',
+                                public ?string                $dn = '',
     )
     {
     }

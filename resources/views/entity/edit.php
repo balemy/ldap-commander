@@ -48,6 +48,7 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
 
         <?= Html::form()
             ->post($urlGenerator->generate('entity-edit', ['dn' => $dn, 'new' => intval($entity->isNewRecord)]))
+            ->id('entityForm')
             ->enctype('multipart/form-data')
             ->csrf($csrf)
             ->open() ?>

@@ -19,7 +19,7 @@ namespace App\Tests\Support;
  * @method void pause($vars = [])
  *
  * @SuppressWarnings(PHPMD)
-*/
+ */
 class AcceptanceTester extends \Codeception\Actor
 {
     use _generated\AcceptanceTesterActions;
@@ -27,4 +27,27 @@ class AcceptanceTester extends \Codeception\Actor
     /**
      * Define custom actions here
      */
+
+    public function loggedIn()
+    {
+        // if snapshot exists - skipping login
+        if ($this->loadSessionSnapshot('login')) {
+            return;
+        }
+
+        $I = $this;
+        $I->amOnPage('/login');
+        try {
+            $I->fillField('#login-dsn', 'ldap://127.0.0.1:1389');
+            $I->fillField('#login-basedn', 'dc=example,dc=org');
+            $I->fillField('#login-admindn', 'cn=admin,dc=example,dc=org');
+        } catch (\Exception $ex) {
+
+        }
+        $I->fillField('#login-adminpassword', 'secret');
+        $I->click('Login');
+
+        // saving snapshot
+        $this->saveSessionSnapshot('login');
+    }
 }
