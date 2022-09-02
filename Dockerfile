@@ -9,7 +9,7 @@ RUN apt-get update
 # Install PHP Extensions
 #--------------------------------------------------------------------------
 RUN \
-    apt-get install libldap2-dev libicu-dev libsqlite3-0 libsqlite3-dev libzip -y && \
+    apt-get install libldap2-dev libicu-dev libsqlite3-0 libsqlite3-dev libzip-dev -y && \
     docker-php-ext-configure ldap  && \
     docker-php-ext-install ldap && \
     docker-php-ext-configure intl  && \
