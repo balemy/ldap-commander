@@ -12,6 +12,8 @@
 
 LDAP Commander is a web interface for managing LDAP servers. Currently only OpenLDAP is supported.
 
+**Demo:** [https://example-ldap.balemy.com/](https://example-ldap.balemy.com/)
+
 ### Features
 
 - Browse LDAP Structure
