@@ -5,20 +5,24 @@ declare(strict_types=1);
 namespace App\Asset;
 
 use Yiisoft\Assets\AssetBundle;
-use Yiisoft\Yii\Bootstrap5\Assets\BootstrapAsset;
 
-final class EntityEditAsset extends AssetBundle
+final class FontAwesomeAsset extends AssetBundle
 {
     public ?string $basePath = '@assets';
+
     public ?string $baseUrl = '@assetsUrl';
-    public ?string $sourcePath = '@resources/assets/js';
+
+    public ?string $sourcePath = '@npm/font-awesome';
 
     public array $depends = [
-        AppAsset::class,
-        Select2Asset::class,
+        Select2Bootstrap5Asset::class,
+    ];
+
+    public array $css = [
+        'css/all.css',
     ];
 
     public array $js = [
-        'entity-edit.js',
+        'js/all.js',
     ];
 }

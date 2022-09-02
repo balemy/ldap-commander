@@ -14,6 +14,10 @@ final class Select2Asset extends AssetBundle
 
     public ?string $sourcePath = '@npm/select2/dist';
 
+    public array $depends = [
+        Select2Bootstrap5Asset::class,
+    ];
+
     public array $css = [
         'css/select2.css',
     ];

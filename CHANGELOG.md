@@ -1,5 +1,9 @@
 # LDAP Commander
 
+## 0.2.1 (2022-09-03)
+
+- Use only bundled assets
+
 ## 0.2.0 (2022-09-02)
 
 - Added Schema View
