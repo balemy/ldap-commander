@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Controller\AuthController;
 use App\Controller\EntityController;
+use App\Controller\SchemaController;
 use App\Controller\SiteController;
 use App\Middleware\LDAPConnect;
 use Yiisoft\Http\Method;
@@ -20,6 +21,10 @@ return [
             Route::get('/browse')->action([EntityController::class, 'list'])->name('entity-list'),
             Route::get('/delete')->action([EntityController::class, 'delete'])->name('entity-delete'),
             Route::get('/entity-bin-download')->action([EntityController::class, 'downloadBinaryAttribute'])->name('entity-attribute-download'),
+
+            Route::get('/schema')->action([SchemaController::class, 'index'])->name('schema'),
+            Route::get('/schema/object-class')->action([SchemaController::class, 'displayObjectClass'])->name('schema-objectclass'),
+            Route::get('/schema/attribute')->action([SchemaController::class, 'displayAttribute'])->name('schema-attribute'),
         ),
     Route::methods([Method::GET, Method::POST], '/login')->action([AuthController::class, 'login'])->name('login'),
     Route::methods([Method::GET, Method::POST], '/logout')->action([AuthController::class, 'logout'])->name('logout'),

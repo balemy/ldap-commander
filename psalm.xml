@@ -13,6 +13,7 @@
         <file name="autoload.php"/>
         <ignoreFiles>
             <directory name="vendor"/>
+            <directory name="tests/Support/_generated"/>
         </ignoreFiles>
     </projectFiles>
 

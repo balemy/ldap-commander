@@ -54,6 +54,10 @@ $this->beginPage()
             'url' => $urlGenerator->generate('entity-list'),
         ],
         [
+            'label' => 'Schema',
+            'url' => $urlGenerator->generate('schema'),
+        ],
+        [
             'label' => 'Logout',
             'url' => $urlGenerator->generate('logout'),
         ],
@@ -61,10 +65,6 @@ $this->beginPage()
     [
         'label' => 'Query',
         'url' => '/contact',
-    ],
-    [
-        'label' => 'Schema',
-        'url' => '/logout'
     ],
     */
     ];

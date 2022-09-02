@@ -6,6 +6,17 @@ class AttributeType
 {
 
     /**
+     * @var ObjectClass[]
+     */
+    public $objectClasses = [];
+
+    /**
+     * @var ObjectClass[]
+     */
+    public $objectClassesMust = [];
+
+
+    /**
      * @param string $oid
      * @param string[] $names
      * @param string $description
@@ -35,16 +46,6 @@ class AttributeType
         return $this;
     }
 
-    /**
-     * @var ObjectClass[]
-     */
-    public $objectClasses = [];
-
-    /**
-     * @var ObjectClass[]
-     */
-    public $objectClassesMust = [];
-
     // X-ORDERED 'VALUES'
     // X-ORDERED 'SIBLINGS'
 
@@ -53,34 +54,10 @@ class AttributeType
         return implode(', ', $this->names);
     }
 
-    /**
-     * @return string[]
-     *
-     * @psalm-return list<string>
-     */
-    public function getObjectClassesNames(): array
+    public function getName(): string
     {
-        $names = [];
-        foreach ($this->objectClasses as $objectClass) {
-            $names[] = strtolower($objectClass->name);
-        }
-        return $names;
+        return (string)$this;
     }
-
-    /**
-     * @return string[]
-     *
-     * @psalm-return list<string>
-     */
-    public function getObjectClassesMustNames(): array
-    {
-        $names = [];
-        foreach ($this->objectClassesMust as $objectClass) {
-            $names[] = strtolower($objectClass->name);
-        }
-        return $names;
-    }
-
 
     public static function createByString(string $string): ?AttributeType
     {

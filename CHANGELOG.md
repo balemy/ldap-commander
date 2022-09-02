@@ -1,5 +1,9 @@
 # LDAP Commander
 
+## 0.2.0 (2022-09-02)
+
+- Added Schema View
+
 ## 0.1.3 (2022-08-31)
 
 - Docker PHP Extension Fixes

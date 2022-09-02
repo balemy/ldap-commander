@@ -40,6 +40,34 @@ class Schema
     }
 
     /**
+     * @param string $oid
+     * @return ObjectClass|null
+     */
+    public function getObjectClassByOid(string $oid): ?ObjectClass
+    {
+        foreach ($this->objectClasses as $objectClass) {
+            if ($objectClass->oid === $oid) {
+                return $objectClass;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @param string $oid
+     * @return AttributeType|null
+     */
+    public function getAttributeTypeByOid(string $oid): ?AttributeType
+    {
+        foreach ($this->attributeTypes as $attributeType) {
+            if ($attributeType->oid === $oid) {
+                return $attributeType;
+            }
+        }
+        return null;
+    }
+
+    /**
      * @return string[]
      *
      * @psalm-return array<string, string>
@@ -51,6 +79,24 @@ class Schema
             $list[strtolower($objectClass->name)] = $objectClass->name;
         }
         return $list;
+    }
+
+    /**
+     * @param AttributeType $attribute
+     * @return ObjectClass[]
+     */
+    public function getObjectClassesByAttributeType(AttributeType $attribute): array
+    {
+        $objectClasses = [];
+        foreach ($this->objectClasses as $objectClass) {
+            foreach (array_merge($objectClass->getMustAttributes(), $objectClass->getMayAttributes()) as $attr) {
+                if ($attr->oid === $attribute->oid) {
+                    $objectClasses[$objectClass->oid] = $objectClass;
+                }
+            }
+        }
+
+        return $objectClasses;
     }
 
 
@@ -158,14 +204,14 @@ class Schema
                 foreach ($objectClass->getAttributeIds() as $attrName) {
                     $attribute = $this->getAttribute($attrName);
                     if ($attribute !== null) {
-                        $attribute->objectClasses[] = $objectClass;
+                        $attribute->objectClasses[$objectClass->oid] = $objectClass;
                     }
                 }
                 /** @var string $attrName */
                 foreach ($objectClass->mustAttributes as $attrName) {
                     $attribute = $this->getAttribute($attrName);
                     if ($attribute !== null) {
-                        $attribute->objectClassesMust[] = $objectClass;
+                        $attribute->objectClassesMust[$objectClass->oid] = $objectClass;
                     }
                 }
             }

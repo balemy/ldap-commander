@@ -49,6 +49,37 @@ class ObjectClass
     }
 
     /**
+     * @return AttributeType[]
+     */
+    public function getMayAttributes() {
+        $arr = [];
+        /** @var string $id */
+        foreach ($this->mayAttributes as $id) {
+            $attribute = $this->schema->getAttribute($id);
+            if ($attribute !== null) {
+                $arr[] = $attribute;
+            }
+        }
+        return $arr;
+    }
+
+    /**
+     * @return AttributeType[]
+     */
+    public function getMustAttributes() {
+        $arr = [];
+        /** @var string $id */
+        foreach ($this->mustAttributes as $id) {
+            $attribute = $this->schema->getAttribute($id);
+            if ($attribute !== null) {
+                $arr[] = $attribute;
+            }
+        }
+        return $arr;
+    }
+
+
+    /**
      * @return ObjectClass[]
      */
     public function getSuperClasses()
