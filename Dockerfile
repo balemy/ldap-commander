@@ -16,6 +16,8 @@ RUN \
     docker-php-ext-install intl && \
     docker-php-ext-configure pdo_sqlite  && \
     docker-php-ext-install pdo_sqlite && \
+    docker-php-ext-configure zip  && \
+    docker-php-ext-install zip && \
     php -m
 
 #--------------------------------------------------------------------------
