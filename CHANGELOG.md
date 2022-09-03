@@ -1,5 +1,10 @@
 # LDAP Commander
 
+
+## 0.2.3 (2022-09-03)
+
+- Many fixes and improvements
+
 ## 0.2.1 (2022-09-03)
 
 - Use only bundled assets
