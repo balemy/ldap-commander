@@ -58,6 +58,11 @@ class EntitySidebar extends Widget
         );
 
         $html .= Html::tag('li',
+            Html::a('Duplicate Entity', $this->urlGenerator->generate('entity-edit', ['dn' => $this->dn, 'duplicate' => 1, 'new' => 1])),
+            ['class' => 'list-group-item']
+        );
+
+        $html .= Html::tag('li',
             Html::a('Delete Entity', $this->urlGenerator->generate('entity-delete', ['dn' => $this->dn]), [
                 'onClick' => 'return confirm("Are you sure?")'
             ]),

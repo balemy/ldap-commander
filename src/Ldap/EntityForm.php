@@ -6,6 +6,7 @@ use App\Helper\DnHelper;
 use App\Ldap\Schema\Schema;
 use LdapRecord\LdapRecordException;
 use LdapRecord\Models\Entry;
+use phpDocumentor\Reflection\Types\Void_;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Form\FormModel;
 use Yiisoft\Validator\Result;
@@ -34,11 +35,7 @@ class EntityForm extends FormModel
     public function getAttributeCastValue(string $attribute): mixed
     {
         if ($attribute === 'rdnAttribute') {
-            if ($this->isNewRecord) {
-                return '';
-            } else {
-                return $this->getRdnAttributeId();
-            }
+            return $this->getRdnAttributeId();
         } elseif ($attribute === 'objectclass' && is_array($this->entry->getAttribute($attribute))) {
 
             // We're working only with lowerclass objectclass names.
@@ -85,6 +82,17 @@ class EntityForm extends FormModel
             $this->entry->$name = $value;
         }
 
+    }
+
+    public function preloadAttributesFromEntry(Entry $duplicate): void
+    {
+        $this->entry->setRawAttributes($duplicate->getAttributes());
+
+        $dn = $duplicate->getDn();
+        if ($dn !== null) {
+            $rdns = DnHelper::getRdns($dn);
+            $this->rdnAttribute = DnHelper::getRdnAttributeName($rdns[0]);
+        }
     }
 
     /**
@@ -209,24 +217,7 @@ class EntityForm extends FormModel
                 }
             }
 
-            #$rdn = $this->entry->getCreatableRdn($rdnAttributeValue, $rdnAttribute);
-            #$newDn = $rdn . ',' . $this->entry->getParentDn();
-            #$this->entry->setDn($newDn);
-            #$this->entry->setDistinguishedNameAttribute($newDn);
-
             $this->entry->save();
-
-            /*
-            $oldDn = $this->entry->getDn();
-            $newRdn = $this->entry->getCreatableRdn($rdnAttributeValue, $rdnAttribute);
-            $parentDn = $this->entry->getParentDn();
-            $result = $this->entry->getConnection()->query()->rename(
-                $oldDn,
-                $newRdn,
-                $parentDn,
-                $deleteOldRdn = true,
-            );
-             */
         }
     }
 
@@ -265,6 +256,10 @@ class EntityForm extends FormModel
 
     public function getRdnAttributeId(): string
     {
+        if (!empty($this->rdnAttribute)) {
+            return $this->rdnAttribute;
+        }
+
         $dn = $this->entry->getDn();
         if ($dn !== null) {
             $rdns = DnHelper::getRdns($dn);

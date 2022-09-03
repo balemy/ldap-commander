@@ -68,17 +68,26 @@ final class EntityController
     {
         $dn = $this->getDnByRequest($request);
         if ($dn === null) {
-            $this->flash->add('danger', 'DN not found!');
-            return $this->webService->getRedirectResponse('entity-list');
+            return $this->webService->getNotFoundResponse();
         }
 
         if (isset($request->getQueryParams()['new']) && $request->getQueryParams()['new'] == 1) {
+            $parentEntry = Entry::query()->find($dn);
+
+            if (isset($request->getQueryParams()['duplicate']) && $request->getQueryParams()['duplicate'] == 1) {
+                $parentEntry = Entry::query()->find($parentEntry->getParentDn());
+            }
+
             $entity = new EntityForm(
                 $this->ldapService->getSchema(),
                 new Entry(),
                 true,
-                $dn
+                $parentEntry->getDn()
             );
+
+            if (isset($request->getQueryParams()['duplicate']) && $request->getQueryParams()['duplicate'] == 1) {
+                $entity->preloadAttributesFromEntry(Entry::query()->find($dn));
+            }
         } else {
             $entry = Entry::query()->find($dn);
             if ($entry === null || !($entry instanceof Entry)) {

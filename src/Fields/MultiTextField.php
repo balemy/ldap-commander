@@ -64,6 +64,7 @@ class MultiTextField extends InputField
 
         $entityForm = $this->getEntityForm();
         if ($entityForm !== null &&
+            !$entityForm->isNewRecord &&
             $entityForm->getRdnAttributeId() === $this->getFormAttributeName() &&
             $entityForm->getRdnAttributeValue() === $val) {
 
