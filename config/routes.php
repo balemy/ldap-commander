@@ -22,6 +22,7 @@ return [
             Route::get('/entity/delete')->action([EntityController::class, 'delete'])->name('entity-delete'),
             Route::get('/entity/download-binattr')->action([EntityController::class, 'downloadBinaryAttribute'])->name('entity-attribute-download'),
             Route::get('/entity/rename')->action([EntityController::class, 'rename'])->name('entity-rename'),
+            Route::get('/entity/move')->action([EntityController::class, 'move'])->name('entity-move'),
 
             Route::get('/schema')->action([SchemaController::class, 'index'])->name('schema'),
             Route::get('/schema/object-class')->action([SchemaController::class, 'displayObjectClass'])->name('schema-objectclass'),

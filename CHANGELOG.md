@@ -1,6 +1,11 @@
 # LDAP Commander
 
 
+## 0.2.5 (2022-09-04)
+
+- Added Entity Duplicate
+- Added Entity Move stub
+
 ## 0.2.4 (2022-09-03)
 
 - Stat timers in footer
