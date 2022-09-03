@@ -103,6 +103,9 @@ function rebuildForm() {
         });
     });
 
+    $('#attribute-list-loader').remove();
+    $('#attribute-list').show();
+    $('#attribute-list-bottom').show();
 }
 
 function onlyUnique(value, index, self) {

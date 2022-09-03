@@ -52,8 +52,14 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
             ->enctype('multipart/form-data')
             ->csrf($csrf)
             ->open() ?>
+        
+        <div class="d-flex justify-content-center" st id="attribute-list-loader">
+            <div class="spinner-border text-primary" style="width: 15rem; height: 15rem;"  role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
 
-        <div id="attribute-list">
+        <div id="attribute-list" style="display:none">
             <?php foreach ($attributeTypes as $attribute => $attributeType): ?>
                 <div class="attribute-row" data-attribute='<?= $attribute ?>'
                      data-attribute-label='<?= $entity->getAttributeLabel($attribute) ?>'>
@@ -75,31 +81,33 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
             <?php endforeach; ?>
         </div>
 
-        <hr>
+        <div id="attribute-list-bottom" style="display:none">
+            <hr>
 
-        <div class="row mb-3">
-            <?= LabelTag::tag()->addAttributes(['class' => 'col-sm-4 col-form-label'])->content('Add Attribute')->render() ?>
+            <div class="row mb-3">
+                <?= LabelTag::tag()->addAttributes(['class' => 'col-sm-4 col-form-label'])->content('Add Attribute')->render() ?>
 
-            <div class="col-sm-8 attribute-row-inputs">
-                <select class="form-select" id="add-attribute-picker" data-placeholder="Choose attribute"></select>
+                <div class="col-sm-8 attribute-row-inputs">
+                    <select class="form-select" id="add-attribute-picker" data-placeholder="Choose attribute"></select>
+                </div>
+
             </div>
 
-        </div>
-
-        <?php if ($entity->isNewRecord): ?>
+            <?php if ($entity->isNewRecord): ?>
+                <hr>
+                <?= Field::getFactory('entity')->select($entity, 'rdnAttribute')
+                    ->label('RDN Attribute')
+                    ->optionsData($attributeTypes)
+                    ->hint(($entity->isNewRecord) ? '' : 'Current DN: ' . $entity->getDn())
+                    ->multiple(false) ?>
+            <?php endif; ?>
             <hr>
-            <?= Field::getFactory('entity')->select($entity, 'rdnAttribute')
-                ->label('RDN Attribute')
-                ->optionsData($attributeTypes)
-                ->hint(($entity->isNewRecord) ? '' : 'Current DN: ' . $entity->getDn())
-                ->multiple(false) ?>
-        <?php endif; ?>
-        <hr>
 
-        <?= Field::submitButton()
-            ->buttonClass('btn btn-primary btn-lg mt-3')
-            ->content('Submit') ?>
+            <?= Field::submitButton()
+                ->buttonClass('btn btn-primary btn-lg mt-3')
+                ->content('Submit') ?>
 
+        </div>
         <?= '</form>' ?>
 
     </div>
