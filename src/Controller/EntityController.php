@@ -72,21 +72,30 @@ final class EntityController
         }
 
         if (isset($request->getQueryParams()['new']) && $request->getQueryParams()['new'] == 1) {
+            /** @var Entry $parentEntry */
             $parentEntry = Entry::query()->find($dn);
 
             if (isset($request->getQueryParams()['duplicate']) && $request->getQueryParams()['duplicate'] == 1) {
-                $parentEntry = Entry::query()->find($parentEntry->getParentDn());
+                $parentDn = $parentEntry->getParentDn();
+                if ($parentDn !== null) {
+                    $parentEntry = Entry::query()->find($parentDn);
+                }
             }
+
+            /** @var string $pdn */
+            $pdn = ($parentEntry !== null) ? $parentEntry->getDn() : '';
 
             $entity = new EntityForm(
                 $this->ldapService->getSchema(),
                 new Entry(),
                 true,
-                $parentEntry->getDn()
+                $pdn
             );
 
             if (isset($request->getQueryParams()['duplicate']) && $request->getQueryParams()['duplicate'] == 1) {
-                $entity->preloadAttributesFromEntry(Entry::query()->find($dn));
+                /** @var Entry $e */
+                $e =  Entry::query()->find($dn);
+                $entity->preloadAttributesFromEntry($e);
             }
         } else {
             $entry = Entry::query()->find($dn);
