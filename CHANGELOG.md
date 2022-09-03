@@ -1,6 +1,11 @@
 # LDAP Commander
 
 
+## 0.2.4 (2022-09-03)
+
+- Stat timers in footer
+- Schema show original definition
+
 ## 0.2.3 (2022-09-03)
 
 - Many fixes and improvements

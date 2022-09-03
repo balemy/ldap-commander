@@ -8,6 +8,7 @@ class ObjectClass
 {
     /**
      * @param Schema $schema
+     * @param string $definition
      * @param string $oid
      * @param string $name
      * @param string $description
@@ -18,6 +19,7 @@ class ObjectClass
      * @param bool $isStructural
      */
     public function __construct(private Schema $schema,
+                                public string  $definition,
                                 public string  $oid,
                                 public string  $name,
                                 public string  $description,
@@ -31,12 +33,14 @@ class ObjectClass
         return $this;
     }
 
-    public function __toString()
+    public
+    function __toString()
     {
         return $this->name;
     }
 
-    public function getAttributeIds(bool $includeSup = false): array
+    public
+    function getAttributeIds(bool $includeSup = false): array
     {
         $supAttributes = [];
         if ($includeSup) {
@@ -51,7 +55,9 @@ class ObjectClass
     /**
      * @return AttributeType[]
      */
-    public function getMayAttributes() {
+    public
+    function getMayAttributes()
+    {
         $arr = [];
         /** @var string $id */
         foreach ($this->mayAttributes as $id) {
@@ -66,7 +72,9 @@ class ObjectClass
     /**
      * @return AttributeType[]
      */
-    public function getMustAttributes() {
+    public
+    function getMustAttributes()
+    {
         $arr = [];
         /** @var string $id */
         foreach ($this->mustAttributes as $id) {
@@ -82,7 +90,8 @@ class ObjectClass
     /**
      * @return ObjectClass[]
      */
-    public function getSuperClasses()
+    public
+    function getSuperClasses()
     {
         $classes = [];
 
@@ -162,6 +171,7 @@ class ObjectClass
 
         return new ObjectClass(
             $schema,
+            $string,
             $matches[1],
             $matches[2],
             $desc[1] ?? '',

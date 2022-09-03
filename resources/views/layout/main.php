@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Asset\AppAsset;
-use App\Widget\FlashMessage;use Yiisoft\Html\Html;
+use App\Widget\FlashMessage;use App\Widget\PerformanceMetrics;use Yiisoft\Html\Html;
 use Yiisoft\I18n\Locale;
 use Yiisoft\Yii\Bootstrap5\Nav;
 use Yiisoft\Yii\Bootstrap5\NavBar;
@@ -96,15 +96,7 @@ $this->beginPage()
     </div>
 </main>
 
-
-<footer class="footer mt-auto py-3 text-muted">
-    <div class="container">
-        <p>
-            <?= $applicationParameters->getVersion() ?>
-        </p>
-    </div>
-</footer>
-
+<?= $this->render('_footer', ['applicationParameters' => $applicationParameters]); ?>
 
 <?php $this->endBody() ?>
 </body>

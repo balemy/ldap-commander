@@ -38,22 +38,22 @@ $this->setTitle($applicationParameters->getName());
                 </tr>
             <?php endif; ?>
             <?php if (!empty($attribute->equality)): ?>
-            <tr>
-                <th scope="row">Equality</th>
-                <td><?= $attribute->equality ?></td>
-            </tr>
+                <tr>
+                    <th scope="row">Equality</th>
+                    <td><?= $attribute->equality ?></td>
+                </tr>
             <?php endif; ?>
             <?php if (!empty($attribute->usage)): ?>
-            <tr>
-                <th scope="row">Usage</th>
-                <td><?= $attribute->usage ?></td>
-            </tr>
+                <tr>
+                    <th scope="row">Usage</th>
+                    <td><?= $attribute->usage ?></td>
+                </tr>
             <?php endif; ?>
             <?php if (!empty($attribute->syntax)): ?>
-            <tr>
-                <th scope="row">Syntax</th>
-                <td><?= $attribute->syntax ?></td>
-            </tr>
+                <tr>
+                    <th scope="row">Syntax</th>
+                    <td><?= $attribute->syntax ?></td>
+                </tr>
             <?php endif; ?>
             <tr>
                 <th scope="row">Is single Value</th>
@@ -62,6 +62,11 @@ $this->setTitle($applicationParameters->getName());
             <tr>
                 <th scope="row">Usages</th>
                 <td><?= count($objectClasses) ?></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <?= Html::encode($attribute->definition) ?>
+                </td>
             </tr>
         </table>
 

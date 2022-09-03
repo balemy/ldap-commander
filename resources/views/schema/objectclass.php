@@ -34,6 +34,10 @@ $this->setTitle($applicationParameters->getName());
         <h2> May Attributes</h2>
         <?= $this->render('_attributeList', ['attributes' => $objectClass->getMayAttributes(), 'urlGenerator' => $urlGenerator]); ?>
 
+        <br>
+        <h2> Definition</h2>
+        <p><?= Html::encode($objectClass->definition); ?></p>
+
     </div>
     <div class="col-md-3">
         <ul class="list-group">

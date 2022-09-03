@@ -65,14 +65,7 @@ $this->beginPage()
 </main>
 
 
-<footer class="footer mt-auto py-3 text-muted">
-    <div class="container">
-        <p>
-            <?= $applicationParameters->getVersion() ?>
-        </p>
-    </div>
-</footer>
-
+<?= $this->render('_footer', ['applicationParameters' => $applicationParameters]); ?>
 
 <?php $this->endBody() ?>
 </body>

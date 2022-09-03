@@ -2,14 +2,13 @@
 
 ## General
 
-- Show Timings
 - Cache Schema
 
 ## Entity Edit
 
 - Duplicate Entity
-- Rename RDN (https://www.cssscript.com/demo/navigation-tree-bootstrap/)
-- DN Fields (e.g. See also)
+- Rename RDN 
+- DN Fields (e.g. See also) (https://www.cssscript.com/demo/navigation-tree-bootstrap/)
 
 ## Login
 
@@ -21,6 +20,8 @@
 
 ## Long Term
 
+- Search Input on ObjectClasses, etc.
 - User / Group
+- Query
 - Session Bookmarks?
 - Import / Export

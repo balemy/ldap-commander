@@ -3,6 +3,7 @@
 namespace App\Ldap;
 
 use App\Ldap\Schema\Schema;
+use App\Timer;
 use LdapRecord\Connection;
 use LdapRecord\Container;
 
@@ -23,10 +24,10 @@ class LdapService
      */
     public $baseDn = '';
 
-    public function __construct()
+    public function __construct(public Timer $timer)
     {
         $this->connection = new Connection();
-        $this->schema = new Schema($this);
+        $this->schema = new Schema($this, $timer);
     }
 
     /**

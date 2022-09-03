@@ -3,6 +3,7 @@
 namespace App\Ldap\Schema;
 
 use App\Ldap\LdapService;
+use App\Timer;
 use LdapRecord\Connection;
 use Yiisoft\Json\Json;
 
@@ -28,7 +29,7 @@ class Schema
      */
     private $_attributeTypesBinary = null;
 
-    public function __construct(public LdapService $ldapService)
+    public function __construct(public LdapService $ldapService, private Timer $timer)
     {
 
     }
@@ -169,6 +170,8 @@ class Schema
      */
     public function populate(Connection $connection): void
     {
+        $this->timer->start('schema');
+
         $query = $this->ldapService->connection->query();
 
         $query->read()
@@ -216,6 +219,9 @@ class Schema
                 }
             }
         }
+
+        $this->timer->stop('schema');
+
     }
 
 

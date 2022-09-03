@@ -17,6 +17,7 @@ class AttributeType
 
 
     /**
+     * @param string $definition
      * @param string $oid
      * @param string[] $names
      * @param string $description
@@ -30,7 +31,8 @@ class AttributeType
      * @param bool $isSingleValue
      * @param bool $isUserModification
      */
-    public function __construct(public string $oid,
+    public function __construct(public string $definition,
+                                public string $oid,
                                 public array  $names,
                                 public string $description,
                                 public string $equality,
@@ -90,7 +92,9 @@ class AttributeType
         preg_match('@SUBSTR\s(.*?)\s@', $string, $substr);
         preg_match('@X\-ORDERED\s\'(.*?)\'\s@', $string, $xOrdered);
 
-        return new self($oid,
+        return new self(
+            $string,
+            $oid,
             $names,
             $desc[1] ?? '',
             $equality[1] ?? '',
