@@ -1,11 +1,26 @@
 # TODOs
 
+## General
+
+- Show Timings
+- Cache Schema
+
 ## Entity Edit
 
-- Cannot change RDN Attribute when editing record
-- Cannot update RDN Attribute value when in RDN (auto rename or block field)
-- Rename
+- Duplicate Entity
+- Rename RDN (https://www.cssscript.com/demo/navigation-tree-bootstrap/)
+- DN Fields (e.g. See also)
 
 ## Login
 
 - ENV_FIXED_HOST for Demo?
+
+## Testing
+
+- Unit Test and refactor Schema classes
+
+## Long Term
+
+- User / Group
+- Session Bookmarks?
+- Import / Export

@@ -42,7 +42,13 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
         <h1> Rename Entity </h1>
         <br>
 
-        TBD
+        <div class="d-flex justify-content-center">
+            <i class="fa-regular fa-face-grin" style="font-size:10em"></i>
+        </div>
+        <div class="d-flex justify-content-center">
+            <br/>
+            Implement me
+        </div>
 
     </div>
     <div class="col-md-3">

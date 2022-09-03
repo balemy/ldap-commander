@@ -52,8 +52,8 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
             ->enctype('multipart/form-data')
             ->csrf($csrf)
             ->open() ?>
-        
-        <div class="d-flex justify-content-center" st id="attribute-list-loader">
+
+        <div class="d-flex justify-content-center" id="attribute-list-loader">
             <div class="spinner-border text-primary" style="width: 15rem; height: 15rem;"  role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>

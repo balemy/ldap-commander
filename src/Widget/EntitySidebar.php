@@ -50,12 +50,12 @@ class EntitySidebar extends Widget
                 Html::a('Edit Entity', $this->urlGenerator->generate('entity-edit', ['dn' => $this->dn])),
                 ['class' => 'list-group-item']
             );
-        } else {
-            $html .= Html::tag('li',
-                Html::a('Rename Entity RDN', $this->urlGenerator->generate('entity-rename', ['dn' => $this->dn])),
-                ['class' => 'list-group-item']
-            );
         }
+
+        $html .= Html::tag('li',
+            Html::a('Rename Entity', $this->urlGenerator->generate('entity-rename', ['dn' => $this->dn])),
+            ['class' => 'list-group-item']
+        );
 
         $html .= Html::tag('li',
             Html::a('Delete Entity', $this->urlGenerator->generate('entity-delete', ['dn' => $this->dn]), [
