@@ -86,12 +86,14 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
 
         </div>
 
-        <hr>
-        <?= Field::getFactory('entity')->select($entity, 'rdnAttribute')
-            ->label('RDN Attribute')
-            ->optionsData($attributeTypes)
-            ->hint(($entity->isNewRecord) ? '' : 'Current DN: ' . $entity->getDn())
-            ->multiple(false) ?>
+        <?php if ($entity->isNewRecord): ?>
+            <hr>
+            <?= Field::getFactory('entity')->select($entity, 'rdnAttribute')
+                ->label('RDN Attribute')
+                ->optionsData($attributeTypes)
+                ->hint(($entity->isNewRecord) ? '' : 'Current DN: ' . $entity->getDn())
+                ->multiple(false) ?>
+        <?php endif; ?>
         <hr>
 
         <?= Field::submitButton()

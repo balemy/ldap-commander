@@ -11,7 +11,7 @@ final class EntityManageCest
     public function testCreateRequireLogin(AcceptanceTester $I): void
     {
         $I->wantTo('check login is required.');
-        $I->amOnPage('/edit?dn=dc%3Dexample%2Cdc%3Dorg&new=1');
+        $I->amOnPage('/entity/edit?dn=dc%3Dexample%2Cdc%3Dorg&new=1');
 
         $I->expectTo('LDAP Login.');
         $I->see('LDAP Login');
@@ -21,19 +21,19 @@ final class EntityManageCest
     {
         $I->loggedIn();
 
-        $I->amOnPage('/edit?dn=dc%3Dexample%2Cdc%3Dorg&new=1');
+        $I->amOnPage('/entity/edit?dn=dc%3Dexample%2Cdc%3Dorg&new=1');
         $I->selectOptionForSelect2('#entityform-objectclass', 'organizationalunit');
         $I->fillField('EntityForm[ou][0]', 'New Department');
         $I->click('Submit', '#entityForm');
 
-        $I->amOnPage('/browse');
+        $I->amOnPage('/entity/browse');
         $I->see('ou=New Department,dc=example,dc=org');
         $I->click('ou=New Department,dc=example,dc=org');
         $I->see('Edit Entity');
         $I->click('Delete Entity');
         $I->acceptPopup();
 
-        $I->amOnPage('/browse');
+        $I->amOnPage('/entity/browse');
         $I->dontSee('ou=New Department,dc=example,dc=org');
     }
 

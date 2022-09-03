@@ -37,7 +37,7 @@ $this->setTitle($applicationParameters->getName());
     </div>
     <div class="col-md-3">
         <ul class="list-group">
-            <li class="list-group-item"><a href="<?= $urlGenerator->generate('schema') ?>">Back to overview</li>
+            <li class="list-group-item"><a href="<?= $urlGenerator->generate('schema') ?>">Back to overview</a></li>
         </ul>
     </div>
 </div>

@@ -17,10 +17,11 @@ return [
         ->middleware(LDAPConnect::class)
         ->routes(
             Route::get('/entity')->action([EntityController::class, 'open'])->name('entity'),
-            Route::methods([Method::GET, Method::POST], '/edit')->action([EntityController::class, 'edit'])->name('entity-edit'),
-            Route::get('/browse')->action([EntityController::class, 'list'])->name('entity-list'),
-            Route::get('/delete')->action([EntityController::class, 'delete'])->name('entity-delete'),
-            Route::get('/entity-bin-download')->action([EntityController::class, 'downloadBinaryAttribute'])->name('entity-attribute-download'),
+            Route::methods([Method::GET, Method::POST], '/entity/edit')->action([EntityController::class, 'edit'])->name('entity-edit'),
+            Route::get('/entity/browse')->action([EntityController::class, 'list'])->name('entity-list'),
+            Route::get('/entity/delete')->action([EntityController::class, 'delete'])->name('entity-delete'),
+            Route::get('/entity/download-binattr')->action([EntityController::class, 'downloadBinaryAttribute'])->name('entity-attribute-download'),
+            Route::get('/entity/rename')->action([EntityController::class, 'rename'])->name('entity-rename'),
 
             Route::get('/schema')->action([SchemaController::class, 'index'])->name('schema'),
             Route::get('/schema/object-class')->action([SchemaController::class, 'displayObjectClass'])->name('schema-objectclass'),

@@ -19,10 +19,12 @@ $(document).ready(function () {
         var $element = $(element);
         $element.detach();
 
+        // Move to bottom
         $el = $('.attribute-row[data-attribute="' + data.id + '"');
-        $el.detach().appendTo("#attribute-list").slideDown();
+        $el.detach().appendTo("#attribute-list");
 
         // For files
+        $el.show();
         $el.find('input').prop("disabled", false);
 
         $('#add-attribute-picker').val('');

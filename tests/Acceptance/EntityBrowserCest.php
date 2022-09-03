@@ -11,7 +11,7 @@ final class EntityBrowserCest
     public function testIndexPageWithoutLogin(AcceptanceTester $I): void
     {
         $I->wantTo('check login is required.');
-        $I->amOnPage('/browse');
+        $I->amOnPage('/entity/browse');
 
         $I->expectTo('LDAP Login.');
         $I->see('LDAP Login');
@@ -22,7 +22,7 @@ final class EntityBrowserCest
         $I->loggedIn();
 
         $I->wantTo('want to see overview');
-        $I->amOnPage('/browse');
+        $I->amOnPage('/entity/browse');
 
         $I->expectTo('See base DN Children.');
         $I->see('List Children');
@@ -35,7 +35,7 @@ final class EntityBrowserCest
         $I->loggedIn();
 
         $I->wantTo('want to see overview');
-        $I->amOnPage('/browse?dn=ou%3Dusers%2Cdc%3Dexample%2Cdc%3Dorg');
+        $I->amOnPage('/entity/browse?dn=ou%3Dusers%2Cdc%3Dexample%2Cdc%3Dorg');
         $I->click('cn=readers,ou=users,dc=example,dc=org');
 
         $I->expectTo('See Edit');
@@ -47,7 +47,7 @@ final class EntityBrowserCest
         $I->loggedIn();
 
         $I->wantTo('want to see overview');
-        $I->amOnPage('/browse');
+        $I->amOnPage('/entity/browse');
         $I->click('ou=users,dc=example,dc=org');
 
         $I->expectTo('See Children');

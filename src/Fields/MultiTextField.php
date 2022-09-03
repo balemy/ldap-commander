@@ -31,10 +31,9 @@ class MultiTextField extends InputField
             $i++;
         }
 
-        $model = $this->getFormModel();
-
-        if ($model instanceof EntityForm) {
-            if ($model->isMultiValueAttribute($this->getFormAttributeName())) {
+        $entityForm = $this->getEntityForm();
+        if ($entityForm !== null) {
+            if ($entityForm->isMultiValueAttribute($this->getFormAttributeName())) {
                 $html .= Html::a('Add more')->addClass('btnx btn-lightx add-input')->addAttributes(['style' => 'font-size:10px'])
                     ->addAttributes(['data-input-name' => $this->getInputName() . '[replace-with-id]',]);
             }
@@ -43,14 +42,35 @@ class MultiTextField extends InputField
         return $html;
     }
 
-    protected
-    function generateInputWithIndex(int $i, ?string $val): string
+    protected function getEntityForm(): ?EntityForm
     {
-        return Html::textInput(
+        $model = $this->getFormModel();
+
+        if ($model instanceof EntityForm) {
+            return $model;
+        }
+
+        return null;
+    }
+
+
+    protected function generateInputWithIndex(int $i, ?string $val): string
+    {
+        $input = Html::textInput(
             $this->getInputName() . '[' . $i . ']',
             $val,
             $this->getInputAttributes()
-        )->render();
+        );
+
+        $entityForm = $this->getEntityForm();
+        if ($entityForm !== null &&
+            $entityForm->getRdnAttributeId() === $this->getFormAttributeName() &&
+            $entityForm->getRdnAttributeValue() === $val) {
+
+            $input = $input->disabled();
+        }
+
+        return $input->render();
     }
 
 }

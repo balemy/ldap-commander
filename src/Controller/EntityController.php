@@ -137,6 +137,27 @@ final class EntityController
         ]);
     }
 
+
+    public function rename(ServerRequestInterface $request): ResponseInterface
+    {
+        $dn = $this->getDnByRequest($request);
+        if ($dn === null) {
+            return $this->webService->getNotFoundResponse();
+        }
+
+        $entry = Entry::query()->find($dn);
+        if ($entry === null || !($entry instanceof Entry)) {
+            return $this->webService->getNotFoundResponse();
+        }
+
+        return $this->viewRenderer->render('rename', [
+            'dn' => $entry->getDn(),
+            'urlGenerator' => $this->urlGenerator,
+            'assetManager' => $this->assetManager,
+            'schemaJsonInfo' => $this->ldapService->getSchema()->getJsonInfo(),
+        ]);
+    }
+
     public function delete(ServerRequestInterface $request): ResponseInterface
     {
         $dn = $this->getDnByRequest($request);

@@ -37,13 +37,7 @@ class EntityForm extends FormModel
             if ($this->isNewRecord) {
                 return '';
             } else {
-                $dn = $this->entry->getDn();
-                if ($dn !== null) {
-                    $rdns = DnHelper::getRdns($dn);
-                    return DnHelper::getRdnAttributeName($rdns[0]);
-                }
-
-                return '';
+                return $this->getRdnAttributeId();
             }
         } elseif ($attribute === 'objectclass' && is_array($this->entry->getAttribute($attribute))) {
 
@@ -191,16 +185,19 @@ class EntityForm extends FormModel
      */
     public function save(): void
     {
-        $rdnAttribute = (string)$this->getAttributeValue('rdnAttribute');
-        $rdnAttributeValue = (string)$this->getAttributeValueAsArray($rdnAttribute)[0];
-        $rdn = $this->entry->getCreatableRdn($rdnAttributeValue, $rdnAttribute);
-
         if ($this->isNewRecord) {
-            $newDn = $rdn . ',' . $this->parentDn;
+            $rdnAttribute = (string)$this->getAttributeValue('rdnAttribute');
+            $rdnAttributeValue = (string)$this->getAttributeValueAsArray($rdnAttribute)[0];
 
+            $rdn = $this->entry->getCreatableRdn($rdnAttributeValue, $rdnAttribute);
+            $newDn = $rdn . ',' . $this->parentDn;
             $this->entry->setDn($newDn);
+
             $this->entry->insert($newDn, $this->getEntryAttributesAsArray());
         } else {
+            // We need to add the RDN attribute value manually, since the input is disabled
+            $this->entry->addAttributeValue($this->getRdnAttributeId(), $this->getRdnAttributeValue());
+
             // It's not possible to modify/add/del binary data. So make sure to delete and recreate it.
             foreach (array_keys($this->schema->getBinaryAttributes()) as $attribute) {
                 assert(is_string($attribute));
@@ -212,7 +209,24 @@ class EntityForm extends FormModel
                 }
             }
 
+            #$rdn = $this->entry->getCreatableRdn($rdnAttributeValue, $rdnAttribute);
+            #$newDn = $rdn . ',' . $this->entry->getParentDn();
+            #$this->entry->setDn($newDn);
+            #$this->entry->setDistinguishedNameAttribute($newDn);
+
             $this->entry->save();
+
+            /*
+            $oldDn = $this->entry->getDn();
+            $newRdn = $this->entry->getCreatableRdn($rdnAttributeValue, $rdnAttribute);
+            $parentDn = $this->entry->getParentDn();
+            $result = $this->entry->getConnection()->query()->rename(
+                $oldDn,
+                $newRdn,
+                $parentDn,
+                $deleteOldRdn = true,
+            );
+             */
         }
     }
 
@@ -249,6 +263,27 @@ class EntityForm extends FormModel
         return $this->entry->getDn();
     }
 
+    public function getRdnAttributeId(): string
+    {
+        $dn = $this->entry->getDn();
+        if ($dn !== null) {
+            $rdns = DnHelper::getRdns($dn);
+            return DnHelper::getRdnAttributeName($rdns[0]);
+        }
+
+        return '';
+    }
+
+    public function getRdnAttributeValue(): string
+    {
+        $dn = $this->entry->getDn();
+        if ($dn !== null) {
+            $rdns = DnHelper::getRdns($dn);
+            return DnHelper::getRdnAttributeValue($rdns[0]);
+        }
+
+        return '';
+    }
 
     private function getEntryAttributesAsArray(): array
     {
