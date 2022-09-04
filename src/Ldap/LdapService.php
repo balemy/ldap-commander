@@ -2,6 +2,7 @@
 
 namespace App\Ldap;
 
+use App\Helper\DSN;
 use App\Ldap\Schema\Schema;
 use App\Timer;
 use LdapRecord\Connection;
@@ -31,23 +32,24 @@ class LdapService
     }
 
     /**
-     * @param ConnectionDetails $connectionDetails
+     * @param LoginForm $login
      * @return void
      * @throws \LdapRecord\Auth\BindException
      * @throws \LdapRecord\LdapRecordException
      */
-    public function connect(ConnectionDetails $connectionDetails)
+    public function connect(LoginForm $login)
     {
+        $dsn = new DSN((string)$login->getAttributeValue('dsn'));
 
         $config = [
-            'hosts' => [$connectionDetails->getHost()],
-            'port' => $connectionDetails->getPort(),
-            'username' => $connectionDetails->adminDn,
-            'password' => $connectionDetails->adminPassword,
-            'base_dn' => $connectionDetails->baseDn
+            'hosts' => [$dsn->getHost()],
+            'port' => $dsn->getPort(),
+            'username' => (string)$login->getAttributeValue('adminDn'),
+            'password' => (string)$login->getAttributeValue('adminPassword'),
+            'base_dn' => (string)$login->getAttributeValue('baseDn')
         ];
 
-        $this->baseDn = $connectionDetails->baseDn;
+        $this->baseDn = $config['base_dn'];
 
         $this->connection = new Connection($config);
         $this->connection->connect();
@@ -56,7 +58,6 @@ class LdapService
         Container::setDefaultConnection('default');
 
         $this->schema->populate($this->connection);
-
     }
 
 

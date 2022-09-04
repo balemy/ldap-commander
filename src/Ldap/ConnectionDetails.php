@@ -6,38 +6,41 @@ use Yiisoft\Session\SessionInterface;
 
 class ConnectionDetails
 {
-    /**
-     * @var array{fragment?: string, host?: string, pass?: string, path?: string, port?: int, query?: string, scheme?: string, user?: string}|false
-     */
-    private $parseUrl = [];
-
-    /**
-     * @var string
-     */
+    public string $title = '';
     public string $dsn = '';
     public string $baseDn = '';
     public string $adminDn = '';
     public string $adminPassword = '';
 
+    const MAX_ENV_CONNECTIONS = 5;
+
     /**
-     * @var string[]
+     * @var array
      */
     const ENV_CONFIG_MAP = [
-        'dsn' => 'CMDA_DSN',
-        'adminDn' => 'CMDA_ADMIN_DN',
-        'adminPassword' => 'CMDA_ADMIN_PASSWORD',
-        'baseDn' => 'CMDA_BASE_DN',
+        'title' => 'LDAPCOM_CONN%d_TITLE',
+        'dsn' => 'LDAPCOM_CONN%d_DSN',
+        'baseDn' => 'LDAPCOM_CONN%d_BASE_DN',
+        'adminDn' => 'LDAPCOM_CONN%d_ADMIN_DN',
+        'adminPassword' => 'LDAPCOM_CONN%d_ADMIN_PASSWORD',
     ];
 
+    /**
+     * @var ConnectionDetails[]|null
+     */
+    private static $_connections = null;
 
     public function __construct(
+        string $title = '',
         string $dsn = '',
         string $baseDn = '',
         string $adminDn = '',
         string $adminPassword = '',
     )
     {
-        $this->loadDefaults();
+        if (!empty($title)) {
+            $this->title = $title;
+        }
 
         if (!empty($dsn)) {
             $this->dsn = $dsn;
@@ -52,81 +55,55 @@ class ConnectionDetails
         if (!empty($adminPassword)) {
             $this->adminPassword = $adminPassword;
         }
-
-        $this->parseUrl = parse_url($this->dsn);
     }
 
-    private function loadDefaults(): void
+    /**
+     * @return ConnectionDetails[]
+     */
+    public static function getAll(): array
     {
-        foreach (static::ENV_CONFIG_MAP as $attribute => $envVar) {
-            assert(is_string($envVar));
-            if (isset($_ENV[$envVar]) && is_string($_ENV[$envVar])) {
-                assert(is_string($attribute));
-                $this->$attribute = $_ENV[$envVar];
+        if (static::$_connections !== null) {
+            return static::$_connections;
+        }
+
+        $connectionDetails = [];
+
+        for ($i = 1; $i <= static::MAX_ENV_CONNECTIONS; $i++) {
+            if (static::getEnvVar('title', $i) !== null || static::getEnvVar('dsn', $i) !== null) {
+
+                $connectionDetails[] = new ConnectionDetails(
+                    static::getEnvVar('title', $i) ?? static::getEnvVar('dsn', $i),
+                    static::getEnvVar('dsn', $i) ?? static::getEnvVar('title', $i),
+                    static::getEnvVar('baseDn', $i) ?? '',
+                    static::getEnvVar('adminDn', $i) ?? '',
+                    static::getEnvVar('adminPassword', $i) ?? '',
+                );
             }
         }
-    }
 
-
-    public static function createFromSession(SessionInterface $session): ConnectionDetails
-    {
-        /** @var ConnectionDetails|null $connectionDetails */
-        $connectionDetails = $session->get('ConnectionDetails');
-        if ($connectionDetails instanceof ConnectionDetails) {
-            return $connectionDetails;
+        if (isset($_ENV['LDAPCOM_ALLOW_CUSTOM_CONNECT']) && $_ENV['LDAPCOM_ALLOW_CUSTOM_CONNECT'] == "1") {
+            $connectionDetails[99] = new ConnectionDetails('Custom');
         }
 
-        return new ConnectionDetails();
+        static::$_connections = $connectionDetails;
+
+        return static::$_connections;
     }
 
 
-    public static function removeFromSession(SessionInterface $session): void
+    private static function getEnvVar(string $name, int $i): ?string
     {
-        $session->remove('ConnectionDetails');
-
-        /*
-        $c = static::createFromSession($session);
-        if ($c) {
-            $c->adminPassword = '';
-            $c->storeInSession($session);
-        }
-        */
-    }
-
-    public function storeInSession(SessionInterface $session): void
-    {
-        $session->set('ConnectionDetails', $this);
-    }
-
-
-    public function getIsSSL(): bool
-    {
-        if (isset($this->parseUrl['scheme']) && $this->parseUrl['scheme'] === 'ldaps') {
-            return true;
+        if (!isset(static::ENV_CONFIG_MAP[$name])) {
+            return null;
         }
 
-        return false;
-    }
+        $name = sprintf(static::ENV_CONFIG_MAP[$name], $i);
 
-    public function getPort(): int
-    {
-        if (isset($this->parseUrl['port'])) {
-            return intval($this->parseUrl['port']);
+        if (isset($_ENV[$name]) && is_string($_ENV[$name])) {
+            return $_ENV[$name];
         }
 
-        if ($this->getIsSSL()) {
-            return 636;
-        }
-
-        return 389;
+        return null;
     }
 
-    public function getHost(): string
-    {
-        if (isset($this->parseUrl['host'])) {
-            return $this->parseUrl['host'];
-        }
-
-        return 'localhost';
-    }
 }

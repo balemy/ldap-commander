@@ -63,17 +63,17 @@ $this->setTitle($applicationParameters->getName());
                 <th scope="row">Usages</th>
                 <td><?= count($objectClasses) ?></td>
             </tr>
-            <tr>
-                <td colspan="2">
-                    <?= Html::encode($attribute->definition) ?>
-                </td>
-            </tr>
         </table>
 
         <br>
         <h2>Object Classes</h2>
         <?= $this->render('_objectclasses', ['objectClasses' => $objectClasses, 'urlGenerator' => $urlGenerator]); ?>
 
+        <br>
+        <h2>Definition</h2>
+        <div class="alert alert-light" role="alert">
+            <?= Html::encode($attribute->definition) ?>
+        </div>
 
     </div>
     <div class="col-md-3">

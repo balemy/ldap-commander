@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Ldap;
 
+use App\Timer;
 use LdapRecord\Auth\BindException;
 use Yiisoft\Form\FormModel;
+use Yiisoft\Session\SessionInterface;
 use Yiisoft\Validator\Result;
 use Yiisoft\Validator\Rule\Required;
 
@@ -17,14 +19,11 @@ final class LoginForm extends FormModel
     private string $adminPassword = '';
     private bool $rememberMe = false;
 
-    private LdapService $ldapService;
+    /**
+     * @var string[]
+     */
+    private $fixedAttributes = [];
 
-    public function __construct(LdapService $ldapService)
-    {
-        $this->ldapService = $ldapService;
-
-        parent::__construct();
-    }
 
     public function getAttributeLabels(): array
     {
@@ -58,8 +57,9 @@ final class LoginForm extends FormModel
             function (): Result {
                 $result = new Result();
 
+                $ldapService = new LdapService(new Timer());
                 try {
-                    $this->ldapService->connect($this->getConnectionDetails());
+                    $ldapService->connect($this);
                 } catch (BindException $exception) {
                     $result->addError($exception->getMessage());
                 }
@@ -71,6 +71,19 @@ final class LoginForm extends FormModel
 
     public function loadConnectionDetails(ConnectionDetails $connectionDetails): void
     {
+        if (!empty($connectionDetails->dsn)) {
+            $this->fixedAttributes[] = 'dsn';
+        }
+        if (!empty($connectionDetails->baseDn)) {
+            $this->fixedAttributes[] = 'baseDn';
+        }
+        if (!empty($connectionDetails->adminDn)) {
+            $this->fixedAttributes[] = 'adminDn';
+        }
+        if (!empty($connectionDetails->adminPassword)) {
+            $this->fixedAttributes[] = 'adminPassword';
+        }
+
         $this->setAttribute('dsn', $connectionDetails->dsn);
         $this->setAttribute('baseDn', $connectionDetails->baseDn);
         $this->setAttribute('adminDn', $connectionDetails->adminDn);
@@ -79,24 +92,31 @@ final class LoginForm extends FormModel
 
     public function isAttributeFixed(string $attribute): bool
     {
-        /*
-        if (isset(ConnectionDetails::ENV_CONFIG_MAP[$attribute]) &&
-            !empty($_ENV[ConnectionDetails::ENV_CONFIG_MAP[$attribute]])
-        ) {
-            return true;
-        }
-        */
-
-        return false;
+        return in_array($attribute, $this->fixedAttributes);
     }
 
-    public function getConnectionDetails(): ConnectionDetails
+
+    public static function createFromSession(SessionInterface $session): ?LoginForm
     {
-        return new ConnectionDetails(
-            (string)$this->getAttributeValue('dsn'),
-            (string)$this->getAttributeValue('baseDn'),
-            (string)$this->getAttributeValue('adminDn'),
-            (string)$this->getAttributeValue('adminPassword'),
-        );
+        /** @var LoginForm|null $loginForm */
+        $loginForm = $session->get('Login');
+        if ($loginForm instanceof LoginForm) {
+            return $loginForm;
+        }
+
+        return null;
     }
+
+
+    public function storeInSession(SessionInterface $session): void
+    {
+        $session->set('Login', $this);
+    }
+
+
+    public static function removeFromSession(SessionInterface $session): void
+    {
+        $session->remove('Login');
+    }
+
 }

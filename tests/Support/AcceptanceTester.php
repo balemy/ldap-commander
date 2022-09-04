@@ -36,14 +36,10 @@ class AcceptanceTester extends \Codeception\Actor
         }
 
         $I = $this;
-        $I->amOnPage('/login');
-        try {
-            $I->fillField('#login-dsn', 'ldap://127.0.0.1:1389');
-            $I->fillField('#login-basedn', 'dc=example,dc=org');
-            $I->fillField('#login-admindn', 'cn=admin,dc=example,dc=org');
-        } catch (\Exception $ex) {
-
-        }
+        $I->amOnPage('/login?c=99');
+        $I->fillField('#login-dsn', 'ldap://127.0.0.1:1389');
+        $I->fillField('#login-basedn', 'dc=example,dc=org');
+        $I->fillField('#login-admindn', 'cn=admin,dc=example,dc=org');
         $I->fillField('#login-adminpassword', 'secret');
         $I->click('Login');
 

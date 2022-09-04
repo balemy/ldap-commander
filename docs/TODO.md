@@ -23,5 +23,6 @@
 - Search Input on ObjectClasses, etc.
 - User / Group
 - Query
+- Move Entity
 - Session Bookmarks?
 - Import / Export

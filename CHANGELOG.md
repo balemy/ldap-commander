@@ -1,6 +1,10 @@
 # LDAP Commander
 
 
+## 0.3.0 (2022-09-04)
+
+- Allow multiple config connections 
+
 ## 0.2.5 (2022-09-04)
 
 - Added Entity Duplicate

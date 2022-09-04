@@ -6,6 +6,7 @@ namespace App\Middleware;
 
 use App\Ldap\ConnectionDetails;
 use App\Ldap\LdapService;
+use App\Ldap\LoginForm;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -33,18 +34,19 @@ final class LDAPConnect implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $connectionDetails = ConnectionDetails::createFromSession($this->session);
-        try {
-            $this->ldapService->connect($connectionDetails);
-        } catch (\Exception $ex) {
-            $this->flash->add('danger', $ex->getMessage());
-            return $this->responseFactory
-                ->createResponse(Status::FOUND)
-                ->withHeader(Header::LOCATION, $this->urlGenerator->generate('login'));
+        $login = LoginForm::createFromSession($this->session);
+        if ($login !== null) {
+            try {
+                $this->ldapService->connect($login);
+
+                return $handler->handle($request);
+            } catch (\Exception $ex) {
+                $this->flash->add('danger', $ex->getMessage());
+            }
         }
 
-        return $handler->handle($request);
-
-
+        return $this->responseFactory
+            ->createResponse(Status::FOUND)
+            ->withHeader(Header::LOCATION, $this->urlGenerator->generate('login'));
     }
 }

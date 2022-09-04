@@ -2,13 +2,16 @@
 
 declare(strict_types=1);
 
+use App\Ldap\ConnectionDetails;
 use Yiisoft\Form\Field;
 use Yiisoft\Html\Tag\Form;
+use Yiisoft\Html\Tag\Select;
 
 /**
  * @var \Yiisoft\View\WebView $this
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var string $csrf
+ * @var int $connectionId
  * @var \App\Ldap\LoginForm $formModel
  */
 
@@ -23,17 +26,28 @@ $error = $error ?? null;
                     <h1 class="fw-normal h3 text-center">LDAP Login</h1>
                 </div>
                 <div class="card-body p-5 text-center">
+                    <div class="form-floating">
+                        <?= Select::tag()
+                            ->optionsData(array_map(fn(ConnectionDetails $c): string => $c->title, ConnectionDetails::getAll()))
+                            ->addClass('form-control')
+                            ->value($connectionId)
+                            ->id('selectConfiguredConn')
+                        ?>
+                        <label for="floatingConnection">Connection</label>
+                    </div>
 
                     <?= Form::tag()
-                        ->post($urlGenerator->generate('login'))
+                        ->post($urlGenerator->generate('login', ['c' => $connectionId]))
                         ->csrf($csrf)
                         ->id('loginForm')
                         ->open() ?>
 
+                    <hr/>
+
                     <?= Field::text($formModel, 'dsn')
                         ->hint('Example: ldaps://localhost:636')
                         ->addInputAttributes(['disabled' => $formModel->isAttributeFixed('dsn')])
-                        ->autofocus() ?>
+                    ?>
 
                     <?= Field::text($formModel, 'baseDn')
                         ->hint('Example: dc=example,dc=org')
@@ -44,7 +58,7 @@ $error = $error ?? null;
                         ->addInputAttributes(['disabled' => $formModel->isAttributeFixed('adminDn')]) ?>
 
                     <?= Field::password($formModel, 'adminPassword')
-                        ->addInputAttributes(['disabled' => $formModel->isAttributeFixed('adminPasswordadm,')]) ?>
+                        ->addInputAttributes(['disabled' => $formModel->isAttributeFixed('adminPassword')]) ?>
 
                     <?= Field::submitButton()
                         ->name('login-button')
@@ -58,3 +72,21 @@ $error = $error ?? null;
         </div>
     </div>
 </div>
+<script>
+    deferJq(function () {
+        $('#selectConfiguredConn').change(function () {
+            url = "<?= $urlGenerator->generate('login', ['c' => 'connectionId']); ?>"
+            window.location = url.replace('connectionId', $(this).val());
+        });
+    });
+
+    function deferJq(method) {
+        if (window.jQuery) {
+            method();
+        } else {
+            setTimeout(function () {
+                deferJq(method)
+            }, 50);
+        }
+    }
+</script>

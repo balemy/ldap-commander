@@ -43,10 +43,11 @@ Default password: `password`
 
 ```
 docker run -it --net='host' \
--e CMDA_DSN='ldap://localhost:389' \
--e CMDA_BASE_DN='dc=example,dc=org' \
--e CMDA_ADMIN_DN='cn=admin,dc=example,dc=org' \
--e CMDA_ADMIN_PASSWORD= \
+-e LDAPCOM_CONN1_TITLE='My LDAP Server' \
+-e LDAPCOM_CONN1_DSN='ldap://localhost:389' \
+-e LDAPCOM_CONN1_BASEDN='dc=example,dc=org' \
+-e LDAPCOM_CONN1_ADMIN_DN='cn=admin,dc=example,dc=org' \
+-e LDAPCOM_CONN1_ADMIN_PASSWORD= \
 -p 8080:8080 balemy/ldap-commander
 ````
 
@@ -72,7 +73,7 @@ vi .env
 ### Startup
 
 ``` 
-./cmda serve
+composer serve
 ``` 
 
 Then open the following URL in your browser: [http://localhost:8080](http://localhost:8080)

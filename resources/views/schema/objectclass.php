@@ -36,7 +36,9 @@ $this->setTitle($applicationParameters->getName());
 
         <br>
         <h2> Definition</h2>
-        <p><?= Html::encode($objectClass->definition); ?></p>
+        <div class="alert alert-light" role="alert">
+            <?= Html::encode($objectClass->definition); ?>
+        </div>
 
     </div>
     <div class="col-md-3">
