@@ -44,6 +44,7 @@ class LdapService
         $config = [
             'hosts' => [$dsn->getHost()],
             'port' => $dsn->getPort(),
+            'use_ssl' => $dsn->getIsSSL(),
             'username' => (string)$login->getAttributeValue('adminDn'),
             'password' => (string)$login->getAttributeValue('adminPassword'),
             'base_dn' => (string)$login->getAttributeValue('baseDn')

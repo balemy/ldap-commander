@@ -72,8 +72,8 @@ class ConnectionDetails
             if (static::getEnvVar('title', $i) !== null || static::getEnvVar('dsn', $i) !== null) {
 
                 $connectionDetails[] = new ConnectionDetails(
-                    static::getEnvVar('title', $i) ?? static::getEnvVar('dsn', $i),
-                    static::getEnvVar('dsn', $i) ?? static::getEnvVar('title', $i),
+                    static::getEnvVar('title', $i) ?? static::getEnvVar('dsn', $i) ?? '',
+                    static::getEnvVar('dsn', $i) ?? static::getEnvVar('title', $i) ?? '',
                     static::getEnvVar('baseDn', $i) ?? '',
                     static::getEnvVar('adminDn', $i) ?? '',
                     static::getEnvVar('adminPassword', $i) ?? '',
