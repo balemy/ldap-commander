@@ -2,6 +2,7 @@
 
 ## General
 
+- Check Composer.lock
 - Cache Schema
 
 ## Entity Edit
@@ -11,8 +12,6 @@
 - DN Fields (e.g. See also) (https://www.cssscript.com/demo/navigation-tree-bootstrap/)
 
 ## Login
-
-- ENV_FIXED_HOST for Demo?
 
 ## Testing
 

@@ -58,7 +58,8 @@ $error = $error ?? null;
                         ->addInputAttributes(['disabled' => $formModel->isAttributeFixed('adminDn')]) ?>
 
                     <?= Field::password($formModel, 'adminPassword')
-                        ->addInputAttributes(['disabled' => $formModel->isAttributeFixed('adminPassword')]) ?>
+                        ->addInputAttributes(['disabled' => $formModel->isAttributeFixed('adminPassword')])
+                    ?>
 
                     <?= Field::submitButton()
                         ->name('login-button')

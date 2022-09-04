@@ -54,12 +54,16 @@ final class AuthController
         if ($request->getMethod() === Method::POST) {
 
             // Loading may return false, when all fields are disabled
-            $loginForm->load(is_array($body) ? $body : []);
+            $loginForm->loadSafeAttributes(is_array($body) ? $body : []);
 
             if ($validator->validate($loginForm)->isValid()) {
                 $loginForm->storeInSession($this->session);
                 return $this->webService->getRedirectResponse('home', []);
             }
+        }
+
+        if ($loginForm->isAttributeFixed('adminPassword')) {
+            $loginForm->setAttribute('adminPassword', '******************');
         }
 
         return $this->viewRenderer->render('login', [

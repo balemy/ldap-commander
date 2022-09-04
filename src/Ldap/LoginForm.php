@@ -6,6 +6,7 @@ namespace App\Ldap;
 
 use App\Timer;
 use LdapRecord\Auth\BindException;
+use phpDocumentor\Reflection\Types\Boolean;
 use Yiisoft\Form\FormModel;
 use Yiisoft\Session\SessionInterface;
 use Yiisoft\Validator\Result;
@@ -23,7 +24,6 @@ final class LoginForm extends FormModel
      * @var string[]
      */
     private $fixedAttributes = [];
-
 
     public function getAttributeLabels(): array
     {
@@ -45,6 +45,7 @@ final class LoginForm extends FormModel
     {
         return [
             'dsn' => [new Required()],
+            'baseDn' => [new Required()],
             'adminDn' => [new Required()],
             'adminPassword' => $this->passwordRules(),
         ];
@@ -117,6 +118,25 @@ final class LoginForm extends FormModel
     public static function removeFromSession(SessionInterface $session): void
     {
         $session->remove('Login');
+    }
+
+    public function loadSafeAttributes(array $attributes) : bool
+    {
+        $scope = $this->getFormName();
+        if (!isset($attributes[$scope]) || !is_array($attributes[$scope])) {
+            return false;
+        }
+
+        /** @var array<string, string> $data */
+        $data = $attributes[$scope];
+
+        foreach ($data as $name => $value) {
+            if (!$this->isAttributeFixed($name)) {
+                $this->setAttribute($name, $value);
+            }
+        }
+
+        return true;
     }
 
 }
