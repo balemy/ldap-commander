@@ -45,12 +45,16 @@ $this->beginPage()
     <?php
     $menuItems = [
         [
-            'label' => 'Entity Browser',
+            'label' => 'Browser',
             'url' => $urlGenerator->generate('entity-list'),
         ],
         [
             'label' => 'Schema',
             'url' => $urlGenerator->generate('schema'),
+        ],
+        [
+            'label' => 'Server',
+            'url' => $urlGenerator->generate('server'),
         ],
         [
             'label' => 'Logout',
