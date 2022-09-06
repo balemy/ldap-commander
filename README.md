@@ -20,6 +20,7 @@ LDAP Commander is a web interface for managing LDAP servers. Currently only Open
 - Create, Edit and Delete LDAP Entities
 - Automatic Schema Detection
 - Schema Viewer
+- Server Info
 - Entity Editor
   - Multi Value Support
   - Binary Attributes
