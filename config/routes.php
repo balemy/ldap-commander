@@ -27,6 +27,8 @@ return [
             Route::get('/schema')->action([SchemaController::class, 'index'])->name('schema'),
             Route::get('/schema/object-class')->action([SchemaController::class, 'displayObjectClass'])->name('schema-objectclass'),
             Route::get('/schema/attribute')->action([SchemaController::class, 'displayAttribute'])->name('schema-attribute'),
+
+            Route::get('/server')->action([\App\Controller\ServerController::class, 'index'])->name('server'),
         ),
     Route::methods([Method::GET, Method::POST], '/login')->action([AuthController::class, 'login'])->name('login'),
     Route::methods([Method::GET, Method::POST], '/logout')->action([AuthController::class, 'logout'])->name('logout'),
