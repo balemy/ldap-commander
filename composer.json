@@ -29,6 +29,7 @@
         "doctrine/collections": "^1.6",
         "fakerphp/faker": "^1.14",
         "httpsoft/http-message": "^1.0.5",
+        "npm-asset/bootstrap-table": "^1.21",
         "npm-asset/font-awesome": "^6.2",
         "npm-asset/jquery": "^3.6",
         "npm-asset/select2": "^4.0",

@@ -45,6 +45,10 @@ $this->beginPage()
     <?php
     $menuItems = [
         [
+            'label' => 'Users',
+            'url' => $urlGenerator->generate('user'),
+        ],
+        [
             'label' => 'Browser',
             'url' => $urlGenerator->generate('entity-list'),
         ],

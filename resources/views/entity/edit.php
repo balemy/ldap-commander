@@ -43,6 +43,9 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
             <h1> Add Entity </h1>
         <?php else: ?>
             <h1> Edit Entity </h1>
+            <p class="lead">
+                <?= Html::encode($dn); ?>
+            </p>
         <?php endif; ?>
         <br>
 

@@ -1,5 +1,10 @@
 # LDAP Commander
 
+## 0.4.0 (2022-09-07)
+
+- Added Server Viewer
+- Added Bootstrap Table
+- Add User View
 
 ## 0.3.0 (2022-09-04)
 

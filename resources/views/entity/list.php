@@ -23,8 +23,11 @@ $this->setTitle($applicationParameters->getName());
         <?= \App\Widget\RdnBreadcrumbs::widget(['$dn' => $dn]); ?>
 
         <h1> List Children </h1>
+        <p class="lead">
+            <?= Html::encode($dn); ?>
+        </p>
         <br>
-        <table class="table table-striped">
+        <table class="table table-striped" data-search="true" data-toggle="table" data-pagination="true" data-page-size="100">
             <thead>
             <tr>
                 <th scope="col">RDN</th>
@@ -43,11 +46,6 @@ $this->setTitle($applicationParameters->getName());
                     <td><?= implode("<br>", $result['objectclass']) ?></td>
                 </tr>
             <?php endforeach; ?>
-            <?php if (count($results) === 0): ?>
-                <tr>
-                    <th colspan="2">No children.</th>
-                </tr>
-            <?php endif; ?>
             </tbody>
         </table>
 
@@ -56,3 +54,4 @@ $this->setTitle($applicationParameters->getName());
         <?= EntitySidebar::widget(['$dn' => $dn, '$location' => EntitySidebarLocation::ListChildren]); ?>
     </div>
 </div>
+

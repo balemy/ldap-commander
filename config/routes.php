@@ -29,6 +29,9 @@ return [
             Route::get('/schema/attribute')->action([SchemaController::class, 'displayAttribute'])->name('schema-attribute'),
 
             Route::get('/server')->action([\App\Controller\ServerController::class, 'index'])->name('server'),
+
+            Route::get('/users')->action([\App\Controller\UserController::class, 'list'])->name('user'),
+            Route::get('/user/edit')->action([\App\Controller\UserController::class, 'edit'])->name('user-edit'),
         ),
     Route::methods([Method::GET, Method::POST], '/login')->action([AuthController::class, 'login'])->name('login'),
     Route::methods([Method::GET, Method::POST], '/logout')->action([AuthController::class, 'logout'])->name('logout'),

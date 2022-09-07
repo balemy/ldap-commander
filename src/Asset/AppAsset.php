@@ -15,6 +15,7 @@ final class AppAsset extends AssetBundle
 
     public array $depends = [
         BootstrapAsset::class,
+        BootstrapTableAsset::class,
         JQueryAsset::class,
         FontAwesomeAsset::class
     ];

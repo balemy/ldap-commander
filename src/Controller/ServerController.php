@@ -70,14 +70,24 @@ final class ServerController
             ->addSelect($infoAttrs)
             ->rawFilter('(objectClass=*)');
 
-        $res = $query->get()[0];
+        /** @var array[] $result */
+        $result = $query->get();
+
+        $res = $result[0];
+
+
         foreach ($res as $i => $values) {
             if (!is_array($values)) {
                 unset($res[$i]);
                 continue;
             }
-            foreach ($values as $ii => $value) {
+
+            /** @var string $ii */
+            foreach ($values as $ii => $_) {
                 if ($ii === 'count') {
+                    /**
+                     * @psalm-suppress MixedArrayAccess
+                     */
                     unset($res[$i][$ii]);
                 }
             }

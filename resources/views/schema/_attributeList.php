@@ -10,7 +10,7 @@ declare(strict_types=1);
 use Yiisoft\Html\Html;
 
 ?>
-<table class="table table-striped">
+<table class="table table-striped" data-toggle="table" data-pagination="true" data-page-size="100">
     <thead>
     <tr>
         <th scope="col">Attribute</th>
