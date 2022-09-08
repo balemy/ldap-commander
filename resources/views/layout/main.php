@@ -48,8 +48,13 @@ $this->beginPage()
     $menuItems = [
         [
             'label' => 'Users',
-            'url' => $urlGenerator->generate('user'),
+            'url' => $urlGenerator->generate('user-list'),
             'active' => StringHelper::startsWith($currentRouteName, 'user'),
+        ],
+        [
+            'label' => 'Groups',
+            'url' => $urlGenerator->generate('group-list'),
+            'active' => StringHelper::startsWith($currentRouteName, 'group'),
         ],
         [
             'label' => 'Browser',
