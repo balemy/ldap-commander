@@ -65,6 +65,24 @@ class User
         return $this->entry->getDn() ?? '';
     }
 
+    public function getDisplayName(): string
+    {
+        $displayName = '';
+        $firstName = $this->getFirstName();
+        $lastName = $this->getFirstName();
+
+        if ($firstName !== null) {
+            $displayName = $firstName;
+        }
+        if ($lastName !== null) {
+            if ($displayName !== '') {
+                $displayName .= '';
+            }
+            $displayName .= $lastName;
+        }
+        return $displayName;
+    }
+
     /**
      * @return User[]
      */

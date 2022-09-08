@@ -73,12 +73,12 @@ final class EntityController
 
         if (isset($request->getQueryParams()['new']) && $request->getQueryParams()['new'] == 1) {
             /** @var Entry $parentEntry */
-            $parentEntry = Entry::query()->find($dn);
+            $parentEntry = Entry::query()->addSelect(['*', '+'])->find($dn);
 
             if (isset($request->getQueryParams()['duplicate']) && $request->getQueryParams()['duplicate'] == 1) {
                 $parentDn = $parentEntry->getParentDn();
                 if ($parentDn !== null) {
-                    $parentEntry = Entry::query()->find($parentDn);
+                    $parentEntry = Entry::query()->addSelect(['*', '+'])->find($parentDn);
                 }
             }
 
@@ -98,7 +98,8 @@ final class EntityController
                 $entity->preloadAttributesFromEntry($e);
             }
         } else {
-            $entry = Entry::query()->find($dn);
+            $entry = Entry::query()->addSelect(['*', '+'])->find($dn);
+
             if ($entry === null || !($entry instanceof Entry)) {
                 $this->flash->add('danger', 'DN not found!');
                 return $this->webService->getRedirectResponse('entity-list');

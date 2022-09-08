@@ -30,6 +30,6 @@ final class SiteController
 
     public function index(WebControllerService $webService): ResponseInterface
     {
-        return $webService->getRedirectResponse('entity', []);
+        return $webService->getRedirectResponse('user-list', []);
     }
 }

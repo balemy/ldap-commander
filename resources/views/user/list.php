@@ -47,7 +47,7 @@ $this->setTitle($applicationParameters->getName());
                     <td><?= $user->getFirstName() ?? ''; ?></td>
                     <td><?= $user->getLastName(); ?></td>
                     <td><?= ($user->getMail() !== null) ? Html::mailto($user->getMail(), $user->getMail()) : '' ?></td>
-                    <td><?= Html::a('Edit', $editUrl, ['class' => 'btn btn-primary btn-sm']); ?></td>
+                    <td><?= Html::a('Edit', $editUrl, ['class' => 'btn btn-secondary btn-sm']); ?></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

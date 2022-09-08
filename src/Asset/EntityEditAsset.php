@@ -15,7 +15,6 @@ final class EntityEditAsset extends AssetBundle
 
     public array $depends = [
         AppAsset::class,
-        Select2Asset::class,
     ];
 
     public array $js = [

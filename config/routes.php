@@ -34,6 +34,8 @@ return [
             Route::get('/user/edit')->action([\App\Controller\UserController::class, 'edit'])->name('user-edit'),
 
             Route::get('/groups')->action([\App\Controller\GroupController::class, 'list'])->name('group-list'),
+            Route::methods([Method::GET, Method::POST], '/group/edit')->action([\App\Controller\GroupController::class, 'edit'])->name('group-edit'),
+            Route::methods([Method::GET, Method::POST], '/group/members')->action([\App\Controller\GroupController::class, 'members'])->name('group-members'),
         ),
     Route::methods([Method::GET, Method::POST], '/login')->action([AuthController::class, 'login'])->name('login'),
     Route::methods([Method::GET, Method::POST], '/logout')->action([AuthController::class, 'logout'])->name('logout'),

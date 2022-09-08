@@ -21,11 +21,11 @@ $this->setTitle($applicationParameters->getName());
     <div class="col-md-9">
         <h1>Server Information</h1>
         <br>
-        <table class="table table-striped">
+        <table class="table table-striped" data-toggle="table">
             <thead>
             <tr>
-                <th scope="col">RDN</th>
-                <th scope="col">ObjectClass(es)</th>
+                <th scope="col">Name</th>
+                <th scope="col">Value(s)</th>
             </tr>
             </thead>
             <tbody>

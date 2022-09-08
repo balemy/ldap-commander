@@ -10,9 +10,11 @@ declare(strict_types=1);
  * @var \App\Ldap\Group[] $groups
  */
 
+use App\Ldap\User;
 use Yiisoft\Html\Html;
 
 $this->setTitle($applicationParameters->getName());
+
 ?>
 
 <div class="row">
@@ -21,6 +23,7 @@ $this->setTitle($applicationParameters->getName());
         <p class="lead">
             Overview of all groups
         </p>
+
         <br>
         <table class="table table-striped" data-search="true" data-toggle="table" data-pagination="true"
                data-page-size="100" data-sortable="true" data-click-to-select="true">
@@ -36,14 +39,18 @@ $this->setTitle($applicationParameters->getName());
             <tbody>
             <?php foreach ($groups as $group): ?>
                 <?php
-                $editUrl = $urlGenerator->generate('entity-edit', ['dn' => $group->getDn()]);
+                $editUrl = $urlGenerator->generate('group-edit', ['dn' => $group->getDn()]);
+                $membersUrl = $urlGenerator->generate('group-members', ['dn' => $group->getDn()]);
                 ?>
                 <tr>
                     <td data-checkbox="true"></td>
                     <td><?= $group->getTitle() ?? ''; ?></td>
                     <td><?= $group->getDn(); ?></td>
-                    <td>0</td>
-                    <td><?= Html::a('Edit', $editUrl, ['class' => 'btn btn-primary btn-sm']); ?></td>
+                    <td><?= count($group->getUserDns()); ?></td>
+                    <td>
+                        <?= Html::a('Edit', $editUrl, ['class' => 'btn btn-secondary btn-sm']); ?>
+                        <?= Html::a('Members', $membersUrl, ['class' => 'btn btn-secondary btn-sm']); ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
