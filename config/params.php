@@ -16,7 +16,7 @@ return [
         'charset' => 'UTF-8',
         'locale' => 'en',
         'name' => 'LDAP Commander',
-        'version' => '0.4.0',
+        'version' => '0.5.0',
     ],
     'middlewares' => [
         ErrorCatcher::class,

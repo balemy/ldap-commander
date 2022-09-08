@@ -1,5 +1,9 @@
 # LDAP Commander
 
+## 0.5.0 (2022-09-09)
+
+- Simple Group Management
+
 ## 0.4.0 (2022-09-07)
 
 - Added Server Viewer
