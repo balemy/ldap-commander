@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Asset\AppAsset;
 use App\Widget\FlashMessage;use App\Widget\PerformanceMetrics;use Yiisoft\Html\Html;
 use Yiisoft\I18n\Locale;
-use Yiisoft\Yii\Bootstrap5\Nav;
+use Yiisoft\Strings\StringHelper;use Yiisoft\Yii\Bootstrap5\Nav;
 use Yiisoft\Yii\Bootstrap5\NavBar;
 
 /**
@@ -28,6 +28,8 @@ $this->addJsFiles($assetManager->getJsFiles());
 $this->addJsStrings($assetManager->getJsStrings());
 $this->addJsVars($assetManager->getJsVars());
 
+$currentRouteName = $currentRoute->getName() ?? '';
+
 $this->beginPage()
 ?><!DOCTYPE html>
 <html lang="<?= Html::encode($locale->language()) ?>">
@@ -47,29 +49,27 @@ $this->beginPage()
         [
             'label' => 'Users',
             'url' => $urlGenerator->generate('user'),
+            'active' => StringHelper::startsWith($currentRouteName, 'user'),
         ],
         [
             'label' => 'Browser',
             'url' => $urlGenerator->generate('entity-list'),
+            'active' => StringHelper::startsWith($currentRouteName, 'entity'),
         ],
         [
             'label' => 'Schema',
             'url' => $urlGenerator->generate('schema'),
+            'active' => StringHelper::startsWith($currentRouteName, 'schema'),
         ],
         [
             'label' => 'Server',
             'url' => $urlGenerator->generate('server'),
+            'active' => StringHelper::startsWith($currentRouteName, 'server'),
         ],
         [
             'label' => 'Logout',
             'url' => $urlGenerator->generate('logout'),
         ],
-        /*
-    [
-        'label' => 'Query',
-        'url' => '/contact',
-    ],
-    */
     ];
 
     ?>
