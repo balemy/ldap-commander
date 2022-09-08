@@ -4,7 +4,7 @@
 
 <p align="center">
     <h1 align="center">LDAP Commander <sup></sup></h1>
-    <h3 align="center">**Demo:** [https://example-ldap.balemy.com/](https://example-ldap.balemy.com/)</h3>
+    <h3 align="center">Demo: https://example-ldap.balemy.com/</h3>
     <br>
 </p>
 
