@@ -26,7 +26,6 @@ final class LoginCest
 
         $I->expectTo('See Homepage Browse');
         $I->see('Overview of all users');
-        $I->see('einstein');
     }
 
     public function testLoginFail(AcceptanceTester $I): void
