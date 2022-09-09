@@ -25,8 +25,8 @@ final class LoginCest
         $I->dontSee('LDAP Login');
 
         $I->expectTo('See Homepage Browse');
-        $I->see('List Children');
-        $I->see('ou=users,dc=example,dc=org');
+        $I->see('Overview of all users');
+        $I->see('einstein');
     }
 
     public function testLoginFail(AcceptanceTester $I): void
