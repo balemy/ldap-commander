@@ -17,7 +17,10 @@ foreach (ConnectionDetails::ENV_CONFIG_MAP as $v) {
     }
 }
 
-$_ENV['YII_ENV'] = empty($_ENV['YII_ENV']) ? null : (string)$_ENV['YII_ENV'];
+if (empty($_ENV['YII_ENV'])) {
+    $_ENV['YII_ENV'] = null;
+}
+
 $_SERVER['YII_ENV'] = $_ENV['YII_ENV'];
 
 $_ENV['YII_DEBUG'] = filter_var(
@@ -26,5 +29,3 @@ $_ENV['YII_DEBUG'] = filter_var(
         FILTER_NULL_ON_FAILURE
     ) ?? true;
 $_SERVER['YII_DEBUG'] = $_ENV['YII_DEBUG'];
-
-// test
