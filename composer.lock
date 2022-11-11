@@ -5229,16 +5229,16 @@
         },
         {
             "name": "yiisoft/definitions",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/definitions.git",
-                "reference": "65d537dfe638b8453531e9d75bec6b4059bba6d5"
+                "reference": "80d384d956019765fda50554749bf18166788d1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/definitions/zipball/65d537dfe638b8453531e9d75bec6b4059bba6d5",
-                "reference": "65d537dfe638b8453531e9d75bec6b4059bba6d5",
+                "url": "https://api.github.com/repos/yiisoft/definitions/zipball/80d384d956019765fda50554749bf18166788d1a",
+                "reference": "80d384d956019765fda50554749bf18166788d1a",
                 "shasum": ""
             },
             "require": {
@@ -5285,7 +5285,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2022-06-17T12:53:07+00:00"
+            "time": "2022-10-25T09:22:34+00:00"
         },
         {
             "name": "yiisoft/di",
@@ -8523,16 +8523,16 @@
         },
         {
             "name": "yiisoft/yii-http",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii-http.git",
-                "reference": "e65cfcbcf4cf80e0d02cee5228a8ee6ee72e13a6"
+                "reference": "f8ba99454f460d37a8457b891684840bea570c30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii-http/zipball/e65cfcbcf4cf80e0d02cee5228a8ee6ee72e13a6",
-                "reference": "e65cfcbcf4cf80e0d02cee5228a8ee6ee72e13a6",
+                "url": "https://api.github.com/repos/yiisoft/yii-http/zipball/f8ba99454f460d37a8457b891684840bea570c30",
+                "reference": "f8ba99454f460d37a8457b891684840bea570c30",
                 "shasum": ""
             },
             "require": {
@@ -8543,11 +8543,13 @@
                 "psr/http-server-handler": "^1.0",
                 "psr/http-server-middleware": "^1.0",
                 "yiisoft/http": "^1.2",
-                "yiisoft/middleware-dispatcher": "^3.0"
+                "yiisoft/middleware-dispatcher": "^3.0|^4.0"
             },
             "require-dev": {
                 "httpsoft/http-message": "^1.0",
+                "maglnet/composer-require-checker": "^4.2",
                 "phpunit/phpunit": "^9.5",
+                "rector/rector": "^0.14.3",
                 "roave/infection-static-analysis-plugin": "^1.16",
                 "spatie/phpunit-watcher": "^1.23",
                 "vimeo/psalm": "^4.18",
@@ -8588,7 +8590,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2022-09-08T06:40:35+00:00"
+            "time": "2022-11-10T13:45:32+00:00"
         },
         {
             "name": "yiisoft/yii-middleware",
