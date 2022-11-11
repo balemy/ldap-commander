@@ -15,6 +15,9 @@
         ],
         "test": "phpunit --testdox --no-interaction",
         "test-watch": "phpunit-watcher watch",
+        "post-install-cmd": [
+            "App\\Installer::copyEnvFile"
+        ],
         "post-update-cmd": [
             "App\\Installer::postUpdate",
             "App\\Installer::copyEnvFile"
