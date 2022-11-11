@@ -40,29 +40,21 @@ final class EntityManageCest
     public function testDuplicate(AcceptanceTester $I): void
     {
         $I->loggedIn();
-        $I->amOnPage('/entity/edit?dn=cn%3Duser01%2Cou%3Dusers%2Cdc%3Dexample%2Cdc%3Dorg');
+        $I->amOnPage('/entity/edit?dn=cn%3DVPN+Users%2Cou%3DGroups%2Cdc%3Dexample%2Cdc%3Dorg');
         $I->see('Edit Entity');
         $I->click('Duplicate Entity');
         $I->see('Add Entity');
         $I->seeInFormFields('#entityForm', [
-            'EntityForm[cn][0]' => 'User1',
-            'EntityForm[cn][1]' => 'user01',
-            'EntityForm[uid][0]' => 'user01',
-            'EntityForm[uidnumber][0]' => '1000',
-            'EntityForm[gidnumber][0]' => '1000',
-            'EntityForm[homedirectory][0]' => '/home/user01',
+            'EntityForm[cn][0]' => 'VPN Users',
+            'EntityForm[uniquemember][0]' => 'cn=Colman Gasikowski,ou=Janitorial,dc=example,dc=org',
+            'EntityForm[uniquemember][1]' => 'cn=Ineke Silburt,ou=Product Development,dc=example,dc=org',
+            'EntityForm[uniquemember][2]' => 'cn=Kristopher Rosenthal,ou=Administrative,dc=example,dc=org',
         ]);
 
-        $I->fillField('EntityForm[cn][0]', 'User9');
-        $I->fillField('EntityForm[cn][1]', 'user09');
-        $I->fillField('EntityForm[uid][0]', 'user09');
-        $I->fillField('EntityForm[uidnumber][0]', '9000');
-        $I->fillField('EntityForm[gidnumber][0]', '9000');
-        $I->fillField('EntityForm[homedirectory][0]', '/home/user09');
-
+        $I->fillField('EntityForm[cn][0]', 'Secure Users');
         $I->click('Submit');
 
-        $I->amOnPage('/entity/edit?dn=cn%3DUser9%2Cou%3Dusers%2Cdc%3Dexample%2Cdc%3Dorg');
+        $I->amOnPage('/entity/edit?dn=cn%3DSecure+Users%2Cou%3DGroups%2Cdc%3Dexample%2Cdc%3Dorg');
         $I->click('Delete Entity');
         $I->acceptPopup();
 
