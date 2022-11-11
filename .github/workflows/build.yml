@@ -35,15 +35,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    services:
-      ldap:
-        image: bitnami/openldap
-        ports:
-          - 1389:1389
-        env:
-          LDAP_CONFIG_ADMIN_ENABLED: true
-          LDAP_ADMIN_USERNAME: admin
-          LDAP_ADMIN_PASSWORD: secret
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -55,6 +46,18 @@ jobs:
           extensions: ${{ env.extensions }}
           ini-values: date.timezone='UTC'
           tools: composer:v2
+
+      - name: Start LDAP Server
+        run: |
+          docker run --detach --rm --name openldap \
+          --net=host \
+          --env BITNAMI_DEBUG=true \
+          --env LDAP_CONFIG_ADMIN_ENABLED=yes \
+          --env LDAP_ADMIN_USERNAME=admin \
+          --env LDAP_ADMIN_PASSWORD=secret \
+          -v ./resources/ldap/example.ldif:/ldifs/example-quickstart.ldif \
+          -p 1389:1389 \
+          bitnami/openldap:latest
 
       - name: Start Selenium
         run: |

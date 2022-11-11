@@ -26,7 +26,7 @@ final class EntityBrowserCest
 
         $I->expectTo('See base DN Children.');
         $I->see('List Children');
-        $I->see('ou=users');
+        $I->see('ou=Accounting');
     }
 
 
@@ -35,8 +35,8 @@ final class EntityBrowserCest
         $I->loggedIn();
 
         $I->wantTo('want to see overview');
-        $I->amOnPage('/entity/browse?dn=ou%3Dusers%2Cdc%3Dexample%2Cdc%3Dorg');
-        $I->click('cn=readers,ou=users,dc=example,dc=org');
+        $I->amOnPage('/entity/browse?dn=ou%3DProduct+Development%2Cdc%3Dexample%2Cdc%3Dorg');
+        $I->click('cn=Felipe Sarioglu,ou=Product Development,dc=example,dc=org');
 
         $I->expectTo('See Edit');
         $I->see('Edit Entity');
@@ -48,10 +48,10 @@ final class EntityBrowserCest
 
         $I->wantTo('want to see overview');
         $I->amOnPage('/entity/browse');
-        $I->click('ou=users,dc=example,dc=org');
+        $I->click('ou=Groups,dc=example,dc=org');
 
         $I->expectTo('See Children');
         $I->see('List Children');
-        $I->see('cn=user01');
+        $I->see('cn=VPN Users');
     }
 }
