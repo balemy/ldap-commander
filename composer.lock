@@ -7169,16 +7169,16 @@
         },
         {
             "name": "yiisoft/session",
-            "version": "1.0.4",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/session.git",
-                "reference": "3bb9049a41a06c6bc17cc0dc0089ee3acd86955d"
+                "reference": "b2552a8d1d68fda667a102fd483b72b0250dc9fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/session/zipball/3bb9049a41a06c6bc17cc0dc0089ee3acd86955d",
-                "reference": "3bb9049a41a06c6bc17cc0dc0089ee3acd86955d",
+                "url": "https://api.github.com/repos/yiisoft/session/zipball/b2552a8d1d68fda667a102fd483b72b0250dc9fe",
+                "reference": "b2552a8d1d68fda667a102fd483b72b0250dc9fe",
                 "shasum": ""
             },
             "require": {
@@ -7241,7 +7241,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2022-02-05T16:22:29+00:00"
+            "time": "2022-10-28T19:25:40+00:00"
         },
         {
             "name": "yiisoft/strings",
