@@ -31,13 +31,10 @@ LDAP Commander is a web interface for managing LDAP servers. Currently only Open
 **Docker Compose (with bundled LDAP Servern and Example data):**
 
 ```
-# Download Docker Compose File
-curl https://raw.githubusercontent.com/balemy/ldap-commander/main/docker-compose.yml --output docker-compose.yml
-# Download Example LDAP Data (Optional)
-curl https://raw.githubusercontent.com/balemy/ldap-commander/main/resources/ldap/example.ldif --output example.ldif
+git clone https://github.com/balemy/ldap-commander.git /opt/ldap-commander
+cd /opt/ldap-commander
 ./docker-compose up
 ```
-Default password: `password`
 
 **Or Standalone without LDAP Server:**
 

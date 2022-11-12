@@ -10,20 +10,22 @@ services:
       - BITNAMI_DEBUG=true
       - LDAP_CONFIG_ADMIN_ENABLED=yes
       - LDAP_ADMIN_USERNAME=admin
-      - LDAP_ADMIN_PASSWORD=password
+      - LDAP_ADMIN_PASSWORD=secret
+      - LDAP_EXTRA_SCHEMAS=cosine,inetorgperson,nis,bitnami-openldap-memberof
     volumes:
       - 'openldap_data:/bitnami/openldap'
-# Uncomment below to use from GitHub Repo
-      - './example.ldif:/ldifs/example-quickstart.ldif'
-#      - './resources/ldap/example.ldif:/ldifs/example.ldif'
+      - './resources/ldap/example.ldif:/ldifs/example.ldif'
+      - './resources/ldap/bitnami-openldap-memberof.ldif:/opt/bitnami/openldap/etc/schema/bitnami-openldap-memberof.ldif'
   ldap-commander:
     image: balemy/ldap-commander:latest
     container_name: ldap-commander
     environment:
-      LDAPCOM_CONN1_DSN: "ldap://openldap:1389"
-      LDAPCOM_CONN1_BASE_DN: "dc=example,dc=org"
-      LDAPCOM_CONN1_ADMIN_DN: "cn=admin,dc=example,dc=org"
-      LDAPCOM_CONN1_ADMIN_PASSWORD: "password"
+#      - LDAPCOM_ALLOW_CUSTOM_CONNECT=1
+      - LDAPCOM_CONN1_TITLE="Bundled LDAP Server"
+      - LDAPCOM_CONN1_DSN=ldap://openldap:1389
+      - LDAPCOM_CONN1_BASE_DN=dc=example,dc=org
+      - LDAPCOM_CONN1_ADMIN_DN=cn=admin,dc=example,dc=org
+      - LDAPCOM_CONN1_ADMIN_PASSWORD=secret
     ports:
       - "8080:8080"
     depends_on:
