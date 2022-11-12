@@ -6,8 +6,16 @@ use Yiisoft\Validator\Rule\Required;
 
 class GroupAddForm extends GroupForm
 {
-
+    protected string $parentDn = '';
     protected array $initialMembers = [];
+
+    /**
+     * @return string
+     */
+    public function getParentDn(): string
+    {
+        return $this->parentDn;
+    }
 
     /**
      * @return string[]
@@ -22,6 +30,7 @@ class GroupAddForm extends GroupForm
         return [
             'title' => [new Required()],
             'initialMembers' => [new Required()],
+            'parentDn' => [new Required()],
         ];
     }
 

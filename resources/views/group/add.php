@@ -9,7 +9,8 @@ declare(strict_types=1);
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var Csrf $csrf
  * @var string $dn
- * @var string $users
+ * @var string[] $users
+ * @var string[] $parentDns
  * @var \App\Ldap\GroupAddForm $formModel
  */
 
@@ -31,6 +32,7 @@ $this->setTitle($applicationParameters->getName());
 
         <?= Html::form()->post($urlGenerator->generate('group-add'))->csrf($csrf)->open() ?>
 
+
         <?= Field::text($formModel, 'title')
             ->autofocus()
             ->tabindex(1) ?>
@@ -39,13 +41,18 @@ $this->setTitle($applicationParameters->getName());
             ->addInputAttributes(['style' => 'height:150px'])
             ->tabindex(2) ?>
 
+
+        <?= Field::select($formModel, 'parentDn')
+            ->optionsData($parentDns)
+            ->tabindex(3) ?>
+
         <?= Field::select($formModel, 'initialMembers[]')
             ->multiple(true)
             ->optionsData($users)
-            ->tabindex(3) ?>
+            ->tabindex(4) ?>
 
         <?= Field::submitButton()
-            ->tabindex(4)
+            ->tabindex(5)
             ->content('Save') ?>
 
         <?= Form::tag()->close(); ?>
@@ -57,6 +64,12 @@ $this->setTitle($applicationParameters->getName());
 </div>
 <script>
     $(document).ready(function () {
+        $('#groupaddform-parentdn').select2({
+            theme: 'bootstrap-5',
+            placeholder: "Parent DN",
+            multiple: false
+        });
+
         $('#groupaddform-initialmembers').select2({
             theme: 'bootstrap-5',
             placeholder: "Initial group members",

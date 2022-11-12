@@ -50,6 +50,19 @@ final class GroupController
     public function add(ServerRequestInterface $request)
     {
         $formModel = new GroupAddForm();
+
+        $ous = [];
+        foreach (Entry::query()->addSelect(['dn', 'cn'])
+                     ->query('(objectClass=organizationalUnit)') as $entry) {
+            /** @var Entry $entry */
+            $ous[$entry->getDn()] = $entry->getName();
+        }
+        if (!array_key_exists($this->ldapService->baseDn, $ous)) {
+            $baseDnEntry = Entry::query()->find($this->ldapService->baseDn);
+            $ous = [$this->ldapService->baseDn => $baseDnEntry->getFirstAttribute('o') . ' (Base DN)']
+            + $ous;
+        }
+
         if ($request->getMethod() === Method::POST) {
             /** @var array<string, array> $body */
             $body = $request->getParsedBody();
@@ -60,6 +73,7 @@ final class GroupController
 
             if ($formModel->load($body) && $this->validator->validate($formModel)->isValid()) {
                 $entry = new Entry();
+                $entry->inside($formModel->getParentDn());
                 $entry->setAttribute('objectclass', 'groupofuniquenames');
                 $entry->setAttribute('cn', $formModel->getTitle());
                 $entry->setAttribute('description', $formModel->getDescription());
@@ -78,10 +92,12 @@ final class GroupController
             $users[$user->getDn()] = $user->getDisplayName() . ' (' . $user->getUsername() . ')';
         }
 
+
         return $this->viewRenderer->render('add', [
             'urlGenerator' => $this->urlGenerator,
             'formModel' => $formModel,
-            'users' => $users
+            'users' => $users,
+            'parentDns' => $ous
         ]);
     }
 
