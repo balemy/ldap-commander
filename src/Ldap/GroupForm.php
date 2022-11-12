@@ -6,8 +6,8 @@ use Yiisoft\Form\FormModel;
 
 class GroupForm extends FormModel
 {
-    private ?string $title = null;
-    private ?string $description = null;
+    protected ?string $title = null;
+    protected ?string $description = null;
 
     /**
      * @return string|null

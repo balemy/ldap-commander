@@ -19,7 +19,9 @@ $this->setTitle($applicationParameters->getName());
 
 <div class="row">
     <div class="col-md-12">
+
         <h1>Groups</h1>
+        <a href="<?= $urlGenerator->generate('group-add'); ?>" class="btn btn-success float-end">Create</a>
         <p class="lead">
             Overview of all groups
         </p>

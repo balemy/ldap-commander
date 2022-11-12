@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Ldap\Group;
+use App\Ldap\GroupAddForm;
 use App\Ldap\GroupForm;
 use App\Ldap\LdapService;
 use App\Ldap\User;
@@ -43,6 +44,44 @@ final class GroupController
         return $this->viewRenderer->render('list', [
             'urlGenerator' => $this->urlGenerator,
             'groups' => Group::getAll()
+        ]);
+    }
+
+    public function add(ServerRequestInterface $request)
+    {
+        $formModel = new GroupAddForm();
+        if ($request->getMethod() === Method::POST) {
+            /** @var array<string, array> $body */
+            $body = $request->getParsedBody();
+
+            if (!is_array($body['GroupAddForm']['initialMembers'])) {
+                $body['GroupAddForm']['initialMembers'] = [];
+            }
+
+            if ($formModel->load($body) && $this->validator->validate($formModel)->isValid()) {
+                $entry = new Entry();
+                $entry->setAttribute('objectclass', 'groupofuniquenames');
+                $entry->setAttribute('cn', $formModel->getTitle());
+                $entry->setAttribute('description', $formModel->getDescription());
+                foreach ($formModel->getInitialMembers() as $memberDn) {
+                    $entry->addAttributeValue('uniqueMember', $memberDn);
+                }
+                $entry->save();
+
+                $this->flash->add('success', ['body' => 'Group successfully saved!']);
+                return $this->webService->getRedirectResponse('group-list', ['saved' => 1]);
+            }
+        }
+
+        $users = [];
+        foreach (User::getAll() as $user) {
+            $users[$user->getDn()] = $user->getDisplayName() . ' (' . $user->getUsername() . ')';
+        }
+
+        return $this->viewRenderer->render('add', [
+            'urlGenerator' => $this->urlGenerator,
+            'formModel' => $formModel,
+            'users' => $users
         ]);
     }
 
