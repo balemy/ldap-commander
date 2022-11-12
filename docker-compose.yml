@@ -20,8 +20,8 @@ services:
     image: balemy/ldap-commander:latest
     container_name: ldap-commander
     environment:
-#      - LDAPCOM_ALLOW_CUSTOM_CONNECT=1
-      - LDAPCOM_CONN1_TITLE="Bundled LDAP Server"
+      - LDAPCOM_ALLOW_CUSTOM_CONNECT=0
+      - LDAPCOM_CONN1_TITLE=Bundled LDAP Server
       - LDAPCOM_CONN1_DSN=ldap://openldap:1389
       - LDAPCOM_CONN1_BASE_DN=dc=example,dc=org
       - LDAPCOM_CONN1_ADMIN_DN=cn=admin,dc=example,dc=org
