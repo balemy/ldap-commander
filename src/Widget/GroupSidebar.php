@@ -49,6 +49,13 @@ class GroupSidebar extends Widget
             ['class' => 'list-group-item']
         );
 
+        $html .= Html::tag('li',
+            Html::a('Delete Group', $this->urlGenerator->generate('group-delete', ['dn' => $this->dn])),
+            [
+                'onClick' => 'return confirm("Are you sure?")',
+                'class' => 'list-group-item'
+            ]);
+
         $html .= Html::closeTag('ul');
 
         return $html;

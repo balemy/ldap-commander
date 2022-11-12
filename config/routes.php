@@ -37,6 +37,7 @@ return [
             Route::methods([Method::GET, Method::POST], '/group/add')->action([\App\Controller\GroupController::class, 'add'])->name('group-add'),
             Route::methods([Method::GET, Method::POST], '/group/edit')->action([\App\Controller\GroupController::class, 'edit'])->name('group-edit'),
             Route::methods([Method::GET, Method::POST], '/group/members')->action([\App\Controller\GroupController::class, 'members'])->name('group-members'),
+            Route::methods([Method::GET, Method::POST], '/group/delete')->action([\App\Controller\GroupController::class, 'delete'])->name('group-delete'),
         ),
     Route::methods([Method::GET, Method::POST], '/login')->action([AuthController::class, 'login'])->name('login'),
     Route::methods([Method::GET, Method::POST], '/logout')->action([AuthController::class, 'logout'])->name('logout'),

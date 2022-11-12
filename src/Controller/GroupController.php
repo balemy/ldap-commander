@@ -12,6 +12,7 @@ use App\Ldap\User;
 use App\Service\WebControllerService;
 use LdapRecord\LdapRecordException;
 use LdapRecord\Models\Entry;
+use LdapRecord\Models\ModelDoesNotExistException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Assets\AssetManager;
@@ -60,7 +61,7 @@ final class GroupController
         if (!array_key_exists($this->ldapService->baseDn, $ous)) {
             $baseDnEntry = Entry::query()->find($this->ldapService->baseDn);
             $ous = [$this->ldapService->baseDn => $baseDnEntry->getFirstAttribute('o') . ' (Base DN)']
-            + $ous;
+                + $ous;
         }
 
         if ($request->getMethod() === Method::POST) {
@@ -162,6 +163,31 @@ final class GroupController
             'dn' => $group->getDn()
         ]);
     }
+
+    public function delete(ServerRequestInterface $request): ResponseInterface
+    {
+        $dn = $this->getDnByRequest($request);
+        if ($dn === null) {
+            return $this->webService->getNotFoundResponse();
+        }
+
+        $entry = Entry::query()->find($dn);
+        if ($entry == null || !($entry instanceof Entry)) {
+            return $this->webService->getNotFoundResponse();
+        }
+
+        try {
+            $entry->delete();
+            $this->flash->add('success', ['body' => 'Group successfully deleted!']);
+        } catch (ModelDoesNotExistException $e) {
+            $this->flash->add('danger', ['body' => 'Group does not exist! Error: ' . $e->getMessage()]);
+        } catch (LdapRecordException $e) {
+            $this->flash->add('danger', ['body' => 'Group not deleted! Error: ' . $e->getMessage()]);
+        }
+
+        return $this->webService->getRedirectResponse('group-list', ['deleted' => 1]);
+    }
+
 
     private function getGroup(ServerRequestInterface $request): ?Group
     {

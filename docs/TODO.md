@@ -4,6 +4,7 @@
 
 - Check Composer.lock
 - Cache Schema
+- Delete Actions (POST Only)
 
 ## Entity Edit
 

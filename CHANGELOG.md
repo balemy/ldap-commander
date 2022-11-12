@@ -1,5 +1,9 @@
 # LDAP Commander
 
+## 0.5.1 (2022-11-12)
+
+- Added ability to create and delete groups
+
 ## 0.5.0 (2022-09-09)
 
 - Simple Group Management
