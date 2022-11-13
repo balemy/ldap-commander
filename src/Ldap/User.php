@@ -40,9 +40,9 @@ class User
         return null;
     }
 
-    public function getUsername(): ?string
+    public function getUsername(): string
     {
-        return $this->getEntryValue('uid') ?? null;
+        return $this->getEntryValue('uid') ?? '';
     }
 
     public function getFirstName(): ?string

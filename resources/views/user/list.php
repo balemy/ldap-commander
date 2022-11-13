@@ -43,7 +43,7 @@ $this->setTitle($applicationParameters->getName());
                 <tr>
                     <td data-checkbox="true"></td>
                     <td><?= ($user->getId()) ? Html::a($user->getId(), $editUrl) : ''; ?></td>
-                    <td><?= $user->getUsername() ?? ''; ?></td>
+                    <td><?= $user->getUsername(); ?></td>
                     <td><?= $user->getFirstName() ?? ''; ?></td>
                     <td><?= $user->getLastName(); ?></td>
                     <td><?= ($user->getMail() !== null) ? Html::mailto($user->getMail(), $user->getMail()) : '' ?></td>

@@ -7,6 +7,10 @@ use Yiisoft\Validator\Rule\Required;
 class GroupAddForm extends GroupForm
 {
     protected string $parentDn = '';
+
+    /**
+     * @var string[]
+     */
     protected array $initialMembers = [];
 
     /**
