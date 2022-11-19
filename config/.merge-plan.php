@@ -18,16 +18,10 @@ return [
             'yiisoft/router-fastroute' => [
                 'config/common.php',
             ],
+            'yiisoft/yii-dataview' => [
+                'config/common/translator-yii-dataview.php',
+            ],
             'yiisoft/log-target-file' => [
-                'config/common.php',
-            ],
-            'yiisoft/translator' => [
-                'config/common.php',
-            ],
-            'yiisoft/translator-formatter-intl' => [
-                'config/common.php',
-            ],
-            'yiisoft/translator-message-php' => [
                 'config/common.php',
             ],
             'yiisoft/yii-debug' => [
@@ -49,6 +43,9 @@ return [
                 'config/common.php',
             ],
             'yiisoft/validator' => [
+                'config/common.php',
+            ],
+            'yiisoft/translator' => [
                 'config/common.php',
             ],
             'yiisoft/view' => [
@@ -86,6 +83,9 @@ return [
             'yiisoft/yii-bootstrap5' => [
                 'config/params.php',
             ],
+            'yiisoft/yii-dataview' => [
+                'config/params.php',
+            ],
             'yiisoft/yii-debug-api' => [
                 'config/params.php',
             ],
@@ -101,16 +101,7 @@ return [
             'yiisoft/assets' => [
                 'config/params.php',
             ],
-            'yiisoft/session' => [
-                'config/params.php',
-            ],
-            'yiisoft/widget' => [
-                'config/params.php',
-            ],
             'yiisoft/log-target-file' => [
-                'config/params.php',
-            ],
-            'yiisoft/translator' => [
                 'config/params.php',
             ],
             'yiisoft/yii-debug' => [
@@ -131,7 +122,19 @@ return [
             'yiisoft/csrf' => [
                 'config/params.php',
             ],
+            'yiisoft/session' => [
+                'config/params.php',
+            ],
             'yiisoft/data-response' => [
+                'config/params.php',
+            ],
+            'yiisoft/validator' => [
+                'config/params.php',
+            ],
+            'yiisoft/translator' => [
+                'config/params.php',
+            ],
+            'yiisoft/widget' => [
                 'config/params.php',
             ],
             'yiisoft/view' => [
@@ -175,9 +178,6 @@ return [
             'yiisoft/assets' => [
                 'config/web.php',
             ],
-            'yiisoft/session' => [
-                'config/web.php',
-            ],
             'yiisoft/error-handler' => [
                 'config/web.php',
             ],
@@ -188,6 +188,9 @@ return [
                 'config/web.php',
             ],
             'yiisoft/csrf' => [
+                'config/web.php',
+            ],
+            'yiisoft/session' => [
                 'config/web.php',
             ],
             'yiisoft/data-response' => [
@@ -254,14 +257,6 @@ return [
                 'console/*.php',
             ],
         ],
-        'widgets' => [
-            'yiisoft/widget' => [
-                'config/widgets.php',
-            ],
-            '/' => [
-                'widgets.php',
-            ],
-        ],
         'events-console' => [
             'yiisoft/log' => [
                 'config/events-console.php',
@@ -306,6 +301,14 @@ return [
             ],
             '/' => [
                 'providers.php',
+            ],
+        ],
+        'widgets' => [
+            'yiisoft/widget' => [
+                'config/widgets.php',
+            ],
+            '/' => [
+                'widgets.php',
             ],
         ],
         'providers-console' => [
