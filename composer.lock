@@ -9754,16 +9754,16 @@
         },
         {
             "name": "codeception/codeception",
-            "version": "5.0.4",
+            "version": "5.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "e3a69881696935c4209a7a45958a3bdd17def56a"
+                "reference": "35a105e0b26ded1c251ab28ae49235bd2164a69b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/e3a69881696935c4209a7a45958a3bdd17def56a",
-                "reference": "e3a69881696935c4209a7a45958a3bdd17def56a",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/35a105e0b26ded1c251ab28ae49235bd2164a69b",
+                "reference": "35a105e0b26ded1c251ab28ae49235bd2164a69b",
                 "shasum": ""
             },
             "require": {
@@ -9806,6 +9806,7 @@
                 "codeception/module-phpbrowser": "*@dev",
                 "codeception/util-universalframework": "*@dev",
                 "ext-simplexml": "*",
+                "jetbrains/phpstorm-attributes": "^1.0",
                 "symfony/dotenv": ">=4.4.24 <7.0",
                 "symfony/process": ">=4.4.24 <7.0",
                 "vlucas/phpdotenv": "^5.1"
@@ -9857,7 +9858,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Codeception/Codeception/issues",
-                "source": "https://github.com/Codeception/Codeception/tree/5.0.4"
+                "source": "https://github.com/Codeception/Codeception/tree/5.0.5"
             },
             "funding": [
                 {
@@ -9865,7 +9866,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2022-10-30T19:15:56+00:00"
+            "time": "2022-11-20T11:29:07+00:00"
         },
         {
             "name": "codeception/lib-asserts",
