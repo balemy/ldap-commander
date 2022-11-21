@@ -1614,16 +1614,16 @@
         },
         {
             "name": "npm-asset/font-awesome",
-            "version": "6.2.0",
+            "version": "6.2.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:FortAwesome/Font-Awesome.git",
-                "reference": "d3a7818c253fcbafff9ebd1d4abb2866c192e1d7"
+                "reference": "96cafbd73ec4339b8c73c36673ce1518db82cc5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/d3a7818c253fcbafff9ebd1d4abb2866c192e1d7",
-                "reference": "d3a7818c253fcbafff9ebd1d4abb2866c192e1d7"
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/96cafbd73ec4339b8c73c36673ce1518db82cc5c",
+                "reference": "96cafbd73ec4339b8c73c36673ce1518db82cc5c"
             },
             "type": "npm-asset"
         },
