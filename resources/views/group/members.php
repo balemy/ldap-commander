@@ -21,6 +21,7 @@ use Yiisoft\Html\Tag\Button;
 use Yiisoft\Html\Tag\Form;
 use Yiisoft\Html\Tag\Input;
 use Yiisoft\Html\Tag\Select;
+use Yiisoft\Yii\View\Csrf;
 
 $this->setTitle($applicationParameters->getName());
 

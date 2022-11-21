@@ -17,7 +17,9 @@ $this->setTitle($applicationParameters->getName());
 
 <div class="row">
     <div class="col-md-12">
-        <h1> Users </h1>
+        <h1>Users </h1>
+        <a href="<?= $urlGenerator->generate('user-edit'); ?>" class="btn btn-success float-end">Create</a>
+
         <p class="lead">
             Overview of all users
         </p>
@@ -38,15 +40,15 @@ $this->setTitle($applicationParameters->getName());
             <tbody>
             <?php foreach ($users as $user): ?>
                 <?php
-                $editUrl = $urlGenerator->generate('entity-edit', ['dn' => $user->getDn()]);
+                $editUrl = $urlGenerator->generate('user-edit', ['dn' => $user->getDn()]);
                 ?>
                 <tr>
                     <td data-checkbox="true"></td>
                     <td><?= ($user->getId()) ? Html::a($user->getId(), $editUrl) : ''; ?></td>
                     <td><?= $user->getUsername(); ?></td>
-                    <td><?= $user->getFirstName() ?? ''; ?></td>
+                    <td><?= $user->getFirstName(); ?></td>
                     <td><?= $user->getLastName(); ?></td>
-                    <td><?= ($user->getMail() !== null) ? Html::mailto($user->getMail(), $user->getMail()) : '' ?></td>
+                    <td><?= (!empty($user->getMail())) ? Html::mailto($user->getMail(), $user->getMail()) : '' ?></td>
                     <td><?= Html::a('Edit', $editUrl, ['class' => 'btn btn-secondary btn-sm']); ?></td>
                 </tr>
             <?php endforeach; ?>

@@ -31,7 +31,7 @@ return [
             Route::get('/server')->action([\App\Controller\ServerController::class, 'index'])->name('server'),
 
             Route::get('/users')->action([\App\Controller\UserController::class, 'list'])->name('user-list'),
-            Route::get('/user/edit')->action([\App\Controller\UserController::class, 'edit'])->name('user-edit'),
+            Route::methods([Method::GET, Method::POST], '/user/edit')->action([\App\Controller\UserController::class, 'edit'])->name('user-edit'),
 
             Route::get('/groups')->action([\App\Controller\GroupController::class, 'list'])->name('group-list'),
             Route::methods([Method::GET, Method::POST], '/group/add')->action([\App\Controller\GroupController::class, 'add'])->name('group-add'),
