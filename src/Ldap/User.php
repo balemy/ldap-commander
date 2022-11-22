@@ -7,9 +7,6 @@ use LdapRecord\Models\OpenLDAP\User as LrUser;
 use Yiisoft\Form\FormModel;
 use Yiisoft\Validator\Rule\Required;
 
-/**
- * @property string|null $mail
- */
 class User extends FormModel
 {
     private Entry $entry;
@@ -82,7 +79,7 @@ class User extends FormModel
         return $this->username;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -102,23 +99,23 @@ class User extends FormModel
         return $this->lastName;
     }
 
-    public function getMail(): ?string
+    public function getMail(): string
     {
         return $this->mail;
     }
 
 
-    public function getMobile(): ?string
+    public function getMobile(): string
     {
         return $this->mobile;
     }
 
-    public function getTelephoneNumber(): ?string
+    public function getTelephoneNumber(): string
     {
         return $this->telephoneNumber;
     }
 
-    public function getHomeNumber(): ?string
+    public function getHomeNumber(): string
     {
         return $this->homeNumber;
     }
@@ -176,7 +173,7 @@ class User extends FormModel
         $this->setEntryAttribute('cn', $this->getCommonName(), $isNewRecord);
         $this->setEntryAttribute('uid', $this->getUsername(), $isNewRecord);
 
-        $this->setEntryAttribute('uidNumber', $this->getId(), $isNewRecord);
+        $this->setEntryAttribute('uidNumber', (string)$this->getId(), $isNewRecord);
         $this->setEntryAttribute('givenName', $this->getFirstName(), $isNewRecord);
         $this->setEntryAttribute('sn', $this->getLastName());
         $this->setEntryAttribute('initials', $this->getInitials(), $isNewRecord);
@@ -186,10 +183,10 @@ class User extends FormModel
         $this->setEntryAttribute('mail', $this->getMail(), $isNewRecord);
 
         $head = $this->entry->getHead();
-        if (!$this->isNewRecord() && $this->entry->isDirty($head)) {
-            $this->entry->rename($this->entry->$head[0]);
+        if (!$this->isNewRecord() && $head !== null && $this->entry->isDirty($head)) {
+            $this->entry->rename((string)$this->entry->getFirstAttribute($head));
             $this->entry->refresh();
-            $this->dn = $this->entry->getDn();
+            $this->dn = $this->entry->getDn() ?? '';
         }
 
 
@@ -200,7 +197,7 @@ class User extends FormModel
 
     private function setEntryAttribute(string $name, string $value, bool $skipWhenEmpty = true): void
     {
-        if (!empty($value)) {
+        if (!empty($value) || !$skipWhenEmpty) {
             $this->entry->setFirstAttribute($name, $value);
         }
     }
@@ -224,7 +221,7 @@ class User extends FormModel
         $this->dn = $this->entry->getDn() ?? '';
     }
 
-    public function isNewRecord()
+    public function isNewRecord(): bool
     {
         return ($this->getDn() === '');
     }
