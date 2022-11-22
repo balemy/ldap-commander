@@ -5,7 +5,7 @@ olcModulePath: /opt/bitnami/openldap/lib/openldap
 olcModuleLoad: memberof.so
 olcModuleLoad: refint.so
 
-dn: olcOverlay=memberof,olcDatabase={2}hdb,cn=config
+dn: olcOverlay=memberof,olcDatabase={2}mdb,cn=config
 objectClass: olcOverlayConfig
 objectClass: olcMemberOf
 olcOverlay: memberof
