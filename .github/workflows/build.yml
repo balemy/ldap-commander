@@ -55,6 +55,7 @@ jobs:
           --env LDAP_CONFIG_ADMIN_ENABLED=yes \
           --env LDAP_ADMIN_USERNAME=admin \
           --env LDAP_ADMIN_PASSWORD=secret \
+          --env LDAP_EXTRA_SCHEMAS=cosine,inetorgperson,nis,bitnami-openldap-memberof \
           -v ${GITHUB_WORKSPACE}/resources/ldap/example.ldif:/ldifs/example-quickstart.ldif \
           -v ${GITHUB_WORKSPACE}/resources/ldap/bitnami-openldap-memberof.ldif:/opt/bitnami/openldap/etc/schema/bitnami-openldap-memberof.ldif \
           -p 1389:1389 \
