@@ -7321,16 +7321,16 @@
         },
         {
             "name": "yiisoft/translator",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/translator.git",
-                "reference": "d87e84d1f8e39f7b0949a7f70a6ab1c8d95ce288"
+                "reference": "5666b309256f860fab0ef990db12c2a6e90d500f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/translator/zipball/d87e84d1f8e39f7b0949a7f70a6ab1c8d95ce288",
-                "reference": "d87e84d1f8e39f7b0949a7f70a6ab1c8d95ce288",
+                "url": "https://api.github.com/repos/yiisoft/translator/zipball/5666b309256f860fab0ef990db12c2a6e90d500f",
+                "reference": "5666b309256f860fab0ef990db12c2a6e90d500f",
                 "shasum": ""
             },
             "require": {
@@ -7397,7 +7397,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2022-11-15T12:42:35+00:00"
+            "time": "2022-11-23T08:08:20+00:00"
         },
         {
             "name": "yiisoft/translator-message-php",
