@@ -29,8 +29,7 @@ $this->setTitle($applicationParameters->getName());
             <thead>
             <tr>
                 <th data-checkbox="true"></th>
-                <th scope="col">ID</th>
-                <th scope="col">Username</th>
+                <th scope="col">Common Name</th>
                 <th scope="col">First name</th>
                 <th scope="col">Last name</th>
                 <th scope="col">E-Mail</th>
@@ -44,11 +43,12 @@ $this->setTitle($applicationParameters->getName());
                 ?>
                 <tr>
                     <td data-checkbox="true"></td>
-                    <td><?= ($user->getId()) ? Html::a($user->getId(), $editUrl) : ''; ?></td>
-                    <td><?= $user->getUsername(); ?></td>
-                    <td><?= $user->getFirstName(); ?></td>
-                    <td><?= $user->getLastName(); ?></td>
-                    <td><?= (!empty($user->getMail())) ? Html::mailto($user->getMail(), $user->getMail()) : '' ?></td>
+                    <td><?= Html::a(Html::encode($user->getCommonName()), $editUrl); ?></td>
+                    <td><?= Html::encode($user->getFirstName()); ?></td>
+                    <td><?= Html::encode($user->getLastName()); ?></td>
+                    <td><?= (!empty($user->getMail())) ?
+                            Html::mailto($user->getMail(), Html::encode($user->getMail())) : ''
+                        ?></td>
                     <td style="width:150px">
                         <?= Html::a('Edit', $editUrl, ['class' => 'btn btn-secondary btn-sm']); ?>
                         <?= Html::a('Groups', $urlGenerator->generate('user-groups', ['dn' => $user->getDn()]), ['class' => 'btn btn-secondary btn-sm']); ?>

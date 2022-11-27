@@ -47,33 +47,34 @@ $this->beginPage()
     <?php
     $menuItems = [
         [
-            'label' => 'Users',
+            'label' => 'Manage Users',
             'url' => $urlGenerator->generate('user-list'),
             'active' => StringHelper::startsWith($currentRouteName, 'user'),
         ],
         [
-            'label' => 'Groups',
+            'label' => 'Manage Groups',
             'url' => $urlGenerator->generate('group-list'),
             'active' => StringHelper::startsWith($currentRouteName, 'group'),
         ],
         [
-            'label' => 'Browser',
+            'label' => 'Entity Browser',
             'url' => $urlGenerator->generate('entity-list'),
             'active' => StringHelper::startsWith($currentRouteName, 'entity'),
         ],
         [
-            'label' => 'Schema',
-            'url' => $urlGenerator->generate('schema'),
-            'active' => StringHelper::startsWith($currentRouteName, 'schema'),
-        ],
-        [
-            'label' => 'Server',
-            'url' => $urlGenerator->generate('server'),
-            'active' => StringHelper::startsWith($currentRouteName, 'server'),
-        ],
-        [
-            'label' => 'Logout',
-            'url' => $urlGenerator->generate('logout'),
+            'label' => 'Information',
+            'items' => [
+                [
+                    'label' => 'Schema',
+                    'url' => $urlGenerator->generate('schema'),
+                    'active' => StringHelper::startsWith($currentRouteName, 'schema'),
+                ],
+                [
+                    'label' => 'Server',
+                    'url' => $urlGenerator->generate('server'),
+                    'active' => StringHelper::startsWith($currentRouteName, 'server'),
+                ]
+            ]
         ],
     ];
 
@@ -92,9 +93,20 @@ $this->beginPage()
 #        ->currentPath($currentPath)
         ->items($menuItems)
         ->options([
-            'class' => 'navbar-nav float-right ml-auto'
+            'class' => 'navbar-nav me-auto'
         ]);
     ?>
+
+    <div class="d-flex">
+        <?= Nav::widget()
+            ->items([[
+                'label' => 'Logout',
+                'url' => $urlGenerator->generate('logout'),
+            ]])->options([
+                'class' => 'navbar-nav ml-auto'
+            ]);
+        ?>
+    </div>
 
     <?= NavBar::end() ?>
 
