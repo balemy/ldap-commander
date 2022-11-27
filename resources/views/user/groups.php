@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 use Balemy\LdapCommander\User\SidebarWidget;
 use Balemy\LdapCommander\User\SidebarLocation;
+use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Button;
 use Yiisoft\Html\Tag\Form;
 use Yiisoft\Html\Tag\Input;
@@ -74,10 +75,10 @@ $form = Form::tag()
             <?php foreach ($assignedGroups as $group): ?>
                 <tr>
                     <td data-checkbox="true"></td>
-                    <td><?= $group->getTitle(); ?></td>
+                    <td><?= Html::a($group->getTitle(), $urlGenerator->generate('group-edit', ['dn' => $group->getDn()])); ?></td>
                     <td><?= $group->getDescription(); ?></td>
                     <!--<td><?= $group->getDn(); ?></td>-->
-                    <td>
+                    <td style="width:100px">
                         <?= $form->open() ?>
                         <?= Input::hidden('delDn', $group->getDn()); ?>
                         <?= Input::submitButton('Remove')->addClass('btn btn-primary btn-sm'); ?>

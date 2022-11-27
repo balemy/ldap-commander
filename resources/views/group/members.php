@@ -65,11 +65,10 @@ $form = Form::tag()
             <thead>
             <tr>
                 <th data-checkbox="true"></th>
-                <th scope="col">ID</th>
                 <th scope="col">Username</th>
                 <th scope="col">Display Name</th>
                 <th scope="col">E-Mail</th>
-                <th>&nbsp;</th>
+                <th scope="col">&nbsp;</th>
             </tr>
             </thead>
             <tbody>
@@ -79,15 +78,15 @@ $form = Form::tag()
                 ?>
                 <tr>
                     <td data-checkbox="true"></td>
-                    <td><?= ($user->getId()) ? Html::a($user->getId(), $editUrl) : ''; ?></td>
-                    <td><?= $user->getUsername(); ?></td>
+                    <td><?= Html::a($user->getUsername(), $urlGenerator->generate('user-edit', ['dn' => $user->getDn()])); ?></td>
                     <td><?= $user->getFirstName() ?? ''; ?> <?= $user->getLastName(); ?></td>
                     <td><?= ($user->getMail() !== null) ? Html::mailto($user->getMail(), $user->getMail()) : '' ?></td>
-                    <td>
+                    <td style="width:100px">
                         <?= $form->open() ?>
                         <?= Input::hidden('delDn', $user->getDn()); ?>
                         <?= Input::submitButton('Remove')->addClass('btn btn-primary btn-sm'); ?>
                         <?= $form->close() ?>
+
                     </td>
                 </tr>
             <?php endforeach; ?>

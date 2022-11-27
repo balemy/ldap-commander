@@ -48,7 +48,7 @@ $this->setTitle($applicationParameters->getName());
                     <td><?= $group->getTitle() ?? ''; ?></td>
                     <td><?= $group->getDn(); ?></td>
                     <td><?= count($group->getUserDns()); ?></td>
-                    <td>
+                    <td  style="width:150px">
                         <?= Html::a('Edit', $editUrl, ['class' => 'btn btn-secondary btn-sm']); ?>
                         <?= Html::a('Members', $membersUrl, ['class' => 'btn btn-secondary btn-sm']); ?>
                     </td>

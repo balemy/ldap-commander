@@ -49,7 +49,7 @@ $this->setTitle($applicationParameters->getName());
                     <td><?= $user->getFirstName(); ?></td>
                     <td><?= $user->getLastName(); ?></td>
                     <td><?= (!empty($user->getMail())) ? Html::mailto($user->getMail(), $user->getMail()) : '' ?></td>
-                    <td>
+                    <td style="width:150px">
                         <?= Html::a('Edit', $editUrl, ['class' => 'btn btn-secondary btn-sm']); ?>
                         <?= Html::a('Groups', $urlGenerator->generate('user-groups', ['dn' => $user->getDn()]), ['class' => 'btn btn-secondary btn-sm']); ?>
                     </td>

@@ -66,7 +66,7 @@ class User extends FormModel
         return false;
     }
 
-    public function getEntry() : Entry
+    public function getEntry(): Entry
     {
         return $this->entry;
     }
@@ -189,6 +189,7 @@ class User extends FormModel
         return [
             'username' => [new Required()],
             'lastName' => [new Required()],
+            'commonName' => [new Required()],
         ];
     }
 
