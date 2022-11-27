@@ -1,5 +1,7 @@
 # LDAP Commander
 
+## 0.6.1 (2022-11-27)
+
 ## 0.6.0 (2022-11-27)
 
 - Added basic user administration
