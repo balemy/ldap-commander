@@ -16,14 +16,14 @@
         "test": "phpunit --testdox --no-interaction",
         "test-watch": "phpunit-watcher watch",
         "post-install-cmd": [
-            "App\\Installer::copyEnvFile"
+            "Balemy\\LdapCommander\\Installer::copyEnvFile"
         ],
         "post-update-cmd": [
-            "App\\Installer::postUpdate",
-            "App\\Installer::copyEnvFile"
+            "Balemy\\LdapCommander\\Installer::postUpdate",
+            "Balemy\\LdapCommander\\Installer::copyEnvFile"
         ],
         "post-create-project-cmd": [
-            "App\\Installer::copyEnvFile"
+            "Balemy\\LdapCommander\\Installer::copyEnvFile"
         ]
     },
     "require": {
@@ -120,12 +120,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src"
+            "Balemy\\LdapCommander\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests"
+            "Balemy\\LdapCommander\\Tests\\": "tests"
         }
     },
     "extra": {

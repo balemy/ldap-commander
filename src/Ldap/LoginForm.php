@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Ldap;
+namespace Balemy\LdapCommander\Ldap;
 
-use App\Timer;
+use Balemy\LdapCommander\Timer;
 use LdapRecord\Auth\BindException;
 use phpDocumentor\Reflection\Types\Boolean;
 use Yiisoft\Form\FormModel;

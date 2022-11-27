@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 /**
  * @var \Yiisoft\View\WebView $this
- * @var \App\ApplicationParameters $applicationParameters
+ * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
- * @var \App\Ldap\Schema\ObjectClass $objectClass
+ * @var \Balemy\LdapCommander\Ldap\Schema\ObjectClass $objectClass
  */
 
 use Yiisoft\Html\Html;

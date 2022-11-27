@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Command\Hello;
-use App\ViewInjection\CommonViewInjection;
-use App\ViewInjection\LayoutViewInjection;
+use Balemy\LdapCommander\Command\Hello;
+use Balemy\LdapCommander\ViewInjection\CommonViewInjection;
+use Balemy\LdapCommander\ViewInjection\LayoutViewInjection;
 use Yiisoft\Definitions\Reference;
 use Yiisoft\ErrorHandler\Middleware\ErrorCatcher;
 use Yiisoft\Router\Middleware\Router;

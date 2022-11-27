@@ -1,4 +1,4 @@
-namespace: App\Tests
+namespace: Balemy\LdapCommander\Tests
 support_namespace: Support
 paths:
     tests: tests

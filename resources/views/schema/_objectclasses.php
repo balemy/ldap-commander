@@ -4,7 +4,7 @@ declare(strict_types=1);
 /**
  * @var \Yiisoft\View\WebView $this
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
- * @var \App\Ldap\Schema\ObjectClass[] $objectClasses
+ * @var \Balemy\LdapCommander\Ldap\Schema\ObjectClass[] $objectClasses
  */
 
 use Yiisoft\Html\Html;

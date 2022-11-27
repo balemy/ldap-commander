@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Fields;
+namespace Balemy\LdapCommander\Fields;
 
 use Yiisoft\Html\Html;
 use Yiisoft\Router\UrlGeneratorInterface;

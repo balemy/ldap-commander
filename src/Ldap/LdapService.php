@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Ldap;
+namespace Balemy\LdapCommander\Ldap;
 
-use App\Helper\DSN;
-use App\Ldap\Schema\Schema;
-use App\Timer;
+use Balemy\LdapCommander\Helper\DSN;
+use Balemy\LdapCommander\Ldap\Schema\Schema;
+use Balemy\LdapCommander\Timer;
 use LdapRecord\Connection;
 use LdapRecord\Container;
 

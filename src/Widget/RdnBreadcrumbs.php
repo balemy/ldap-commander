@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Widget;
+namespace Balemy\LdapCommander\Widget;
 
-use App\Ldap\LdapService;
+use Balemy\LdapCommander\Ldap\LdapService;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Widget\Widget;
 use Yiisoft\Yii\Bootstrap5\Breadcrumbs;

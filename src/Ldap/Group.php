@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Ldap;
+namespace Balemy\LdapCommander\Ldap;
 
 use LdapRecord\Models\ActiveDirectory\Computer;
 use LdapRecord\Models\ActiveDirectory\Contact;

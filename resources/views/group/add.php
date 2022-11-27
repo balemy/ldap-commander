@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 /**
  * @var \Yiisoft\View\WebView $this
- * @var \App\ApplicationParameters $applicationParameters
+ * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var Csrf $csrf
  * @var string $dn
  * @var string[] $users
  * @var string[] $parentDns
- * @var \App\Ldap\GroupAddForm $formModel
+ * @var \Balemy\LdapCommander\Ldap\GroupAddForm $formModel
  */
 
 use Yiisoft\Form\Field;

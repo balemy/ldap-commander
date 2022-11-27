@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Ldap;
+namespace Balemy\LdapCommander\Ldap;
 
 use LdapRecord\Models\Entry;
 use LdapRecord\Models\OpenLDAP\User as LrUser;

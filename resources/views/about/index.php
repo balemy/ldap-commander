@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /**
  * @var \Yiisoft\View\WebView $this
- * @var \App\ApplicationParameters $applicationParameters
+ * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  */
 
 $this->setTitle($applicationParameters->getName());

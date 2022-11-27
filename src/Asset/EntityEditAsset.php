@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Asset;
+namespace Balemy\LdapCommander\Asset;
 
 use Yiisoft\Assets\AssetBundle;
 use Yiisoft\Yii\Bootstrap5\Assets\BootstrapAsset;

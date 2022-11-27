@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 /**
  * @var \Yiisoft\View\WebView $this
- * @var \App\ApplicationParameters $applicationParameters
+ * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var array $results
  */
 
-use App\Helper\OID;
+use Balemy\LdapCommander\Helper\OID;
 use Yiisoft\Html\Html;
 
 $this->setTitle($applicationParameters->getName());

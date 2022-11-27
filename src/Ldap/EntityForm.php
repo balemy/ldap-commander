@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Ldap;
+namespace Balemy\LdapCommander\Ldap;
 
-use App\Helper\DnHelper;
-use App\Ldap\Schema\Schema;
+use Balemy\LdapCommander\Helper\DnHelper;
+use Balemy\LdapCommander\Ldap\Schema\Schema;
 use LdapRecord\LdapRecordException;
 use LdapRecord\Models\Entry;
 use phpDocumentor\Reflection\Types\Void_;

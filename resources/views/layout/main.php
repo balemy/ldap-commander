@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use App\Asset\AppAsset;
-use App\Widget\FlashMessage;use App\Widget\PerformanceMetrics;use Yiisoft\Html\Html;
+use Balemy\LdapCommander\Asset\AppAsset;
+use Balemy\LdapCommander\Widget\FlashMessage;use Balemy\LdapCommander\Widget\PerformanceMetrics;use Yiisoft\Html\Html;
 use Yiisoft\I18n\Locale;
 use Yiisoft\Strings\StringHelper;use Yiisoft\Yii\Bootstrap5\Nav;
 use Yiisoft\Yii\Bootstrap5\NavBar;
 
 /**
- * @var App\ApplicationParameters $applicationParameters
+ * @var Balemy\LdapCommander\ApplicationParameters $applicationParameters
  * @var Yiisoft\Aliases\Aliases $aliases
  * @var Yiisoft\Assets\AssetManager $assetManager
  * @var string $content

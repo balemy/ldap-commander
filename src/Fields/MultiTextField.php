@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Fields;
+namespace Balemy\LdapCommander\Fields;
 
-use App\Ldap\EntityForm;
+use Balemy\LdapCommander\Ldap\EntityForm;
 use Cycle\Schema\Definition\Entity;
 use Yiisoft\Form\Field\Base\InputField;
 use Yiisoft\Html\Html;

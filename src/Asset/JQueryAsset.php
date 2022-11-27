@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Asset;
+namespace Balemy\LdapCommander\Asset;
 
 use Yiisoft\Assets\AssetBundle;
 use Yiisoft\View\View;

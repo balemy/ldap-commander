@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 /**
  * @var \Yiisoft\View\WebView $this
- * @var \App\ApplicationParameters $applicationParameters
+ * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var Csrf $csrf
  * @var string $dn
- * @var \App\Ldap\GroupForm $formModel
+ * @var \Balemy\LdapCommander\Ldap\GroupForm $formModel
  */
 
-use App\Widget\GroupSidebar;
-use App\Widget\GroupSidebarLocation;
+use Balemy\LdapCommander\Widget\GroupSidebar;
+use Balemy\LdapCommander\Widget\GroupSidebarLocation;
 use Yiisoft\Form\Field;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Form;

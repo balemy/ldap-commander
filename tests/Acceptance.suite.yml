@@ -15,5 +15,5 @@ modules:
         capabilities:
           chromeOptions:
             args: ["--headless", "--disable-gpu"]
-    - \App\Tests\Support\Helper\Select2
+    - \Balemy\LdapCommander\Tests\Support\Helper\Select2
 step_decorators: ~

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /**
  * @var \Yiisoft\View\WebView $this
- * @var \App\ApplicationParameters $applicationParameters
+ * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var Csrf $csrf
@@ -13,9 +13,9 @@ declare(strict_types=1);
  * @var User[] $noMembers
  */
 
-use App\Ldap\User;
-use App\Widget\GroupSidebar;
-use App\Widget\GroupSidebarLocation;
+use Balemy\LdapCommander\Ldap\User;
+use Balemy\LdapCommander\Widget\GroupSidebar;
+use Balemy\LdapCommander\Widget\GroupSidebarLocation;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Button;
 use Yiisoft\Html\Tag\Form;

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace Balemy\LdapCommander\Controller;
 
-use App\Ldap\GroupForm;
-use App\Ldap\LdapService;
-use App\Ldap\User;
-use App\Service\WebControllerService;
+use Balemy\LdapCommander\Ldap\GroupForm;
+use Balemy\LdapCommander\Ldap\LdapService;
+use Balemy\LdapCommander\Ldap\User;
+use Balemy\LdapCommander\Service\WebControllerService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Assets\AssetManager;

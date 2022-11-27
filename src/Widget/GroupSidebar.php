@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Widget;
+namespace Balemy\LdapCommander\Widget;
 
 use Yiisoft\Html\Html;
 use Yiisoft\Router\CurrentRoute;

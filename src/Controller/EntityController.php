@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace Balemy\LdapCommander\Controller;
 
-use App\Ldap\EntityForm;
-use App\Ldap\LdapService;
-use App\Service\WebControllerService;
+use Balemy\LdapCommander\Ldap\EntityForm;
+use Balemy\LdapCommander\Ldap\LdapService;
+use Balemy\LdapCommander\Service\WebControllerService;
 use HttpSoft\Message\StreamFactory;
 use HttpSoft\Message\UploadedFile;
 use LdapRecord\LdapRecordException;

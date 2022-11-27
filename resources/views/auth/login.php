@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Ldap\ConnectionDetails;
+use Balemy\LdapCommander\Ldap\ConnectionDetails;
 use Yiisoft\Form\Field;
 use Yiisoft\Html\Tag\Form;
 use Yiisoft\Html\Tag\Select;
@@ -12,7 +12,7 @@ use Yiisoft\Html\Tag\Select;
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var string $csrf
  * @var int $connectionId
- * @var \App\Ldap\LoginForm $formModel
+ * @var \Balemy\LdapCommander\Ldap\LoginForm $formModel
  */
 
 $error = $error ?? null;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Timer;
+use Balemy\LdapCommander\Timer;
 use Yiisoft\Yii\Http\Event\ApplicationStartup;
 
 return [

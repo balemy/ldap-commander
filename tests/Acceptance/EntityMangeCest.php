@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Acceptance;
+namespace Balemy\LdapCommander\Tests\Acceptance;
 
-use App\Tests\Support\AcceptanceTester;
+use Balemy\LdapCommander\Tests\Support\AcceptanceTester;
 
 final class EntityManageCest
 {

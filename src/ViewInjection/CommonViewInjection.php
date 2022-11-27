@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\ViewInjection;
+namespace Balemy\LdapCommander\ViewInjection;
 
-use App\ApplicationParameters;
+use Balemy\LdapCommander\ApplicationParameters;
 use Yiisoft\Yii\View\CommonParametersInjectionInterface;
 
 final class CommonViewInjection implements CommonParametersInjectionInterface

@@ -1,5 +1,5 @@
 <?php // @codingStandardsIgnoreFile
-namespace App\Tests\Support\Helper;
+namespace Balemy\LdapCommander\Tests\Support\Helper;
 
 
 use Exception;

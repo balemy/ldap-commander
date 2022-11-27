@@ -1,5 +1,5 @@
 actor: CliTester
-suite_namespace: App\Tests\Cli
+suite_namespace: Balemy\LdapCommander\Tests\Cli
 modules:
     # enable helpers as array
     enabled: [Cli]

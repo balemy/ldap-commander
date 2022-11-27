@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 /**
- * @var App\ApplicationParameters $applicationParameters
+ * @var Balemy\LdapCommander\ApplicationParameters $applicationParameters
  */
 
-use App\Widget\PerformanceMetrics;
+use Balemy\LdapCommander\Widget\PerformanceMetrics;
 
 ?>
 <footer class="footer mt-auto py-3 text-muted">

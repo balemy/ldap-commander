@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Cli;
+namespace Balemy\LdapCommander\Tests\Cli;
 
-use App\Tests\Support\CliTester;
+use Balemy\LdapCommander\Tests\Support\CliTester;
 
 final class ConsoleCest
 {

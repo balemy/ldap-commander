@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helper;
+namespace Balemy\LdapCommander\Helper;
 
 class DSN
 {

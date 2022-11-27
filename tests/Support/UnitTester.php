@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Support;
+namespace Balemy\LdapCommander\Tests\Support;
 
 /**
  * Inherited Methods

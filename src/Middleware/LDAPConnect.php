@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Middleware;
+namespace Balemy\LdapCommander\Middleware;
 
-use App\Ldap\ConnectionDetails;
-use App\Ldap\LdapService;
-use App\Ldap\LoginForm;
+use Balemy\LdapCommander\Ldap\ConnectionDetails;
+use Balemy\LdapCommander\Ldap\LdapService;
+use Balemy\LdapCommander\Ldap\LoginForm;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

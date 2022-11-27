@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\ApplicationParameters;
+use Balemy\LdapCommander\ApplicationParameters;
 
 /** @var array $params */
 

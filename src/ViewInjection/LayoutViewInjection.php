@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\ViewInjection;
+namespace Balemy\LdapCommander\ViewInjection;
 
 use Yiisoft\Aliases\Aliases;
 use Yiisoft\Assets\AssetManager;

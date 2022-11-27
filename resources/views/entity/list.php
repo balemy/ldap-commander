@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 /**
  * @var \Yiisoft\View\WebView $this
- * @var \App\ApplicationParameters $applicationParameters
+ * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var array $results
  * @var string $dn
  */
 
-use App\Widget\EntitySidebar;
-use App\Widget\EntitySidebarLocation;
+use Balemy\LdapCommander\Widget\EntitySidebar;
+use Balemy\LdapCommander\Widget\EntitySidebarLocation;
 use Yiisoft\Html\Html;
 
 $this->setTitle($applicationParameters->getName());
@@ -20,7 +20,7 @@ $this->setTitle($applicationParameters->getName());
 
 <div class="row">
     <div class="col-md-9">
-        <?= \App\Widget\RdnBreadcrumbs::widget(['$dn' => $dn]); ?>
+        <?= \Balemy\LdapCommander\Widget\RdnBreadcrumbs::widget(['$dn' => $dn]); ?>
 
         <h1> List Children </h1>
         <p class="lead">

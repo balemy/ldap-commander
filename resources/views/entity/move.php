@@ -5,20 +5,20 @@ declare(strict_types=1);
 /**
  * @var WebView $this
  * @var \Yiisoft\Assets\AssetManager $assetManager
- * @var \App\ApplicationParameters $applicationParameters
+ * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
- * @var \App\Ldap\Schema\AttributeType[] $attributeTypes
- * @var \App\Ldap\EntityForm $entity
+ * @var \Balemy\LdapCommander\Ldap\Schema\AttributeType[] $attributeTypes
+ * @var \Balemy\LdapCommander\Ldap\EntityForm $entity
  * @var string $dn
  * @var Csrf $csrf
  * @var string $schemaJsonInfo
  * @var array $objectClassNames
  */
 
-use App\Asset\EntityEditAsset;
-use App\Widget\EntitySidebar;
-use App\Widget\EntitySidebarLocation;
-use App\Widget\RdnBreadcrumbs;
+use Balemy\LdapCommander\Asset\EntityEditAsset;
+use Balemy\LdapCommander\Widget\EntitySidebar;
+use Balemy\LdapCommander\Widget\EntitySidebarLocation;
+use Balemy\LdapCommander\Widget\RdnBreadcrumbs;
 use Yiisoft\View\WebView;
 use Yiisoft\Yii\View\Csrf;
 

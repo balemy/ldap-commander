@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Widget;
+namespace Balemy\LdapCommander\Widget;
 
 use Yiisoft\Session\Flash\FlashInterface;
 use Yiisoft\Yii\Bootstrap5\Alert;

@@ -5,23 +5,23 @@ declare(strict_types=1);
 /**
  * @var WebView $this
  * @var \Yiisoft\Assets\AssetManager $assetManager
- * @var \App\ApplicationParameters $applicationParameters
+ * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
- * @var \App\Ldap\Schema\AttributeType[] $attributeTypes
- * @var \App\Ldap\EntityForm $entity
+ * @var \Balemy\LdapCommander\Ldap\Schema\AttributeType[] $attributeTypes
+ * @var \Balemy\LdapCommander\Ldap\EntityForm $entity
  * @var string $dn
  * @var Csrf $csrf
  * @var string $schemaJsonInfo
  * @var array $objectClassNames
  */
 
-use App\Asset\EntityEditAsset;
-use App\Fields\MultiPasswordField;
-use App\Fields\MultiTextField;
-use App\Fields\MultiFileField;
-use App\Widget\EntitySidebar;
-use App\Widget\EntitySidebarLocation;
-use App\Widget\RdnBreadcrumbs;
+use Balemy\LdapCommander\Asset\EntityEditAsset;
+use Balemy\LdapCommander\Fields\MultiPasswordField;
+use Balemy\LdapCommander\Fields\MultiTextField;
+use Balemy\LdapCommander\Fields\MultiFileField;
+use Balemy\LdapCommander\Widget\EntitySidebar;
+use Balemy\LdapCommander\Widget\EntitySidebarLocation;
+use Balemy\LdapCommander\Widget\RdnBreadcrumbs;
 use Yiisoft\Form\Field;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Label as LabelTag;
