@@ -9,13 +9,12 @@ declare(strict_types=1);
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var Csrf $csrf
  * @var string $dn
- * @var \Balemy\LdapCommander\User\User[] $members
- * @var \Balemy\LdapCommander\User\User[] $noMembers
+ * @var \Balemy\LdapCommander\Group\Group[] $assignedGroups
+ * @var \Balemy\LdapCommander\Group\Group[] $notAssignedGroups
  */
 
-use Balemy\LdapCommander\Group\SidebarWidget;
-use Balemy\LdapCommander\Group\GroupSidebarLocation;
-use Yiisoft\Html\Html;
+use Balemy\LdapCommander\User\SidebarWidget;
+use Balemy\LdapCommander\User\SidebarLocation;
 use Yiisoft\Html\Tag\Button;
 use Yiisoft\Html\Tag\Form;
 use Yiisoft\Html\Tag\Input;
@@ -25,20 +24,20 @@ use Yiisoft\Yii\View\Csrf;
 $this->setTitle($applicationParameters->getName());
 
 $addOptions = ['' => ''];
-foreach ($noMembers as $user) {
-    $addOptions[$user->getDn()] = $user->getDisplayName() . ' (' . $user->getUsername() . ')';
+foreach ($notAssignedGroups as $group) {
+    $addOptions[$group->getDn()] = $group->getTitle() . ' (' . $group->getDescription() . ')';
 }
 
 $form = Form::tag()
     ->method('post')
     ->csrf($csrf)
-    ->action($urlGenerator->generate('group-members', ['dn' => $dn]))
+    ->action($urlGenerator->generate('user-groups', ['dn' => $dn]))
 ?>
 
 
 <div class="row">
     <div class="col-md-9">
-        <h1>Group Members (<?= count($members); ?>)</h1>
+        <h1>Group Memberships (<?= count($assignedGroups); ?>)</h1>
         <p class="lead">
             <?= $dn ?>
         </p>
@@ -46,10 +45,10 @@ $form = Form::tag()
 
         <?= $form->addClass('row g-3 alert alert-dark')->open(); ?>
         <div class="col-auto">
-            <label for="select2addUser" class="visually-hidden">Add new member</label>
+            <label for="select2add" class="visually-hidden">Add new Group Membership</label>
             <?= Select::tag()
                 ->optionsData($addOptions)
-                ->id("select2addUser")
+                ->id("select2add")
                 ->name('addDn')
                 ->addAttributes(['style' => 'width:300px'])
                 ->addClass('form-control');
@@ -65,27 +64,22 @@ $form = Form::tag()
             <thead>
             <tr>
                 <th data-checkbox="true"></th>
-                <th scope="col">ID</th>
-                <th scope="col">Username</th>
-                <th scope="col">Display Name</th>
-                <th scope="col">E-Mail</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <!--<th scope="col">DN</th>-->
                 <th>&nbsp;</th>
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($members as $user): ?>
-                <?php
-                $editUrl = $urlGenerator->generate('entity-edit', ['dn' => $user->getDn()]);
-                ?>
+            <?php foreach ($assignedGroups as $group): ?>
                 <tr>
                     <td data-checkbox="true"></td>
-                    <td><?= ($user->getId()) ? Html::a($user->getId(), $editUrl) : ''; ?></td>
-                    <td><?= $user->getUsername(); ?></td>
-                    <td><?= $user->getFirstName() ?? ''; ?> <?= $user->getLastName(); ?></td>
-                    <td><?= ($user->getMail() !== null) ? Html::mailto($user->getMail(), $user->getMail()) : '' ?></td>
+                    <td><?= $group->getTitle(); ?></td>
+                    <td><?= $group->getDescription(); ?></td>
+                    <!--<td><?= $group->getDn(); ?></td>-->
                     <td>
                         <?= $form->open() ?>
-                        <?= Input::hidden('delDn', $user->getDn()); ?>
+                        <?= Input::hidden('delDn', $group->getDn()); ?>
                         <?= Input::submitButton('Remove')->addClass('btn btn-primary btn-sm'); ?>
                         <?= $form->close() ?>
                     </td>
@@ -95,15 +89,14 @@ $form = Form::tag()
         </table>
     </div>
     <div class="col-md-3">
-        <?= SidebarWidget::widget(['$dn' => $dn, '$location' => GroupSidebarLocation::Members]); ?>
+        <?= SidebarWidget::widget(['$dn' => $dn, '$location' => SidebarLocation::Members]); ?>
     </div>
 </div>
 <script>
     $(document).ready(function () {
-        $('#select2addUser').select2({
+        $('#select2add').select2({
             theme: 'bootstrap-5',
-            placeholder: "Select user to add"
+            placeholder: "Select Group to add"
         });
     });
-
 </script>

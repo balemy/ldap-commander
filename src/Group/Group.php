@@ -1,13 +1,9 @@
 <?php
 
-namespace Balemy\LdapCommander\Ldap;
+namespace Balemy\LdapCommander\Group;
 
-use LdapRecord\Models\ActiveDirectory\Computer;
-use LdapRecord\Models\ActiveDirectory\Contact;
-use LdapRecord\Models\ActiveDirectory\User;
 use LdapRecord\Models\Entry;
 use LdapRecord\Models\OpenLDAP\Group as LrGroup;
-use LdapRecord\Models\OpenLDAP\User as LrUser;
 
 class Group
 {
@@ -82,6 +78,18 @@ class Group
         return $groups;
     }
 
+    public static function getOne(string $dn): ?Group
+    {
+        /** @var Entry|null $entry */
+        $entry = Entry::query()->find($dn);
+        if ($entry !== null) {
+            return new Group($entry);
+        }
+
+        return null;
+    }
+
+
     public function addMember(string $addDn): bool
     {
         $this->entry->addAttributeValue('uniquemember', $addDn);
@@ -119,6 +127,11 @@ class Group
         $this->entry->setFirstAttribute('description', $formModel->getDescription());
         $this->entry->save();
         return true;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getDn();
     }
 
 }

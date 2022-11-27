@@ -6,7 +6,9 @@ use Balemy\LdapCommander\Controller\AuthController;
 use Balemy\LdapCommander\Controller\EntityController;
 use Balemy\LdapCommander\Controller\SchemaController;
 use Balemy\LdapCommander\Controller\SiteController;
+use Balemy\LdapCommander\Group\GroupController;
 use Balemy\LdapCommander\Middleware\LDAPConnect;
+use Balemy\LdapCommander\User\UserController;
 use Yiisoft\Http\Method;
 use Yiisoft\Router\Group;
 use Yiisoft\Router\Route;
@@ -30,14 +32,16 @@ return [
 
             Route::get('/server')->action([\Balemy\LdapCommander\Controller\ServerController::class, 'index'])->name('server'),
 
-            Route::get('/users')->action([\Balemy\LdapCommander\Controller\UserController::class, 'list'])->name('user-list'),
-            Route::methods([Method::GET, Method::POST], '/user/edit')->action([\Balemy\LdapCommander\Controller\UserController::class, 'edit'])->name('user-edit'),
+            Route::get('/users')->action([UserController::class, 'list'])->name('user-list'),
+            Route::methods([Method::GET, Method::POST], '/user/edit')->action([UserController::class, 'edit'])->name('user-edit'),
+            Route::methods([Method::GET, Method::POST], '/user/groups')->action([UserController::class, 'members'])->name('user-groups'),
+            Route::methods([Method::GET, Method::POST], '/user/delete')->action([UserController::class, 'delete'])->name('user-delete'),
 
-            Route::get('/groups')->action([\Balemy\LdapCommander\Controller\GroupController::class, 'list'])->name('group-list'),
-            Route::methods([Method::GET, Method::POST], '/group/add')->action([\Balemy\LdapCommander\Controller\GroupController::class, 'add'])->name('group-add'),
-            Route::methods([Method::GET, Method::POST], '/group/edit')->action([\Balemy\LdapCommander\Controller\GroupController::class, 'edit'])->name('group-edit'),
-            Route::methods([Method::GET, Method::POST], '/group/members')->action([\Balemy\LdapCommander\Controller\GroupController::class, 'members'])->name('group-members'),
-            Route::methods([Method::GET, Method::POST], '/group/delete')->action([\Balemy\LdapCommander\Controller\GroupController::class, 'delete'])->name('group-delete'),
+            Route::get('/groups')->action([GroupController::class, 'list'])->name('group-list'),
+            Route::methods([Method::GET, Method::POST], '/group/add')->action([GroupController::class, 'add'])->name('group-add'),
+            Route::methods([Method::GET, Method::POST], '/group/edit')->action([GroupController::class, 'edit'])->name('group-edit'),
+            Route::methods([Method::GET, Method::POST], '/group/members')->action([GroupController::class, 'members'])->name('group-members'),
+            Route::methods([Method::GET, Method::POST], '/group/delete')->action([GroupController::class, 'delete'])->name('group-delete'),
         ),
     Route::methods([Method::GET, Method::POST], '/login')->action([AuthController::class, 'login'])->name('login'),
     Route::methods([Method::GET, Method::POST], '/logout')->action([AuthController::class, 'logout'])->name('logout'),

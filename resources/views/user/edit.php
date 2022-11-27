@@ -8,9 +8,11 @@ declare(strict_types=1);
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var Csrf $csrf
- * @var \Balemy\LdapCommander\Ldap\User $user
+ * @var \Balemy\LdapCommander\User\User $user
  */
 
+use Balemy\LdapCommander\User\SidebarLocation;
+use Balemy\LdapCommander\User\SidebarWidget;
 use Yiisoft\Form\Field;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Form;
@@ -34,7 +36,6 @@ $this->setTitle($applicationParameters->getName());
         <br>
 
         <?= Html::form()->post($urlGenerator->generate('user-edit', ['dn' => $user->getDn()]))->csrf($csrf)->open() ?>
-
 
         <div class="row">
             <div class="col-sm-4">
@@ -92,6 +93,7 @@ $this->setTitle($applicationParameters->getName());
     </div>
 
     <div class="col-md-3">
+        <?= SidebarWidget::widget(['$dn' => $user->getDn(), '$location' => SidebarLocation::Edit]); ?>
     </div>
 
 </div>

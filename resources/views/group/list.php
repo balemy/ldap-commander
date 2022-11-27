@@ -7,10 +7,9 @@ declare(strict_types=1);
  * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
- * @var \Balemy\LdapCommander\Ldap\Group[] $groups
+ * @var \Balemy\LdapCommander\Group\Group[] $groups
  */
 
-use Balemy\LdapCommander\Ldap\User;
 use Yiisoft\Html\Html;
 
 $this->setTitle($applicationParameters->getName());

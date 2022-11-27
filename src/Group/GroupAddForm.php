@@ -1,6 +1,6 @@
 <?php
 
-namespace Balemy\LdapCommander\Ldap;
+namespace Balemy\LdapCommander\Group;
 
 use Yiisoft\Validator\Rule\Required;
 

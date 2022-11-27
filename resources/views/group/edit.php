@@ -9,11 +9,11 @@ declare(strict_types=1);
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var Csrf $csrf
  * @var string $dn
- * @var \Balemy\LdapCommander\Ldap\GroupForm $formModel
+ * @var \Balemy\LdapCommander\Group\GroupForm $formModel
  */
 
-use Balemy\LdapCommander\Widget\GroupSidebar;
-use Balemy\LdapCommander\Widget\GroupSidebarLocation;
+use Balemy\LdapCommander\Group\SidebarWidget;
+use Balemy\LdapCommander\Group\GroupSidebarLocation;
 use Yiisoft\Form\Field;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Form;
@@ -48,7 +48,7 @@ $this->setTitle($applicationParameters->getName());
     </div>
 
     <div class="col-md-3">
-        <?= GroupSidebar::widget(['$dn' => $dn, '$location' => GroupSidebarLocation::Edit]); ?>
+        <?= SidebarWidget::widget(['$dn' => $dn, '$location' => GroupSidebarLocation::Edit]); ?>
     </div>
 
 </div>

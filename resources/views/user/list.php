@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
- * @var \Balemy\LdapCommander\Ldap\User[] $users
+ * @var \Balemy\LdapCommander\User\User[] $users
  */
 
 use Yiisoft\Html\Html;
@@ -49,7 +49,10 @@ $this->setTitle($applicationParameters->getName());
                     <td><?= $user->getFirstName(); ?></td>
                     <td><?= $user->getLastName(); ?></td>
                     <td><?= (!empty($user->getMail())) ? Html::mailto($user->getMail(), $user->getMail()) : '' ?></td>
-                    <td><?= Html::a('Edit', $editUrl, ['class' => 'btn btn-secondary btn-sm']); ?></td>
+                    <td>
+                        <?= Html::a('Edit', $editUrl, ['class' => 'btn btn-secondary btn-sm']); ?>
+                        <?= Html::a('Groups', $urlGenerator->generate('user-groups', ['dn' => $user->getDn()]), ['class' => 'btn btn-secondary btn-sm']); ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

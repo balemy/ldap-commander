@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @var string $dn
  * @var string[] $users
  * @var string[] $parentDns
- * @var \Balemy\LdapCommander\Ldap\GroupAddForm $formModel
+ * @var \Balemy\LdapCommander\Group\GroupAddForm $formModel
  */
 
 use Yiisoft\Form\Field;

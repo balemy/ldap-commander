@@ -1,7 +1,8 @@
 <?php
 
-namespace Balemy\LdapCommander\Ldap;
+namespace Balemy\LdapCommander\User;
 
+use Balemy\LdapCommander\Group\Group;
 use LdapRecord\Models\Entry;
 use LdapRecord\Models\OpenLDAP\User as LrUser;
 use Yiisoft\Form\FormModel;
@@ -54,7 +55,8 @@ class User extends FormModel
 
     public function loadByEntryByDn(string $dn): bool
     {
-        $entry = LrUser::query()->find($dn, ['*', '+']);
+        $entry = LrUser::query()->addSelect(['*', '+'])->find($dn, ['*']);
+
         if ($entry instanceof Entry) {
             $this->entry = $entry;
             $this->loadByEntry();
@@ -62,6 +64,11 @@ class User extends FormModel
             return true;
         }
         return false;
+    }
+
+    public function getEntry() : Entry
+    {
+        return $this->entry;
     }
 
     public function getId(): ?int
@@ -124,6 +131,25 @@ class User extends FormModel
     public function getDn(): string
     {
         return $this->dn;
+    }
+
+    /**
+     * @return Group[]
+     */
+    public function getGroups(): array
+    {
+        $groups = [];
+        if (!empty($this->entry->getAttributeValue('memberof')) && is_array($this->entry->getAttributeValue('memberof'))) {
+            /** @var string[] $memberOf */
+            $memberOf = $this->entry->getAttributeValue('memberof');
+            foreach ($memberOf as $groupDn) {
+                $group = Group::getOne($groupDn);
+                if ($group !== null) {
+                    $groups[] = $group;
+                }
+            }
+        }
+        return $groups;
     }
 
     public function getDisplayName(): string

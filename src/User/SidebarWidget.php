@@ -1,6 +1,6 @@
 <?php
 
-namespace Balemy\LdapCommander\Widget;
+namespace Balemy\LdapCommander\User;
 
 use Yiisoft\Html\Html;
 use Yiisoft\Router\CurrentRoute;
@@ -8,17 +8,17 @@ use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\View\WebView;
 use Yiisoft\Widget\Widget;
 
-enum GroupSidebarLocation
+enum SidebarLocation
 {
     case Edit;
     case Members;
 }
 
-class GroupSidebar extends Widget
+class SidebarWidget extends Widget
 {
     public string $dn = '';
 
-    public GroupSidebarLocation $location = GroupSidebarLocation::Edit;
+    public SidebarLocation $location = SidebarLocation::Edit;
 
     public function __construct(
         public CurrentRoute          $currentRoute,
@@ -31,15 +31,16 @@ class GroupSidebar extends Widget
     protected function run(): string
     {
         $html = Html::openTag('ul', ['class' => 'list-group']);
-        if ($this->location !== GroupSidebarLocation::Edit) {
+
+        if ($this->location !== SidebarLocation::Edit) {
             $html .= Html::tag('li',
-                Html::a('Edit Group', $this->urlGenerator->generate('group-edit', ['dn' => $this->dn])),
+                Html::a('Edit User', $this->urlGenerator->generate('user-edit', ['dn' => $this->dn])),
                 ['class' => 'list-group-item']
             );
         }
-        if ($this->location !== GroupSidebarLocation::Members) {
+        if ($this->location !== SidebarLocation::Members) {
             $html .= Html::tag('li',
-                Html::a('Manage Members', $this->urlGenerator->generate('group-members', ['dn' => $this->dn])),
+                Html::a('Groups', $this->urlGenerator->generate('user-groups', ['dn' => $this->dn])),
                 ['class' => 'list-group-item']
             );
         }
@@ -50,7 +51,7 @@ class GroupSidebar extends Widget
         );
 
         $html .= Html::tag('li',
-            Html::a('Delete Group', $this->urlGenerator->generate('group-delete', ['dn' => $this->dn])),
+            Html::a('Delete User', $this->urlGenerator->generate('user-delete', ['dn' => $this->dn])),
             [
                 'onClick' => 'return confirm("Are you sure?")',
                 'class' => 'list-group-item'

@@ -2,14 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Balemy\LdapCommander\Controller;
+namespace Balemy\LdapCommander\Group;
 
-use Balemy\LdapCommander\Ldap\Group;
-use Balemy\LdapCommander\Ldap\GroupAddForm;
-use Balemy\LdapCommander\Ldap\GroupForm;
 use Balemy\LdapCommander\Ldap\LdapService;
-use Balemy\LdapCommander\Ldap\User;
 use Balemy\LdapCommander\Service\WebControllerService;
+use Balemy\LdapCommander\User\User;
 use LdapRecord\LdapRecordException;
 use LdapRecord\Models\Entry;
 use LdapRecord\Models\ModelDoesNotExistException;
@@ -200,11 +197,7 @@ final class GroupController
     {
         $dn = $this->getDnByRequest($request);
         if ($dn !== null) {
-            /** @var Entry|null $entry */
-            $entry = Entry::query()->find($dn);
-            if ($entry !== null) {
-                return new Group($entry);
-            }
+            return Group::getOne($dn);
         }
 
         return null;
