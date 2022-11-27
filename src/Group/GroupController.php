@@ -49,25 +49,6 @@ final class GroupController
     {
         $formModel = new GroupAddForm();
 
-        $ous = [];
-        /** @var Entry $entry */
-        foreach (Entry::query()->addSelect(['dn', 'cn'])
-                     ->query('(objectClass=organizationalUnit)') as $entry) {
-            $name = $entry->getName();
-            $dn = $entry->getDn();
-            if ($name !== null && $dn !== null) {
-                $ous[$dn] = $name;
-            }
-        }
-        if (!array_key_exists($this->ldapService->baseDn, $ous)) {
-            $baseDnEntry = Entry::query()->find($this->ldapService->baseDn);
-            if ($baseDnEntry !== null) {
-                /** @var string $orgName */
-                $orgName = $baseDnEntry->getFirstAttribute('o');
-                $ous = [$this->ldapService->baseDn => $orgName . ' (Base DN)'] + $ous;
-            }
-        }
-
         if ($request->getMethod() === Method::POST) {
             /** @var array<string, array> $body */
             $body = $request->getParsedBody();
@@ -102,7 +83,7 @@ final class GroupController
             'urlGenerator' => $this->urlGenerator,
             'formModel' => $formModel,
             'users' => $users,
-            'parentDns' => $ous
+            'parentDns' => $this->ldapService->getOrganizationalUnits()
         ]);
     }
 

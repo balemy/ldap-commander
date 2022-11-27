@@ -7,6 +7,7 @@ use Balemy\LdapCommander\Ldap\Schema\Schema;
 use Balemy\LdapCommander\Timer;
 use LdapRecord\Connection;
 use LdapRecord\Container;
+use LdapRecord\Models\Entry;
 
 class LdapService
 {
@@ -79,4 +80,35 @@ class LdapService
         #return Yii::$app->cache->getOrSet('oc_' . $dn, function () use ($dn) {
         #});
     }
+
+
+    public function getOrganizationalUnits()
+    {
+        $ous = [];
+
+        /** @var Entry $entry */
+        foreach (Entry::query()
+                     ->addSelect(['dn', 'cn'])
+                     ->query('(objectClass=organizationalUnit)') as $entry) {
+
+            $name = $entry->getName();
+            $dn = $entry->getDn();
+            if ($name !== null && $dn !== null) {
+                $ous[$dn] = $name;
+            }
+        }
+
+        if (!array_key_exists($this->baseDn, $ous)) {
+            $baseDnEntry = Entry::query()->find($this->baseDn);
+            if ($baseDnEntry !== null) {
+                /** @var string $orgName */
+                $orgName = $baseDnEntry->getFirstAttribute('o');
+                $ous = [$this->baseDn => $orgName . ' (Base DN)'] + $ous;
+            }
+        }
+
+        return $ous;
+    }
+
+
 }

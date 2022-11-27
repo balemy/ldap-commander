@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var Csrf $csrf
  * @var \Balemy\LdapCommander\User\User $user
+ * @var string[] $parentDNs
  */
 
 use Balemy\LdapCommander\User\SidebarLocation;
@@ -82,6 +83,12 @@ $this->setTitle($applicationParameters->getName());
                 <?= Field::text($user, 'mobile')
                     ->tabindex(2) ?>
             </div>
+        </div>
+        <div class="col-sm-12">
+            <?= Field::select($user, 'parentDn')
+                ->optionsData($parentDNs)
+                ->autofocus()
+                ->tabindex(1) ?>
         </div>
 
 

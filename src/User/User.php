@@ -14,6 +14,9 @@ class User extends FormModel
 
     private ?int $id = null;
 
+    private string $parentDn = '';
+
+
     private string $username = '';
     private string $commonName = '';
 
@@ -69,6 +72,11 @@ class User extends FormModel
     public function getEntry(): Entry
     {
         return $this->entry;
+    }
+
+    public function getParentDn(): string
+    {
+        return $this->parentDn;
     }
 
     public function getId(): ?int
@@ -184,12 +192,20 @@ class User extends FormModel
         return '';
     }
 
+    public function getAttributeLabels(): array
+    {
+        return [
+            'parentDn' => 'Organizational Unit'
+        ];
+    }
+
     public function getRules(): array
     {
         return [
             'username' => [new Required()],
             'lastName' => [new Required()],
             'commonName' => [new Required()],
+            'parentDn' => [new Required()],
         ];
     }
 
@@ -200,7 +216,7 @@ class User extends FormModel
         $this->setEntryAttribute('cn', $this->getCommonName(), $isNewRecord);
         $this->setEntryAttribute('uid', $this->getUsername(), $isNewRecord);
 
-        $this->setEntryAttribute('uidNumber', (string)$this->getId(), $isNewRecord);
+        //$this->setEntryAttribute('uidNumber', (string)$this->getId(), $isNewRecord);
         $this->setEntryAttribute('givenName', $this->getFirstName(), $isNewRecord);
         $this->setEntryAttribute('sn', $this->getLastName());
         $this->setEntryAttribute('initials', $this->getInitials(), $isNewRecord);
@@ -209,15 +225,31 @@ class User extends FormModel
         $this->setEntryAttribute('homeNumber', $this->getHomeNumber(), $isNewRecord);
         $this->setEntryAttribute('mail', $this->getMail(), $isNewRecord);
 
-        $head = $this->entry->getHead();
-        if (!$this->isNewRecord() && $head !== null && $this->entry->isDirty($head)) {
-            $this->entry->rename((string)$this->entry->getFirstAttribute($head));
-            $this->entry->refresh();
-            $this->dn = $this->entry->getDn() ?? '';
+        $moveToDn = null;
+
+        if ($this->isNewRecord()) {
+            $this->entry->inside($this->getParentDn());
+        } else {
+            if ($this->entry->getParentDn() !== $this->getParentDn()) {
+                $moveToDn = $this->getParentDn();
+            }
+
+            $head = $this->entry->getHead();
+            if ($head !== null && $this->entry->isDirty($head)) {
+                $this->entry->rename((string)$this->entry->getFirstAttribute($head));
+                $this->entry->refresh();
+                $this->dn = $this->entry->getDn() ?? '';
+            }
         }
 
-
         $this->entry->save();
+
+        if ($moveToDn !== null) {
+            $this->entry->move($moveToDn);
+            $this->entry->refresh();
+            $this->dn = $this->entry->getDn();
+        }
+
         return true;
     }
 
@@ -245,6 +277,7 @@ class User extends FormModel
         $this->mobile = $this->getEntryValue('mobile');
         $this->homeNumber = $this->getEntryValue('homeNumber');
         $this->mail = $this->getEntryValue('mail');
+        $this->parentDn = $this->entry->getParentDn() ?? '';
         $this->dn = $this->entry->getDn() ?? '';
     }
 

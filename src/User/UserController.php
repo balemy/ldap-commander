@@ -71,6 +71,7 @@ final class UserController
         return $this->viewRenderer->render('edit', [
             'urlGenerator' => $this->urlGenerator,
             'dn' => $user->getDn(),
+            'parentDNs' => $this->ldapService->getOrganizationalUnits(),
             'user' => $user,
         ]);
     }
@@ -120,7 +121,7 @@ final class UserController
             'urlGenerator' => $this->urlGenerator,
             'assignedGroups' => $assignedGroups,
             'notAssignedGroups' => $notAssignedGroups,
-            'dn' => $user->getDn()
+            'dn' => $user->getDn(),
         ]);
     }
 

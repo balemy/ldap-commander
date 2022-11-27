@@ -32,6 +32,14 @@ class Group
     }
 
 
+    public function getAttributeLabels(): array
+    {
+        return [
+            'parentDn' => 'Organizational Unit'
+        ];
+    }
+
+
     public function getId(): ?int
     {
         $id = $this->getEntryValue('uidNumber');
