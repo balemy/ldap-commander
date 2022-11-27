@@ -41,7 +41,6 @@ $this->setTitle($applicationParameters->getName());
             ->addInputAttributes(['style' => 'height:150px'])
             ->tabindex(2) ?>
 
-
         <?= Field::select($formModel, 'parentDn')
             ->optionsData($parentDns)
             ->tabindex(3) ?>
@@ -64,12 +63,6 @@ $this->setTitle($applicationParameters->getName());
 </div>
 <script>
     $(document).ready(function () {
-        $('#groupaddform-parentdn').select2({
-            theme: 'bootstrap-5',
-            placeholder: "Parent DN",
-            multiple: false
-        });
-
         $('#groupaddform-initialmembers').select2({
             theme: 'bootstrap-5',
             placeholder: "Initial group members",

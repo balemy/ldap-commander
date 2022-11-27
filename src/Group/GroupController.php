@@ -110,7 +110,8 @@ final class GroupController
         return $this->viewRenderer->render('edit', [
             'urlGenerator' => $this->urlGenerator,
             'dn' => $group->getDn(),
-            'formModel' => $formModel
+            'formModel' => $formModel,
+            'parentDns' => $this->ldapService->getOrganizationalUnits()
         ]);
     }
 

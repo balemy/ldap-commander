@@ -247,7 +247,7 @@ class User extends FormModel
         if ($moveToDn !== null) {
             $this->entry->move($moveToDn);
             $this->entry->refresh();
-            $this->dn = $this->entry->getDn();
+            $this->dn = $this->entry->getDn() ?? '';
         }
 
         return true;

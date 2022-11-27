@@ -82,7 +82,10 @@ class LdapService
     }
 
 
-    public function getOrganizationalUnits()
+    /**
+     * @return string[]
+     */
+    public function getOrganizationalUnits(): array
     {
         $ous = [];
 

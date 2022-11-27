@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var Csrf $csrf
  * @var string $dn
+ * @var string[] $parentDns
  * @var \Balemy\LdapCommander\Group\GroupForm $formModel
  */
 
@@ -39,6 +40,10 @@ $this->setTitle($applicationParameters->getName());
         <?= Field::textarea($formModel, 'description')
             ->addInputAttributes(['style' => 'height:150px'])
             ->tabindex(2) ?>
+
+        <?= Field::select($formModel, 'parentDn')
+            ->optionsData($parentDns)
+            ->tabindex(3) ?>
 
         <?= Field::submitButton()
             ->tabindex(3)

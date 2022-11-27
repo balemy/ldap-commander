@@ -2,24 +2,15 @@
 
 namespace Balemy\LdapCommander\Group;
 
+use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Validator\Rule\Required;
 
 class GroupAddForm extends GroupForm
 {
-    protected string $parentDn = '';
-
     /**
      * @var string[]
      */
     protected array $initialMembers = [];
-
-    /**
-     * @return string
-     */
-    public function getParentDn(): string
-    {
-        return $this->parentDn;
-    }
 
     /**
      * @return string[]
@@ -31,11 +22,9 @@ class GroupAddForm extends GroupForm
 
     public function getRules(): array
     {
-        return [
-            'title' => [new Required()],
+        return ArrayHelper::merge(parent::getRules(), [
             'initialMembers' => [new Required()],
-            'parentDn' => [new Required()],
-        ];
+        ]);
     }
 
 }

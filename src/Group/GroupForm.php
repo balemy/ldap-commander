@@ -3,11 +3,20 @@
 namespace Balemy\LdapCommander\Group;
 
 use Yiisoft\Form\FormModel;
+use Yiisoft\Validator\Rule\Required;
 
 class GroupForm extends FormModel
 {
     protected ?string $title = null;
     protected ?string $description = null;
+    protected string $parentDn = '';
+
+    public function getAttributeLabels(): array
+    {
+        return [
+            'parentDn' => 'Organizational Unit'
+        ];
+    }
 
     /**
      * @return string|null
@@ -26,10 +35,16 @@ class GroupForm extends FormModel
     }
 
 
+    public function getParentDn(): string
+    {
+        return $this->parentDn;
+    }
+
     public function getRules(): array
     {
         return [
-            // Define validation rules here
+            'title' => [new Required()],
+            'parentDn' => [new Required()],
         ];
     }
 
@@ -37,6 +52,7 @@ class GroupForm extends FormModel
     {
         $this->title = $group->getTitle();
         $this->description = $group->getDescription();
+        $this->parentDn = $group->getParentDn();
 
     }
 }

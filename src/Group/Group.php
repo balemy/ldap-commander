@@ -4,10 +4,10 @@ namespace Balemy\LdapCommander\Group;
 
 use LdapRecord\Models\Entry;
 use LdapRecord\Models\OpenLDAP\Group as LrGroup;
+use Yiisoft\Validator\Rule\Required;
 
 class Group
 {
-
     private $entry;
 
 
@@ -29,14 +29,6 @@ class Group
         }
 
         return null;
-    }
-
-
-    public function getAttributeLabels(): array
-    {
-        return [
-            'parentDn' => 'Organizational Unit'
-        ];
     }
 
 
@@ -133,13 +125,32 @@ class Group
     {
         $this->entry->setFirstAttribute('cn', $formModel->getTitle());
         $this->entry->setFirstAttribute('description', $formModel->getDescription());
-        $this->entry->save();
+
+        if ($this->isNewRecord()) {
+            $this->entry->inside($formModel->getParentDn());
+            $this->entry->save();
+        } else {
+            $this->entry->save();
+            $this->entry->move($formModel->getParentDn());
+            $this->entry->refresh();
+        }
+
         return true;
     }
 
     public function __toString(): string
     {
         return $this->getDn();
+    }
+
+    public function isNewRecord(): bool
+    {
+        return empty($this->entry->getDn());
+    }
+
+    public function getParentDn(): string
+    {
+        return $this->entry->getParentDn() ?? '';
     }
 
 }
