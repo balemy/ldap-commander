@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var Csrf $csrf
- * @var \Balemy\LdapCommander\User\UserForm $user
+ * @var \Balemy\LdapCommander\User\UserForm $userForm
  * @var string[] $parentDNs
  */
 
@@ -24,10 +24,10 @@ $this->setTitle($applicationParameters->getName());
 
 <div class="row">
     <div class="col-md-9">
-        <?php if (!$user->isNewRecord()): ?>
+        <?php if (!$userForm->isNewRecord()): ?>
             <h1>Edit User</h1>
             <p class="lead">
-                <?= Html::encode($user->getDn()) ?>
+                <?= Html::encode($userForm->user->getDn()) ?>
             </p>
         <?php else: ?>
             <h1>Create User</h1>
@@ -36,16 +36,16 @@ $this->setTitle($applicationParameters->getName());
         <?php endif; ?>
         <br>
 
-        <?= Html::form()->post($urlGenerator->generate('user-edit', ['dn' => $user->getDn()]))->csrf($csrf)->open() ?>
+        <?= Html::form()->post($urlGenerator->generate('user-edit', ['dn' => $userForm->user->getDn()]))->csrf($csrf)->open() ?>
 
         <div class="row">
             <div class="col-sm-4">
-                <?= Field::text($user, 'username')
+                <?= Field::text($userForm, 'uid')
                     ->autofocus()
                     ->tabindex(1) ?>
             </div>
             <div class="col-sm">
-                <?= Field::text($user, 'commonName')
+                <?= Field::text($userForm, 'cn')
                     ->autofocus()
                     ->tabindex(2) ?>
             </div>
@@ -54,38 +54,22 @@ $this->setTitle($applicationParameters->getName());
 
         <div class="row">
             <div class="col-sm">
-                <?= Field::text($user, 'firstName')
+                <?= Field::text($userForm, 'givenName')
                     ->tabindex(2) ?>
             </div>
             <div class="col-sm">
-                <?= Field::text($user, 'lastName')
-                    ->tabindex(2) ?>
-            </div>
-            <div class="col-sm-2">
-                <?= Field::text($user, 'title')
-                    ->tabindex(2) ?>
-            </div>
-            <div class="col-sm-2">
-                <?= Field::text($user, 'initials')
+                <?= Field::text($userForm, 'sn')
                     ->tabindex(2) ?>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <?= Field::text($user, 'mail')
-                    ->tabindex(2) ?>
-            </div>
-            <div class="col">
-                <?= Field::text($user, 'telephoneNumber')
-                    ->tabindex(2) ?>
-            </div>
-            <div class="col">
-                <?= Field::text($user, 'mobile')
+                <?= Field::text($userForm, 'mail')
                     ->tabindex(2) ?>
             </div>
         </div>
         <div class="col-sm-12">
-            <?= Field::select($user, 'parentDn')
+            <?= Field::select($userForm, 'parentDn')
                 ->optionsData($parentDNs)
                 ->autofocus()
                 ->tabindex(1) ?>
@@ -100,7 +84,7 @@ $this->setTitle($applicationParameters->getName());
     </div>
 
     <div class="col-md-3">
-        <?= SidebarWidget::widget(['$dn' => $user->getDn(), '$location' => SidebarLocation::Edit]); ?>
+        <?= SidebarWidget::widget(['$dn' => $userForm->user->getDn() ?? '', '$location' => SidebarLocation::Edit]); ?>
     </div>
 
 </div>

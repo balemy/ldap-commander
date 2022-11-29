@@ -47,32 +47,38 @@ final class UserController
 
     public function edit(ServerRequestInterface $request, WebControllerService $webService): ResponseInterface
     {
-        $user = new UserForm();
+        $userForm = new UserForm();
 
         $dn = $this->getDnByRequest($request);
-        if ($dn !== null && !$user->loadByEntryByDn($dn)) {
-            return $this->webService->getNotFoundResponse();
+        if ($dn !== null) {
+            $user = User::query()->find($dn);
+            if ($user === null || !($user instanceof User)) {
+                return $this->webService->getNotFoundResponse();
+            }
+            $userForm->setUser($user);
         }
 
         if ($request->getMethod() === Method::POST) {
             /** @var array<string, array> $body */
             $body = $request->getParsedBody();
-            if ($user->load($body) && $this->validator->validate($user)->isValid()) {
-                $user->updateEntry();
+            if ($userForm->load($body) && $this->validator->validate($userForm)->isValid()) {
+                $userForm->updateEntry();
                 $this->flash->add('success', ['body' => 'User successfully saved!']);
 
-                if ($user->isNewRecord()) {
+                if ($userForm->isNewRecord()) {
                     return $this->webService->getRedirectResponse('user-list', ['saved' => 1]);
                 }
-                return $this->webService->getRedirectResponse('user-edit', ['dn' => $user->getDn(), 'saved' => 1]);
+                return $this->webService->getRedirectResponse('user-edit', [
+                    'dn' => $userForm->user->getDn(), 'saved' => 1
+                ]);
             }
         }
 
         return $this->viewRenderer->render('edit', [
             'urlGenerator' => $this->urlGenerator,
-            'dn' => $user->getDn(),
+            'dn' => $userForm->user->getDn(),
             'parentDNs' => $this->ldapService->getOrganizationalUnits(),
-            'user' => $user,
+            'userForm' => $userForm,
         ]);
     }
 
