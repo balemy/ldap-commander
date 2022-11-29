@@ -26,7 +26,7 @@ $this->setTitle($applicationParameters->getName());
 
 $addOptions = ['' => ''];
 foreach ($noMembers as $user) {
-    $addOptions[$user->getDn()] = $user->getDisplayName() . ' (' . $user->getUsername() . ')';
+    $addOptions[$user->getDn()] = $user->getDisplayName();
 }
 
 $form = Form::tag()
@@ -65,7 +65,6 @@ $form = Form::tag()
             <thead>
             <tr>
                 <th data-checkbox="true"></th>
-                <th scope="col">Username</th>
                 <th scope="col">Display Name</th>
                 <th scope="col">E-Mail</th>
                 <th scope="col">&nbsp;</th>
@@ -78,9 +77,12 @@ $form = Form::tag()
                 ?>
                 <tr>
                     <td data-checkbox="true"></td>
-                    <td><?= Html::a($user->getUsername(), $urlGenerator->generate('user-edit', ['dn' => $user->getDn()])); ?></td>
-                    <td><?= $user->getFirstName() ?? ''; ?> <?= $user->getLastName(); ?></td>
-                    <td><?= ($user->getMail() !== null) ? Html::mailto($user->getMail(), $user->getMail()) : '' ?></td>
+                    <td><?= Html::a($user->getDisplayName(), $urlGenerator->generate('user-edit', ['dn' => $user->getDn()])); ?></td>
+                    <td>
+                        <?php if ($user->getFirstAttribute('mail') !== null) : ?>
+                            <?= Html::mailto($user->getFirstAttribute('mail')); ?>
+                        <?php endif; ?>
+                    </td>
                     <td style="width:100px">
                         <?= $form->open() ?>
                         <?= Input::hidden('delDn', $user->getDn()); ?>

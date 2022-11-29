@@ -41,13 +41,13 @@ final class UserController
     {
         return $this->viewRenderer->render('list', [
             'urlGenerator' => $this->urlGenerator,
-            'users' => User::getAll()
+            'users' => User::all()
         ]);
     }
 
     public function edit(ServerRequestInterface $request, WebControllerService $webService): ResponseInterface
     {
-        $user = new User();
+        $user = new UserForm();
 
         $dn = $this->getDnByRequest($request);
         if ($dn !== null && !$user->loadByEntryByDn($dn)) {
@@ -78,12 +78,12 @@ final class UserController
 
     public function members(ServerRequestInterface $request): ResponseInterface
     {
-        $user = new User();
-
         $dn = $this->getDnByRequest($request);
-        if ($dn !== null && !$user->loadByEntryByDn($dn)) {
+        if ($dn === null) {
             return $this->webService->getNotFoundResponse();
         }
+
+        $user = User::query()->findOrFail($dn, ['+']);
 
         if ($request->getMethod() === 'POST') {
             $body = $request->getParsedBody();
@@ -101,10 +101,11 @@ final class UserController
                 }
             }
             // Reload user
-            $user->loadByEntryByDn($user->getDn());
+            /** @var User $user */
+            $user = User::query()->findOrFail($dn, ['+']);
         }
 
-
+        /** @var Group[] $groups */
         $groups = $user->getGroups();
 
         $notAssignedGroups = [];

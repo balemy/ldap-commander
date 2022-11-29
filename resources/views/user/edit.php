@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var Csrf $csrf
- * @var \Balemy\LdapCommander\User\User $user
+ * @var \Balemy\LdapCommander\User\UserForm $user
  * @var string[] $parentDNs
  */
 

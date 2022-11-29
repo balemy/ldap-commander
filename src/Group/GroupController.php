@@ -74,8 +74,9 @@ final class GroupController
         }
 
         $users = [];
-        foreach (User::getAll() as $user) {
-            $users[$user->getDn()] = $user->getDisplayName() . ' (' . $user->getUsername() . ')';
+        /** @var User $user */
+        foreach (User::all() as $user) {
+            $users[$user->getDn() ?? ''] = $user->getDisplayName();
         }
 
 
@@ -134,7 +135,8 @@ final class GroupController
 
         $noMembers = [];
         $members = [];
-        foreach (User::getAll() as $user) {
+        /** @var User $user */
+        foreach (User::all() as $user) {
             if (in_array($user->getDn(), $group->getUserDns())) {
                 $members[] = $user;
             } else {

@@ -90,16 +90,24 @@ class Group
     }
 
 
-    public function addMember(string $addDn): bool
+    public function addMember(?string $addDn): bool
     {
+        if ($addDn === null) {
+            return false;
+        }
+
         $this->entry->addAttributeValue('uniquemember', $addDn);
         $this->entry->save();
 
         return true;
     }
 
-    public function removeMember(string $delDn): bool
+    public function removeMember(?string $delDn): bool
     {
+        if ($delDn === null) {
+            return false;
+        }
+
         $attribute = $this->entry->getAttributeValue('uniquemember');
         assert(is_array($attribute));
 

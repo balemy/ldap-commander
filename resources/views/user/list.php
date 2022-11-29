@@ -43,12 +43,14 @@ $this->setTitle($applicationParameters->getName());
                 ?>
                 <tr>
                     <td data-checkbox="true"></td>
-                    <td><?= Html::a(Html::encode($user->getCommonName()), $editUrl); ?></td>
-                    <td><?= Html::encode($user->getFirstName()); ?></td>
-                    <td><?= Html::encode($user->getLastName()); ?></td>
-                    <td><?= (!empty($user->getMail())) ?
-                            Html::mailto($user->getMail(), Html::encode($user->getMail())) : ''
-                        ?></td>
+                    <td><?= Html::a(Html::encode($user->getFirstAttribute('cn')), $editUrl); ?></td>
+                    <td><?= Html::encode($user->getFirstAttribute('givenName')); ?></td>
+                    <td><?= Html::encode($user->getFirstAttribute('sn')); ?></td>
+                    <td>
+                        <?php if ($user->getFirstAttribute('mail') !== null) : ?>
+                            <?= Html::mailto($user->getFirstAttribute('mail')); ?>
+                        <?php endif; ?>
+                    </td>
                     <td style="width:150px">
                         <?= Html::a('Edit', $editUrl, ['class' => 'btn btn-secondary btn-sm']); ?>
                         <?= Html::a('Groups', $urlGenerator->generate('user-groups', ['dn' => $user->getDn()]), ['class' => 'btn btn-secondary btn-sm']); ?>
