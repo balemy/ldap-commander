@@ -2,6 +2,7 @@
 
 namespace Balemy\LdapCommander\User;
 
+use Balemy\LdapCommander\ApplicationParameters;
 use Yiisoft\Form\FormModel;
 
 
@@ -13,7 +14,7 @@ class UserForm extends FormModel
     private array $internalAttrs = ['parentDn'];
 
 
-    public function __construct()
+    public function __construct(private ApplicationParameters $applicationParameters)
     {
         parent::__construct();
         $this->user = new User();
@@ -63,15 +64,29 @@ class UserForm extends FormModel
      */
     protected function collectAttributes(): array
     {
-        return [
-            'parentDn' => 'parentDn',
-            'cn' => 'cn', 'uid' => 'uid', 'givenName' => 'givenName', 'sn' => 'sn', 'mail' => 'mail'];
+        $fields = ['parentDn' => 'string'];
+        $rows = $this->applicationParameters->getUserEditFields();
+        /** @var string[] $row */
+        foreach ($rows as $row) {
+            foreach (array_keys($row) as $fieldKey) {
+                $fields[$fieldKey] = 'string';
+            }
+        }
+        return $fields;
     }
 
     public function updateEntry(): bool
     {
-        foreach ($this->collectAttributes() as $attributeName) {
-            if (!in_array($attributeName, $this->internalAttrs)) {
+        /** @var string $attributeName */
+        foreach (array_keys($this->collectAttributes()) as $attributeName) {
+            if ($attributeName === 'userPassword') {
+                $password = (string)$this->getAttributeValue('userPassword');
+                if (!empty($password)) {
+                    $salt = mt_rand(0, mt_getrandmax());
+                    $value = '{SSHA}' . base64_encode(sha1($password . $salt, TRUE) . $salt);
+                    $this->user->setFirstAttribute('userPassword', $value);
+                }
+            } elseif (!in_array($attributeName, $this->internalAttrs)) {
                 $this->user->setFirstAttribute($attributeName, $this->getAttributeValue($attributeName));
             }
         }
@@ -105,8 +120,9 @@ class UserForm extends FormModel
 
     private function loadByEntry(): void
     {
-        foreach ($this->collectAttributes() as $attributeName) {
-            if (!in_array($attributeName, $this->internalAttrs)) {
+        /** @var string $attributeName */
+        foreach (array_keys($this->collectAttributes()) as $attributeName) {
+            if (!in_array($attributeName, $this->internalAttrs) && $attributeName !== 'userPassword') {
                 $this->setAttribute($attributeName,
                     $this->user->getFirstAttribute($attributeName));
             }

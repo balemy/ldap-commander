@@ -30,6 +30,10 @@ class SidebarWidget extends Widget
 
     protected function run(): string
     {
+       if (empty($this->dn)) {
+            return '';
+        }
+
         $html = Html::openTag('ul', ['class' => 'list-group']);
 
         if ($this->location !== SidebarLocation::Edit) {

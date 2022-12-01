@@ -10,6 +10,7 @@ declare(strict_types=1);
  * @var Csrf $csrf
  * @var \Balemy\LdapCommander\User\UserForm $userForm
  * @var string[] $parentDNs
+ * @var string[] $fieldSet
  */
 
 use Balemy\LdapCommander\User\SidebarLocation;
@@ -38,44 +39,24 @@ $this->setTitle($applicationParameters->getName());
 
         <?= Html::form()->post($urlGenerator->generate('user-edit', ['dn' => $userForm->user->getDn()]))->csrf($csrf)->open() ?>
 
+        <?php foreach ($fieldSet as $row): ?>
+            <div class="row">
+                <?php foreach ($row as $fieldName => $fieldLabel): ?>
+                    <div class="col-sm">
+                        <?= Field::text($userForm, $fieldName)
+                            ->autofocus() ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
         <div class="row">
-            <div class="col-sm-4">
-                <?= Field::text($userForm, 'uid')
+            <div class="col-sm-12">
+                <?= Field::select($userForm, 'parentDn')
+                    ->optionsData($parentDNs)
                     ->autofocus()
                     ->tabindex(1) ?>
             </div>
-            <div class="col-sm">
-                <?= Field::text($userForm, 'cn')
-                    ->autofocus()
-                    ->tabindex(2) ?>
-            </div>
         </div>
-
-
-        <div class="row">
-            <div class="col-sm">
-                <?= Field::text($userForm, 'givenName')
-                    ->tabindex(2) ?>
-            </div>
-            <div class="col-sm">
-                <?= Field::text($userForm, 'sn')
-                    ->tabindex(2) ?>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <?= Field::text($userForm, 'mail')
-                    ->tabindex(2) ?>
-            </div>
-        </div>
-        <div class="col-sm-12">
-            <?= Field::select($userForm, 'parentDn')
-                ->optionsData($parentDNs)
-                ->autofocus()
-                ->tabindex(1) ?>
-        </div>
-
-
         <?= Field::submitButton()
             ->tabindex(3)
             ->content('Save') ?>

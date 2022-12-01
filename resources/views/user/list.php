@@ -8,6 +8,7 @@ declare(strict_types=1);
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var \Balemy\LdapCommander\User\User[] $users
+ * @var string[] $columns
  */
 
 use Yiisoft\Html\Html;
@@ -29,10 +30,9 @@ $this->setTitle($applicationParameters->getName());
             <thead>
             <tr>
                 <th data-checkbox="true"></th>
-                <th scope="col">Common Name</th>
-                <th scope="col">First name</th>
-                <th scope="col">Last name</th>
-                <th scope="col">E-Mail</th>
+                <?php foreach ($columns as $label): ?>
+                    <th scope="col"><?= Html::encode($label) ?></th>
+                <?php endforeach; ?>
                 <th>&nbsp;</th>
             </tr>
             </thead>
@@ -43,14 +43,15 @@ $this->setTitle($applicationParameters->getName());
                 ?>
                 <tr>
                     <td data-checkbox="true"></td>
-                    <td><?= Html::a(Html::encode($user->getFirstAttribute('cn')), $editUrl); ?></td>
-                    <td><?= Html::encode($user->getFirstAttribute('givenName')); ?></td>
-                    <td><?= Html::encode($user->getFirstAttribute('sn')); ?></td>
-                    <td>
-                        <?php if ($user->getFirstAttribute('mail') !== null) : ?>
-                            <?= Html::mailto($user->getFirstAttribute('mail')); ?>
-                        <?php endif; ?>
-                    </td>
+                    <?php foreach ($columns as $key => $label): ?>
+                        <td>
+                            <?php if ($key === 'mail' && $user->getFirstAttribute('mail') !== null): ?>
+                                <?= Html::mailto($user->getFirstAttribute('mail')); ?>
+                            <?php else: ?>
+                                <?= Html::encode($user->getFirstAttribute($key)); ?>
+                            <?php endif; ?>
+                        </td>
+                    <?php endforeach; ?>
                     <td style="width:150px">
                         <?= Html::a('Edit', $editUrl, ['class' => 'btn btn-secondary btn-sm']); ?>
                         <?= Html::a('Groups', $urlGenerator->generate('user-groups', ['dn' => $user->getDn()]), ['class' => 'btn btn-secondary btn-sm']); ?>

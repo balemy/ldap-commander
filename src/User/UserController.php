@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Balemy\LdapCommander\User;
 
+use Balemy\LdapCommander\ApplicationParameters;
 use Balemy\LdapCommander\Group\Group;
 use Balemy\LdapCommander\Ldap\LdapService;
 use Balemy\LdapCommander\Service\WebControllerService;
@@ -29,7 +30,8 @@ final class UserController
                                 public SessionInterface      $session,
                                 public ValidatorInterface    $validator,
                                 public AssetManager          $assetManager,
-                                public FlashInterface        $flash
+                                public FlashInterface        $flash,
+                                public ApplicationParameters $applicationParameters
     )
     {
         $this->viewRenderer = $viewRenderer
@@ -41,13 +43,14 @@ final class UserController
     {
         return $this->viewRenderer->render('list', [
             'urlGenerator' => $this->urlGenerator,
-            'users' => User::all()
+            'users' => User::all(),
+            'columns' => $this->applicationParameters->getUserListColumns()
         ]);
     }
 
     public function edit(ServerRequestInterface $request, WebControllerService $webService): ResponseInterface
     {
-        $userForm = new UserForm();
+        $userForm = new UserForm($this->applicationParameters);
 
         $dn = $this->getDnByRequest($request);
         if ($dn !== null) {
@@ -79,6 +82,7 @@ final class UserController
             'dn' => $userForm->user->getDn(),
             'parentDNs' => $this->ldapService->getOrganizationalUnits(),
             'userForm' => $userForm,
+            'fieldSet' => $this->applicationParameters->getUserEditFields()
         ]);
     }
 
