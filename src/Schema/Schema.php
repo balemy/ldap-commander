@@ -1,6 +1,6 @@
 <?php
 
-namespace Balemy\LdapCommander\Ldap\Schema;
+namespace Balemy\LdapCommander\Schema;
 
 use Balemy\LdapCommander\Ldap\LdapService;
 use Balemy\LdapCommander\Timer;

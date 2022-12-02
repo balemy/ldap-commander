@@ -3,10 +3,9 @@
 namespace Balemy\LdapCommander\Ldap;
 
 use Balemy\LdapCommander\Helper\DnHelper;
-use Balemy\LdapCommander\Ldap\Schema\Schema;
+use Balemy\LdapCommander\Schema\Schema;
 use LdapRecord\LdapRecordException;
 use LdapRecord\Models\Entry;
-use phpDocumentor\Reflection\Types\Void_;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Form\FormModel;
 use Yiisoft\Validator\Result;

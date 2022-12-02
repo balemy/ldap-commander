@@ -1,6 +1,6 @@
 <?php
 
-namespace Balemy\LdapCommander\Ldap\Schema;
+namespace Balemy\LdapCommander\Schema;
 
 class Syntax
 {

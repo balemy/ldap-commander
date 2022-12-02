@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @var \Yiisoft\Assets\AssetManager $assetManager
  * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
- * @var \Balemy\LdapCommander\Ldap\Schema\AttributeType[] $attributeTypes
+ * @var \Balemy\LdapCommander\Schema\AttributeType[] $attributeTypes
  * @var \Balemy\LdapCommander\Ldap\EntityForm $entity
  * @var string $dn
  * @var Csrf $csrf
@@ -16,16 +16,9 @@ declare(strict_types=1);
  */
 
 use Balemy\LdapCommander\Asset\EntityEditAsset;
-use Balemy\LdapCommander\Fields\MultiPasswordField;
-use Balemy\LdapCommander\Fields\MultiTextField;
-use Balemy\LdapCommander\Fields\MultiFileField;
 use Balemy\LdapCommander\Widget\EntitySidebar;
 use Balemy\LdapCommander\Widget\EntitySidebarLocation;
 use Balemy\LdapCommander\Widget\RdnBreadcrumbs;
-use Yiisoft\Form\Field;
-use Yiisoft\Html\Html;
-use Yiisoft\Html\Tag\Label as LabelTag;
-use Yiisoft\Html\Tag\Option;
 use Yiisoft\View\WebView;
 use Yiisoft\Yii\View\Csrf;
 

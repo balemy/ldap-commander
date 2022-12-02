@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @var \Yiisoft\Assets\AssetManager $assetManager
  * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
- * @var \Balemy\LdapCommander\Ldap\Schema\AttributeType[] $attributeTypes
+ * @var \Balemy\LdapCommander\Schema\AttributeType[] $attributeTypes
  * @var \Balemy\LdapCommander\Ldap\EntityForm $entity
  * @var string $dn
  * @var Csrf $csrf

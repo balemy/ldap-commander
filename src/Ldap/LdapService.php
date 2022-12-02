@@ -3,7 +3,7 @@
 namespace Balemy\LdapCommander\Ldap;
 
 use Balemy\LdapCommander\Helper\DSN;
-use Balemy\LdapCommander\Ldap\Schema\Schema;
+use Balemy\LdapCommander\Schema\Schema;
 use Balemy\LdapCommander\Timer;
 use LdapRecord\Connection;
 use LdapRecord\Container;

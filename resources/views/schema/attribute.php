@@ -7,8 +7,8 @@ declare(strict_types=1);
  * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
- * @var \Balemy\LdapCommander\Ldap\Schema\AttributeType $attribute
- * @var \Balemy\LdapCommander\Ldap\Schema\ObjectClass[] $objectClasses
+ * @var \Balemy\LdapCommander\Schema\AttributeType $attribute
+ * @var \Balemy\LdapCommander\Schema\ObjectClass[] $objectClasses
  */
 
 use Yiisoft\Html\Html;
