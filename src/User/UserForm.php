@@ -3,6 +3,7 @@
 namespace Balemy\LdapCommander\User;
 
 use Balemy\LdapCommander\ApplicationParameters;
+use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Form\FormModel;
 
 
@@ -12,12 +13,15 @@ class UserForm extends FormModel
     private array $_attrs = [];
 
     private array $internalAttrs = ['parentDn'];
+    private UserFormSchema $formSchema;
 
 
-    public function __construct(private ApplicationParameters $applicationParameters)
+    public function __construct(ApplicationParameters $applicationParameters)
     {
-        parent::__construct();
+        $this->formSchema = new UserFormSchema($applicationParameters);
         $this->user = new User();
+
+        parent::__construct();
     }
 
     public function setUser(User $user): void
@@ -34,6 +38,14 @@ class UserForm extends FormModel
     public function getAttributeCastValue(string $attribute): mixed
     {
         return $this->_attrs[$attribute] ?? '';
+    }
+
+    /**
+     * @return UserFormSchema
+     */
+    public function getFormSchema(): UserFormSchema
+    {
+        return $this->formSchema;
     }
 
 
@@ -53,9 +65,10 @@ class UserForm extends FormModel
 
     public function getAttributeLabels(): array
     {
-        return [
+        /** @var string[] */
+        return array_merge([
             'parentDn' => 'Organizational Unit'
-        ];
+        ], $this->formSchema->getFields());
     }
 
     /**
@@ -65,12 +78,8 @@ class UserForm extends FormModel
     protected function collectAttributes(): array
     {
         $fields = ['parentDn' => 'string'];
-        $rows = $this->applicationParameters->getUserEditFields();
-        /** @var string[] $row */
-        foreach ($rows as $row) {
-            foreach (array_keys($row) as $fieldKey) {
-                $fields[$fieldKey] = 'string';
-            }
+        foreach (array_keys($this->formSchema->getFields()) as $attribute) {
+            $fields[$attribute] = 'string';
         }
         return $fields;
     }

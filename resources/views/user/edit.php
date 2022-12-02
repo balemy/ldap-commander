@@ -39,7 +39,7 @@ $this->setTitle($applicationParameters->getName());
 
         <?= Html::form()->post($urlGenerator->generate('user-edit', ['dn' => $userForm->user->getDn()]))->csrf($csrf)->open() ?>
 
-        <?php foreach ($fieldSet as $row): ?>
+        <?php foreach ($userForm->getFormSchema()->getRows() as $row): ?>
             <div class="row">
                 <?php foreach ($row as $fieldName => $fieldLabel): ?>
                     <div class="col-sm">

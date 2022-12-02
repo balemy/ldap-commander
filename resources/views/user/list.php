@@ -12,6 +12,7 @@ declare(strict_types=1);
  */
 
 use Yiisoft\Html\Html;
+use Yiisoft\Html\Tag\Button;
 
 $this->setTitle($applicationParameters->getName());
 ?>
@@ -24,7 +25,24 @@ $this->setTitle($applicationParameters->getName());
         <p class="lead">
             Overview of all users
         </p>
-        <br>
+        <br/>
+
+        <!--
+        <form class="row g-3 alert alert-dark" style="padding-top:0px;"
+              action="#" method="post">
+            <div class="col-auto" style="width:300px">
+                <label for="test">Organizational Unit</label>
+                <?= Html::select('test')
+                    ->optionsData(['foo' => 'bar', 'bla' => 'fuu'])
+                    ->addClass('form-control')
+                ?>
+            </div>
+            <div class="col-auto">
+                <?= Button::submit('Add')->addClass('btn btn-primary')->addAttributes(['style' => 'margin-top:24px']); ?>
+            </div>
+        </form>
+        -->
+
         <table class="table table-striped" data-search="true" data-toggle="table" data-pagination="true"
                data-page-size="100" data-sortable="true" data-click-to-select="true">
             <thead>

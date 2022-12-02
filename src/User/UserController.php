@@ -82,7 +82,6 @@ final class UserController
             'dn' => $userForm->user->getDn(),
             'parentDNs' => $this->ldapService->getOrganizationalUnits(),
             'userForm' => $userForm,
-            'fieldSet' => $this->applicationParameters->getUserEditFields()
         ]);
     }
 
