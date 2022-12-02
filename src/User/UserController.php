@@ -54,7 +54,7 @@ final class UserController
 
         $dn = $this->getDnByRequest($request);
         if ($dn !== null) {
-            $user = User::query()->find($dn);
+            $user = User::query()->addSelect(['*', '+'])->find($dn);
             if ($user === null || !($user instanceof User)) {
                 return $this->webService->getNotFoundResponse();
             }
@@ -131,7 +131,7 @@ final class UserController
             'urlGenerator' => $this->urlGenerator,
             'assignedGroups' => $assignedGroups,
             'notAssignedGroups' => $notAssignedGroups,
-            'dn' => $user->getDn(),
+            'user' => $user,
         ]);
     }
 

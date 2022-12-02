@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var Csrf $csrf
- * @var string $dn
+ * @var \Balemy\LdapCommander\User\User $user
  * @var \Balemy\LdapCommander\Group\Group[] $assignedGroups
  * @var \Balemy\LdapCommander\Group\Group[] $notAssignedGroups
  */
@@ -32,7 +32,7 @@ foreach ($notAssignedGroups as $group) {
 $form = Form::tag()
     ->method('post')
     ->csrf($csrf)
-    ->action($urlGenerator->generate('user-groups', ['dn' => $dn]))
+    ->action($urlGenerator->generate('user-groups', ['dn' => $user->getDn()]))
 ?>
 
 
@@ -40,7 +40,7 @@ $form = Form::tag()
     <div class="col-md-9">
         <h1>Group Memberships (<?= count($assignedGroups); ?>)</h1>
         <p class="lead">
-            <?= $dn ?>
+            <?= $user->getDn() ?>
         </p>
         <br>
 
@@ -90,7 +90,7 @@ $form = Form::tag()
         </table>
     </div>
     <div class="col-md-3">
-        <?= SidebarWidget::widget(['$dn' => $dn, '$location' => SidebarLocation::Members]); ?>
+        <?= SidebarWidget::widget(['$user' => $user, '$location' => SidebarLocation::Members]); ?>
     </div>
 </div>
 <script>
