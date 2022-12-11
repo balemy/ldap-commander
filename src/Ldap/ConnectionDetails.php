@@ -111,7 +111,7 @@ class ConnectionDetails
             return null;
         }
 
-        $name = sprintf(static::ENV_CONFIG_MAP[$name], $i);
+        $name = sprintf((string)static::ENV_CONFIG_MAP[$name], $i);
 
         if (isset($_ENV[$name]) && is_string($_ENV[$name])) {
             return $_ENV[$name];

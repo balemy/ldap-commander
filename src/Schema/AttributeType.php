@@ -51,7 +51,7 @@ class AttributeType
     // X-ORDERED 'VALUES'
     // X-ORDERED 'SIBLINGS'
 
-    public function __toString()
+    public function __toString(): string
     {
         return implode(', ', $this->names);
     }

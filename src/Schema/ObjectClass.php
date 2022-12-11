@@ -33,14 +33,12 @@ class ObjectClass
         return $this;
     }
 
-    public
-    function __toString()
+    public function __toString(): string
     {
         return $this->name;
     }
 
-    public
-    function getAttributeIds(bool $includeSup = false): array
+    public function getAttributeIds(bool $includeSup = false): array
     {
         $supAttributes = [];
         if ($includeSup) {
@@ -72,8 +70,7 @@ class ObjectClass
     /**
      * @return AttributeType[]
      */
-    public
-    function getMustAttributes()
+    public function getMustAttributes()
     {
         $arr = [];
         /** @var string $id */
@@ -90,8 +87,7 @@ class ObjectClass
     /**
      * @return ObjectClass[]
      */
-    public
-    function getSuperClasses()
+    public function getSuperClasses()
     {
         $classes = [];
 
