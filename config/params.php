@@ -14,9 +14,15 @@ use Yiisoft\Yii\View\CsrfViewInjection;
 return [
     'app' => [
         'charset' => 'UTF-8',
-        'locale' => 'en',
         'name' => 'LDAP Commander',
         'version' => '0.6.1',
+    ],
+    'locale' => [
+        'locales' => ['en' => 'en-US', 'ru' => 'ru-RU', 'id' => 'id-ID', 'sk' => 'sk-SK'],
+        'ignoredRequests' => [
+            '/debug**',
+            '/inspect**',
+        ],
     ],
     'middlewares' => [
         ErrorCatcher::class,
@@ -82,7 +88,11 @@ return [
             ],
         ],
     ],
-
+    'yiisoft/translator' => [
+        'locale' => 'en',
+        'fallbackLocale' => 'en',
+        'defaultCategory' => 'app',
+    ],
     'yiisoft/yii-console' => [
         'commands' => [
             'hello' => Hello::class,

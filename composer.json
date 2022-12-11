@@ -98,7 +98,8 @@
         "yiisoft/yii-runner-console": "^1.0",
         "yiisoft/yii-runner-http": "^1.1",
         "yiisoft/yii-swagger": "^1.0",
-        "yiisoft/yii-view": "^5.0"
+        "yiisoft/yii-view": "^5.0",
+      "ext-intl": "*"
     },
     "require-dev": {
         "codeception/c3": "^2.6",
