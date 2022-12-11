@@ -47,53 +47,53 @@ $this->beginPage()
     <?php
     $menuItems = [
         [
-            'label' => 'Manage Users',
+            'label' => 'Users',
             'url' => $urlGenerator->generate('user-list'),
             'active' => StringHelper::startsWith($currentRouteName, 'user'),
         ],
         [
-            'label' => 'Manage Groups',
+            'label' => 'Groups',
             'url' => $urlGenerator->generate('group-list'),
             'active' => StringHelper::startsWith($currentRouteName, 'group'),
         ],
         [
-            'label' => 'Entity Browser',
+            'label' => 'Browser',
             'url' => $urlGenerator->generate('entity-list'),
             'active' => StringHelper::startsWith($currentRouteName, 'entity'),
         ],
-        [
-            'label' => 'Configuration',
-            'items' => [
-                /*
-                [
-                    'label' => 'Schema Editor',
-                    'url' => $urlGenerator->generate('schema-edit'),
-                    'active' => StringHelper::startsWith($currentRouteName, 'schema-edit'),
-                ],
-                [
-                    'label' => 'Referential Integrity',
-                    'url' => $urlGenerator->generate('server-config-refint-edit'),
-                    'active' => StringHelper::startsWith($currentRouteName, 'server-config-refint-edit'),
-                ],
-                [
-                    'label' => 'Password Policies',
-                    'url' => $urlGenerator->generate('server'),
-                    'active' => StringHelper::startsWith($currentRouteName, 'server'),
-                ],
-                [
-                    'label' => 'Reverse Group Membership',
-                    'url' => $urlGenerator->generate('server-config-memberof-edit'),
-                    'active' => StringHelper::startsWith($currentRouteName, 'server-config-memberof-edit'),
-                ],
-                [
-                    'label' => 'Indexes',
-                    'url' => $urlGenerator->generate('server'),
-                    'active' => StringHelper::startsWith($currentRouteName, 'server'),
-                ]
-                */
 
-            ]
+        /*
+[
+    'label' => 'Configuration',
+    'items' => [
+        [
+            'label' => 'Schema Editor',
+            'url' => $urlGenerator->generate('schema-edit'),
+            'active' => StringHelper::startsWith($currentRouteName, 'schema-edit'),
         ],
+        [
+            'label' => 'Referential Integrity',
+            'url' => $urlGenerator->generate('server-config-refint-edit'),
+            'active' => StringHelper::startsWith($currentRouteName, 'server-config-refint-edit'),
+        ],
+        [
+            'label' => 'Password Policies',
+            'url' => $urlGenerator->generate('server'),
+            'active' => StringHelper::startsWith($currentRouteName, 'server'),
+        ],
+        [
+            'label' => 'Reverse Group Membership',
+            'url' => $urlGenerator->generate('server-config-memberof-edit'),
+            'active' => StringHelper::startsWith($currentRouteName, 'server-config-memberof-edit'),
+        ],
+        [
+            'label' => 'Indexes',
+            'url' => $urlGenerator->generate('server'),
+            'active' => StringHelper::startsWith($currentRouteName, 'server'),
+        ]
+    ]
+],
+        */
         [
             'label' => 'Information',
             'items' => [

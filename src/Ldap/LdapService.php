@@ -17,11 +17,6 @@ class LdapService
     public $connection;
 
     /**
-     * @var Connection
-     */
-    public $configConnection;
-
-    /**
      * @var Schema
      */
     private $schema;
@@ -34,7 +29,6 @@ class LdapService
     public function __construct(public Timer $timer)
     {
         $this->connection = new Connection();
-        $this->configConnection = new Connection();
         $this->schema = new Schema($this, $timer);
     }
 
@@ -66,31 +60,6 @@ class LdapService
         Container::setDefaultConnection('default');
 
         $this->schema->populate($this->connection);
-    }
-
-    /**
-     * @param LoginForm $login
-     * @return void
-     * @throws \LdapRecord\Auth\BindException
-     * @throws \LdapRecord\LdapRecordException
-     */
-    public function connectConfig(LoginForm $login)
-    {
-        $dsn = new DSN((string)$login->getAttributeValue('dsn'));
-
-        $config = [
-            'hosts' => [$dsn->getHost()],
-            'port' => $dsn->getPort(),
-            'use_ssl' => $dsn->getIsSSL(),
-            'username' => (string)$login->getAttributeValue('configUser'),
-            'password' => (string)$login->getAttributeValue('configPassword'),
-            'base_dn' => 'cn=config'
-        ];
-
-        $this->configConnection = new Connection($config);
-        $this->configConnection->connect();
-
-        Container::addConnection($this->configConnection, 'config');
     }
 
     public function getSchema(): Schema

@@ -35,16 +35,6 @@ final class LDAPConnect implements MiddlewareInterface
     {
         $login = LoginForm::createFromSession($this->session);
         if ($login !== null) {
-
-            if (!empty($login->getAttributeValue('configUser'))) {
-                try {
-                    $this->ldapService->connectConfig($login);
-                } catch (\Exception $ex) {
-                    $this->flash->add('danger', 'Configuration Connect: ' . $ex->getMessage());
-                }
-            }
-
-
             try {
                 $this->ldapService->connect($login);
             } catch (\Exception $ex) {

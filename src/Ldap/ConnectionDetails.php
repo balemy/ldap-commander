@@ -11,8 +11,6 @@ class ConnectionDetails
     public string $baseDn = '';
     public string $adminDn = '';
     public string $adminPassword = '';
-    public string $configUser = '';
-    public string $configPassword = '';
 
     const MAX_ENV_CONNECTIONS = 5;
 
@@ -25,8 +23,6 @@ class ConnectionDetails
         'baseDn' => 'LDAPCOM_CONN%d_BASE_DN',
         'adminDn' => 'LDAPCOM_CONN%d_ADMIN_DN',
         'adminPassword' => 'LDAPCOM_CONN%d_ADMIN_PASSWORD',
-        'configUser' => 'LDAPCOM_CONN%d_CONFIG_USER',
-        'configPassword' => 'LDAPCOM_CONN%d_CONFIG_PASSWORD',
     ];
 
     /**
@@ -40,8 +36,6 @@ class ConnectionDetails
         string $baseDn = '',
         string $adminDn = '',
         string $adminPassword = '',
-        string $configUser = '',
-        string $configPassword = '',
     )
     {
         if (!empty($title)) {
@@ -60,12 +54,6 @@ class ConnectionDetails
         }
         if (!empty($adminPassword)) {
             $this->adminPassword = $adminPassword;
-        }
-        if (!empty($configUser)) {
-            $this->configUser = $configUser;
-        }
-        if (!empty($configPassword)) {
-            $this->configPassword = $configPassword;
         }
     }
 
@@ -89,8 +77,6 @@ class ConnectionDetails
                     static::getEnvVar('baseDn', $i) ?? '',
                     static::getEnvVar('adminDn', $i) ?? '',
                     static::getEnvVar('adminPassword', $i) ?? '',
-                    static::getEnvVar('configUser', $i) ?? '',
-                    static::getEnvVar('configPassword', $i) ?? '',
                 );
             }
         }

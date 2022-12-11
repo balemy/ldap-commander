@@ -16,12 +16,14 @@ class RefIntService
 
     public function populate(RefForm $formModel): void
     {
+        /*
         $entry = Entry::query()
             ->setConnection($this->ldapService->configConnection)
             ->findOrFail('cn=module{0},cn=config');
 
         print "<pre>";
         print_r($entry);
+        */
     }
 
     public function saveByForm(RefForm $formModel): void

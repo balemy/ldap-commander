@@ -64,7 +64,7 @@ class MemberOfService
     {
         /** @var Entry $entry */
         $entry = Entry::query()
-            ->setConnection($this->ldapService->configConnection)
+            //->setConnection($this->ldapService->configConnection)
             ->in('olcDatabase={2}mdb,cn=config')
             ->findByOrFail('objectclass', 'olcMemberOfConfig');
 

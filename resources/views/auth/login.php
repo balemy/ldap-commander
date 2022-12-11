@@ -70,20 +70,6 @@ $error = $error ?? null;
                         ?>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md">
-
-                        <?= Field::text($formModel, 'configUser')
-                            ->hint('Example: cn=admin,dc=config')
-                            ->addInputAttributes(['disabled' => $formModel->isAttributeFixed('configUser')]) ?>
-                    </div>
-                    <div class="col-md">
-
-                        <?= Field::password($formModel, 'configPassword')
-                            ->addInputAttributes(['disabled' => $formModel->isAttributeFixed('configPassword')])
-                        ?>
-                    </div>
-                </div>
 
                 <?= Field::submitButton()
                     ->name('login-button')
