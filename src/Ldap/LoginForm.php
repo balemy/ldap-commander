@@ -18,6 +18,8 @@ final class LoginForm extends FormModel
     private string $baseDn = '';
     private string $adminDn = '';
     private string $adminPassword = '';
+    private string $configUser = '';
+    private string $configPassword = '';
     private bool $rememberMe = false;
 
     /**
@@ -32,6 +34,8 @@ final class LoginForm extends FormModel
             'baseDn' => 'Base DN',
             'adminDn' => 'Admin DN',
             'adminPassword' => 'Password',
+            'configUser' => 'Config User',
+            'configPassword' => 'Config Password',
             'rememberMe' => 'Remember me',
         ];
     }
@@ -84,11 +88,19 @@ final class LoginForm extends FormModel
         if (!empty($connectionDetails->adminPassword)) {
             $this->fixedAttributes[] = 'adminPassword';
         }
+        if (!empty($connectionDetails->configUser)) {
+            $this->fixedAttributes[] = 'configUser';
+        }
+        if (!empty($connectionDetails->configPassword)) {
+            $this->fixedAttributes[] = 'configPassword';
+        }
 
         $this->setAttribute('dsn', $connectionDetails->dsn);
         $this->setAttribute('baseDn', $connectionDetails->baseDn);
         $this->setAttribute('adminDn', $connectionDetails->adminDn);
         $this->setAttribute('adminPassword', $connectionDetails->adminPassword);
+        $this->setAttribute('configUser', $connectionDetails->configUser);
+        $this->setAttribute('configPassword', $connectionDetails->configPassword);
     }
 
     public function isAttributeFixed(string $attribute): bool

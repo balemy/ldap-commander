@@ -62,6 +62,39 @@ $this->beginPage()
             'active' => StringHelper::startsWith($currentRouteName, 'entity'),
         ],
         [
+            'label' => 'Configuration',
+            'items' => [
+                /*
+                [
+                    'label' => 'Schema Editor',
+                    'url' => $urlGenerator->generate('schema-edit'),
+                    'active' => StringHelper::startsWith($currentRouteName, 'schema-edit'),
+                ],
+                [
+                    'label' => 'Referential Integrity',
+                    'url' => $urlGenerator->generate('server-config-refint-edit'),
+                    'active' => StringHelper::startsWith($currentRouteName, 'server-config-refint-edit'),
+                ],
+                [
+                    'label' => 'Password Policies',
+                    'url' => $urlGenerator->generate('server'),
+                    'active' => StringHelper::startsWith($currentRouteName, 'server'),
+                ],
+                [
+                    'label' => 'Reverse Group Membership',
+                    'url' => $urlGenerator->generate('server-config-memberof-edit'),
+                    'active' => StringHelper::startsWith($currentRouteName, 'server-config-memberof-edit'),
+                ],
+                [
+                    'label' => 'Indexes',
+                    'url' => $urlGenerator->generate('server'),
+                    'active' => StringHelper::startsWith($currentRouteName, 'server'),
+                ]
+                */
+
+            ]
+        ],
+        [
             'label' => 'Information',
             'items' => [
                 [

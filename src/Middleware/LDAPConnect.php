@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Balemy\LdapCommander\Middleware;
 
-use Balemy\LdapCommander\Ldap\ConnectionDetails;
 use Balemy\LdapCommander\Ldap\LdapService;
 use Balemy\LdapCommander\Ldap\LoginForm;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -36,13 +35,22 @@ final class LDAPConnect implements MiddlewareInterface
     {
         $login = LoginForm::createFromSession($this->session);
         if ($login !== null) {
+
+            if (!empty($login->getAttributeValue('configUser'))) {
+                try {
+                    $this->ldapService->connectConfig($login);
+                } catch (\Exception $ex) {
+                    $this->flash->add('danger', 'Configuration Connect: ' . $ex->getMessage());
+                }
+            }
+
+
             try {
                 $this->ldapService->connect($login);
-
-                return $handler->handle($request);
             } catch (\Exception $ex) {
                 $this->flash->add('danger', $ex->getMessage());
             }
+            return $handler->handle($request);
         }
 
         return $this->responseFactory

@@ -8,6 +8,7 @@ use Balemy\LdapCommander\Controller\SchemaController;
 use Balemy\LdapCommander\Controller\SiteController;
 use Balemy\LdapCommander\Group\GroupController;
 use Balemy\LdapCommander\Middleware\LDAPConnect;
+use Balemy\LdapCommander\ServerConfig\ReferentialIntegrity\Controller as RefIntController;
 use Balemy\LdapCommander\User\UserController;
 use Yiisoft\Http\Method;
 use Yiisoft\Router\Group;
@@ -42,6 +43,11 @@ return [
             Route::methods([Method::GET, Method::POST], '/group/edit')->action([GroupController::class, 'edit'])->name('group-edit'),
             Route::methods([Method::GET, Method::POST], '/group/members')->action([GroupController::class, 'members'])->name('group-members'),
             Route::methods([Method::GET, Method::POST], '/group/delete')->action([GroupController::class, 'delete'])->name('group-delete'),
+
+            Route::methods([Method::GET, Method::POST], '/server-config/refint/edit')->action([RefIntController::class, 'edit'])->name('server-config-refint-edit'),
+            Route::methods([Method::GET, Method::POST], '/server-config/memberof/edit')->action([\Balemy\LdapCommander\ServerConfig\MemberOf\Controller::class, 'edit'])->name('server-config-memberof-edit'),
+
+            //Route::methods([Method::GET, Method::POST], '/schema-editor/')->action([\Balemy\LdapCommander\Schema\Controller::class, 'list'])->name('schema-edit'),
         ),
     Route::methods([Method::GET, Method::POST], '/login')->action([AuthController::class, 'login'])->name('login'),
     Route::methods([Method::GET, Method::POST], '/logout')->action([AuthController::class, 'logout'])->name('logout'),

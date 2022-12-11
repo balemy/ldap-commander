@@ -16,6 +16,13 @@ $this->setTitle($applicationParameters->getName());
 
 ?>
 
+<style>
+    .table td.fit,
+    .table th.fit {
+        white-space: nowrap;
+        width: 1%;
+    }
+</style>
 <div class="row">
     <div class="col-md-12">
 
@@ -31,8 +38,8 @@ $this->setTitle($applicationParameters->getName());
             <thead>
             <tr>
                 <th data-checkbox="true"></th>
-                <th scope="col">Name</th>
-                <th scope="col">DN</th>
+                <th class="fit" scope="col">Name</th>
+                <th scope="col">Description</th>
                 <th scope="col">Members</th>
                 <th>&nbsp;</th>
             </tr>
@@ -45,10 +52,10 @@ $this->setTitle($applicationParameters->getName());
                 ?>
                 <tr>
                     <td data-checkbox="true"></td>
-                    <td><?= $group->getTitle() ?? ''; ?></td>
-                    <td><?= $group->getDn(); ?></td>
-                    <td><?= count($group->getUserDns()); ?></td>
-                    <td  style="width:150px">
+                    <td class="fit"><?= $group->getTitle() ?? ''; ?></td>
+                    <td><?= Html::encode($group->getDescription()); ?></td>
+                    <td style="width:100px"><?= count($group->getUserDns()); ?></td>
+                    <td style="width:150px">
                         <?= Html::a('Edit', $editUrl, ['class' => 'btn btn-secondary btn-sm']); ?>
                         <?= Html::a('Members', $membersUrl, ['class' => 'btn btn-secondary btn-sm']); ?>
                     </td>

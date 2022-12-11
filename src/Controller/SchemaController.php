@@ -27,7 +27,7 @@ final class SchemaController
     )
     {
         $this->viewRenderer = $viewRenderer
-            ->withControllerName('schema')
+            ->withControllerName('schema-info')
             ->withLayout('@views/layout/main');
     }
 
