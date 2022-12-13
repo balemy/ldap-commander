@@ -1,6 +1,6 @@
 # LDAP Commander
 
-## 0.6.2 (2022-11-27)
+## 0.6.2 (2022-12-13)
 
 - Optimized User Management
 
