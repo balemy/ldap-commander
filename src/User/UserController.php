@@ -50,7 +50,7 @@ final class UserController
 
     public function edit(ServerRequestInterface $request, WebControllerService $webService): ResponseInterface
     {
-        $userForm = new UserForm($this->applicationParameters);
+        $userForm = new UserForm($this->applicationParameters, $this->ldapService);
 
         $dn = $this->getDnByRequest($request);
         if ($dn !== null) {

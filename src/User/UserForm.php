@@ -3,8 +3,11 @@
 namespace Balemy\LdapCommander\User;
 
 use Balemy\LdapCommander\ApplicationParameters;
+use Balemy\LdapCommander\Ldap\LdapService;
+use Balemy\LdapCommander\Schema\AttributeType;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Form\FormModel;
+use Yiisoft\Validator\Rule\Required;
 
 
 class UserForm extends FormModel
@@ -15,12 +18,13 @@ class UserForm extends FormModel
     private array $internalAttrs = ['parentDn'];
     private UserFormSchema $formSchema;
 
+    private LdapService $ldapService;
 
-    public function __construct(ApplicationParameters $applicationParameters)
+    public function __construct(ApplicationParameters $applicationParameters, LdapService $ldapService)
     {
         $this->formSchema = new UserFormSchema($applicationParameters);
         $this->user = new User();
-
+        $this->ldapService = $ldapService;
         parent::__construct();
     }
 
@@ -48,6 +52,29 @@ class UserForm extends FormModel
         return $this->formSchema;
     }
 
+
+    public function getRules(): array
+    {
+        /** @var AttributeType[] $requiredAttributes */
+        $requiredAttributes = [];
+        /** @var string $objectClassName */
+        foreach ($this->user->getObjectClasses() as $objectClassName) {
+            $oc = $this->ldapService->getSchema()->getObjectClass($objectClassName);
+            if ($oc !== null) {
+                $requiredAttributes = array_merge($requiredAttributes, $oc->getMustAttributes());
+            }
+        }
+
+        $rules = [];
+        foreach (array_keys($this->collectAttributes()) as $attribute) {
+            foreach ($requiredAttributes as $requiredAttribute) {
+                if (in_array($attribute, $requiredAttribute->names)) {
+                    $rules[$attribute] = [new Required()];
+                }
+            }
+        }
+        return $rules;
+    }
 
     private function getEntryValue(string $name): string
     {
