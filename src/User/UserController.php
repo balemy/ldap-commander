@@ -65,11 +65,12 @@ final class UserController
             /** @var array<string, array> $body */
             $body = $request->getParsedBody();
             if ($userForm->load($body) && $this->validator->validate($userForm)->isValid()) {
+                $isNewRecord = $userForm->isNewRecord();
                 $userForm->updateEntry();
                 $this->flash->add('success', ['body' => 'User successfully saved!']);
 
-                if ($userForm->isNewRecord()) {
-                    return $this->webService->getRedirectResponse('user-list', ['saved' => 1]);
+                if ($isNewRecord) {
+                    return $this->webService->getRedirectResponse('user-groups', ['dn' => $userForm->user->getDn(),   'saved' => 1]);
                 }
                 return $this->webService->getRedirectResponse('user-edit', [
                     'dn' => $userForm->user->getDn(), 'saved' => 1

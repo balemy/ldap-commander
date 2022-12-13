@@ -123,7 +123,12 @@ class UserForm extends FormModel
                     $this->user->setFirstAttribute('userPassword', $value);
                 }
             } elseif (!in_array($attributeName, $this->internalAttrs)) {
-                $this->user->setFirstAttribute($attributeName, $this->getAttributeValue($attributeName));
+                $val = $this->getAttributeValue($attributeName);
+                if ($this->isNewRecord() && empty($val)) {
+                    // On new record, don't set empty attribute values
+                } else {
+                    $this->user->setFirstAttribute($attributeName, $this->getAttributeValue($attributeName));
+                }
             }
         }
 
