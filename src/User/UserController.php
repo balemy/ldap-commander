@@ -39,12 +39,30 @@ final class UserController
             ->withLayout('@views/layout/main');
     }
 
-    public function list(WebControllerService $webService): ResponseInterface
+    public function list(ServerRequestInterface $request, WebControllerService $webService): ResponseInterface
     {
+        $ous = $this->ldapService->getOrganizationalUnits();
+        $ou = '';
+
+        if (!empty($request->getQueryParams()['ou']) &&
+            is_string($request->getQueryParams()['ou']) &&
+            array_key_exists((string)$request->getQueryParams()['ou'], $ous)
+        ) {
+            $ou = (string) $request->getQueryParams()['ou'];
+        }
+
+        if ($ou === '') {
+            $users = User::all();
+        } else {
+            $users = User::query()->in($ou)->paginate();
+        }
+
         return $this->viewRenderer->render('list', [
             'urlGenerator' => $this->urlGenerator,
-            'users' => User::all(),
-            'columns' => $this->applicationParameters->getUserListColumns()
+            'users' => $users,
+            'columns' => $this->applicationParameters->getUserListColumns(),
+            'organizationalUnits' => $ous,
+            'organizationalUnit' => $ou
         ]);
     }
 
@@ -70,7 +88,7 @@ final class UserController
                 $this->flash->add('success', ['body' => 'User successfully saved!']);
 
                 if ($isNewRecord) {
-                    return $this->webService->getRedirectResponse('user-groups', ['dn' => $userForm->user->getDn(),   'saved' => 1]);
+                    return $this->webService->getRedirectResponse('user-groups', ['dn' => $userForm->user->getDn(), 'saved' => 1]);
                 }
                 return $this->webService->getRedirectResponse('user-edit', [
                     'dn' => $userForm->user->getDn(), 'saved' => 1

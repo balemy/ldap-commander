@@ -43,8 +43,13 @@ $this->setTitle($applicationParameters->getName());
             <div class="row">
                 <?php foreach ($row as $fieldName => $fieldLabel): ?>
                     <div class="col-sm">
-                        <?= Field::text($userForm, $fieldName)
-                            ->autofocus() ?>
+                        <?php if ($fieldName === 'userPassword'): ?>
+                            <?= Field::password($userForm, $fieldName)
+                                ->autofocus() ?>
+                        <?php else: ?>
+                            <?= Field::text($userForm, $fieldName)
+                                ->autofocus() ?>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </div>

@@ -9,10 +9,11 @@ declare(strict_types=1);
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var \Balemy\LdapCommander\User\User[] $users
  * @var string[] $columns
+ * @var string[] $organizationalUnits
+ * @var string $organizationalUnit
  */
 
 use Yiisoft\Html\Html;
-use Yiisoft\Html\Tag\Button;
 
 $this->setTitle($applicationParameters->getName());
 ?>
@@ -20,28 +21,27 @@ $this->setTitle($applicationParameters->getName());
 <div class="row">
     <div class="col-md-12">
         <h1>Users </h1>
-        <a href="<?= $urlGenerator->generate('user-edit'); ?>" class="btn btn-success float-end">Create</a>
 
         <p class="lead">
             Overview of all users
         </p>
         <br/>
 
-        <!--
-        <form class="row g-3 alert alert-dark" style="padding-top:0px;"
-              action="#" method="post">
-            <div class="col-auto" style="width:300px">
-                <label for="test">Organizational Unit</label>
-                <?= Html::select('test')
-                    ->optionsData(['foo' => 'bar', 'bla' => 'fuu'])
-                    ->addClass('form-control')
+        <div>
+            <a href="<?= $urlGenerator->generate('user-edit'); ?>" class="btn btn-success float-end">
+                Create new user
+            </a>
+
+            <form class="form-floating" style="margin-right:150px">
+                <?= Html::select('ou')
+                    ->optionsData($organizationalUnits)
+                    ->value($organizationalUnit)
+                    ->addClass('form-select')
+                    ->addAttributes(['style' => 'max-width:50%;', 'onchange' => 'this.form.submit()'])
                 ?>
-            </div>
-            <div class="col-auto">
-                <?= Button::submit('Add')->addClass('btn btn-primary')->addAttributes(['style' => 'margin-top:24px']); ?>
-            </div>
-        </form>
-        -->
+                <label for="ou">Organization Unit</label>
+            </form>
+        </div>
 
         <table class="table table-striped" data-search="true" data-toggle="table" data-pagination="true"
                data-page-size="100" data-sortable="true" data-click-to-select="true">
