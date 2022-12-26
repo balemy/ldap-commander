@@ -5362,16 +5362,16 @@
         },
         {
             "name": "yiisoft/di",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/di.git",
-                "reference": "a0762f4770d9d26eb3678f5cacd74763635566fc"
+                "reference": "a6d889f74030a381dad337f1bd1ea9de7341bc9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/di/zipball/a0762f4770d9d26eb3678f5cacd74763635566fc",
-                "reference": "a0762f4770d9d26eb3678f5cacd74763635566fc",
+                "url": "https://api.github.com/repos/yiisoft/di/zipball/a6d889f74030a381dad337f1bd1ea9de7341bc9b",
+                "reference": "a6d889f74030a381dad337f1bd1ea9de7341bc9b",
                 "shasum": ""
             },
             "require": {
@@ -5438,7 +5438,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2022-11-05T10:58:23+00:00"
+            "time": "2022-12-23T16:12:56+00:00"
         },
         {
             "name": "yiisoft/error-handler",
