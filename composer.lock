@@ -7393,16 +7393,16 @@
         },
         {
             "name": "yiisoft/translator",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/translator.git",
-                "reference": "774fe4926091188e531ab69f1901b328c8874981"
+                "reference": "fc8c34d316772be05fdf1e7b874e079c2aa029db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/translator/zipball/774fe4926091188e531ab69f1901b328c8874981",
-                "reference": "774fe4926091188e531ab69f1901b328c8874981",
+                "url": "https://api.github.com/repos/yiisoft/translator/zipball/fc8c34d316772be05fdf1e7b874e079c2aa029db",
+                "reference": "fc8c34d316772be05fdf1e7b874e079c2aa029db",
                 "shasum": ""
             },
             "require": {
@@ -7414,10 +7414,10 @@
             "require-dev": {
                 "maglnet/composer-require-checker": "^4.2",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.14.3",
-                "roave/infection-static-analysis-plugin": "^1.16",
+                "rector/rector": "^0.15.2",
+                "roave/infection-static-analysis-plugin": "^1.25",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.18",
+                "vimeo/psalm": "^4.30|^5.4",
                 "yiisoft/di": "^1.2"
             },
             "suggest": {
@@ -7469,7 +7469,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2022-11-28T20:07:38+00:00"
+            "time": "2023-01-07T21:20:24+00:00"
         },
         {
             "name": "yiisoft/translator-message-php",
