@@ -8569,16 +8569,16 @@
         },
         {
             "name": "yiisoft/yii-http",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii-http.git",
-                "reference": "f8ba99454f460d37a8457b891684840bea570c30"
+                "reference": "cba85e098b585713af6d1f355c77fb0015d68c7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii-http/zipball/f8ba99454f460d37a8457b891684840bea570c30",
-                "reference": "f8ba99454f460d37a8457b891684840bea570c30",
+                "url": "https://api.github.com/repos/yiisoft/yii-http/zipball/cba85e098b585713af6d1f355c77fb0015d68c7a",
+                "reference": "cba85e098b585713af6d1f355c77fb0015d68c7a",
                 "shasum": ""
             },
             "require": {
@@ -8589,16 +8589,16 @@
                 "psr/http-server-handler": "^1.0",
                 "psr/http-server-middleware": "^1.0",
                 "yiisoft/http": "^1.2",
-                "yiisoft/middleware-dispatcher": "^3.0|^4.0"
+                "yiisoft/middleware-dispatcher": "^3.0|^4.0|^5.0"
             },
             "require-dev": {
                 "httpsoft/http-message": "^1.0",
                 "maglnet/composer-require-checker": "^4.2",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.14.3",
+                "rector/rector": "^0.15.3",
                 "roave/infection-static-analysis-plugin": "^1.16",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.18",
+                "vimeo/psalm": "^4.30|^5.4",
                 "yiisoft/test-support": "^3.0"
             },
             "type": "library",
@@ -8636,7 +8636,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2022-11-10T13:45:32+00:00"
+            "time": "2023-01-13T12:55:07+00:00"
         },
         {
             "name": "yiisoft/yii-middleware",
