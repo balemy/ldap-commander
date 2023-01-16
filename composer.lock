@@ -263,16 +263,16 @@
         },
         {
             "name": "directorytree/ldaprecord",
-            "version": "v2.19.2",
+            "version": "v2.19.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DirectoryTree/LdapRecord.git",
-                "reference": "c0b468f3ac56656c9dba012cc88f8336f9ee359c"
+                "reference": "3557d500b24b331852e4c9ebea1e712b7629cb09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DirectoryTree/LdapRecord/zipball/c0b468f3ac56656c9dba012cc88f8336f9ee359c",
-                "reference": "c0b468f3ac56656c9dba012cc88f8336f9ee359c",
+                "url": "https://api.github.com/repos/DirectoryTree/LdapRecord/zipball/3557d500b24b331852e4c9ebea1e712b7629cb09",
+                "reference": "3557d500b24b331852e4c9ebea1e712b7629cb09",
                 "shasum": ""
             },
             "require": {
@@ -284,7 +284,7 @@
                 "psr/log": "^1.0|^2.0|^3.0",
                 "psr/simple-cache": "^1.0|^2.0",
                 "symfony/polyfill-php80": "^1.25",
-                "tightenco/collect": "^5.6|^6.0|^7.0|^8.0"
+                "tightenco/collect": "^5.6|^6.0|^7.0|^8.0|^9.0"
             },
             "require-dev": {
                 "mockery/mockery": "^1.0",
@@ -333,7 +333,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-05T15:31:30+00:00"
+            "time": "2023-01-16T14:11:36+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -1207,7 +1207,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v9.46.0",
+            "version": "v9.47.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -1439,16 +1439,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.64.1",
+            "version": "2.65.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "f2e59963f4c4f4fdfb9fcfd752e8d2e2b79a4e2c"
+                "reference": "09acf64155c16dc6f580f36569ae89344e9734a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/f2e59963f4c4f4fdfb9fcfd752e8d2e2b79a4e2c",
-                "reference": "f2e59963f4c4f4fdfb9fcfd752e8d2e2b79a4e2c",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/09acf64155c16dc6f580f36569ae89344e9734a3",
+                "reference": "09acf64155c16dc6f580f36569ae89344e9734a3",
                 "shasum": ""
             },
             "require": {
@@ -1537,7 +1537,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-01T23:17:36+00:00"
+            "time": "2023-01-06T15:55:01+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -4313,20 +4313,20 @@
         },
         {
             "name": "tightenco/collect",
-            "version": "v8.83.25",
+            "version": "v9.47.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tighten/collect.git",
-                "reference": "7d2a6fc5e97c5f7209a780bea98f35042c1fd0ea"
+                "reference": "7bc3f863032e4458d798a4d2fa9379d32504aa97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tighten/collect/zipball/7d2a6fc5e97c5f7209a780bea98f35042c1fd0ea",
-                "reference": "7d2a6fc5e97c5f7209a780bea98f35042c1fd0ea",
+                "url": "https://api.github.com/repos/tighten/collect/zipball/7bc3f863032e4458d798a4d2fa9379d32504aa97",
+                "reference": "7bc3f863032e4458d798a4d2fa9379d32504aa97",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3|^8.0",
+                "php": "^8.0",
                 "symfony/var-dumper": "^3.4 || ^4.0 || ^5.0 || ^6.0"
             },
             "require-dev": {
@@ -4361,9 +4361,9 @@
             ],
             "support": {
                 "issues": "https://github.com/tighten/collect/issues",
-                "source": "https://github.com/tighten/collect/tree/v8.83.25"
+                "source": "https://github.com/tighten/collect/tree/v9.47.0"
             },
-            "time": "2022-08-22T17:55:07+00:00"
+            "time": "2023-01-13T19:14:21+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
