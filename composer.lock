@@ -5442,16 +5442,16 @@
         },
         {
             "name": "yiisoft/error-handler",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/error-handler.git",
-                "reference": "a4e2e562ee2e510178344a9fe5f1c6ee7dc41e42"
+                "reference": "6df1df9ba97f1db602221e206911c4daf35f05bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/error-handler/zipball/a4e2e562ee2e510178344a9fe5f1c6ee7dc41e42",
-                "reference": "a4e2e562ee2e510178344a9fe5f1c6ee7dc41e42",
+                "url": "https://api.github.com/repos/yiisoft/error-handler/zipball/6df1df9ba97f1db602221e206911c4daf35f05bb",
+                "reference": "6df1df9ba97f1db602221e206911c4daf35f05bb",
                 "shasum": ""
             },
             "require": {
@@ -5523,7 +5523,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2022-06-15T09:13:27+00:00"
+            "time": "2023-01-26T09:22:57+00:00"
         },
         {
             "name": "yiisoft/event-dispatcher",
