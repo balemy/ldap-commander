@@ -5300,16 +5300,16 @@
         },
         {
             "name": "yiisoft/definitions",
-            "version": "3.0.2",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/definitions.git",
-                "reference": "49e6c18f1b44685ed89036e3fe29e106d103fe58"
+                "reference": "2c04ca3db8e11bb342b60ee292d1172dc260a5c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/definitions/zipball/49e6c18f1b44685ed89036e3fe29e106d103fe58",
-                "reference": "49e6c18f1b44685ed89036e3fe29e106d103fe58",
+                "url": "https://api.github.com/repos/yiisoft/definitions/zipball/2c04ca3db8e11bb342b60ee292d1172dc260a5c5",
+                "reference": "2c04ca3db8e11bb342b60ee292d1172dc260a5c5",
                 "shasum": ""
             },
             "require": {
@@ -5319,10 +5319,10 @@
             "require-dev": {
                 "maglnet/composer-require-checker": "^4.2",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.14.3",
+                "rector/rector": "^0.15.2",
                 "roave/infection-static-analysis-plugin": "^1.18",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.22",
+                "vimeo/psalm": "^4.30|^5.6",
                 "yiisoft/test-support": "^1.4"
             },
             "type": "library",
@@ -5358,7 +5358,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2022-12-02T20:40:03+00:00"
+            "time": "2023-02-04T16:05:45+00:00"
         },
         {
             "name": "yiisoft/di",
