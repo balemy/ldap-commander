@@ -9795,16 +9795,16 @@
         },
         {
             "name": "codeception/c3",
-            "version": "2.7.0",
+            "version": "2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/c3.git",
-                "reference": "bf4fba8b8de7a103ff56e64c31994e44c970f522"
+                "reference": "848979b6d67fe9591add59643e2de6897a3f61d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/c3/zipball/bf4fba8b8de7a103ff56e64c31994e44c970f522",
-                "reference": "bf4fba8b8de7a103ff56e64c31994e44c970f522",
+                "url": "https://api.github.com/repos/Codeception/c3/zipball/848979b6d67fe9591add59643e2de6897a3f61d7",
+                "reference": "848979b6d67fe9591add59643e2de6897a3f61d7",
                 "shasum": ""
             },
             "require": {
@@ -9846,9 +9846,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Codeception/c3/issues",
-                "source": "https://github.com/Codeception/c3/tree/2.7.0"
+                "source": "https://github.com/Codeception/c3/tree/2.8.0"
             },
-            "time": "2022-08-20T18:49:46+00:00"
+            "time": "2023-02-03T22:04:50+00:00"
         },
         {
             "name": "codeception/codeception",
