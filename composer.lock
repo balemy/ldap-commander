@@ -5300,16 +5300,16 @@
         },
         {
             "name": "yiisoft/definitions",
-            "version": "3.1.0",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/definitions.git",
-                "reference": "2c04ca3db8e11bb342b60ee292d1172dc260a5c5"
+                "reference": "49d9ffa0532aeef1b44eab9c652981fed344c9fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/definitions/zipball/2c04ca3db8e11bb342b60ee292d1172dc260a5c5",
-                "reference": "2c04ca3db8e11bb342b60ee292d1172dc260a5c5",
+                "url": "https://api.github.com/repos/yiisoft/definitions/zipball/49d9ffa0532aeef1b44eab9c652981fed344c9fa",
+                "reference": "49d9ffa0532aeef1b44eab9c652981fed344c9fa",
                 "shasum": ""
             },
             "require": {
@@ -5358,7 +5358,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2023-02-04T16:05:45+00:00"
+            "time": "2023-02-12T13:27:59+00:00"
         },
         {
             "name": "yiisoft/di",
