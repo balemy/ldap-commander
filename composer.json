@@ -54,7 +54,7 @@
         "yiisoft/assets": "^2.1",
         "yiisoft/auth": "^3.0",
         "yiisoft/cache": "^2.0",
-        "yiisoft/cache-file": "^2.0",
+        "yiisoft/cache-file": "^3.0",
         "yiisoft/config": "^1.0",
         "yiisoft/cookies": "^1.2",
         "yiisoft/csrf": "^1.2",

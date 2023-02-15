@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c623dfaa6043de2bc75358740c0bd482",
+    "content-hash": "e7e3675c217486323741255e253524ec",
     "packages": [
         {
             "name": "alexkart/curl-builder",
@@ -4860,16 +4860,16 @@
         },
         {
             "name": "yiisoft/cache-file",
-            "version": "2.0.1",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/cache-file.git",
-                "reference": "ff3162db263a0530955c7511c831be18a31826eb"
+                "reference": "b5c80fb9cf8ddb2355e50487ea30c6897b68c7a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/cache-file/zipball/ff3162db263a0530955c7511c831be18a31826eb",
-                "reference": "ff3162db263a0530955c7511c831be18a31826eb",
+                "url": "https://api.github.com/repos/yiisoft/cache-file/zipball/b5c80fb9cf8ddb2355e50487ea30c6897b68c7a7",
+                "reference": "b5c80fb9cf8ddb2355e50487ea30c6897b68c7a7",
                 "shasum": ""
             },
             "require": {
@@ -4880,12 +4880,15 @@
                 "psr/simple-cache-implementation": "1.0.0"
             },
             "require-dev": {
+                "maglnet/composer-require-checker": "^4.4",
                 "php-mock/php-mock-phpunit": "^2.6",
                 "phpunit/phpunit": "^9.5",
+                "rector/rector": "^0.15.1",
                 "roave/infection-static-analysis-plugin": "^1.16",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.18",
-                "yiisoft/aliases": "^1.1|^2.0"
+                "vimeo/psalm": "^4.30|^5.6",
+                "yiisoft/aliases": "^3.0",
+                "yiisoft/di": "^1.2"
             },
             "type": "library",
             "extra": {
@@ -4893,7 +4896,7 @@
                     "source-directory": "config"
                 },
                 "config-plugin": {
-                    "common": "common.php",
+                    "di": "di.php",
                     "params": "params.php"
                 }
             },
@@ -4933,7 +4936,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2022-09-18T13:54:48+00:00"
+            "time": "2023-02-15T14:45:11+00:00"
         },
         {
             "name": "yiisoft/config",
