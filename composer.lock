@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e8492d1545b05616661c422b32599960",
+    "content-hash": "ad21244f906b94134f5762cffcebe61d",
     "packages": [
         {
             "name": "alexkart/curl-builder",
@@ -6947,16 +6947,16 @@
         },
         {
             "name": "yiisoft/rbac-rules-container",
-            "version": "1.1.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/rbac-rules-container.git",
-                "reference": "9a230b6e5c63ea9ef4b0e1b24d4652fa701f236b"
+                "reference": "19c42b56751596ce139386d97f5164b77f655565"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/rbac-rules-container/zipball/9a230b6e5c63ea9ef4b0e1b24d4652fa701f236b",
-                "reference": "9a230b6e5c63ea9ef4b0e1b24d4652fa701f236b",
+                "url": "https://api.github.com/repos/yiisoft/rbac-rules-container/zipball/19c42b56751596ce139386d97f5164b77f655565",
+                "reference": "19c42b56751596ce139386d97f5164b77f655565",
                 "shasum": ""
             },
             "require": {
@@ -6969,10 +6969,10 @@
             "require-dev": {
                 "maglnet/composer-require-checker": "^4.2",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.14.3",
+                "rector/rector": "^0.15.2",
                 "roave/infection-static-analysis-plugin": "^1.18",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.22",
+                "vimeo/psalm": "^4.30|^5.6",
                 "yiisoft/di": "^1.0",
                 "yiisoft/test-support": "^3.0"
             },
@@ -6983,7 +6983,7 @@
                 },
                 "config-plugin": {
                     "params": "params.php",
-                    "common": "common.php"
+                    "di": "di.php"
                 }
             },
             "autoload": {
@@ -7022,7 +7022,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2022-11-10T11:40:51+00:00"
+            "time": "2023-02-16T10:44:01+00:00"
         },
         {
             "name": "yiisoft/router",
