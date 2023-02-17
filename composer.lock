@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad21244f906b94134f5762cffcebe61d",
+    "content-hash": "ca47f1ce83df9d7775991b5e8349011c",
     "packages": [
         {
             "name": "alexkart/curl-builder",
@@ -15404,33 +15404,33 @@
         },
         {
             "name": "yiisoft/translator-extractor",
-            "version": "1.1.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/translator-extractor.git",
-                "reference": "7022074760e7a3334c91904ee16f1551ad4df710"
+                "reference": "27e7c4fdbf53dcabdeb7083a3c0ddc29ed14cada"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/translator-extractor/zipball/7022074760e7a3334c91904ee16f1551ad4df710",
-                "reference": "7022074760e7a3334c91904ee16f1551ad4df710",
+                "url": "https://api.github.com/repos/yiisoft/translator-extractor/zipball/27e7c4fdbf53dcabdeb7083a3c0ddc29ed14cada",
+                "reference": "27e7c4fdbf53dcabdeb7083a3c0ddc29ed14cada",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.0",
                 "symfony/console": "^5.4|^6.0",
                 "yiisoft/friendly-exception": "^1.0",
-                "yiisoft/translator": "^1.0|^2.0",
-                "yiisoft/yii-console": "^1.0"
+                "yiisoft/translator": "^1.0|^2.0|^3.0"
             },
             "require-dev": {
                 "maglnet/composer-require-checker": "^4.2",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.14.3",
+                "rector/rector": "^0.15.2",
                 "roave/infection-static-analysis-plugin": "^1.16",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.18",
-                "yiisoft/di": "^1.0"
+                "vimeo/psalm": "^4.30|^5.6",
+                "yiisoft/di": "^1.0",
+                "yiisoft/yii-console": "^2.0"
             },
             "type": "library",
             "extra": {
@@ -15439,7 +15439,7 @@
                 },
                 "config-plugin": {
                     "params": "params.php",
-                    "console": "console.php"
+                    "di-console": "di-console.php"
                 }
             },
             "autoload": {
@@ -15476,7 +15476,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2022-11-08T07:15:55+00:00"
+            "time": "2023-02-17T13:40:13+00:00"
         },
         {
             "name": "yiisoft/yii-debug-viewer",

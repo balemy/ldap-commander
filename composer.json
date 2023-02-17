@@ -113,7 +113,7 @@
         "roave/security-advisories": "dev-master",
         "spatie/phpunit-watcher": "^1.23",
         "vimeo/psalm": "^5.1",
-        "yiisoft/translator-extractor": "^1.0",
+        "yiisoft/translator-extractor": "^2.0",
         "yiisoft/yii-debug-viewer": "^3.0@dev"
     },
     "replace": {
