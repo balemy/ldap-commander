@@ -263,16 +263,16 @@
         },
         {
             "name": "directorytree/ldaprecord",
-            "version": "v2.20.0",
+            "version": "v2.20.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DirectoryTree/LdapRecord.git",
-                "reference": "221e5d78372c434313feae1ce2d209aec9e62a94"
+                "reference": "a841f3d9c7c1de8064188a7e566515680d42f048"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DirectoryTree/LdapRecord/zipball/221e5d78372c434313feae1ce2d209aec9e62a94",
-                "reference": "221e5d78372c434313feae1ce2d209aec9e62a94",
+                "url": "https://api.github.com/repos/DirectoryTree/LdapRecord/zipball/a841f3d9c7c1de8064188a7e566515680d42f048",
+                "reference": "a841f3d9c7c1de8064188a7e566515680d42f048",
                 "shasum": ""
             },
             "require": {
@@ -333,7 +333,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-14T13:58:51+00:00"
+            "time": "2023-02-20T17:47:23+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -1207,7 +1207,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v10.0.0",
+            "version": "v10.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -4313,16 +4313,16 @@
         },
         {
             "name": "tightenco/collect",
-            "version": "v9.47.0",
+            "version": "v9.52.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tighten/collect.git",
-                "reference": "7bc3f863032e4458d798a4d2fa9379d32504aa97"
+                "reference": "d4772fe52bbc823d1d2e3d289d3f1ca8c0f3323b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tighten/collect/zipball/7bc3f863032e4458d798a4d2fa9379d32504aa97",
-                "reference": "7bc3f863032e4458d798a4d2fa9379d32504aa97",
+                "url": "https://api.github.com/repos/tighten/collect/zipball/d4772fe52bbc823d1d2e3d289d3f1ca8c0f3323b",
+                "reference": "d4772fe52bbc823d1d2e3d289d3f1ca8c0f3323b",
                 "shasum": ""
             },
             "require": {
@@ -4361,9 +4361,9 @@
             ],
             "support": {
                 "issues": "https://github.com/tighten/collect/issues",
-                "source": "https://github.com/tighten/collect/tree/v9.47.0"
+                "source": "https://github.com/tighten/collect/tree/v9.52.0"
             },
-            "time": "2023-01-13T19:14:21+00:00"
+            "time": "2023-02-17T21:37:36+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
