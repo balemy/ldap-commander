@@ -1603,10 +1603,10 @@
         },
         {
             "name": "npm-asset/bootstrap-table",
-            "version": "1.21.2",
+            "version": "1.21.3",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/bootstrap-table/-/bootstrap-table-1.21.2.tgz"
+                "url": "https://registry.npmjs.org/bootstrap-table/-/bootstrap-table-1.21.3.tgz"
             },
             "type": "npm-asset",
             "license": [
