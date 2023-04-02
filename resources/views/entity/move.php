@@ -31,7 +31,7 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
 
 <div class="row">
     <div class="col-md-9">
-        <?= RdnBreadcrumbs::widget(['$dn' => $dn]); ?>
+        <?= RdnBreadcrumbs::widget([], ['$dn' => $dn]); ?>
         <h1> Move Entity </h1>
         <br>
 
@@ -45,6 +45,6 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
 
     </div>
     <div class="col-md-3">
-        <?= EntitySidebar::widget(['$dn' => $dn, '$location' => EntitySidebarLocation::Edit]); ?>
+        <?= EntitySidebar::widget([], ['$dn' => $dn, '$location' => EntitySidebarLocation::Edit]); ?>
     </div>
 </div>

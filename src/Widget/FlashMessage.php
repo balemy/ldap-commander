@@ -17,7 +17,7 @@ final class FlashMessage extends Widget
         $this->flash = $flash;
     }
 
-    protected function run(): string
+    public function render(): string
     {
         $flashes = $this->flash->getAll();
 

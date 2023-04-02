@@ -24,7 +24,7 @@ class RdnBreadcrumbs extends Widget
     /**
      * {@inheritDoc}
      */
-    protected function run(): string
+    public function render(): string
     {
         $parts = [];
         if ($this->dn !== $this->ldapService->baseDn) {

@@ -17,8 +17,7 @@ enum EntitySidebarLocation
 
 class EntitySidebar extends Widget
 {
-    public string $dn = '';
-
+    public string $dn;
     public EntitySidebarLocation $location = EntitySidebarLocation::ListChildren;
 
     public function __construct(
@@ -27,9 +26,10 @@ class EntitySidebar extends Widget
         public WebView               $view,
     )
     {
+        $this->dn = '';
     }
 
-    protected function run(): string
+    public function render(): string
     {
         $html = Html::openTag('ul', ['class' => 'list-group']);
         if ($this->location !== EntitySidebarLocation::Add) {

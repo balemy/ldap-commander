@@ -317,7 +317,7 @@ class EntityForm extends FormModel
             $r = [];
             if (in_array($attribute, $validAttributes)) {
                 if ($attributeType->syntax === '1.3.6.1.4.1.1466.115.121.1.27') {
-                    $r[] = new Number(asInteger: true, skipOnEmpty: true);
+                    $r[] = new Number(skipOnEmpty: true);
                 }
                 if (in_array($attribute, $requiredAttributes)) {
                     $r[] = new Required();

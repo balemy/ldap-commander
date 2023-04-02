@@ -28,7 +28,7 @@ class SidebarWidget extends Widget
     {
     }
 
-    protected function run(): string
+    public function render(): string
     {
         $html = Html::openTag('ul', ['class' => 'list-group']);
         if ($this->location !== GroupSidebarLocation::Edit) {

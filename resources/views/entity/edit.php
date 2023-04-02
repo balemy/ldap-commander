@@ -37,7 +37,7 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
 
 <div class="row">
     <div class="col-md-9">
-        <?= RdnBreadcrumbs::widget(['$dn' => $dn]); ?>
+        <?= RdnBreadcrumbs::widget([], ['$dn' => $dn]); ?>
         <?php if ($entity->isNewRecord): ?>
             <h1> Add Entity </h1>
         <?php else: ?>
@@ -114,7 +114,7 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
 
     </div>
     <div class="col-md-3">
-        <?= EntitySidebar::widget(['$dn' => $dn, '$location' => ($entity->isNewRecord) ? EntitySidebarLocation::Add : EntitySidebarLocation::Edit]); ?>
+        <?= EntitySidebar::widget([], ['$dn' => $dn, '$location' => ($entity->isNewRecord) ? EntitySidebarLocation::Add : EntitySidebarLocation::Edit]); ?>
     </div>
 </div>
 

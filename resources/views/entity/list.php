@@ -20,14 +20,15 @@ $this->setTitle($applicationParameters->getName());
 
 <div class="row">
     <div class="col-md-9">
-        <?= \Balemy\LdapCommander\Widget\RdnBreadcrumbs::widget(['$dn' => $dn]); ?>
+        <?= \Balemy\LdapCommander\Widget\RdnBreadcrumbs::widget([], ['$dn' => $dn]); ?>
 
         <h1> List Children </h1>
         <p class="lead">
             <?= Html::encode($dn); ?>
         </p>
         <br>
-        <table class="table table-striped" data-search="true" data-toggle="table" data-pagination="true" data-page-size="100">
+        <table class="table table-striped" data-search="true" data-toggle="table" data-pagination="true"
+               data-page-size="100">
             <thead>
             <tr>
                 <th scope="col">RDN</th>
@@ -51,7 +52,9 @@ $this->setTitle($applicationParameters->getName());
 
     </div>
     <div class="col-md-3">
-        <?= EntitySidebar::widget(['$dn' => $dn, '$location' => EntitySidebarLocation::ListChildren]); ?>
+        <?= $dn ?>
+
+        <?= EntitySidebar::widget([], ['$dn' => $dn, '$location' => EntitySidebarLocation::ListChildren]); ?>
     </div>
 </div>
 

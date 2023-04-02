@@ -28,7 +28,7 @@ class SidebarWidget extends Widget
     {
     }
 
-    protected function run(): string
+    public function render(): string
     {
         if ($this->user === null || empty($this->user->getDn())) {
             return '';
