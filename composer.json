@@ -13,6 +13,10 @@
             "Composer\\Config::disableProcessTimeout",
             "./cmda serve"
         ],
+        "post-install-cmd": [
+            "Balemy\\LdapCommander\\Installer::postUpdate",
+            "Balemy\\LdapCommander\\Installer::copyEnvFile"
+        ],
         "post-update-cmd": [
             "Balemy\\LdapCommander\\Installer::postUpdate",
             "Balemy\\LdapCommander\\Installer::copyEnvFile"
