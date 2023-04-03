@@ -12,8 +12,9 @@ use Yiisoft\Validator\Result;
 use Yiisoft\Validator\Rule\Each;
 use Yiisoft\Validator\Rule\Number;
 use Yiisoft\Validator\Rule\Required;
+use Yiisoft\Validator\RulesProviderInterface;
 
-class EntityForm extends FormModel
+class EntityForm extends FormModel implements RulesProviderInterface
 {
     private string $rdnAttribute = '';
 

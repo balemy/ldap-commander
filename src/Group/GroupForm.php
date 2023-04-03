@@ -4,8 +4,9 @@ namespace Balemy\LdapCommander\Group;
 
 use Yiisoft\Form\FormModel;
 use Yiisoft\Validator\Rule\Required;
+use Yiisoft\Validator\RulesProviderInterface;
 
-class GroupForm extends FormModel
+class GroupForm extends FormModel implements RulesProviderInterface
 {
     protected ?string $title = null;
     protected ?string $description = null;

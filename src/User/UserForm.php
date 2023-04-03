@@ -5,12 +5,12 @@ namespace Balemy\LdapCommander\User;
 use Balemy\LdapCommander\ApplicationParameters;
 use Balemy\LdapCommander\Ldap\LdapService;
 use Balemy\LdapCommander\Schema\AttributeType;
-use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Form\FormModel;
 use Yiisoft\Validator\Rule\Required;
+use Yiisoft\Validator\RulesProviderInterface;
 
 
-class UserForm extends FormModel
+class UserForm extends FormModel implements RulesProviderInterface
 {
     public User $user;
     private array $_attrs = [];

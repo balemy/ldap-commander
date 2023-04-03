@@ -4,8 +4,9 @@ namespace Balemy\LdapCommander\Group;
 
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Validator\Rule\Required;
+use Yiisoft\Validator\RulesProviderInterface;
 
-class GroupAddForm extends GroupForm
+class GroupAddForm extends GroupForm implements RulesProviderInterface
 {
     /**
      * @var string[]

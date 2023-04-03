@@ -6,13 +6,13 @@ namespace Balemy\LdapCommander\Ldap;
 
 use Balemy\LdapCommander\Timer;
 use LdapRecord\Auth\BindException;
-use phpDocumentor\Reflection\Types\Boolean;
 use Yiisoft\Form\FormModel;
 use Yiisoft\Session\SessionInterface;
 use Yiisoft\Validator\Result;
 use Yiisoft\Validator\Rule\Required;
+use Yiisoft\Validator\RulesProviderInterface;
 
-final class LoginForm extends FormModel
+final class LoginForm extends FormModel implements RulesProviderInterface
 {
     private string $dsn = '';
     private string $baseDn = '';
