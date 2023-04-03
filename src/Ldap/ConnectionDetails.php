@@ -15,7 +15,7 @@ class ConnectionDetails
     const MAX_ENV_CONNECTIONS = 5;
 
     /**
-     * @var array
+     * @var string[]
      */
     const ENV_CONFIG_MAP = [
         'title' => 'LDAPCOM_CONN%d_TITLE',

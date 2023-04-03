@@ -336,8 +336,10 @@ class EntityForm extends FormModel
     {
         foreach ($result->getErrorMessagesIndexedByPath() as $name => $errors) {
             if (str_contains($name, '.')) {
-                list($attributeName, $attributeIndex) = explode('.', $name, 2);
-                $this->formValidationErrorsIndexed[$attributeName . '[' . $attributeIndex . ']'] = $errors;
+                $res = explode('.', $name, 2);
+                if (count($res) === 2) {
+                    $this->formValidationErrorsIndexed[$res[0] . '[' . $res[1] . ']'] = $errors;
+                }
             }
         }
 
