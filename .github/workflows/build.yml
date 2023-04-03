@@ -75,3 +75,10 @@ jobs:
         run: |
           php -S 127.0.0.1:8080 -t public > ./runtime/yii.log 2>&1 &
           vendor/bin/codecept run
+          
+      - name: Upload Codeception Output
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: codeception-output
+          path: runtime/tests/_output/*          
