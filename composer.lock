@@ -1222,16 +1222,16 @@
         },
         {
             "name": "httpsoft/http-message",
-            "version": "1.0.11",
+            "version": "1.0.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/httpsoft/http-message.git",
-                "reference": "51163fa329523fe1697e2de459ac45aa201dbb12"
+                "reference": "d2e085532fb6e65a4331d4f1a9c86f45174bc685"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/httpsoft/http-message/zipball/51163fa329523fe1697e2de459ac45aa201dbb12",
-                "reference": "51163fa329523fe1697e2de459ac45aa201dbb12",
+                "url": "https://api.github.com/repos/httpsoft/http-message/zipball/d2e085532fb6e65a4331d4f1a9c86f45174bc685",
+                "reference": "d2e085532fb6e65a4331d4f1a9c86f45174bc685",
                 "shasum": ""
             },
             "require": {
@@ -1281,7 +1281,7 @@
                 "issues": "https://github.com/httpsoft/http-message/issues",
                 "source": "https://github.com/httpsoft/http-message"
             },
-            "time": "2023-04-02T17:32:05+00:00"
+            "time": "2023-04-17T16:50:19+00:00"
         },
         {
             "name": "illuminate/contracts",
