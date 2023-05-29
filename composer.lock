@@ -2620,16 +2620,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v6.2.10",
+            "version": "v6.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "12288d9f4500f84a4d02254d4aa968b15488476f"
+                "reference": "5aa03db8ef0a5457c316ec580e69562d97734c77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/12288d9f4500f84a4d02254d4aa968b15488476f",
-                "reference": "12288d9f4500f84a4d02254d4aa968b15488476f",
+                "url": "https://api.github.com/repos/symfony/console/zipball/5aa03db8ef0a5457c316ec580e69562d97734c77",
+                "reference": "5aa03db8ef0a5457c316ec580e69562d97734c77",
                 "shasum": ""
             },
             "require": {
@@ -2696,7 +2696,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v6.2.10"
+                "source": "https://github.com/symfony/console/tree/v6.2.11"
             },
             "funding": [
                 {
@@ -2712,7 +2712,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-04-28T13:37:43+00:00"
+            "time": "2023-05-26T08:16:21+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -7869,16 +7869,16 @@
         },
         {
             "name": "yiisoft/yii-console",
-            "version": "2.0.1",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii-console.git",
-                "reference": "55de5e6d3bcfccfc5fd6f39379ef192e142f7712"
+                "reference": "630e1077a0e8344e81885e6c36e49e6059ef969c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii-console/zipball/55de5e6d3bcfccfc5fd6f39379ef192e142f7712",
-                "reference": "55de5e6d3bcfccfc5fd6f39379ef192e142f7712",
+                "url": "https://api.github.com/repos/yiisoft/yii-console/zipball/630e1077a0e8344e81885e6c36e49e6059ef969c",
+                "reference": "630e1077a0e8344e81885e6c36e49e6059ef969c",
                 "shasum": ""
             },
             "require": {
@@ -7946,7 +7946,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2023-03-31T08:30:43+00:00"
+            "time": "2023-05-28T15:36:59+00:00"
         },
         {
             "name": "yiisoft/yii-dataview",
