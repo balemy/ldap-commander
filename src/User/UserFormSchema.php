@@ -9,14 +9,18 @@ final class UserFormSchema
 {
     private array $_fields = [];
 
+    /**
+     * @var array|array[]
+     */
     private array $_rows;
 
     public function __construct(private readonly ApplicationParameters $applicationParameters)
     {
         $this->_rows = $this->applicationParameters->getUserEditFields();
 
-        /** @var string[] $row */
+        /** @var array $row */
         foreach ($this->_rows as $row) {
+            /** @var string $fieldLabel */
             foreach ($row as $fieldKey => $fieldLabel) {
                 $this->_fields[$fieldKey] = $fieldLabel;
             }
@@ -28,9 +32,6 @@ final class UserFormSchema
         return $this->_rows;
     }
 
-    /**
-     * @psalm-return array<string,string>
-     */
     public function getFields(): array
     {
         return $this->_fields;

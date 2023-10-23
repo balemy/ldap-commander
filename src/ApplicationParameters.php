@@ -11,9 +11,6 @@ final class ApplicationParameters
     private string $version = '0.0.0';
     private array $userListColumns = ['cn' => 'Common Name', 'givenName' => 'First name', 'sn' => 'Last name', 'mail' => 'E-Mail'];
 
-    /**
-     * @psalm-return array<string,string>
-     */
     private array $userEditFields = [
         ['uid' => 'Username', 'cn' => 'Common Name'],
         ['title' => 'Title', 'givenName' => 'First name', 'sn' => 'Last name'],
@@ -69,9 +66,6 @@ final class ApplicationParameters
         return $new;
     }
 
-    /**
-     * @param string[] $value
-     */
     public function userListColumns(array $value): self
     {
         $new = clone $this;
@@ -79,9 +73,6 @@ final class ApplicationParameters
         return $new;
     }
 
-    /**
-     * @param string[] $value
-     */
     public function userEditFields(array $value): self
     {
         $new = clone $this;

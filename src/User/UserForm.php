@@ -111,6 +111,10 @@ class UserForm extends FormModel implements RulesProviderInterface, DataSetInter
         return '';
     }
 
+    /**
+     * @psalm-suppress LessSpecificImplementedReturnType
+     * @psalm-suppress MixedReturnTypeCoercion
+     */
     public function getAttributeLabels(): array
     {
         return array_merge([
