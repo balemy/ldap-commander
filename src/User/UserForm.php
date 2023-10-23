@@ -6,11 +6,12 @@ use Balemy\LdapCommander\ApplicationParameters;
 use Balemy\LdapCommander\Ldap\LdapService;
 use Balemy\LdapCommander\Schema\AttributeType;
 use Yiisoft\Form\FormModel;
+use Yiisoft\Validator\DataSetInterface;
 use Yiisoft\Validator\Rule\Required;
 use Yiisoft\Validator\RulesProviderInterface;
 
 
-class UserForm extends FormModel implements RulesProviderInterface
+class UserForm extends FormModel implements RulesProviderInterface, DataSetInterface
 {
     public User $user;
     private array $_attrs = [];
@@ -20,12 +21,14 @@ class UserForm extends FormModel implements RulesProviderInterface
 
     private LdapService $ldapService;
 
+    private ?array $collectedAttributes = null;
+
+
     public function __construct(ApplicationParameters $applicationParameters, LdapService $ldapService)
     {
         $this->formSchema = new UserFormSchema($applicationParameters);
         $this->user = new User();
         $this->ldapService = $ldapService;
-        parent::__construct();
     }
 
     public function setUser(User $user): void
@@ -34,12 +37,30 @@ class UserForm extends FormModel implements RulesProviderInterface
         $this->loadByEntry();
     }
 
+    public function load(array $attributes): bool
+    {
+        /** @var array<string, string> $attributes */
+        foreach ($attributes as $name => $value) {
+            $this->setAttribute($name, $value);
+        }
+
+        return true;
+    }
+
     public function setAttribute(string $name, mixed $value): void
     {
+        if (!$this->hasAttribute($name)) {
+            throw new \Exception('Invalid ' . $name . ' exception!');
+        }
         $this->_attrs[$name] = $value;
     }
 
-    public function getAttributeCastValue(string $attribute): mixed
+    public function hasAttribute(string $attribute): bool
+    {
+        return (array_key_exists($attribute, $this->collectAttributes()));
+    }
+
+    public function getAttributeValue(string $attribute): mixed
     {
         return $this->_attrs[$attribute] ?? '';
     }
@@ -92,23 +113,20 @@ class UserForm extends FormModel implements RulesProviderInterface
 
     public function getAttributeLabels(): array
     {
-        /** @var string[] */
         return array_merge([
             'parentDn' => 'Organizational Unit'
         ], $this->formSchema->getFields());
     }
 
-    /**
-     * @inheritDoc
-     * @return string[]
-     */
-    protected function collectAttributes(): array
+    private function collectAttributes(): array
     {
-        $fields = ['parentDn' => 'string'];
-        foreach (array_keys($this->formSchema->getFields()) as $attribute) {
-            $fields[$attribute] = 'string';
+        if (!$this->collectedAttributes) {
+            $this->collectedAttributes = ['parentDn' => 'string'];
+            foreach (array_keys($this->formSchema->getFields()) as $attribute) {
+                $this->collectedAttributes[$attribute] = 'string';
+            }
         }
-        return $fields;
+        return $this->collectedAttributes;
     }
 
     public function updateEntry(): bool
@@ -123,7 +141,7 @@ class UserForm extends FormModel implements RulesProviderInterface
                     $this->user->setFirstAttribute('userPassword', $value);
                 }
             } elseif (!in_array($attributeName, $this->internalAttrs)) {
-                $val = (string) $this->getAttributeValue($attributeName);
+                $val = (string)$this->getAttributeValue($attributeName);
                 if ($this->isNewRecord() && empty($val)) {
                     // On new record, don't set empty attribute values
                 } else {
@@ -177,4 +195,8 @@ class UserForm extends FormModel implements RulesProviderInterface
         return !$this->user->exists;
     }
 
+    public function getData(): ?array
+    {
+        return $this->_attrs;
+    }
 }

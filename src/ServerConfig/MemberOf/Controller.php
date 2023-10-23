@@ -9,6 +9,7 @@ use Balemy\LdapCommander\Service\WebControllerService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Http\Method;
+use Yiisoft\Hydrator\Hydrator;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Session\Flash\FlashInterface;
 use Yiisoft\Validator\ValidatorInterface;
@@ -38,7 +39,7 @@ final class Controller
         if ($request->getMethod() === Method::POST) {
             /** @var array<string, array> $body */
             $body = $request->getParsedBody();
-            if ($formModel->load($body) &&
+            if ((new Hydrator())->hydrate($formModel, $body['MemberOfForm']) &&
                 $this->validator->validate($formModel)->isValid()) {
                 $memberOfService->saveByForm($formModel);
                 $this->flash->add('success', ['body' => 'Successfully saved!']);

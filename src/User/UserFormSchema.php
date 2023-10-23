@@ -3,12 +3,10 @@
 namespace Balemy\LdapCommander\User;
 
 use Balemy\LdapCommander\ApplicationParameters;
-use Yiisoft\Form\FormModel;
 
 
 final class UserFormSchema
 {
-
     private array $_fields = [];
 
     private array $_rows;
@@ -30,6 +28,9 @@ final class UserFormSchema
         return $this->_rows;
     }
 
+    /**
+     * @psalm-return array<string,string>
+     */
     public function getFields(): array
     {
         return $this->_fields;

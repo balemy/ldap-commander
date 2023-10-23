@@ -10,6 +10,10 @@ final class ApplicationParameters
     private string $name = 'LDAP Commander';
     private string $version = '0.0.0';
     private array $userListColumns = ['cn' => 'Common Name', 'givenName' => 'First name', 'sn' => 'Last name', 'mail' => 'E-Mail'];
+
+    /**
+     * @psalm-return array<string,string>
+     */
     private array $userEditFields = [
         ['uid' => 'Username', 'cn' => 'Common Name'],
         ['title' => 'Title', 'givenName' => 'First name', 'sn' => 'Last name'],

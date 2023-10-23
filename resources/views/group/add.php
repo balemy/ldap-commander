@@ -20,6 +20,8 @@ use Yiisoft\Html\Tag\Form;
 use Yiisoft\Yii\View\Csrf;
 
 $this->setTitle($applicationParameters->getName());
+
+
 ?>
 
 <div class="row">
@@ -45,7 +47,7 @@ $this->setTitle($applicationParameters->getName());
             ->optionsData($parentDns)
             ->tabindex(3) ?>
 
-        <?= Field::select($formModel, 'initialMembers[]')
+        <?= Field::select($formModel, 'initialMembers')
             ->multiple(true)
             ->optionsData($users)
             ->tabindex(4) ?>

@@ -14,6 +14,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Http\Method;
+use Yiisoft\Hydrator\Hydrator;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Session\Flash\FlashInterface;
 use Yiisoft\Session\SessionInterface;
@@ -57,7 +58,8 @@ final class GroupController
                 $body['GroupAddForm']['initialMembers'] = [];
             }
 
-            if ($formModel->load($body) && $this->validator->validate($formModel)->isValid()) {
+            (new Hydrator())->hydrate($formModel, $body['GroupAddForm']);
+            if ($this->validator->validate($formModel)->isValid()) {
                 $entry = new Entry();
                 $entry->inside($formModel->getParentDn());
                 $entry->setAttribute('objectclass', 'groupofuniquenames');
@@ -101,11 +103,13 @@ final class GroupController
         if ($request->getMethod() === Method::POST) {
             /** @var array<string, array> $body */
             $body = $request->getParsedBody();
-            if ($formModel->load($body) && $this->validator->validate($formModel)->isValid()) {
+            (new Hydrator())->hydrate($formModel, $body['GroupForm']);
+            if ($this->validator->validate($formModel)->isValid()) {
                 $group->update($formModel);
                 $this->flash->add('success', ['body' => 'Group successfully saved!']);
                 return $this->webService->getRedirectResponse('group-edit', ['dn' => $group->getDn(), 'saved' => 1]);
             }
+
         }
 
         return $this->viewRenderer->render('edit', [

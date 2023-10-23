@@ -7,6 +7,7 @@ namespace Balemy\LdapCommander\Ldap;
 use Balemy\LdapCommander\Timer;
 use LdapRecord\Auth\BindException;
 use Yiisoft\Form\FormModel;
+use Yiisoft\Hydrator\Hydrator;
 use Yiisoft\Session\SessionInterface;
 use Yiisoft\Validator\Result;
 use Yiisoft\Validator\Rule\Required;
@@ -72,6 +73,8 @@ final class LoginForm extends FormModel implements RulesProviderInterface
 
     public function loadConnectionDetails(ConnectionDetails $connectionDetails): void
     {
+
+
         if (!empty($connectionDetails->dsn)) {
             $this->fixedAttributes[] = 'dsn';
         }
@@ -85,10 +88,13 @@ final class LoginForm extends FormModel implements RulesProviderInterface
             $this->fixedAttributes[] = 'adminPassword';
         }
 
-        $this->setAttribute('dsn', $connectionDetails->dsn);
-        $this->setAttribute('baseDn', $connectionDetails->baseDn);
-        $this->setAttribute('adminDn', $connectionDetails->adminDn);
-        $this->setAttribute('adminPassword', $connectionDetails->adminPassword);
+        $hydrator = new Hydrator();
+        $hydrator->hydrate($this, [
+            'dsn' => $connectionDetails->dsn,
+            'baseDn' => $connectionDetails->baseDn,
+            'adminDn' => $connectionDetails->adminDn,
+            'adminPassword' => $connectionDetails->adminPassword
+        ]);
     }
 
     public function isAttributeFixed(string $attribute): bool
@@ -120,7 +126,7 @@ final class LoginForm extends FormModel implements RulesProviderInterface
         $session->remove('Login');
     }
 
-    public function loadSafeAttributes(array $attributes) : bool
+    public function loadSafeAttributes(array $attributes): bool
     {
         $scope = $this->getFormName();
         if (!isset($attributes[$scope]) || !is_array($attributes[$scope])) {
@@ -132,7 +138,7 @@ final class LoginForm extends FormModel implements RulesProviderInterface
 
         foreach ($data as $name => $value) {
             if (!$this->isAttributeFixed($name)) {
-                $this->setAttribute($name, $value);
+                (new Hydrator())->hydrate($this, [$name => $value]);
             }
         }
 

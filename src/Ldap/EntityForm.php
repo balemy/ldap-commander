@@ -8,13 +8,14 @@ use LdapRecord\LdapRecordException;
 use LdapRecord\Models\Entry;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Form\FormModel;
+use Yiisoft\Validator\DataSetInterface;
 use Yiisoft\Validator\Result;
 use Yiisoft\Validator\Rule\Each;
 use Yiisoft\Validator\Rule\Number;
 use Yiisoft\Validator\Rule\Required;
 use Yiisoft\Validator\RulesProviderInterface;
 
-class EntityForm extends FormModel implements RulesProviderInterface
+class EntityForm extends FormModel implements RulesProviderInterface, DataSetInterface
 {
     private string $rdnAttribute = '';
 
@@ -29,10 +30,16 @@ class EntityForm extends FormModel implements RulesProviderInterface
         public bool   $isNewRecord = false,
         public string $parentDn = '')
     {
-        parent::__construct();
+        ;
     }
 
-    public function getAttributeCastValue(string $attribute): mixed
+    public function hasAttribute(string $attribute): bool
+    {
+        return (array_key_exists($attribute, $this->collectAttributes()));
+    }
+
+
+    public function getAttributeValue(string $attribute): mixed
     {
         if ($attribute === 'rdnAttribute') {
             return $this->getRdnAttributeId();
@@ -135,15 +142,6 @@ class EntityForm extends FormModel implements RulesProviderInterface
         return implode(', ', $attributeType->names);
     }
 
-    /**
-     * @return false
-     */
-    public function isAttributeEmpty(string $attribute): bool
-    {
-        return false;
-    }
-
-
     public function load(object|array|null $data, ?string $formName = null): bool
     {
         if (!is_array($data)) {
@@ -170,7 +168,13 @@ class EntityForm extends FormModel implements RulesProviderInterface
             return (in_array($k, $validAttributes));
         }, ARRAY_FILTER_USE_BOTH);
 
-        return parent::load($rawData, '');
+        /** @var string $v */
+        foreach ($rawData as $k => $v) {
+            /** @var string $k */
+            $this->setAttribute($k, $v);
+        }
+
+        return true;
     }
 
     private function getValidAttributes(array $objectClasses = []): array
@@ -331,6 +335,11 @@ class EntityForm extends FormModel implements RulesProviderInterface
 
         return $rules;
 
+    }
+
+    public function getData(): ?array
+    {
+        return $this->getEntryAttributesAsArray();
     }
 
     public function processValidationResult(Result $result): void

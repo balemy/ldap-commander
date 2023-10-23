@@ -15,6 +15,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Http\Method;
+use Yiisoft\Hydrator\Hydrator;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Session\Flash\FlashInterface;
 use Yiisoft\Session\SessionInterface;
@@ -82,7 +83,8 @@ final class UserController
         if ($request->getMethod() === Method::POST) {
             /** @var array<string, array> $body */
             $body = $request->getParsedBody();
-            if ($userForm->load($body) && $this->validator->validate($userForm)->isValid()) {
+
+            if ($userForm->load($body['UserForm']) && $this->validator->validate($userForm)->isValid()) {
                 $isNewRecord = $userForm->isNewRecord();
                 $userForm->updateEntry();
                 $this->flash->add('success', ['body' => 'User successfully saved!']);
@@ -90,6 +92,7 @@ final class UserController
                 if ($isNewRecord) {
                     return $this->webService->getRedirectResponse('user-groups', ['dn' => $userForm->user->getDn(), 'saved' => 1]);
                 }
+
                 return $this->webService->getRedirectResponse('user-edit', [
                     'dn' => $userForm->user->getDn(), 'saved' => 1
                 ]);

@@ -91,10 +91,9 @@
         "yiisoft/yii-console": "^2.0",
         "yiisoft/yii-dataview": "^3.0@dev",
         "yiisoft/yii-debug": "^3.0@dev",
-        "yiisoft/yii-debug-api": "^3.0@dev",
         "yiisoft/yii-event": "^2.0",
         "yiisoft/yii-http": "^1.0",
-        "yiisoft/yii-middleware": "dev-master",
+        "yiisoft/yii-middleware": "^1.0",
         "yiisoft/yii-runner-console": "^2.0",
         "yiisoft/yii-runner-http": "^2.0",
         "yiisoft/yii-view": "^6.0"
@@ -112,8 +111,8 @@
         "spatie/phpunit-watcher": "^1.23",
         "vimeo/psalm": "^5.9",
         "yiisoft/translator-extractor": "^2.0",
+        "yiisoft/yii-debug-api": "3.0.x-dev",
         "yiisoft/yii-debug-viewer": "^3.0@dev",
-        "yiisoft/yii-gii": "^3.0@dev",
         "yiisoft/yii-testing": "dev-master"
     },
     "replace": {

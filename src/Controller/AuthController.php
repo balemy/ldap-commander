@@ -11,6 +11,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Http\Method;
+use Yiisoft\Hydrator\Hydrator;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Session\SessionInterface;
 use Yiisoft\Validator\ValidatorInterface;
@@ -63,7 +64,7 @@ final class AuthController
         }
 
         if ($loginForm->isAttributeFixed('adminPassword')) {
-            $loginForm->setAttribute('adminPassword', '******************');
+            (new Hydrator())->hydrate($loginForm, ['adminPassword' => '******************']);
         }
 
         return $this->viewRenderer->render('login', [

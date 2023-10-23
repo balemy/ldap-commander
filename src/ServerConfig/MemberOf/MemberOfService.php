@@ -4,6 +4,7 @@ namespace Balemy\LdapCommander\ServerConfig\MemberOf;
 
 use Balemy\LdapCommander\Ldap\LdapService;
 use LdapRecord\Models\Entry;
+use Yiisoft\Hydrator\Hydrator;
 
 class MemberOfService
 {
@@ -18,10 +19,12 @@ class MemberOfService
 
         $entry = $this->getConfigEntry();
 
-        $formModel->setAttribute('enabled', true);
-        $formModel->setAttribute('memberAD', $entry->getFirstAttribute('olcMemberOfMemberAD'));
-        $formModel->setAttribute('memberOfAD', $entry->getFirstAttribute('olcMemberOfMemberOfAD'));
-        $formModel->setAttribute('groupOC', $entry->getFirstAttribute('olcMemberOfGroupOC'));
+        (new Hydrator())->hydrate($formModel, [
+            'enabled' => true,
+            'memberAD' => $entry->getFirstAttribute('olcMemberOfMemberAD'),
+            'memberOfAD' => $entry->getFirstAttribute('olcMemberOfMemberOfAD'),
+            'groupOC' => $entry->getFirstAttribute('olcMemberOfGroupOC')
+        ]);
     }
 
     public function saveByForm(MemberOfForm $formModel): void
