@@ -63,7 +63,7 @@ jobs:
 
       - name: Start Selenium
         run: |
-          docker run --net=host --shm-size="2g" selenium/standalone-chrome
+          docker run --detach --net=host --shm-size="2g" selenium/standalone-chrome:4.8.0-20230131
 
       - name: Update composer
         run: composer self-update
