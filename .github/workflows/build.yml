@@ -42,7 +42,7 @@ jobs:
       - name: Install PHP with extensions
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1
+          php-version: 8.2
           extensions: ${{ env.extensions }}
           ini-values: date.timezone='UTC'
           tools: composer:v2

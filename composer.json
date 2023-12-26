@@ -28,7 +28,7 @@
         "test-watch": "phpunit-watcher watch"
     },
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "ext-intl": "*",
         "ext-mbstring": "*",
         "ext-pdo_sqlite": "*",
