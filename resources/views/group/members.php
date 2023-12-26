@@ -32,7 +32,7 @@ foreach ($noMembers as $user) {
 $form = Form::tag()
     ->method('post')
     ->csrf($csrf)
-    ->action($urlGenerator->generate('group-members', ['dn' => $dn]))
+    ->action($urlGenerator->generate('group-members', [], ['dn' => $dn]))
 ?>
 
 
@@ -73,11 +73,11 @@ $form = Form::tag()
             <tbody>
             <?php foreach ($members as $user): ?>
                 <?php
-                $editUrl = $urlGenerator->generate('entity-edit', ['dn' => $user->getDn()]);
+                $editUrl = $urlGenerator->generate('entity-edit', [], ['dn' => $user->getDn()]);
                 ?>
                 <tr>
                     <td data-checkbox="true"></td>
-                    <td><?= Html::a($user->getDisplayName(), $urlGenerator->generate('user-edit', ['dn' => $user->getDn()])); ?></td>
+                    <td><?= Html::a($user->getDisplayName(), $urlGenerator->generate('user-edit', [], ['dn' => $user->getDn()])); ?></td>
                     <td>
                         <?php if ($user->getFirstAttribute('mail') !== null) : ?>
                             <?= Html::mailto($user->getFirstAttribute('mail')); ?>

@@ -32,7 +32,7 @@ final class WebControllerService
     {
         return $this->responseFactory
             ->createResponse(Status::FOUND)
-            ->withHeader(Header::LOCATION, $this->urlGenerator->generate($url, $arguments));
+            ->withHeader(Header::LOCATION, $this->urlGenerator->generate($url, [], $arguments));
     }
 
     public function getNotFoundResponse(): ResponseInterface

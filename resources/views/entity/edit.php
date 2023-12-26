@@ -22,7 +22,8 @@ use Balemy\LdapCommander\Fields\MultiTextField;
 use Balemy\LdapCommander\Widget\EntitySidebar;
 use Balemy\LdapCommander\Widget\EntitySidebarLocation;
 use Balemy\LdapCommander\Widget\RdnBreadcrumbs;
-use Yiisoft\Form\Field;
+use Yiisoft\FormModel\Field;
+use Yiisoft\FormModel\FormModelInputData;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Label as LabelTag;
 use Yiisoft\View\WebView;
@@ -49,7 +50,7 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
         <br>
 
         <?= Html::form()
-            ->post($urlGenerator->generate('entity-edit', ['dn' => $dn, 'new' => intval($entity->isNewRecord)]))
+            ->post($urlGenerator->generate('entity-edit', [], ['dn' => $dn, 'new' => intval($entity->isNewRecord)]))
             ->id('entityForm')
             ->enctype('multipart/form-data')
             ->csrf($csrf)
@@ -64,19 +65,16 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
         <div id="attribute-list" style="display:none">
             <?php foreach ($attributeTypes as $attribute => $attributeType): ?>
                 <div class="attribute-row" data-attribute='<?= $attribute ?>'
-                     data-attribute-label='<?= $entity->getAttributeLabel($attribute) ?>'>
+                     data-attribute-label='<?= $entity->getPropertyLabel($attribute) ?>'>
 
                     <?php if ($attribute === 'objectclass'): ?>
-                        <?= Field::getFactory('entity')->select($entity, 'objectclass')
-                            ->optionsData($objectClassNames)
-                            ->multiple(true) ?>
+                        <?= Field::select($entity, 'objectclass', theme: 'label-left')->optionsData($objectClassNames)->multiple(true); ?>
                     <?php elseif ($attribute === 'userpassword'): ?>
-                        <?= Field::getFactory('entity')->input(MultiPasswordField::class, $entity, $attribute) ?>
+                        <?= MultiPasswordField::widget(config: ['$entityForm' => $entity], theme: 'label-left')->inputData(new FormModelInputData($entity, $attribute)) ?>
                     <?php elseif ($entity->isBinaryAttribute($attribute)): ?>
-                        <?= Field::getFactory('entity')->input(MultiFileField::class, $entity, $attribute,
-                            ['$dn' => $entity->getDn()]) ?>
+                        <?= MultiFileField::widget(config: ['$dn' => $entity->getDn(), '$entityForm' => $entity], theme: 'label-left')->inputData(new FormModelInputData($entity, $attribute)) ?>
                     <?php else: ?>
-                        <?= Field::getFactory('entity')->input(MultiTextField::class, $entity, $attribute) ?>
+                        <?= MultiTextField::widget(config: ['$entityForm' => $entity], theme: 'label-left')->inputData(new FormModelInputData($entity, $attribute)) ?>
                     <?php endif; ?>
 
                 </div>
@@ -97,9 +95,9 @@ $this->registerJs('var ldapSchema=' . $schemaJsonInfo, WebView::POSITION_BEGIN);
 
             <?php if ($entity->isNewRecord): ?>
                 <hr>
-                <?= Field::getFactory('entity')->select($entity, 'rdnAttribute')
+                <?= Field::select($entity, 'rdnAttribute', theme: 'label-left')
                     ->label('RDN Attribute')
-                    ->optionsData($attributeTypes)
+                    ->optionsData($attributeTypes)->multiple(true)
                     ->hint(($entity->isNewRecord) ? '' : 'Current DN: ' . $entity->getDn())
                     ->multiple(false) ?>
             <?php endif; ?>

@@ -30,7 +30,7 @@ class MemberOfService
     public function saveByForm(MemberOfForm $formModel): void
     {
         $entry = $this->getConfigEntry();
-        $entry->setFirstAttribute('olcMemberOfGroupOC', $formModel->getAttributeValue('groupOC'));
+        $entry->setFirstAttribute('olcMemberOfGroupOC', $formModel->getPropertyValue('groupOC'));
         $entry->save();
     }
 
@@ -45,7 +45,7 @@ class MemberOfService
             ->in('cn=config')
             ->findManyBy('objectclass', ['olcModuleList']);
         foreach ($entries as $entry) {
-            $modules = $entry->getAttributeValue('olcModuleLoad');
+            $modules = $entry->getPropertyValue('olcModuleLoad');
             print_r($modules);
             print "<br>";
         }

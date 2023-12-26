@@ -13,7 +13,7 @@ declare(strict_types=1);
  * @var \Balemy\LdapCommander\ServerConfig\MemberOf\MemberOfForm $formModel
  */
 
-use Yiisoft\Form\Field;
+use Yiisoft\FormModel\Field;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Form;
 use Yiisoft\Yii\View\Csrf;

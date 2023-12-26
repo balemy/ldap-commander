@@ -9,7 +9,7 @@ final class MultiFileField extends MultiTextField
 {
 
     public function __construct(public UrlGeneratorInterface $urlGenerator,
-                                public ?string                $dn = '',
+                                public ?string               $dn = '',
     )
     {
     }
@@ -22,8 +22,8 @@ final class MultiFileField extends MultiTextField
         if (!empty($val)) {
             $fileControls = Html::a(
                     'Download (' . strlen($val) . ' bytes)',
-                    $this->urlGenerator->generate('entity-attribute-download', [
-                        'dn' => $this->dn, 'attribute' => $this->getFormAttributeName(), 'i' => $i
+                    $this->urlGenerator->generate('entity-attribute-download', [], [
+                        'dn' => $this->dn, 'attribute' => $this->getInputData()->getName(), 'i' => $i
                     ]),
                     ['target' => '_blank', 'class' => 'btn btn-outline-secondary download-binary-button']
                 ) .
@@ -37,7 +37,7 @@ final class MultiFileField extends MultiTextField
         return (string)Html::div(
             $fileControls .
             Html::file(
-                name: $this->getInputName() . '[' . $i . ']',
+                name: $this->getInputData()->getName() ?? 'EmptyName!' . '[' . $i . ']',
                 value: $val,
                 attributes: $this->getInputAttributes()
             )->addAttributes(['style' => (empty($val)) ? '' : 'display:none'])->disabled(true)->render(),

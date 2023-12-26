@@ -39,7 +39,7 @@ class RdnBreadcrumbs extends Widget
 
             $links[] = [
                 'label' => $part,
-                'url' => $this->urlGenerator->generate('entity', ['dn' => $full])
+                'url' => $this->urlGenerator->generate('entity', [], ['dn' => $full])
             ];
         }
 

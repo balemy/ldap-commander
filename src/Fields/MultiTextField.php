@@ -3,18 +3,20 @@
 namespace Balemy\LdapCommander\Fields;
 
 use Balemy\LdapCommander\Ldap\EntityForm;
-use Cycle\Schema\Definition\Entity;
 use Yiisoft\Form\Field\Base\InputField;
 use Yiisoft\Html\Html;
 
 class MultiTextField extends InputField
 {
+
+    public ?EntityForm $entityForm = null;
+
     protected function generateInput(): string
     {
         $html = '';
 
         /** @var array|string $values */
-        $values = $this->getFormAttributeValue();
+        $values = $this->getInputData()->getValue();
         if (!is_array($values)) {
             $values = [$values];
         }
@@ -31,42 +33,33 @@ class MultiTextField extends InputField
             $i++;
         }
 
-        $entityForm = $this->getEntityForm();
-        if ($entityForm !== null) {
-            if ($entityForm->isMultiValueAttribute($this->getFormAttributeName())) {
+        if ($this->entityForm !== null) {
+            $inputName = $this->getInputData()->getName() ?? 'EmptyInputName!!';
+
+            if ($this->entityForm->isMultiValueAttribute($inputName)) {
                 $html .= Html::a('Add more')->addClass('btnx btn-lightx add-input')->addAttributes(['style' => 'font-size:10px'])
-                    ->addAttributes(['data-input-name' => $this->getInputName() . '[replace-with-id]',]);
+                    ->addAttributes(['data-input-name' => $inputName . '[replace-with-id]',]);
             }
         }
 
         return $html;
     }
 
-    protected function getEntityForm(): ?EntityForm
-    {
-        $model = $this->getFormModel();
-
-        if ($model instanceof EntityForm) {
-            return $model;
-        }
-
-        return null;
-    }
-
 
     protected function generateInputWithIndex(int $i, ?string $val): string
     {
+        $inputName = $this->getInputData()->getName() ?? 'EmptyInputName!!';
+
         $input = Html::textInput(
-            $this->getInputName() . '[' . $i . ']',
+            $inputName . '[' . $i . ']',
             $val,
             $this->getInputAttributes()
         );
 
-        $entityForm = $this->getEntityForm();
-        if ($entityForm !== null &&
-            !$entityForm->isNewRecord &&
-            $entityForm->getRdnAttributeId() === $this->getFormAttributeName() &&
-            $entityForm->getRdnAttributeValue() === $val) {
+        if ($this->entityForm !== null &&
+            !$this->entityForm->isNewRecord &&
+            $this->entityForm->getRdnAttributeId() === $this->getInputData()->getName() &&
+            $this->entityForm->getRdnAttributeValue() === $val) {
 
             $input = $input->disabled();
         }

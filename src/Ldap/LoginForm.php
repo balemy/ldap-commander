@@ -6,7 +6,7 @@ namespace Balemy\LdapCommander\Ldap;
 
 use Balemy\LdapCommander\Timer;
 use LdapRecord\Auth\BindException;
-use Yiisoft\Form\FormModel;
+use Yiisoft\FormModel\FormModel;
 use Yiisoft\Hydrator\Hydrator;
 use Yiisoft\Session\SessionInterface;
 use Yiisoft\Validator\Result;

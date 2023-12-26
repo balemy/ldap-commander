@@ -2,7 +2,7 @@
 
 namespace Balemy\LdapCommander\ServerConfig\ReferentialIntegrity;
 
-use Yiisoft\Form\FormModel;
+use Yiisoft\FormModel\FormModel;
 use Yiisoft\Validator\RulesProviderInterface;
 
 class RefForm extends FormModel implements RulesProviderInterface

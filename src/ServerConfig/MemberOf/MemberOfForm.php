@@ -2,7 +2,7 @@
 
 namespace Balemy\LdapCommander\ServerConfig\MemberOf;
 
-use Yiisoft\Form\FormModel;
+use Yiisoft\FormModel\FormModel;
 use Yiisoft\Validator\RulesProviderInterface;
 
 class MemberOfForm extends FormModel implements RulesProviderInterface

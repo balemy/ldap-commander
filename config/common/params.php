@@ -6,6 +6,7 @@ use Balemy\LdapCommander\ViewInjection\CommonViewInjection;
 use Balemy\LdapCommander\ViewInjection\LayoutViewInjection;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Definitions\Reference;
+use Yiisoft\Form\Field\SubmitButton;
 use Yiisoft\Router\CurrentRoute;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Translator\TranslatorInterface;
@@ -34,9 +35,8 @@ return [
             '@views' => '@resources/views',
         ],
     ],
-
     'yiisoft/form' => [
-        'configs' => [
+        'themes' => [
             'default' => [
                 'containerClass' => 'form-floating mb-3',
                 'inputClass' => 'form-control',
@@ -47,13 +47,13 @@ return [
                 'errorClass' => 'fw-bold fst-italic',
                 'hintClass' => 'form-text',
                 'fieldConfigs' => [
-                    \Yiisoft\Form\Field\SubmitButton::class => [
+                    SubmitButton::class => [
                         'buttonClass()' => ['btn btn-primary btn-lg mt-3'],
                         'containerClass()' => ['d-grid gap-2 form-floating'],
                     ],
                 ],
             ],
-            'entity' => [
+            'label-left' => [
                 'containerClass' => 'row mb-3',
                 'labelClass' => 'col-sm-4 col-form-label',
                 'inputContainerClass' => 'col-sm-8',
@@ -63,7 +63,7 @@ return [
                 'hintClass' => 'form-text',
                 'inputClass' => 'form-control',
                 'validClass' => 'is-valid',
-            ],
+            ]
         ],
     ],
 

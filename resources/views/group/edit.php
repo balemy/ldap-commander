@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 use Balemy\LdapCommander\Group\SidebarWidget;
 use Balemy\LdapCommander\Group\GroupSidebarLocation;
-use Yiisoft\Form\Field;
+use Yiisoft\FormModel\Field;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Form;
 use Yiisoft\Yii\View\Csrf;
@@ -31,7 +31,7 @@ $this->setTitle($applicationParameters->getName());
         </p>
         <br>
 
-        <?= Html::form()->post($urlGenerator->generate('group-edit', ['dn' => $dn]))->csrf($csrf)->open() ?>
+        <?= Html::form()->post($urlGenerator->generate('group-edit', [], ['dn' => $dn]))->csrf($csrf)->open() ?>
 
         <?= Field::text($formModel, 'title')
             ->autofocus()

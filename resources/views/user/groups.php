@@ -32,7 +32,7 @@ foreach ($notAssignedGroups as $group) {
 $form = Form::tag()
     ->method('post')
     ->csrf($csrf)
-    ->action($urlGenerator->generate('user-groups', ['dn' => $user->getDn()]))
+    ->action($urlGenerator->generate('user-groups', [], ['dn' => $user->getDn()]))
 ?>
 
 
@@ -75,7 +75,7 @@ $form = Form::tag()
             <?php foreach ($assignedGroups as $group): ?>
                 <tr>
                     <td data-checkbox="true"></td>
-                    <td><?= Html::a($group->getTitle(), $urlGenerator->generate('group-edit', ['dn' => $group->getDn()])); ?></td>
+                    <td><?= Html::a($group->getTitle(), $urlGenerator->generate('group-edit', [], ['dn' => $group->getDn()])); ?></td>
                     <td><?= $group->getDescription(); ?></td>
                     <!--<td><?= $group->getDn(); ?></td>-->
                     <td style="width:100px">

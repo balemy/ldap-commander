@@ -2,7 +2,7 @@
 
 namespace Balemy\LdapCommander\Group;
 
-use Yiisoft\Form\FormModel;
+use Yiisoft\FormModel\FormModel;
 use Yiisoft\Validator\Rule\Required;
 use Yiisoft\Validator\RulesProviderInterface;
 
@@ -12,7 +12,7 @@ class GroupForm extends FormModel implements RulesProviderInterface
     protected ?string $description = null;
     protected string $parentDn = '';
 
-    public function getAttributeLabels(): array
+    public function getPropertyLabels(): array
     {
         return [
             'parentDn' => 'Organizational Unit'

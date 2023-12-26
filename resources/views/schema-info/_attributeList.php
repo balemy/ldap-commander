@@ -21,7 +21,7 @@ use Yiisoft\Html\Html;
     <?php foreach ($attributes as $attribute): ?>
         <tr>
             <th scope="row">
-                <?= Html::a($attribute->getName(), $urlGenerator->generate('schema-attribute', ['oid' => $attribute->oid])) ?>
+                <?= Html::a($attribute->getName(), $urlGenerator->generate('schema-attribute', [], ['oid' => $attribute->oid])) ?>
             </th>
             <td>
                 <?= Html::encode($attribute->description); ?>

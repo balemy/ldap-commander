@@ -43,7 +43,7 @@ $this->setTitle($applicationParameters->getName());
                 $title = str_replace($dn, '<small>' . $dn . '</small>', $title);
                 ?>
                 <tr>
-                    <th scope="row"><?= Html::a($title, $urlGenerator->generate('entity', ['dn' => $result['dn']]))->encode(false) ?></th>
+                    <th scope="row"><?= Html::a($title, $urlGenerator->generate('entity', [], ['dn' => $result['dn']]))->encode(false) ?></th>
                     <td><?= implode("<br>", $result['objectclass']) ?></td>
                 </tr>
             <?php endforeach; ?>

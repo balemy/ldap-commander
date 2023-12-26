@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use Balemy\LdapCommander\Ldap\ConnectionDetails;
-use Yiisoft\Form\Field;
+use Yiisoft\FormModel\Field;
 use Yiisoft\Html\Tag\Form;
 use Yiisoft\Html\Tag\Select;
 
@@ -36,7 +36,7 @@ $error = $error ?? null;
                 </div>
 
                 <?= Form::tag()
-                    ->post($urlGenerator->generate('login', ['c' => $connectionId]))
+                    ->post($urlGenerator->generate('login', [], ['c' => $connectionId]))
                     ->csrf($csrf)
                     ->id('loginForm')
                     ->open() ?>
@@ -85,7 +85,7 @@ $error = $error ?? null;
 <script>
     deferJq(function () {
         $('#selectConfiguredConn').change(function () {
-            url = "<?= $urlGenerator->generate('login', ['c' => 'connectionId']); ?>"
+            url = "<?= $urlGenerator->generate('login', [], ['c' => 'connectionId']); ?>"
             window.location = url.replace('connectionId', $(this).val());
         });
     });

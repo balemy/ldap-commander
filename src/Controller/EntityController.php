@@ -94,7 +94,7 @@ final class EntityController
 
             if (isset($request->getQueryParams()['duplicate']) && $request->getQueryParams()['duplicate'] == 1) {
                 /** @var Entry $e */
-                $e =  Entry::query()->find($dn);
+                $e = Entry::query()->find($dn);
                 $entity->preloadAttributesFromEntry($e);
             }
         } else {
@@ -248,7 +248,7 @@ final class EntityController
             $entry = Entry::query()->find($dn);
 
             if ($entry !== null) {
-                $attr = Arr::wrap($entry->getAttributeValue($attribute));
+                $attr = Arr::wrap($entry->getPropertyValue($attribute));
 
                 if (isset($attr[$index])) {
                     return $responseFactory

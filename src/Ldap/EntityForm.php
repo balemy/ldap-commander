@@ -7,7 +7,7 @@ use Balemy\LdapCommander\Schema\Schema;
 use LdapRecord\LdapRecordException;
 use LdapRecord\Models\Entry;
 use Yiisoft\Arrays\ArrayHelper;
-use Yiisoft\Form\FormModel;
+use Yiisoft\FormModel\FormModel;
 use Yiisoft\Validator\DataSetInterface;
 use Yiisoft\Validator\Result;
 use Yiisoft\Validator\Rule\Each;
@@ -33,26 +33,25 @@ class EntityForm extends FormModel implements RulesProviderInterface, DataSetInt
         ;
     }
 
-    public function hasAttribute(string $attribute): bool
+    public function hasProperty(string $property): bool
     {
-        return (array_key_exists($attribute, $this->collectAttributes()));
+        return (array_key_exists($property, $this->collectAttributes()));
     }
 
-
-    public function getAttributeValue(string $attribute): mixed
+    public function getPropertyValue(string $property): mixed
     {
-        if ($attribute === 'rdnAttribute') {
+        if ($property === 'rdnAttribute') {
             return $this->getRdnAttributeId();
-        } elseif ($attribute === 'objectclass' && is_array($this->entry->getAttribute($attribute))) {
+        } elseif ($property === 'objectclass' && is_array($this->entry->getAttribute($property))) {
 
             // We're working only with lowerclass objectclass names.
             // Schema returns  objectclass keys as lc
             /** @var string[] $val */
-            $val = $this->entry->$attribute;
+            $val = $this->entry->$property;
             return array_map('strtolower', $val);
         }
 
-        return $this->entry->$attribute;
+        return $this->entry->$property;
     }
 
 
@@ -73,7 +72,7 @@ class EntityForm extends FormModel implements RulesProviderInterface, DataSetInt
                 $this->rdnAttribute = $value;
             }
         } elseif ($this->isBinaryAttribute($name) && is_array($value)) {
-            $currentValue = $this->entry->getAttributeValue($name);
+            $currentValue = $this->entry->getPropertyValue($name);
             assert(is_array($currentValue));
 
             /** @var array<int, string> $value */
@@ -120,7 +119,7 @@ class EntityForm extends FormModel implements RulesProviderInterface, DataSetInt
     public function getAttributeValueAsArray(string $attribute): array
     {
         /** @var array|string $val */
-        $val = $this->getAttributeValue($attribute);
+        $val = $this->getPropertyValue($attribute);
 
         if (is_array($val)) {
             return $val;
@@ -131,13 +130,13 @@ class EntityForm extends FormModel implements RulesProviderInterface, DataSetInt
         }
     }
 
-    public function getAttributeLabel(string $attribute): string
+    public function getPropertyLabel(string $property): string
     {
-        if (!isset($this->schema->attributeTypes[$attribute])) {
+        if (!isset($this->schema->attributeTypes[$property])) {
             return '';
         }
 
-        $attributeType = $this->schema->attributeTypes[$attribute];
+        $attributeType = $this->schema->attributeTypes[$property];
 
         return implode(', ', $attributeType->names);
     }
@@ -198,7 +197,7 @@ class EntityForm extends FormModel implements RulesProviderInterface, DataSetInt
     public function save(): void
     {
         if ($this->isNewRecord) {
-            $rdnAttribute = (string)$this->getAttributeValue('rdnAttribute');
+            $rdnAttribute = (string)$this->getPropertyValue('rdnAttribute');
             $rdnAttributeValue = (string)$this->getAttributeValueAsArray($rdnAttribute)[0];
 
             $rdn = $this->entry->getCreatableRdn($rdnAttributeValue, $rdnAttribute);
@@ -215,7 +214,7 @@ class EntityForm extends FormModel implements RulesProviderInterface, DataSetInt
                 assert(is_string($attribute));
                 if ($this->entry->isDirty($attribute) && !empty($this->entry->getOriginal()[$attribute])) {
                     /** @var string $binaryData */
-                    $binaryData = $this->entry->getAttributeValue($attribute);
+                    $binaryData = $this->entry->getPropertyValue($attribute);
                     $this->entry->deleteAttribute($attribute);
                     $this->entry->addAttributeValue($attribute, $binaryData);
                 }
@@ -354,5 +353,16 @@ class EntityForm extends FormModel implements RulesProviderInterface, DataSetInt
         }
 
         parent::processValidationResult($result);
+    }
+
+
+    public function getAttributeValue(string $attribute): mixed
+    {
+        return $this->getPropertyValue($attribute);
+    }
+
+    public function hasAttribute(string $attribute): bool
+    {
+        return $this->hasProperty($attribute);
     }
 }

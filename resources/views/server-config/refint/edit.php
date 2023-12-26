@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 use Balemy\LdapCommander\Group\SidebarWidget;
 use Balemy\LdapCommander\Group\GroupSidebarLocation;
-use Yiisoft\Form\Field;
+use Yiisoft\FormModel\Field;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Form;
 use Yiisoft\Yii\View\Csrf;

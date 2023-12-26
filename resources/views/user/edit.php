@@ -15,12 +15,18 @@ declare(strict_types=1);
 
 use Balemy\LdapCommander\User\SidebarLocation;
 use Balemy\LdapCommander\User\SidebarWidget;
-use Yiisoft\Form\Field;
+use Yiisoft\FormModel\Field;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Form;
 use Yiisoft\Yii\View\Csrf;
 
 $this->setTitle($applicationParameters->getName());
+
+if (!empty($errors)) {
+    print "<pre>";
+    print_r($errors);
+    print "</pre>";
+}
 ?>
 
 <div class="row">
@@ -37,7 +43,7 @@ $this->setTitle($applicationParameters->getName());
         <?php endif; ?>
         <br>
 
-        <?= Html::form()->post($urlGenerator->generate('user-edit', ['dn' => $userForm->user->getDn()]))->csrf($csrf)->open() ?>
+        <?= Html::form()->post($urlGenerator->generate('user-edit', [], ['dn' => $userForm->user->getDn()]))->csrf($csrf)->open() ?>
 
         <?php foreach ($userForm->getFormSchema()->getRows() as $row): ?>
             <div class="row">
@@ -47,8 +53,7 @@ $this->setTitle($applicationParameters->getName());
                             <?= Field::password($userForm, $fieldName)
                                 ->autofocus() ?>
                         <?php else: ?>
-                            <?= Field::text($userForm, $fieldName)
-                                ->autofocus() ?>
+                            <?= Field::text($userForm, $fieldName) ?>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>

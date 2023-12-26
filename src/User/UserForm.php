@@ -5,7 +5,9 @@ namespace Balemy\LdapCommander\User;
 use Balemy\LdapCommander\ApplicationParameters;
 use Balemy\LdapCommander\Ldap\LdapService;
 use Balemy\LdapCommander\Schema\AttributeType;
-use Yiisoft\Form\FormModel;
+use Yiisoft\FormModel\Exception\PropertyNotSupportNestedValuesException;
+use Yiisoft\FormModel\Exception\UndefinedArrayElementException;
+use Yiisoft\FormModel\FormModel;
 use Yiisoft\Validator\DataSetInterface;
 use Yiisoft\Validator\Rule\Required;
 use Yiisoft\Validator\RulesProviderInterface;
@@ -41,28 +43,36 @@ class UserForm extends FormModel implements RulesProviderInterface, DataSetInter
     {
         /** @var array<string, string> $attributes */
         foreach ($attributes as $name => $value) {
-            $this->setAttribute($name, $value);
+            $this->setProperty($name, $value);
         }
 
         return true;
     }
 
-    public function setAttribute(string $name, mixed $value): void
+    private function setProperty(string $name, mixed $value): void
     {
-        if (!$this->hasAttribute($name)) {
+        if (!$this->hasProperty($name)) {
             throw new \Exception('Invalid ' . $name . ' exception!');
         }
         $this->_attrs[$name] = $value;
     }
 
-    public function hasAttribute(string $attribute): bool
+    public function hasProperty(string $property): bool
     {
-        return (array_key_exists($attribute, $this->collectAttributes()));
+        return (array_key_exists($property, $this->collectAttributes()));
     }
 
-    public function getAttributeValue(string $attribute): mixed
+    public function getPropertyValue(string $property): mixed
     {
-        return $this->_attrs[$attribute] ?? '';
+        try {
+            return $this->_attrs[$property] ?? '';
+        } catch (PropertyNotSupportNestedValuesException $exception) {
+            return $exception->getValue() === null
+                ? null
+                : throw $exception;
+        } catch (UndefinedArrayElementException) {
+            return null;
+        }
     }
 
     /**
@@ -102,7 +112,7 @@ class UserForm extends FormModel implements RulesProviderInterface, DataSetInter
         /**
          * @psalm-suppress MixedAssignment
          */
-        $res = $this->user->getAttributeValue($name);
+        $res = $this->user->getPropertyValue($name);
         if (is_array($res)) {
             if (isset($res[0]) && is_string($res[0])) {
                 return $res[0];
@@ -115,7 +125,7 @@ class UserForm extends FormModel implements RulesProviderInterface, DataSetInter
      * @psalm-suppress LessSpecificImplementedReturnType
      * @psalm-suppress MixedReturnTypeCoercion
      */
-    public function getAttributeLabels(): array
+    public function getPropertyLabels(): array
     {
         return array_merge([
             'parentDn' => 'Organizational Unit'
@@ -138,25 +148,25 @@ class UserForm extends FormModel implements RulesProviderInterface, DataSetInter
         /** @var string $attributeName */
         foreach (array_keys($this->collectAttributes()) as $attributeName) {
             if ($attributeName === 'userPassword') {
-                $password = (string)$this->getAttributeValue('userPassword');
+                $password = (string)$this->getPropertyValue('userPassword');
                 if (!empty($password)) {
                     $salt = mt_rand(0, mt_getrandmax());
                     $value = '{SSHA}' . base64_encode(sha1($password . $salt, TRUE) . $salt);
                     $this->user->setFirstAttribute('userPassword', $value);
                 }
             } elseif (!in_array($attributeName, $this->internalAttrs)) {
-                $val = (string)$this->getAttributeValue($attributeName);
+                $val = (string)$this->getPropertyValue($attributeName);
                 if ($this->isNewRecord() && empty($val)) {
                     // On new record, don't set empty attribute values
                 } else {
-                    $this->user->setFirstAttribute($attributeName, $this->getAttributeValue($attributeName));
+                    $this->user->setFirstAttribute($attributeName, $this->getPropertyValue($attributeName));
                 }
             }
         }
 
         $moveToDn = null;
 
-        $parentDn = (string)$this->getAttributeValue('parentDn');
+        $parentDn = (string)$this->getPropertyValue('parentDn');
         if ($this->isNewRecord()) {
             $this->user->inside($parentDn);
         } else {
@@ -186,12 +196,12 @@ class UserForm extends FormModel implements RulesProviderInterface, DataSetInter
         /** @var string $attributeName */
         foreach (array_keys($this->collectAttributes()) as $attributeName) {
             if (!in_array($attributeName, $this->internalAttrs) && $attributeName !== 'userPassword') {
-                $this->setAttribute($attributeName,
+                $this->setProperty($attributeName,
                     $this->user->getFirstAttribute($attributeName));
             }
         }
 
-        $this->setAttribute('parentDn', $this->user->getParentDn() ?? '');
+        $this->setProperty('parentDn', $this->user->getParentDn() ?? '');
     }
 
     public function isNewRecord(): bool
@@ -202,5 +212,15 @@ class UserForm extends FormModel implements RulesProviderInterface, DataSetInter
     public function getData(): ?array
     {
         return $this->_attrs;
+    }
+
+    public function getAttributeValue(string $attribute): mixed
+    {
+        return $this->getPropertyValue($attribute);
+    }
+
+    public function hasAttribute(string $attribute): bool
+    {
+        return $this->hasProperty($attribute);
     }
 }

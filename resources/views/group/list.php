@@ -47,8 +47,8 @@ $this->setTitle($applicationParameters->getName());
             <tbody>
             <?php foreach ($groups as $group): ?>
                 <?php
-                $editUrl = $urlGenerator->generate('group-edit', ['dn' => $group->getDn()]);
-                $membersUrl = $urlGenerator->generate('group-members', ['dn' => $group->getDn()]);
+                $editUrl = $urlGenerator->generate('group-edit', [], ['dn' => $group->getDn()]);
+                $membersUrl = $urlGenerator->generate('group-members', [], ['dn' => $group->getDn()]);
                 ?>
                 <tr>
                     <td data-checkbox="true"></td>

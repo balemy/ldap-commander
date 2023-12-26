@@ -49,7 +49,7 @@ final class UserController
             is_string($request->getQueryParams()['ou']) &&
             array_key_exists((string)$request->getQueryParams()['ou'], $ous)
         ) {
-            $ou = (string) $request->getQueryParams()['ou'];
+            $ou = (string)$request->getQueryParams()['ou'];
         }
 
         if ($ou === '') {
@@ -104,6 +104,7 @@ final class UserController
             'dn' => $userForm->user->getDn(),
             'parentDNs' => $this->ldapService->getOrganizationalUnits(),
             'userForm' => $userForm,
+            'errors' => $this->validator->validate($userForm)->getErrors(),
         ]);
     }
 

@@ -23,7 +23,7 @@ use Yiisoft\Html\Html;
         <tr>
             <th scope="row">
                 <?= Html::a($objectClass->name,
-                    $urlGenerator->generate('schema-objectclass', ['oid' => $objectClass->oid])
+                    $urlGenerator->generate('schema-objectclass', [], ['oid' => $objectClass->oid])
                 ) ?>
             </th>
             <td>

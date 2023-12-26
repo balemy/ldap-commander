@@ -33,24 +33,24 @@ class SidebarWidget extends Widget
         $html = Html::openTag('ul', ['class' => 'list-group']);
         if ($this->location !== GroupSidebarLocation::Edit) {
             $html .= Html::tag('li',
-                Html::a('Edit Group', $this->urlGenerator->generate('group-edit', ['dn' => $this->dn])),
+                Html::a('Edit Group', $this->urlGenerator->generate('group-edit', [], ['dn' => $this->dn])),
                 ['class' => 'list-group-item']
             );
         }
         if ($this->location !== GroupSidebarLocation::Members) {
             $html .= Html::tag('li',
-                Html::a('Manage Members', $this->urlGenerator->generate('group-members', ['dn' => $this->dn])),
+                Html::a('Manage Members', $this->urlGenerator->generate('group-members', [], ['dn' => $this->dn])),
                 ['class' => 'list-group-item']
             );
         }
 
         $html .= Html::tag('li',
-            Html::a('Edit Raw Entity', $this->urlGenerator->generate('entity-edit', ['dn' => $this->dn])),
+            Html::a('Edit Raw Entity', $this->urlGenerator->generate('entity-edit', [], ['dn' => $this->dn])),
             ['class' => 'list-group-item']
         );
 
         $html .= Html::tag('li',
-            Html::a('Delete Group', $this->urlGenerator->generate('group-delete', ['dn' => $this->dn])),
+            Html::a('Delete Group', $this->urlGenerator->generate('group-delete', [], ['dn' => $this->dn])),
             [
                 'onClick' => 'return confirm("Are you sure?")',
                 'class' => 'list-group-item'
