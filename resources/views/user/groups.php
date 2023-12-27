@@ -8,12 +8,12 @@ declare(strict_types=1);
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var Csrf $csrf
- * @var \Balemy\LdapCommander\User\User $user
- * @var \Balemy\LdapCommander\Group\Group[] $assignedGroups
- * @var \Balemy\LdapCommander\Group\Group[] $notAssignedGroups
+ * @var \Balemy\LdapCommander\Modules\UserManager\User $user
+ * @var \Balemy\LdapCommander\Modules\GroupManager\Group[] $assignedGroups
+ * @var \Balemy\LdapCommander\Modules\GroupManager\Group[] $notAssignedGroups
  */
 
-use Balemy\LdapCommander\User\SidebarWidget;
+use Balemy\LdapCommander\Modules\UserManager\SidebarWidget;
 use Balemy\LdapCommander\User\SidebarLocation;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Button;

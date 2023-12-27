@@ -15,10 +15,10 @@ declare(strict_types=1);
  * @var array $objectClassNames
  */
 
-use Balemy\LdapCommander\Asset\EntityEditAsset;
+use Balemy\LdapCommander\Modules\EntityBrowser\Assets\EntityEditAsset;
+use Balemy\LdapCommander\Modules\EntityBrowser\Widgets\RdnBreadcrumbs;
 use Balemy\LdapCommander\Widget\EntitySidebar;
 use Balemy\LdapCommander\Widget\EntitySidebarLocation;
-use Balemy\LdapCommander\Widget\RdnBreadcrumbs;
 use Yiisoft\View\WebView;
 use Yiisoft\Yii\View\Csrf;
 

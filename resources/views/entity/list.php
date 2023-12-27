@@ -11,8 +11,9 @@ declare(strict_types=1);
  * @var string $dn
  */
 
-use Balemy\LdapCommander\Widget\EntitySidebar;
-use Balemy\LdapCommander\Widget\EntitySidebarLocation;
+use Balemy\LdapCommander\Modules\EntityBrowser\Widgets\EntitySidebar;
+use Balemy\LdapCommander\Modules\EntityBrowser\Widgets\RdnBreadcrumbs;
+use Balemy\LdapCommander\Modules\EntityBrowser\Widgets\EntitySidebarLocation;
 use Yiisoft\Html\Html;
 
 $this->setTitle($applicationParameters->getName());
@@ -20,7 +21,7 @@ $this->setTitle($applicationParameters->getName());
 
 <div class="row">
     <div class="col-md-9">
-        <?= \Balemy\LdapCommander\Widget\RdnBreadcrumbs::widget([], ['$dn' => $dn]); ?>
+        <?= RdnBreadcrumbs::widget([], ['$dn' => $dn]); ?>
 
         <h1> List Children </h1>
         <p class="lead">

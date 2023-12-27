@@ -9,12 +9,12 @@ declare(strict_types=1);
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var Csrf $csrf
  * @var string $dn
- * @var \Balemy\LdapCommander\User\User[] $members
- * @var \Balemy\LdapCommander\User\User[] $noMembers
+ * @var \Balemy\LdapCommander\Modules\UserManager\User[] $members
+ * @var \Balemy\LdapCommander\Modules\UserManager\User[] $noMembers
  */
 
-use Balemy\LdapCommander\Group\SidebarWidget;
-use Balemy\LdapCommander\Group\GroupSidebarLocation;
+use Balemy\LdapCommander\Modules\GroupManager\SidebarWidget;
+use Balemy\LdapCommander\Modules\GroupManager\GroupSidebarLocation;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Button;
 use Yiisoft\Html\Tag\Form;

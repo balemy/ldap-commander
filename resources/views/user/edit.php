@@ -8,13 +8,13 @@ declare(strict_types=1);
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var Csrf $csrf
- * @var \Balemy\LdapCommander\User\UserForm $userForm
+ * @var \Balemy\LdapCommander\Modules\UserManager\UserForm $userForm
  * @var string[] $parentDNs
  * @var string[] $fieldSet
  */
 
-use Balemy\LdapCommander\User\SidebarLocation;
-use Balemy\LdapCommander\User\SidebarWidget;
+use Balemy\LdapCommander\Modules\UserManager\SidebarWidget;
+use Balemy\LdapCommander\Modules\UserManager\SidebarLocation;
 use Yiisoft\FormModel\Field;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Form;

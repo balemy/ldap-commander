@@ -3,13 +3,13 @@
 declare(strict_types=1);
 
 use Balemy\LdapCommander\Controller\AuthController;
-use Balemy\LdapCommander\Controller\EntityController;
-use Balemy\LdapCommander\Controller\SchemaController;
 use Balemy\LdapCommander\Controller\SiteController;
-use Balemy\LdapCommander\Group\GroupController;
 use Balemy\LdapCommander\Middleware\LDAPConnect;
-use Balemy\LdapCommander\ServerConfig\ReferentialIntegrity\Controller as RefIntController;
-use Balemy\LdapCommander\User\UserController;
+use Balemy\LdapCommander\Modules\EntityBrowser\EntityController;
+use Balemy\LdapCommander\Modules\GroupManager\GroupController;
+use Balemy\LdapCommander\Modules\SchemaBrowser\SchemaController;
+use Balemy\LdapCommander\Modules\ServerConfig\ReferentialIntegrity\Controller as RefIntController;
+use Balemy\LdapCommander\Modules\UserManager\UserController;
 use Yiisoft\Http\Method;
 use Yiisoft\Router\Group;
 use Yiisoft\Router\Route;
@@ -31,7 +31,7 @@ return [
             Route::get('/schema/object-class')->action([SchemaController::class, 'displayObjectClass'])->name('schema-objectclass'),
             Route::get('/schema/attribute')->action([SchemaController::class, 'displayAttribute'])->name('schema-attribute'),
 
-            Route::get('/server')->action([\Balemy\LdapCommander\Controller\ServerController::class, 'index'])->name('server'),
+            Route::get('/server')->action([\Balemy\LdapCommander\Modules\ServerInfo\ServerController::class, 'index'])->name('server'),
 
             Route::get('/users')->action([UserController::class, 'list'])->name('user-list'),
             Route::methods([Method::GET, Method::POST], '/user/edit')->action([UserController::class, 'edit'])->name('user-edit'),
@@ -45,7 +45,7 @@ return [
             Route::methods([Method::GET, Method::POST], '/group/delete')->action([GroupController::class, 'delete'])->name('group-delete'),
 
             Route::methods([Method::GET, Method::POST], '/server-config/refint/edit')->action([RefIntController::class, 'edit'])->name('server-config-refint-edit'),
-            Route::methods([Method::GET, Method::POST], '/server-config/memberof/edit')->action([\Balemy\LdapCommander\ServerConfig\MemberOf\Controller::class, 'edit'])->name('server-config-memberof-edit'),
+            Route::methods([Method::GET, Method::POST], '/server-config/memberof/edit')->action([\Balemy\LdapCommander\Modules\ServerConfig\MemberOf\Controller::class, 'edit'])->name('server-config-memberof-edit'),
 
         //Route::methods([Method::GET, Method::POST], '/schema-editor/')->action([\Balemy\LdapCommander\Schema\Controller::class, 'list'])->name('schema-edit'),
         ),

@@ -10,11 +10,10 @@ declare(strict_types=1);
  * @var Csrf $csrf
  * @var string $dn
  * @var string[] $parentDns
- * @var \Balemy\LdapCommander\Group\GroupForm $formModel
+ * @var \Balemy\LdapCommander\Modules\GroupManager\GroupForm $formModel
  */
 
 use Balemy\LdapCommander\Group\SidebarWidget;
-use Balemy\LdapCommander\Group\GroupSidebarLocation;
 use Yiisoft\FormModel\Field;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Form;

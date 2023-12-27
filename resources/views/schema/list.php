@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @var Csrf $csrf
  * @var string $dn
  * @var string[] $parentDns
- * @var \Balemy\LdapCommander\ServerConfig\MemberOf\MemberOfForm $formModel
+ * @var \Balemy\LdapCommander\Modules\ServerConfig\MemberOf\MemberOfForm $formModel
  */
 
 use Yiisoft\Yii\View\Csrf;

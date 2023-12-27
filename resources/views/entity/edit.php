@@ -15,13 +15,13 @@ declare(strict_types=1);
  * @var array $objectClassNames
  */
 
-use Balemy\LdapCommander\Asset\EntityEditAsset;
-use Balemy\LdapCommander\Fields\MultiFileField;
-use Balemy\LdapCommander\Fields\MultiPasswordField;
-use Balemy\LdapCommander\Fields\MultiTextField;
-use Balemy\LdapCommander\Widget\EntitySidebar;
-use Balemy\LdapCommander\Widget\EntitySidebarLocation;
-use Balemy\LdapCommander\Widget\RdnBreadcrumbs;
+use Balemy\LdapCommander\Modules\EntityBrowser\Assets\EntityEditAsset;
+use Balemy\LdapCommander\Modules\EntityBrowser\Fields\MultiFileField;
+use Balemy\LdapCommander\Modules\EntityBrowser\Fields\MultiPasswordField;
+use Balemy\LdapCommander\Modules\EntityBrowser\Fields\MultiTextField;
+use Balemy\LdapCommander\Modules\EntityBrowser\Widgets\EntitySidebar;
+use Balemy\LdapCommander\Modules\EntityBrowser\Widgets\EntitySidebarLocation;
+use Balemy\LdapCommander\Modules\EntityBrowser\Widgets\RdnBreadcrumbs;
 use Yiisoft\FormModel\Field;
 use Yiisoft\FormModel\FormModelInputData;
 use Yiisoft\Html\Html;

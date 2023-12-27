@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
- * @var \Balemy\LdapCommander\User\User[] $users
+ * @var \Balemy\LdapCommander\Modules\UserManager\User[] $users
  * @var string[] $columns
  * @var string[] $organizationalUnits
  * @var string $organizationalUnit
