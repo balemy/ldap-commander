@@ -21,12 +21,6 @@ use Yiisoft\Html\Tag\Form;
 use Yiisoft\Yii\View\Csrf;
 
 $this->setTitle($applicationParameters->getName());
-
-if (!empty($errors)) {
-    print "<pre>";
-    print_r($errors);
-    print "</pre>";
-}
 ?>
 
 <div class="row">

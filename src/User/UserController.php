@@ -104,7 +104,6 @@ final class UserController
             'dn' => $userForm->user->getDn(),
             'parentDNs' => $this->ldapService->getOrganizationalUnits(),
             'userForm' => $userForm,
-            'errors' => $this->validator->validate($userForm)->getErrors(),
         ]);
     }
 

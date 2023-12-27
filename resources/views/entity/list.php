@@ -52,8 +52,6 @@ $this->setTitle($applicationParameters->getName());
 
     </div>
     <div class="col-md-3">
-        <?= $dn ?>
-
         <?= EntitySidebar::widget([], ['$dn' => $dn, '$location' => EntitySidebarLocation::ListChildren]); ?>
     </div>
 </div>

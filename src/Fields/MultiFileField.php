@@ -7,13 +7,12 @@ use Yiisoft\Router\UrlGeneratorInterface;
 
 final class MultiFileField extends MultiTextField
 {
-
     public function __construct(public UrlGeneratorInterface $urlGenerator,
                                 public ?string               $dn = '',
     )
     {
+        ;
     }
-
 
     protected function generateInputWithIndex(int $i, ?string $val): string
     {
@@ -23,7 +22,7 @@ final class MultiFileField extends MultiTextField
             $fileControls = Html::a(
                     'Download (' . strlen($val) . ' bytes)',
                     $this->urlGenerator->generate('entity-attribute-download', [], [
-                        'dn' => $this->dn, 'attribute' => $this->getInputData()->getName(), 'i' => $i
+                        'dn' => $this->dn, 'attribute' => $this->getInputName(), 'i' => $i
                     ]),
                     ['target' => '_blank', 'class' => 'btn btn-outline-secondary download-binary-button']
                 ) .
@@ -37,7 +36,7 @@ final class MultiFileField extends MultiTextField
         return (string)Html::div(
             $fileControls .
             Html::file(
-                name: $this->getInputData()->getName() ?? 'EmptyName!' . '[' . $i . ']',
+                name: $this->getInputName() . '[' . $i . ']',
                 value: $val,
                 attributes: $this->getInputAttributes()
             )->addAttributes(['style' => (empty($val)) ? '' : 'display:none'])->disabled(true)->render(),
@@ -45,5 +44,3 @@ final class MultiFileField extends MultiTextField
         )->encode(false);
     }
 }
-
-?>

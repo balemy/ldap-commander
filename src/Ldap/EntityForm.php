@@ -72,7 +72,7 @@ class EntityForm extends FormModel implements RulesProviderInterface, DataSetInt
                 $this->rdnAttribute = $value;
             }
         } elseif ($this->isBinaryAttribute($name) && is_array($value)) {
-            $currentValue = $this->entry->getPropertyValue($name);
+            $currentValue = $this->entry->getAttributeValue($name);
             assert(is_array($currentValue));
 
             /** @var array<int, string> $value */
