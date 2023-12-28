@@ -19,7 +19,7 @@ return array_merge($ldapCommanderConfig, [
     'app' => [
         'charset' => 'UTF-8',
         'name' => 'LDAP Commander',
-        'version' => '0.6.2',
+        'version' => '0.7.0',
     ],
     'yiisoft/aliases' => [
         'aliases' => [
