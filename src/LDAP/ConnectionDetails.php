@@ -23,12 +23,12 @@ class ConnectionDetails
     public static function fromArray(array $config): static
     {
         return new static(
-            dsn: $config['dsn'] ?? 'http://localhost',
-            baseDn: $config['baseDn'] ?? '',
-            adminDn: $config['adminDn'] ?? '',
-            adminPassword: $config['adminPassword'] ?? '',
-            configDn: $config['configDn'] ?? '',
-            configPassword: $config['configPassword'] ?? '',
+            dsn: is_string($config['dsn']) ? $config['dsn'] : 'http://localhost',
+            baseDn: is_string($config['baseDn']) ? $config['baseDn'] : '',
+            adminDn: is_string($config['adminDn']) ? $config['adminDn'] : '',
+            adminPassword: is_string($config['adminPassword']) ? $config['adminPassword'] : '',
+            configDn: is_string($config['configDn']) ? $config['configDn'] : '',
+            configPassword: is_string($config['configPassword']) ? $config['configPassword'] : '',
         );
     }
 }
