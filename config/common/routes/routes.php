@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-use Balemy\LdapCommander\Controller\AuthController;
 use Balemy\LdapCommander\Controller\SiteController;
 use Balemy\LdapCommander\LDAP\Middleware\LDAPConnect;
 use Balemy\LdapCommander\Modules\EntityBrowser\EntityController;
 use Balemy\LdapCommander\Modules\GroupManager\GroupController;
 use Balemy\LdapCommander\Modules\SchemaBrowser\SchemaController;
 use Balemy\LdapCommander\Modules\ServerConfig\ReferentialIntegrity\Controller as RefIntController;
+use Balemy\LdapCommander\Modules\Session\AuthController;
+use Balemy\LdapCommander\Modules\Session\SessionLoaderMiddleware;
 use Balemy\LdapCommander\Modules\UserManager\UserController;
 use Yiisoft\Http\Method;
 use Yiisoft\Router\Group;
@@ -17,7 +18,7 @@ use Yiisoft\Router\Route;
 return [
     Route::get('/')->action([SiteController::class, 'index'])->name('home'),
     Group::create()
-        ->middleware(LDAPConnect::class)
+        ->middleware(SessionLoaderMiddleware::class)
         ->routes(
             Route::get('/entity')->action([EntityController::class, 'open'])->name('entity'),
             Route::methods([Method::GET, Method::POST], '/entity/edit')->action([EntityController::class, 'edit'])->name('entity-edit'),

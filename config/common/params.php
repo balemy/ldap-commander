@@ -12,7 +12,9 @@ use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Translator\TranslatorInterface;
 use Yiisoft\Yii\View\CsrfViewInjection;
 
-return [
+$ldapCommanderConfig = (array) require(dirname(__DIR__) . '/ldap-commander.php');
+
+return array_merge($ldapCommanderConfig, [
     'app' => [
         'charset' => 'UTF-8',
         'name' => 'LDAP Commander',
@@ -94,4 +96,4 @@ return [
     'yiisoft/yii-debug-api' => [
         'allowedIPs' => ['172.0.0.1/10'],
     ],
-];
+]);

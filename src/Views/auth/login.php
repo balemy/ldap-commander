@@ -12,7 +12,7 @@ use Yiisoft\Html\Tag\Select;
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var string $csrf
  * @var int $connectionId
- * @var \Balemy\LdapCommander\LDAP\LoginForm $formModel
+ * @var \Balemy\LdapCommander\Modules\Session\LoginForm $formModel
  */
 
 $error = $error ?? null;

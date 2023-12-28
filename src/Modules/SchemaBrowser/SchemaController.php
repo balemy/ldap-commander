@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Balemy\LdapCommander\Modules\SchemaBrowser;
 
 use Balemy\LdapCommander\LDAP\LdapService;
+use Balemy\LdapCommander\Modules\Session\SessionList;
 use Balemy\LdapCommander\Service\WebControllerService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Assets\AssetManager;
+use Yiisoft\Di\Container;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Session\Flash\FlashInterface;
 use Yiisoft\Session\SessionInterface;
@@ -23,7 +25,7 @@ final class SchemaController
                                 public UrlGeneratorInterface $urlGenerator,
                                 public SessionInterface      $session,
                                 public AssetManager          $assetManager,
-                                public FlashInterface        $flash
+                                public FlashInterface        $flash,
     )
     {
         $this->viewRenderer = $viewRenderer->withViewPath(__DIR__ . '/Views/');

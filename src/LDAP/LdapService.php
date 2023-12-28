@@ -4,6 +4,7 @@ namespace Balemy\LdapCommander\LDAP;
 
 use Balemy\LdapCommander\LDAP\Helper\DSN;
 use Balemy\LdapCommander\LDAP\Schema\Schema;
+use Balemy\LdapCommander\Modules\Session\LoginForm;
 use Balemy\LdapCommander\Timer;
 use LdapRecord\Connection;
 use LdapRecord\Container;
@@ -49,6 +50,30 @@ class LdapService
             'username' => (string)$login->getPropertyValue('adminDn'),
             'password' => (string)$login->getPropertyValue('adminPassword'),
             'base_dn' => (string)$login->getPropertyValue('baseDn')
+        ];
+
+        $this->baseDn = $config['base_dn'];
+
+        $this->connection = new Connection($config);
+        $this->connection->connect();
+
+        Container::addConnection($this->connection, 'default');
+        Container::setDefaultConnection('default');
+
+        $this->schema->populate($this->connection);
+    }
+
+    public function connectWithDetails(ConnectionDetails $details)
+    {
+        $dsn = new DSN($details->dsn);
+
+        $config = [
+            'hosts' => [$dsn->getHost()],
+            'port' => $dsn->getPort(),
+            'use_ssl' => $dsn->getIsSSL(),
+            'username' => $details->adminDn,
+            'password' => $details->adminPassword,
+            'base_dn' => $details->baseDn
         ];
 
         $this->baseDn = $config['base_dn'];
