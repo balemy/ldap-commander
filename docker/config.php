@@ -3,7 +3,6 @@
 return [
     'ldap-sessions' => [
         [
-            'title' => 'Test Docker',
             'LDAP' => [
                 'dsn' => 'ldap://openldap:1389',
                 'baseDn' => 'dc=example,dc=org',

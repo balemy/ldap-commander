@@ -12,7 +12,6 @@
 
 LDAP Commander is a web interface for managing LDAP servers. Currently only OpenLDAP is supported.
 
-
 ### Features
 
 - Browse LDAP Structure
@@ -25,31 +24,33 @@ LDAP Commander is a web interface for managing LDAP servers. Currently only Open
   - Binary Attributes
   - SHA Password Hashing
 
-
 ## Quickstart with Docker
 
-**Docker Compose (with bundled LDAP Servern and Example data):**
+**Without LDAP Server:**
 
 ```
-git clone https://github.com/balemy/ldap-commander.git /opt/ldap-commander
-cd /opt/ldap-commander
-./docker-compose up
-```
-
-**Or Standalone without LDAP Server:**
-
-```
-docker run -it --net='host' \
--e LDAPCOM_CONN1_TITLE='My LDAP Server' \
--e LDAPCOM_CONN1_DSN='ldap://localhost:389' \
--e LDAPCOM_CONN1_BASEDN='dc=example,dc=org' \
--e LDAPCOM_CONN1_ADMIN_DN='cn=admin,dc=example,dc=org' \
--e LDAPCOM_CONN1_ADMIN_PASSWORD= \
--p 8080:8080 balemy/ldap-commander
+wget -O config.php https://raw.githubusercontent.com/balemy/ldap-commander/main/config/ldap.example.php
+docker run -it --net='host' -p 8080:8080 -v ./config.php:/app/config/ldap.php balemy/ldap-commander
 ````
 
-Then open the following URL in your browser: [http://localhost:8080](http://localhost:8080)
+**Docker Compose (with bundled LDAP Server and Example data):**
 
+```
+mkdir /opt/ldap-commander
+cd /opt/ldap-commander
+
+wget -O config.php https://raw.githubusercontent.com/balemy/ldap-commander/main/docker/config.php
+wget -O docker-compose.yml https://raw.githubusercontent.com/balemy/ldap-commander/main/docker/docker-compose.yml
+wget -O ldap-memberof.ldif https://raw.githubusercontent.com/balemy/ldap-commander/main/resources/ldap/bitnami-openldap-memberof.ldif
+wget -O ldap-example-data.ldif https://raw.githubusercontent.com/balemy/ldap-commander/main/resources/ldap/example.ldif
+
+mkdir openldap_data
+chmod 777 openldap_data
+
+docker-compose up
+```
+
+Then open the following URL in your browser: [http://localhost:8080](http://localhost:8080)
 
 ## Quickstart with PHP & Composer
 
@@ -78,5 +79,3 @@ Then open the following URL in your browser: [http://localhost:8080](http://loca
 ## License
 
 Please see [`LICENSE`](./LICENSE.md) for more information.
-
-

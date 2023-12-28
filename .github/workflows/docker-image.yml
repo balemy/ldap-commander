@@ -22,13 +22,13 @@ jobs:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
     - name: Install Git
-      run: sudo apt-get install -y git        
-        
+      run: sudo apt-get install -y git
+
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag balemy/ldap-commander:latest
-      
+      run: docker build . --file docker/Dockerfile --tag balemy/ldap-commander:latest
+
     - name: Docker Push
       run: docker push balemy/ldap-commander
