@@ -25,8 +25,7 @@ RUN \
 #--------------------------------------------------------------------------
 RUN apt-get install git unzip -y
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
-#RUN composer install --no-dev
-RUN composer install
+RUN composer install --no-dev
 
 #--------------------------------------------------------------------------
 # Cleanup
