@@ -8,6 +8,7 @@ use Balemy\LdapCommander\LDAP\ConnectionDetails;
 use Balemy\LdapCommander\Service\WebControllerService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Yiisoft\Aliases\Aliases;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\FormModel\FormHydrator;
 use Yiisoft\Http\Method;
@@ -30,7 +31,12 @@ final class AuthController
         $this->viewRenderer = $viewRenderer->withViewPath(__DIR__ . '/Views/')->withLayout('@views/layout/main-nomenu');
     }
 
-    public function login(ServerRequestInterface $request, ValidatorInterface $validator, FormHydrator $formHydrator, SessionList $sessionList): ResponseInterface
+    public function login(ServerRequestInterface $request,
+                          ValidatorInterface     $validator,
+                          FormHydrator           $formHydrator,
+                          SessionList            $sessionList,
+                          Aliases                $aliases
+    ): ResponseInterface
     {
         $loginForm = new LoginForm($sessionList);
 
@@ -45,6 +51,8 @@ final class AuthController
         return $this->viewRenderer->render('login', [
             'urlGenerator' => $this->urlGenerator,
             'loginForm' => $loginForm,
+            'sessionList' => $loginForm->getSessionTitles(),
+            'aliases' => $aliases
         ]);
     }
 

@@ -12,7 +12,8 @@ use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Translator\TranslatorInterface;
 use Yiisoft\Yii\View\CsrfViewInjection;
 
-$ldapCommanderConfig = (array) require(dirname(__DIR__) . '/ldap-commander.php');
+$ldapConfigFile = dirname(__DIR__) . '/ldap.php';
+$ldapCommanderConfig = (file_exists($ldapConfigFile)) ? (array)require($ldapConfigFile) : [];
 
 return array_merge($ldapCommanderConfig, [
     'app' => [

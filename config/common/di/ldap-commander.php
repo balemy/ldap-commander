@@ -9,7 +9,7 @@ use Balemy\LdapCommander\Modules\Session\SessionList;
 return [
     SessionList::class => [
         '__construct()' => [
-            'params' => $params['ldap-sessions'],
+            'params' => $params['ldap-sessions'] ?? [],
         ],
     ],
 ];
