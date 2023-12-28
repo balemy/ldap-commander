@@ -3,8 +3,8 @@
 namespace Balemy\LdapCommander\Modules\UserManager;
 
 use Balemy\LdapCommander\ApplicationParameters;
-use Balemy\LdapCommander\Ldap\LdapService;
-use Balemy\LdapCommander\Schema\AttributeType;
+use Balemy\LdapCommander\LDAP\LdapService;
+use Balemy\LdapCommander\LDAP\Schema\AttributeType;
 use Yiisoft\FormModel\Exception\PropertyNotSupportNestedValuesException;
 use Yiisoft\FormModel\Exception\UndefinedArrayElementException;
 use Yiisoft\FormModel\FormModel;

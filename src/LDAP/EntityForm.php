@@ -1,9 +1,9 @@
 <?php
 
-namespace Balemy\LdapCommander\Ldap;
+namespace Balemy\LdapCommander\LDAP;
 
-use Balemy\LdapCommander\Helper\DnHelper;
-use Balemy\LdapCommander\Schema\Schema;
+use Balemy\LdapCommander\LDAP\Helper\DnHelper;
+use Balemy\LdapCommander\LDAP\Schema\Schema;
 use LdapRecord\LdapRecordException;
 use LdapRecord\Models\Entry;
 use Yiisoft\Arrays\ArrayHelper;

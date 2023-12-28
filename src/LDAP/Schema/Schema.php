@@ -1,8 +1,8 @@
 <?php
 
-namespace Balemy\LdapCommander\Schema;
+namespace Balemy\LdapCommander\LDAP\Schema;
 
-use Balemy\LdapCommander\Ldap\LdapService;
+use Balemy\LdapCommander\LDAP\LdapService;
 use Balemy\LdapCommander\Timer;
 use LdapRecord\Connection;
 use Yiisoft\Json\Json;

@@ -2,7 +2,7 @@
 
 namespace Balemy\LdapCommander\Modules\EntityBrowser\Fields;
 
-use Balemy\LdapCommander\Ldap\EntityForm;
+use Balemy\LdapCommander\LDAP\EntityForm;
 use Yiisoft\Form\Field\Base\InputField;
 use Yiisoft\Html\Html;
 

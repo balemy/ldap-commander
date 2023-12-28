@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Balemy\LdapCommander\Modules\GroupManager;
 
-use Balemy\LdapCommander\Ldap\LdapService;
+use Balemy\LdapCommander\LDAP\LdapService;
 use Balemy\LdapCommander\Modules\UserManager\User;
 use Balemy\LdapCommander\Service\WebControllerService;
 use LdapRecord\LdapRecordException;

@@ -1,8 +1,6 @@
 <?php
 
-namespace Balemy\LdapCommander\Ldap;
-
-use Yiisoft\Session\SessionInterface;
+namespace Balemy\LdapCommander\LDAP;
 
 class ConnectionDetails
 {

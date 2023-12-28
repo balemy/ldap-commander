@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Balemy\LdapCommander\Controller;
 
-use Balemy\LdapCommander\Ldap\LdapService;
+use Balemy\LdapCommander\LDAP\LdapService;
 use Balemy\LdapCommander\Service\WebControllerService;
 use Psr\Http\Message\ResponseInterface;
 use Yiisoft\Assets\AssetManager;

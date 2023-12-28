@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Balemy\LdapCommander\Controller\AuthController;
 use Balemy\LdapCommander\Controller\SiteController;
-use Balemy\LdapCommander\Middleware\LDAPConnect;
+use Balemy\LdapCommander\LDAP\Middleware\LDAPConnect;
 use Balemy\LdapCommander\Modules\EntityBrowser\EntityController;
 use Balemy\LdapCommander\Modules\GroupManager\GroupController;
 use Balemy\LdapCommander\Modules\SchemaBrowser\SchemaController;

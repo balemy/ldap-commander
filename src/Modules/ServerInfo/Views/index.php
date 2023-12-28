@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @var array $results
  */
 
-use Balemy\LdapCommander\Helper\OID;
+use Balemy\LdapCommander\LDAP\Helper\OID;
 use Yiisoft\Html\Html;
 
 $this->setTitle($applicationParameters->getName());

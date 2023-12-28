@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Balemy\LdapCommander\Modules\EntityBrowser;
 
-use Balemy\LdapCommander\Ldap\EntityForm;
-use Balemy\LdapCommander\Ldap\LdapService;
+use Balemy\LdapCommander\LDAP\EntityForm;
+use Balemy\LdapCommander\LDAP\LdapService;
 use Balemy\LdapCommander\Service\WebControllerService;
 use HttpSoft\Message\StreamFactory;
 use HttpSoft\Message\UploadedFile;

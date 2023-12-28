@@ -1,6 +1,6 @@
 <?php
 
-namespace Balemy\LdapCommander\Schema;
+namespace Balemy\LdapCommander\LDAP\Schema;
 
 use Yiisoft\Arrays\ArrayHelper;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Balemy\LdapCommander\Ldap\ConnectionDetails;
+use Balemy\LdapCommander\LDAP\ConnectionDetails;
 use Dotenv\Dotenv;
 
 require_once __DIR__ . '/vendor/autoload.php';

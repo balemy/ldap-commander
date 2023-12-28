@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Balemy\LdapCommander\Ldap;
+namespace Balemy\LdapCommander\LDAP;
 
 use Balemy\LdapCommander\Timer;
 use LdapRecord\Auth\BindException;

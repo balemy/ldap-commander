@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
- * @var \Balemy\LdapCommander\Schema\ObjectClass[] $objectClasses
+ * @var \Balemy\LdapCommander\LDAP\Schema\ObjectClass[] $objectClasses
  */
 
 $this->setTitle($applicationParameters->getName());

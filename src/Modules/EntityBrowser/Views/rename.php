@@ -7,8 +7,8 @@ declare(strict_types=1);
  * @var \Yiisoft\Assets\AssetManager $assetManager
  * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  * @var \Yiisoft\Router\UrlGeneratorInterface $urlGenerator
- * @var \Balemy\LdapCommander\Schema\AttributeType[] $attributeTypes
- * @var \Balemy\LdapCommander\Ldap\EntityForm $entity
+ * @var \Balemy\LdapCommander\LDAP\Schema\AttributeType[] $attributeTypes
+ * @var \Balemy\LdapCommander\LDAP\EntityForm $entity
  * @var string $dn
  * @var Csrf $csrf
  * @var string $schemaJsonInfo

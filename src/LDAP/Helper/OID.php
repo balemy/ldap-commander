@@ -1,6 +1,6 @@
 <?php
 
-namespace Balemy\LdapCommander\Helper;
+namespace Balemy\LdapCommander\LDAP\Helper;
 
 class OID
 {

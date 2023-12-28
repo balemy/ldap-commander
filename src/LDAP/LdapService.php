@@ -1,9 +1,9 @@
 <?php
 
-namespace Balemy\LdapCommander\Ldap;
+namespace Balemy\LdapCommander\LDAP;
 
-use Balemy\LdapCommander\Helper\DSN;
-use Balemy\LdapCommander\Schema\Schema;
+use Balemy\LdapCommander\LDAP\Helper\DSN;
+use Balemy\LdapCommander\LDAP\Schema\Schema;
 use Balemy\LdapCommander\Timer;
 use LdapRecord\Connection;
 use LdapRecord\Container;

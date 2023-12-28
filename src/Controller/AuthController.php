@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Balemy\LdapCommander\Controller;
 
-use Balemy\LdapCommander\Ldap\ConnectionDetails;
-use Balemy\LdapCommander\Ldap\LoginForm;
+use Balemy\LdapCommander\LDAP\ConnectionDetails;
+use Balemy\LdapCommander\LDAP\LoginForm;
 use Balemy\LdapCommander\Service\WebControllerService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

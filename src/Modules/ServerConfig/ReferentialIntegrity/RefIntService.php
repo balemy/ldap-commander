@@ -2,7 +2,7 @@
 
 namespace Balemy\LdapCommander\Modules\ServerConfig\ReferentialIntegrity;
 
-use Balemy\LdapCommander\Ldap\LdapService;
+use Balemy\LdapCommander\LDAP\LdapService;
 
 class RefIntService
 {
