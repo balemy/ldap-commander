@@ -36,7 +36,7 @@ final class EntityController
                                 public ValidatorInterface    $validator
     )
     {
-        $this->viewRenderer = $viewRenderer->withControllerName('entity');
+        $this->viewRenderer = $viewRenderer->withViewPath(__DIR__ . '/Views/');
     }
 
     public function open(ServerRequestInterface $request): ResponseInterface

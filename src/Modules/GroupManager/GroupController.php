@@ -33,9 +33,7 @@ final class GroupController
                                 public FlashInterface        $flash
     )
     {
-        $this->viewRenderer = $viewRenderer
-            ->withControllerName('group')
-            ->withLayout('@views/layout/main');
+        $this->viewRenderer = $viewRenderer->withViewPath(__DIR__ . '/Views/');
     }
 
     public function list(WebControllerService $webService): ResponseInterface

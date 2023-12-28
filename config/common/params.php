@@ -32,7 +32,7 @@ return [
             '@src' => '@root/src',
             '@vendor' => '@root/vendor',
             '@layout' => '@views/layout',
-            '@views' => '@resources/views',
+            '@views' => '@src/Views',
         ],
     ],
     'yiisoft/form' => [

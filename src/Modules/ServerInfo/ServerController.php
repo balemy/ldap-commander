@@ -25,9 +25,7 @@ final class ServerController
                                 public FlashInterface        $flash
     )
     {
-        $this->viewRenderer = $viewRenderer
-            ->withControllerName('server')
-            ->withLayout('@views/layout/main');
+        $this->viewRenderer = $viewRenderer->withViewPath(__DIR__ . '/Views/');
     }
 
     public function index(WebControllerService $webService): ResponseInterface

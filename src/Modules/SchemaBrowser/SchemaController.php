@@ -26,9 +26,7 @@ final class SchemaController
                                 public FlashInterface        $flash
     )
     {
-        $this->viewRenderer = $viewRenderer
-            ->withControllerName('schema-info')
-            ->withLayout('@views/layout/main');
+        $this->viewRenderer = $viewRenderer->withViewPath(__DIR__ . '/Views/');
     }
 
     public function index(WebControllerService $webService): ResponseInterface

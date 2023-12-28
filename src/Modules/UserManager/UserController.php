@@ -34,9 +34,7 @@ final class UserController
                                 public ApplicationParameters $applicationParameters
     )
     {
-        $this->viewRenderer = $viewRenderer
-            ->withControllerName('user')
-            ->withLayout('@views/layout/main');
+        $this->viewRenderer = $viewRenderer->withViewPath(__DIR__ . '/Views/');
     }
 
     public function list(ServerRequestInterface $request, WebControllerService $webService): ResponseInterface

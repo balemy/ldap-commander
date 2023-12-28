@@ -25,10 +25,7 @@ final class Controller
                                 public FlashInterface        $flash
     )
     {
-        $this->viewRenderer = $viewRenderer
-            ->withControllerName('refint')
-            ->withViewPath('@views/server-config')
-            ->withLayout('@views/layout/main');
+        $this->viewRenderer = $viewRenderer->withViewPath(__DIR__ . '/Views/');
     }
 
     public function edit(ServerRequestInterface $request, WebControllerService $webService, RefIntService $refIntService): ResponseInterface
