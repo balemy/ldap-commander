@@ -63,7 +63,7 @@ class LdapService
         $this->schema->populate($this->connection);
     }
 
-    public function connectWithDetails(ConnectionDetails $details)
+    public function connectWithDetails(ConnectionDetails $details): void
     {
         $dsn = new DSN($details->dsn);
 

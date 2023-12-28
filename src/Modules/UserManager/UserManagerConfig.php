@@ -2,20 +2,20 @@
 
 namespace Balemy\LdapCommander\Modules\UserManager;
 
-class UserManagerConfig
+final class UserManagerConfig
 {
 
-    public function __construct(
+    final public function __construct(
         public readonly bool $enabled = false,
     )
     {
         ;
     }
 
-    public static function fromArray(array $config): static
+    public static function fromArray(array $config): self
     {
         return new static(
-            enabled: $config['enabled'] ?? false,
+            enabled: is_bool($config['enabled']) ? $config['enabled'] : false,
         );
     }
 }

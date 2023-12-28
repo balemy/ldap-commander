@@ -5,7 +5,7 @@ namespace Balemy\LdapCommander\Modules\Session;
 use Balemy\LdapCommander\LDAP\ConnectionDetails;
 use Balemy\LdapCommander\Modules\UserManager\UserManagerConfig;
 
-class SessionList
+final class SessionList
 {
     /**
      * @var Session[]
@@ -15,11 +15,10 @@ class SessionList
 
     public function __construct(array $params)
     {
+        /** @var array<array> $sessionConfig */
         foreach ($params as $sessionConfig) {
-
             $connectionDetails = ConnectionDetails::fromArray($sessionConfig['LDAP']);
             $userManagerConfig = UserManagerConfig::fromArray($sessionConfig['UserManager']);
-
             $this->sessions[] = new Session($connectionDetails, $userManagerConfig);
         }
     }
@@ -49,7 +48,10 @@ class SessionList
         return null;
     }
 
-    public function getAll()
+    /**
+     * @return Session[]
+     */
+    public function getAll(): array
     {
         return $this->sessions;
     }

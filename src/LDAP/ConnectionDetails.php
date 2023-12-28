@@ -4,7 +4,7 @@ namespace Balemy\LdapCommander\LDAP;
 
 class ConnectionDetails
 {
-    public function __construct(
+    final public function __construct(
         public readonly string $dsn,
         public readonly string $baseDn,
         public readonly string $adminDn,
@@ -16,6 +16,10 @@ class ConnectionDetails
         ;
     }
 
+    /**
+     * @param array $config
+     * @return static
+     */
     public static function fromArray(array $config): static
     {
         return new static(

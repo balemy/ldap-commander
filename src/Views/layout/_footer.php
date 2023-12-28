@@ -3,9 +3,10 @@
 declare(strict_types=1);
 
 /**
- * @var Balemy\LdapCommander\ApplicationParameters $applicationParameters
+ * @var ApplicationParameters $applicationParameters
  */
 
+use Balemy\LdapCommander\ApplicationParameters;
 use Balemy\LdapCommander\Widget\PerformanceMetrics;
 
 ?>
@@ -14,7 +15,7 @@ use Balemy\LdapCommander\Widget\PerformanceMetrics;
         <br>
         <br>
         <p>
-            LDAP Commander<br />
+            LDAP Commander<br/>
             <small>Version <?= $applicationParameters->getVersion() ?>
                 <br>
                 <br>

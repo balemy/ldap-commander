@@ -11,8 +11,11 @@
         <file name="public/index.php"/>
         <file name="cmda"/>
         <file name="autoload.php"/>
-        <ignoreFiles>
+        <ignoreFiles>        
             <directory name="vendor"/>
+            <directory name="src/Modules/*/Views/"/>
+            <directory name="src/Views/"/>
+            <directory name="src/Modules/ServerConfig"/>
             <directory name="tests/Support/_generated"/>
         </ignoreFiles>
     </projectFiles>
