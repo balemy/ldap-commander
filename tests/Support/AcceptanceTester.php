@@ -36,12 +36,11 @@ class AcceptanceTester extends \Codeception\Actor
         }
 
         $I = $this;
-        $I->amOnPage('/login?c=99');
-        $I->fillField('#login-dsn', 'ldap://127.0.0.1:1389');
-        $I->fillField('#login-basedn', 'dc=example,dc=org');
-        $I->fillField('#login-admindn', 'cn=admin,dc=example,dc=org');
-        $I->fillField('#login-adminpassword', 'secret');
-        $I->click('Login');
+        $I->amOnPage('/login');
+
+        $I->selectOption('#loginform-sessionid', 'ldap://localhost:1389');
+        $I->fillField('#loginform-password', 'secret');
+        $I->click('Login', '#loginForm');
 
         // saving snapshot
         $this->saveSessionSnapshot('login');

@@ -18,6 +18,7 @@ use Yiisoft\Yii\Bootstrap5\NavBar;
  * @var Yiisoft\View\WebView $this
  * @var Yiisoft\Router\UrlGeneratorInterface $urlGenerator
  * @var Yiisoft\Router\CurrentRoute $currentRoute
+ * @var \Balemy\LdapCommander\Modules\Session\Session $session
  */
 
 $assetManager->register(AppAsset::class);
@@ -45,70 +46,75 @@ $this->beginPage()
 
 <header>
     <?php
-    $menuItems = [
-        [
+    $menuItems = [];
+
+    if ($session->userManager->enabled) {
+        $menuItems[] = [
             'label' => 'Users',
             'url' => $urlGenerator->generate('user-list'),
             'active' => StringHelper::startsWith($currentRouteName, 'user'),
-        ],
-        [
+        ];
+
+        $menuItems[] = [
             'label' => 'Groups',
             'url' => $urlGenerator->generate('group-list'),
             'active' => StringHelper::startsWith($currentRouteName, 'group'),
-        ],
-        [
-            'label' => 'Browser',
-            'url' => $urlGenerator->generate('entity-list'),
-            'active' => StringHelper::startsWith($currentRouteName, 'entity'),
-        ],
+        ];
+    }
 
-        /*
+
+    $menuItems[] = [
+        'label' => 'Browser',
+        'url' => $urlGenerator->generate('entity-list'),
+        'active' => StringHelper::startsWith($currentRouteName, 'entity'),
+    ];
+
+    /*
 [
-    'label' => 'Configuration',
-    'items' => [
-        [
-            'label' => 'Schema Editor',
-            'url' => $urlGenerator->generate('schema-edit'),
-            'active' => StringHelper::startsWith($currentRouteName, 'schema-edit'),
-        ],
-        [
-            'label' => 'Referential Integrity',
-            'url' => $urlGenerator->generate('server-config-refint-edit'),
-            'active' => StringHelper::startsWith($currentRouteName, 'server-config-refint-edit'),
-        ],
-        [
-            'label' => 'Password Policies',
-            'url' => $urlGenerator->generate('server'),
-            'active' => StringHelper::startsWith($currentRouteName, 'server'),
-        ],
-        [
-            'label' => 'Reverse Group Membership',
-            'url' => $urlGenerator->generate('server-config-memberof-edit'),
-            'active' => StringHelper::startsWith($currentRouteName, 'server-config-memberof-edit'),
-        ],
-        [
-            'label' => 'Indexes',
-            'url' => $urlGenerator->generate('server'),
-            'active' => StringHelper::startsWith($currentRouteName, 'server'),
-        ]
+'label' => 'Configuration',
+'items' => [
+    [
+        'label' => 'Schema Editor',
+        'url' => $urlGenerator->generate('schema-edit'),
+        'active' => StringHelper::startsWith($currentRouteName, 'schema-edit'),
+    ],
+    [
+        'label' => 'Referential Integrity',
+        'url' => $urlGenerator->generate('server-config-refint-edit'),
+        'active' => StringHelper::startsWith($currentRouteName, 'server-config-refint-edit'),
+    ],
+    [
+        'label' => 'Password Policies',
+        'url' => $urlGenerator->generate('server'),
+        'active' => StringHelper::startsWith($currentRouteName, 'server'),
+    ],
+    [
+        'label' => 'Reverse Group Membership',
+        'url' => $urlGenerator->generate('server-config-memberof-edit'),
+        'active' => StringHelper::startsWith($currentRouteName, 'server-config-memberof-edit'),
+    ],
+    [
+        'label' => 'Indexes',
+        'url' => $urlGenerator->generate('server'),
+        'active' => StringHelper::startsWith($currentRouteName, 'server'),
     ]
+]
 ],
-        */
-        [
-            'label' => 'Information',
-            'items' => [
-                [
-                    'label' => 'Schema',
-                    'url' => $urlGenerator->generate('schema'),
-                    'active' => StringHelper::startsWith($currentRouteName, 'schema'),
-                ],
-                [
-                    'label' => 'Server',
-                    'url' => $urlGenerator->generate('server'),
-                    'active' => StringHelper::startsWith($currentRouteName, 'server'),
-                ]
+    */
+    $menuItems[] = [
+        'label' => 'Information',
+        'items' => [
+            [
+                'label' => 'Schema',
+                'url' => $urlGenerator->generate('schema'),
+                'active' => StringHelper::startsWith($currentRouteName, 'schema'),
+            ],
+            [
+                'label' => 'Server',
+                'url' => $urlGenerator->generate('server'),
+                'active' => StringHelper::startsWith($currentRouteName, 'server'),
             ]
-        ],
+        ]
     ];
 
     ?>

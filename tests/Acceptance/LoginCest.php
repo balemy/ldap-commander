@@ -13,12 +13,9 @@ final class LoginCest
         $I->amGoingTo('go to the log in page.');
         $I->amOnPage('/login');
 
-        $I->selectOption('#selectConfiguredConn', 'Custom');
-        $I->amOnPage('/login?c=99');
-        $I->fillField('#login-dsn', 'ldap://127.0.0.1:1389');
-        $I->fillField('#login-basedn', 'dc=example,dc=org');
-        $I->fillField('#login-admindn', 'cn=admin,dc=example,dc=org');
-        $I->fillField('#login-adminpassword', 'secret');
+
+        $I->selectOption('#loginform-sessionid', 'ldap://localhost:1389');
+        $I->fillField('#loginform-password', 'secret');
         $I->click('Login', '#loginForm');
 
         $I->expectTo('see logged index page.');
@@ -33,16 +30,11 @@ final class LoginCest
         $I->amGoingTo('go to the log in page.');
         $I->amOnPage('/login');
 
-        $I->selectOption('#selectConfiguredConn', 'Custom');
-        $I->amOnPage('/login?c=99');
-        $I->fillField('#login-dsn', 'ldap://127.0.0.1:1389');
-        $I->fillField('#login-basedn', 'dc=example,dc=org');
-        $I->fillField('#login-admindn', 'cn=admin,dc=example,dc=org');
-        $I->fillField('#login-adminpassword', 'wrong');
-
+        $I->selectOption('#loginform-sessionid', 'ldap://localhost:1389');
+        $I->fillField('#loginform-password', 'wrong-password');
         $I->click('Login', '#loginForm');
 
         $I->expectTo('see validations errors.');
-        $I->see('Unable to bind to server: Invalid credentials');
+        $I->see('Login failed!');
     }
 }

@@ -73,6 +73,7 @@ jobs:
 
       - name: Run tests with codeception
         run: |
+          cp ${GITHUB_WORKSPACE}/config/ldap.tests.php ${GITHUB_WORKSPACE}/config.ldap.php
           php -S 127.0.0.1:8080 -t public > ./runtime/yii.log 2>&1 &
           vendor/bin/codecept run
 
