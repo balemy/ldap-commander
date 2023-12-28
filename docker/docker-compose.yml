@@ -14,8 +14,8 @@ services:
       - LDAP_EXTRA_SCHEMAS=cosine,inetorgperson,nis,bitnami-openldap-memberof
     volumes:
       - 'openldap_data:/bitnami/openldap'
-      - 'ldap-example-data.ldif:/ldifs/example.ldif'
-      - 'ldap-memberof.ldif:/opt/bitnami/openldap/etc/schema/bitnami-openldap-memberof.ldif'
+      - './ldap-example-data.ldif:/ldifs/example.ldif'
+      - './ldap-memberof.ldif:/opt/bitnami/openldap/etc/schema/bitnami-openldap-memberof.ldif'
   ldap-commander:
     image: balemy/ldap-commander:latest
     container_name: ldap-commander
@@ -24,7 +24,7 @@ services:
     depends_on:
       - openldap
     volumes:
-      - 'config.php:/app/config/ldap.php'
+      - './config.php:/app/config/ldap.php'
 volumes:
   openldap_data:
     driver: local
