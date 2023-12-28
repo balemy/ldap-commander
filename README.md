@@ -5,6 +5,7 @@
 <p align="center">
     <h1 align="center">LDAP Commander <sup></sup></h1>
     <h3 align="center">Demo: https://example-ldap.balemy.com/</h3>
+    <h5 align="center">Username: &lt;leave empty&gt; &middot; Password: secret</h5>
     <br>
 </p>
 
