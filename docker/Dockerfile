@@ -1,5 +1,5 @@
 # Specify the parent image from which we build
-FROM php:8.1-cli
+FROM php:8.2-cli
 WORKDIR /app
 COPY . .
 
@@ -25,7 +25,8 @@ RUN \
 #--------------------------------------------------------------------------
 RUN apt-get install git unzip -y
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
-RUN composer install --no-dev
+#RUN composer install --no-dev
+RUN composer install
 
 #--------------------------------------------------------------------------
 # Cleanup
