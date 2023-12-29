@@ -7,6 +7,9 @@ namespace Balemy\LdapCommander\Modules\UserManager;
 use Balemy\LdapCommander\ApplicationParameters;
 use Balemy\LdapCommander\LDAP\LdapService;
 use Balemy\LdapCommander\Modules\GroupManager\Group;
+use Balemy\LdapCommander\Modules\Session\Session;
+use Balemy\LdapCommander\Modules\Session\SessionList;
+use Balemy\LdapCommander\Modules\Session\SessionLoaderMiddleware;
 use Balemy\LdapCommander\Service\WebControllerService;
 use LdapRecord\LdapRecordException;
 use LdapRecord\Models\Entry;
@@ -31,7 +34,7 @@ final class UserController
                                 public ValidatorInterface    $validator,
                                 public AssetManager          $assetManager,
                                 public FlashInterface        $flash,
-                                public ApplicationParameters $applicationParameters
+                                public ApplicationParameters $applicationParameters,
     )
     {
         $this->viewRenderer = $viewRenderer->withViewPath(__DIR__ . '/Views/');
@@ -58,7 +61,7 @@ final class UserController
         return $this->viewRenderer->render('list', [
             'urlGenerator' => $this->urlGenerator,
             'users' => $users,
-            'columns' => $this->applicationParameters->getUserListColumns(),
+            'columns' => Session::getCurrentSession()->userManager->listColumns ?? [],
             'organizationalUnits' => $ous,
             'organizationalUnit' => $ou
         ]);

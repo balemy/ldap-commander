@@ -36,4 +36,14 @@ class Session
     {
         return md5(sha1($this->connectionDetails->dsn . $this->connectionDetails->adminDn));
     }
+
+    /**
+     * @todo Find a better approach
+     * @return Session|null
+     */
+    public static function getCurrentSession(): ?Session
+    {
+        return SessionLoaderMiddleware::$currentSession;
+    }
+
 }

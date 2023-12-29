@@ -3,28 +3,30 @@
 namespace Balemy\LdapCommander\Modules\UserManager;
 
 use Balemy\LdapCommander\ApplicationParameters;
+use Balemy\LdapCommander\Modules\Session\Session;
 
 
 final class UserFormSchema
 {
     private array $_fields = [];
 
-    /**
-     * @var array|array[]
-     */
-    private array $_rows;
+    private array $_rows = [];
 
-    public function __construct(private readonly ApplicationParameters $applicationParameters)
+    public function __construct()
     {
-        $this->_rows = $this->applicationParameters->getUserEditFields();
+        $session = Session::getCurrentSession();
+        if ($session) {
+            $this->_rows = $session->userManager->editFields;
 
-        /** @var array $row */
-        foreach ($this->_rows as $row) {
-            /** @var string $fieldLabel */
-            foreach ($row as $fieldKey => $fieldLabel) {
-                $this->_fields[$fieldKey] = $fieldLabel;
+            /** @var array $row */
+            foreach ($this->_rows as $row) {
+                /** @var string $fieldLabel */
+                foreach ($row as $fieldKey => $fieldLabel) {
+                    $this->_fields[$fieldKey] = $fieldLabel;
+                }
             }
         }
+
     }
 
     public function getRows(): array

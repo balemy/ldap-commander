@@ -18,7 +18,7 @@ use Yiisoft\Session\SessionInterface;
 
 final class SessionLoaderMiddleware implements MiddlewareInterface
 {
-    public ?Session $currentSession = null;
+    public static ?Session $currentSession = null;
 
     public function __construct(
         private ResponseFactoryInterface $responseFactory,
@@ -53,7 +53,7 @@ final class SessionLoaderMiddleware implements MiddlewareInterface
         }
 
 
-        $this->currentSession = $session;
+        static::$currentSession = $session;
 
         return $handler->handle($request);
     }

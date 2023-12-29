@@ -9,16 +9,7 @@ final class ApplicationParameters
     private string $charset = 'UTF-8';
     private string $name = 'LDAP Commander';
     private string $version = '0.0.0';
-    private array $userListColumns = ['cn' => 'Common Name', 'givenName' => 'First name', 'sn' => 'Last name', 'mail' => 'E-Mail'];
 
-    private array $userEditFields = [
-        ['uid' => 'Username', 'cn' => 'Common Name'],
-        ['title' => 'Title', 'givenName' => 'First name', 'sn' => 'Last name'],
-        ['mail' => 'E-Mail', 'telephoneNumber' => 'Telephone Number', 'mobile' => 'Mobile Number'],
-        ['street' => 'Street Address'],
-        ['postalCode' => 'Post code', 'l' => 'City', 'st' => 'State'],
-        ['userPassword' => 'New Password']
-    ];
 
     public function getCharset(): string
     {
@@ -33,16 +24,6 @@ final class ApplicationParameters
     public function getVersion(): string
     {
         return $this->version;
-    }
-
-    public function getUserListColumns(): array
-    {
-        return $this->userListColumns;
-    }
-
-    public function getUserEditFields(): array
-    {
-        return $this->userEditFields;
     }
 
     public function charset(string $value): self
@@ -66,17 +47,4 @@ final class ApplicationParameters
         return $new;
     }
 
-    public function userListColumns(array $value): self
-    {
-        $new = clone $this;
-        $new->userListColumns = $value;
-        return $new;
-    }
-
-    public function userEditFields(array $value): self
-    {
-        $new = clone $this;
-        $new->userEditFields = $value;
-        return $new;
-    }
 }
