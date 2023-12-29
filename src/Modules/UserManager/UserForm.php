@@ -28,7 +28,7 @@ class UserForm extends FormModel implements RulesProviderInterface, DataSetInter
 
     public function __construct(ApplicationParameters $applicationParameters, LdapService $ldapService)
     {
-        $this->formSchema = new UserFormSchema($applicationParameters);
+        $this->formSchema = new UserFormSchema();
         $this->user = new User();
         $this->ldapService = $ldapService;
     }
