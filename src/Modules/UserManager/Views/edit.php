@@ -9,8 +9,8 @@ declare(strict_types=1);
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var Csrf $csrf
  * @var \Balemy\LdapCommander\Modules\UserManager\UserForm $userForm
+ * @var \Balemy\LdapCommander\Modules\UserManager\UserFormSchema $userFormSchema
  * @var string[] $parentDNs
- * @var string[] $fieldSet
  */
 
 use Balemy\LdapCommander\Modules\UserManager\SidebarWidget;
@@ -25,10 +25,10 @@ $this->setTitle($applicationParameters->getName());
 
 <div class="row">
     <div class="col-md-9">
-        <?php if (!$userForm->isNewRecord()): ?>
+        <?php if (!$userForm->isNewRecord): ?>
             <h1>Edit User</h1>
             <p class="lead">
-                <?= Html::encode($userForm->user->getDn()) ?>
+                <?= Html::encode($userForm->getDn()) ?>
             </p>
         <?php else: ?>
             <h1>Create User</h1>
@@ -37,9 +37,9 @@ $this->setTitle($applicationParameters->getName());
         <?php endif; ?>
         <br>
 
-        <?= Html::form()->post($urlGenerator->generate('user-edit', [], ['dn' => $userForm->user->getDn()]))->csrf($csrf)->open() ?>
+        <?= Html::form()->post($urlGenerator->generate('user-edit', [], ['dn' => $userForm->getDn()]))->csrf($csrf)->open() ?>
 
-        <?php foreach ($userForm->getFormSchema()->getRows() as $row): ?>
+        <?php foreach ($userFormSchema->getRows() as $row): ?>
             <div class="row">
                 <?php foreach ($row as $fieldName => $fieldLabel): ?>
                     <div class="col-sm">
@@ -69,7 +69,7 @@ $this->setTitle($applicationParameters->getName());
     </div>
 
     <div class="col-md-3">
-        <?= SidebarWidget::widget([], ['$user' => $userForm->user, '$location' => SidebarLocation::Edit]); ?>
+        <?= SidebarWidget::widget([], ['$userDn' => $userForm->getDn(), '$location' => SidebarLocation::Edit]); ?>
     </div>
 
 </div>

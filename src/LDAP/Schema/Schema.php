@@ -35,9 +35,15 @@ class Schema
     }
 
 
-    public function getObjectClass(string $name): ?ObjectClass
+    public function getObjectClass(string $name): ObjectClass
     {
-        return $this->objectClasses[strtolower($name)] ?? null;
+        $objectClass = $this->objectClasses[strtolower($name)];
+
+        if ($objectClass === null) {
+            throw new \Exception('Could not find object class: ' . $name);
+        }
+
+        return $objectClass;
     }
 
     /**

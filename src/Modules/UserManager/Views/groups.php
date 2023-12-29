@@ -90,7 +90,7 @@ $form = Form::tag()
         </table>
     </div>
     <div class="col-md-3">
-        <?= SidebarWidget::widget([], ['$user' => $user, '$location' => SidebarLocation::Members]); ?>
+        <?= SidebarWidget::widget([], ['$userDn' => $user->getDn(), '$location' => SidebarLocation::Members]); ?>
     </div>
 </div>
 <script>

@@ -56,6 +56,11 @@ class AttributeType
         return implode(', ', $this->names);
     }
 
+    public function getPrimaryName(): string
+    {
+        return $this->names[0];
+    }
+
     public function getName(): string
     {
         return (string)$this;

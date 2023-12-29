@@ -53,8 +53,7 @@ class ObjectClass
     /**
      * @return AttributeType[]
      */
-    public
-    function getMayAttributes()
+    public function getMayAttributes()
     {
         $arr = [];
         /** @var string $id */
@@ -70,7 +69,8 @@ class ObjectClass
     /**
      * @return AttributeType[]
      */
-    public function getMustAttributes()
+    public
+    function getMustAttributes()
     {
         $arr = [];
         /** @var string $id */
@@ -87,21 +87,32 @@ class ObjectClass
     /**
      * @return ObjectClass[]
      */
-    public function getSuperClasses()
+    public function getSuperClasses(): array
     {
-        $classes = [];
-
+        $supers = [];
         foreach ($this->sups as $sup) {
-            $objectClass = $this->schema->getObjectClass($sup);
-            if ($objectClass !== null) {
-                $classes[] = $objectClass;
-            } else {
-                throw new \Exception('Could not find object class: ' . $sup);
-            }
+            $supers[] = $this->schema->getObjectClass($sup);
         }
 
-        return $classes;
+        return $supers;
     }
+
+    /**
+     * @param ObjectClass[] $supers
+     * @return ObjectClass[]
+     */
+    public function getSuperClassesRecursive(array $supers = []): array
+    {
+        $newSupers = [];
+        foreach ($this->getSuperClasses() as $superClass) {
+            $newSupers[] = $superClass;
+            $newSupers = array_merge($newSupers, $superClass->getSuperClassesRecursive($supers));
+        }
+
+
+        return array_unique(array_merge($newSupers, $supers));
+    }
+
 
     public static function createByString(Schema $schema, string $string): ?ObjectClass
     {

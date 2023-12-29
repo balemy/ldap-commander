@@ -6,6 +6,7 @@ namespace Balemy\LdapCommander\Modules\UserManager;
 
 use Balemy\LdapCommander\ApplicationParameters;
 use Balemy\LdapCommander\LDAP\LdapService;
+use Balemy\LdapCommander\LDAP\Services\SchemaService;
 use Balemy\LdapCommander\Modules\GroupManager\Group;
 use Balemy\LdapCommander\Modules\Session\Session;
 use Balemy\LdapCommander\Modules\Session\SessionList;
@@ -17,6 +18,7 @@ use LdapRecord\Models\ModelDoesNotExistException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Assets\AssetManager;
+use Yiisoft\FormModel\FormHydrator;
 use Yiisoft\Http\Method;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Session\Flash\FlashInterface;
@@ -32,8 +34,10 @@ final class UserController
                                 public UrlGeneratorInterface $urlGenerator,
                                 public SessionInterface      $session,
                                 public ValidatorInterface    $validator,
+                                public FormHydrator          $formHydrator,
                                 public AssetManager          $assetManager,
                                 public FlashInterface        $flash,
+                                public SchemaService        $schemaService,
                                 public ApplicationParameters $applicationParameters,
     )
     {
@@ -69,41 +73,28 @@ final class UserController
 
     public function edit(ServerRequestInterface $request, WebControllerService $webService): ResponseInterface
     {
-        $userForm = new UserForm($this->applicationParameters, $this->ldapService);
+        $userModel = new UserForm(dn: $this->getDnByRequest($request), schemaService: $this->schemaService);
 
-        $dn = $this->getDnByRequest($request);
-        if ($dn !== null) {
-            $user = User::query()->addSelect(['*', '+'])->find($dn);
-            if ($user === null || !($user instanceof User)) {
-                return $this->webService->getNotFoundResponse();
+        if ($request->getMethod() === Method::POST &&
+            $userModel->load($request->getParsedBody()) && $this->validator->validate($userModel)->isValid()) {
+            $userModel->save();
+            $this->flash->add('success', ['body' => 'User successfully saved!']);
+
+            if ($userModel->isNewRecord) {
+                return $this->webService->getRedirectResponse('user-groups', ['dn' => $userModel->getDn(), 'saved' => 1]);
             }
-            $userForm->setUser($user);
-        }
 
-        if ($request->getMethod() === Method::POST) {
-            /** @var array<string, array> $body */
-            $body = $request->getParsedBody();
-
-            if ($userForm->load($body['UserForm']) && $this->validator->validate($userForm)->isValid()) {
-                $isNewRecord = $userForm->isNewRecord();
-                $userForm->updateEntry();
-                $this->flash->add('success', ['body' => 'User successfully saved!']);
-
-                if ($isNewRecord) {
-                    return $this->webService->getRedirectResponse('user-groups', ['dn' => $userForm->user->getDn(), 'saved' => 1]);
-                }
-
-                return $this->webService->getRedirectResponse('user-edit', [
-                    'dn' => $userForm->user->getDn(), 'saved' => 1
-                ]);
-            }
+            return $this->webService->getRedirectResponse('user-edit', [
+                'dn' => $userModel->getDn(), 'saved' => 1
+            ]);
         }
 
         return $this->viewRenderer->render('edit', [
             'urlGenerator' => $this->urlGenerator,
-            'dn' => $userForm->user->getDn(),
+            'dn' => $userModel->getDn(),
             'parentDNs' => $this->ldapService->getOrganizationalUnits(),
-            'userForm' => $userForm,
+            'userForm' => $userModel,
+            'userFormSchema' => new UserFormSchema()
         ]);
     }
 
