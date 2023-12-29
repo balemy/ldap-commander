@@ -79,6 +79,7 @@ class SchemaService
                 $mustAttributesNames[] = $mustAttribute->getPrimaryName();
             }
         }
+
         return array_unique($mustAttributesNames);
     }
 }

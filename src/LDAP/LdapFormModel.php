@@ -18,7 +18,7 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
     /**
      * @var string[] Properties loaded for modification
      */
-    private array $loadedProperties = [];
+    protected array $loadedProperties = [];
 
     /**
      * @var string[] Properties which are not synced with the LR Entry object
@@ -30,16 +30,24 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
      */
     protected array $requiredObjectClasses = [];
 
+    /**
+     * @var string The current or head attribute for new entries.
+     */
+    protected string $headAttribute = 'cn';
+
+
     public function __construct(private ?string $dn, private SchemaService $schemaService)
     {
         if ($dn !== null) {
             /** @noinspection PhpFieldAssignmentTypeMismatchInspection */
             $this->lrEntry = Entry::query()->addSelect(['*', '+'])->findOrFail($dn);
-            // ToDo: Loading implementes required ObjectClass
+            $this->headAttribute = (string)$this->lrEntry->getHead();
+            $this->loadedProperties['parentDn'] = $this->lrEntry->getParentDn();
+            // ToDo: Loading only entries which implements required ObjectClass
+
         } else {
             $this->lrEntry = new Entry();
             $this->lrEntry->setFirstAttribute('objectclass', $this->requiredObjectClasses);
-
             $this->isNewRecord = true;
         }
     }
@@ -54,11 +62,12 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
             $rules[$name] = [new Required()];
         }
         $rules['parentDn'] = [new Required()];
+        $rules[$this->headAttribute] = [new Required()];
 
         return $rules;
     }
 
-    public function load($data): bool
+    public function load(array $data): bool
     {
         if (is_array($data[$this->getFormName()])) {
             foreach ($data[$this->getFormName()] as $name => $value) {
@@ -76,24 +85,50 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
 
     public function save(): bool
     {
-        if ($this->isNewRecord) {
-            $this->lrEntry->inside($this->getPropertyValue('parentDn'));
-        }
-
         foreach ($this->loadedProperties as $name => $value) {
             if (in_array($name, $this->noEntryProperties)) {
-                continue;
+                continue; // Skip not LrEntry Related Properties (e.g. parentDn)
             }
             if ($this->isNewRecord && empty($value)) {
                 continue; // Skip empty attributes on insert
             }
+            if (!$this->isNewRecord && $name === $this->headAttribute) {
+                continue; // Skip head attribute. Rename required (below).
+            }
             $this->lrEntry->setFirstAttribute($name, $value);
         }
+
+        $headRdn = $this->headAttribute . '=' . (string)$this->loadedProperties[$this->headAttribute];
+        if ($this->isNewRecord) {
+            $parentDn = $this->getPropertyValue('parentDn');
+            $this->lrEntry->inside($parentDn);
+            $this->lrEntry->setDn($headRdn . ',' . $parentDn);
+        } else {
+            if ($this->isHeadAttributeChanged()) {
+                $this->lrEntry->rename($headRdn);
+            }
+        }
+
         $this->lrEntry->save();
+
+        if (!$this->isNewRecord && $this->lrEntry->getParentDn() !== $this->loadedProperties['parentDn']) {
+            $this->lrEntry->move($this->loadedProperties['parentDn']);
+        }
+
         $this->lrEntry->refresh();
         $this->dn = $this->lrEntry->getDn();
 
         return true;
+    }
+
+    private function isHeadAttributeChanged()
+    {
+        if ($this->isNewRecord) {
+            return false;
+        }
+        $head = $this->headAttribute;
+        return ($this->lrEntry->getFirstAttribute($head) !== $this->loadedProperties[$head]);
+
     }
 
     public function getDn(): string
@@ -161,4 +196,6 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
     {
         return (array)$this->lrEntry->getAttribute('objectclass');
     }
+
+
 }

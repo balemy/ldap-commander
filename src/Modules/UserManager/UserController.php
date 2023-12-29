@@ -74,7 +74,6 @@ final class UserController
     public function edit(ServerRequestInterface $request, WebControllerService $webService): ResponseInterface
     {
         $userModel = new UserForm(dn: $this->getDnByRequest($request), schemaService: $this->schemaService);
-
         if ($request->getMethod() === Method::POST &&
             $userModel->load($request->getParsedBody()) && $this->validator->validate($userModel)->isValid()) {
             $userModel->save();
