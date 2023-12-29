@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a5477ba8ec4c69f3939061e31e5c0f82",
+    "content-hash": "b0326e0167197807f60fd9986173260d",
     "packages": [
         {
             "name": "alexkart/curl-builder",
@@ -1472,16 +1472,16 @@
         },
         {
             "name": "npm-asset/font-awesome",
-            "version": "6.3.0",
+            "version": "6.5.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:FortAwesome/Font-Awesome.git",
-                "reference": "d02961b018153506364077343b0edcde0a39d27e"
+                "url": "https://github.com/FortAwesome/Font-Awesome.git",
+                "reference": "deeea78c52bfe00b6e251ffddccf5570d5fdb05e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/d02961b018153506364077343b0edcde0a39d27e",
-                "reference": "d02961b018153506364077343b0edcde0a39d27e"
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/deeea78c52bfe00b6e251ffddccf5570d5fdb05e",
+                "reference": "deeea78c52bfe00b6e251ffddccf5570d5fdb05e"
             },
             "type": "npm-asset"
         },
@@ -15625,7 +15625,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.1",
+        "php": "^8.2",
         "ext-intl": "*",
         "ext-mbstring": "*",
         "ext-pdo_sqlite": "*"
