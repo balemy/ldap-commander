@@ -13,8 +13,8 @@ declare(strict_types=1);
  * @var \Balemy\LdapCommander\Modules\GroupManager\Group[] $notAssignedGroups
  */
 
+use Balemy\LdapCommander\Modules\UserManager\SidebarLocation;
 use Balemy\LdapCommander\Modules\UserManager\SidebarWidget;
-use Balemy\LdapCommander\User\SidebarLocation;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Button;
 use Yiisoft\Html\Tag\Form;
@@ -90,7 +90,7 @@ $form = Form::tag()
         </table>
     </div>
     <div class="col-md-3">
-        <?= SidebarWidget::widget(['$user' => $user, '$location' => SidebarLocation::Members]); ?>
+        <?= SidebarWidget::widget([], ['$user' => $user, '$location' => SidebarLocation::Members]); ?>
     </div>
 </div>
 <script>

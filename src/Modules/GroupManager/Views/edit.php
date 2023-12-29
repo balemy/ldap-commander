@@ -53,7 +53,7 @@ $this->setTitle($applicationParameters->getName());
     </div>
 
     <div class="col-md-3">
-        <?= SidebarWidget::widget(['$dn' => $dn, '$location' => GroupSidebarLocation::Edit]); ?>
+        <?= SidebarWidget::widget([], ['$dn' => $dn, '$location' => GroupSidebarLocation::Edit]); ?>
     </div>
 
 </div>
