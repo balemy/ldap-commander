@@ -33,7 +33,7 @@
         "ext-mbstring": "*",
         "ext-pdo_sqlite": "*",
         "cebe/markdown": "^1.2@dev",
-        "directorytree/ldaprecord": "^2.19",
+        "directorytree/ldaprecord": "^3.3",
         "doctrine/collections": "^2.0",
         "fakerphp/faker": "^1.14",
         "httpsoft/http-message": "^1.0.5",
