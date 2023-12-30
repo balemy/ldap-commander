@@ -1,6 +1,6 @@
 <?php
 
-namespace Balemy\LdapCommander\LDAP;
+namespace Balemy\LdapCommander\Modules\EntityBrowser;
 
 use Balemy\LdapCommander\LDAP\Helper\DnHelper;
 use Balemy\LdapCommander\LDAP\Schema\Schema;

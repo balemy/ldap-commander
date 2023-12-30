@@ -3,7 +3,8 @@
 declare(strict_types=1);
 
 use Balemy\LdapCommander\Asset\AppAsset;
-use Balemy\LdapCommander\Widget\FlashMessage;use Balemy\LdapCommander\Widget\PerformanceMetrics;use Yiisoft\Html\Html;
+use Balemy\LdapCommander\Widget\FlashMessage;
+use Yiisoft\Html\Html;
 use Yiisoft\I18n\Locale;
 use Yiisoft\Strings\StringHelper;use Yiisoft\Yii\Bootstrap5\Nav;
 use Yiisoft\Yii\Bootstrap5\NavBar;
@@ -48,7 +49,7 @@ $this->beginPage()
     <?php
     $menuItems = [];
 
-    if ($session->userManager->enabled) {
+    if ($session?->userManager->enabled) {
         $menuItems[] = [
             'label' => 'Users',
             'url' => $urlGenerator->generate('user-list'),

@@ -29,7 +29,7 @@ class Schema
      */
     private $_attributeTypesBinary = null;
 
-    public function __construct(public LdapService $ldapService, private Timer $timer)
+    public function __construct(public LdapService $ldapService, private ?Timer $timer)
     {
 
     }
@@ -178,7 +178,9 @@ class Schema
      */
     public function populate(Connection $connection): void
     {
-        $this->timer->start('schema');
+        if ($this->timer) {
+            $this->timer->start('schema');
+        }
 
         $query = $this->ldapService->connection->query();
 
@@ -228,8 +230,9 @@ class Schema
             }
         }
 
-        $this->timer->stop('schema');
-
+        if ($this->timer) {
+            $this->timer->stop('schema');
+        }
     }
 
 

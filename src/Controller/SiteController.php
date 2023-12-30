@@ -15,7 +15,6 @@ use Yiisoft\Yii\View\ViewRenderer;
 
 final class SiteController
 {
-
     public function __construct(public ViewRenderer          $viewRenderer,
                                 public LdapService           $ldapService,
                                 public WebControllerService  $webService,

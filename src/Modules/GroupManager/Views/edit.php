@@ -28,9 +28,28 @@ $this->setTitle($applicationParameters->getName());
     <div class="col-md-9">
         <?php if (!$groupModel->isNewRecord): ?>
             <h1>Edit Group</h1>
-            <p class="lead">
-                <?= Html::encode($groupModel->getDn()) ?>
-            </p>
+            <table class="table">
+                <tr>
+                    <td>DN</td>
+                    <td>
+                        <code><?= Html::encode($groupModel->getDn()) ?></code>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Login filter</td>
+                    <td>
+                        <code>(&(uid=%s)(objectClass=inetOrgPerson)(memberOf=<?= Html::encode($groupModel->getDn()) ?>))</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Search filter</td>
+                    <td>
+                        <code>(&(objectClass=inetOrgPerson)(memberof=<?= Html::encode($groupModel->getDn()) ?>))</code>
+                    </td>
+                </tr>
+
+            </table>
+
         <?php else: ?>
             <h1>Create Group</h1>
             <p class="lead">

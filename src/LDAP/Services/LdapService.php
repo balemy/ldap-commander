@@ -28,7 +28,7 @@ class LdapService
      */
     public $baseDn = '';
 
-    public function __construct(public Timer $timer)
+    public function __construct(public ?Timer $timer)
     {
         $this->connection = new Connection();
         $this->schema = new Schema($this, $timer);
