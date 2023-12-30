@@ -3,12 +3,21 @@
 namespace Balemy\LdapCommander\Modules\UserManager;
 
 use Balemy\LdapCommander\LDAP\LdapFormModel;
+use Balemy\LdapCommander\Modules\GroupManager\Group;
 
 
 class UserForm extends LdapFormModel
 {
     protected array $requiredObjectClasses = ['inetorgperson'];
     protected string $headAttribute = 'uid';
+    protected array $customProperties = ['groups'];
+
+    protected function init(): void
+    {
+        if (!$this->isNewRecord) {
+            $this->loadedProperties['groups'] = (array)$this->lrEntry->getAttributeValue('memberof');
+        }
+    }
 
     /**
      * @psalm-suppress MixedArrayAccess
@@ -24,7 +33,6 @@ class UserForm extends LdapFormModel
             $sn = $data[$this->getFormName()]['sn'] ?? '';
             $data[$this->getFormName()]['cn'] = $givenName . ' ' . $sn;
         }
-
         return parent::load($data);
     }
 
@@ -33,10 +41,23 @@ class UserForm extends LdapFormModel
     {
         // Auto Hash Password
         $password = $this->loadedProperties['userPassword'];
-        if (!empty($password) && !str_starts_with($password, '{SSHA}')) {
+        if (!empty($password) && is_string($password) && !str_starts_with($password, '{SSHA}')) {
             $salt = mt_rand(0, mt_getrandmax());
             $this->loadedProperties['userPassword'] =
                 '{SSHA}' . base64_encode(sha1($password . $salt, TRUE) . $salt);
+        }
+
+        // Group Memberships
+        /** @var string[] $currentGroups */
+        $currentGroups = (array)$this->lrEntry->getAttributeValue('memberof');
+        /** @var string[] $newGroups */
+        $newGroups = (is_array($this->loadedProperties['groups'])) ? $this->loadedProperties['groups'] : [];
+
+        foreach (array_diff($newGroups, $currentGroups) as $groupDn) {
+            (Group::getOne($groupDn))?->addMember($this->getDn());
+        }
+        foreach (array_diff($currentGroups, $newGroups) as $groupDn) {
+            (Group::getOne($groupDn))?->removeMember($this->getDn());
         }
 
         return parent::save();

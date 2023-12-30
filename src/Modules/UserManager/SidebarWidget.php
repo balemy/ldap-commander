@@ -36,26 +36,11 @@ class SidebarWidget extends Widget
             return '';
         }
 
-        /** @var User $user */
-        $user = User::query()->addSelect(['*', '+'])->findOrFail($this->userDn);
-
         $html = Html::openTag('ul', ['class' => 'list-group']);
 
         if ($this->location !== SidebarLocation::Edit) {
             $html .= Html::tag('li',
                 Html::a('Edit User', $this->urlGenerator->generate('user-edit', [], ['dn' => $this->userDn])),
-                ['class' => 'list-group-item']
-            );
-        }
-        if ($this->location !== SidebarLocation::Members) {
-            $memberCountBadge = '<span class="badge rounded-pill bg-primary float-end" style="text-decoration:none;margin-top:3px">'
-                . count($user->getGroups()) . '</span>';
-
-            $html .= Html::tag('li',
-                Html::a('Groups' .
-                    $memberCountBadge,
-                    $this->urlGenerator->generate('user-groups', [], ['dn' => $this->userDn])
-                )->encode(false),
                 ['class' => 'list-group-item']
             );
         }

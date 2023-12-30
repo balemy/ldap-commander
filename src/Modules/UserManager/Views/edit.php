@@ -11,6 +11,7 @@ declare(strict_types=1);
  * @var \Balemy\LdapCommander\Modules\UserManager\UserForm $userForm
  * @var \Balemy\LdapCommander\Modules\UserManager\UserFormSchema $userFormSchema
  * @var string[] $parentDNs
+ * @var string[] $groups
  */
 
 use Balemy\LdapCommander\Modules\UserManager\SidebarWidget;
@@ -44,8 +45,7 @@ $this->setTitle($applicationParameters->getName());
                 <?php foreach ($row as $fieldName => $fieldLabel): ?>
                     <div class="col-sm">
                         <?php if ($fieldName === 'userPassword'): ?>
-                            <?= Field::password($userForm, $fieldName)
-                                ->autofocus() ?>
+                            <?= Field::password($userForm, $fieldName) ?>
                         <?php else: ?>
                             <?= Field::text($userForm, $fieldName) ?>
                         <?php endif; ?>
@@ -53,11 +53,17 @@ $this->setTitle($applicationParameters->getName());
                 <?php endforeach; ?>
             </div>
         <?php endforeach; ?>
+
+
         <div class="row">
+            <div class="col-sm-12">
+                <?= Field::select($userForm, 'groups')
+                    ->multiple(true)
+                    ->optionsData($groups) ?>
+            </div>
             <div class="col-sm-12">
                 <?= Field::select($userForm, 'parentDn')
                     ->optionsData($parentDNs)
-                    ->autofocus()
                     ->tabindex(1) ?>
             </div>
         </div>
@@ -73,3 +79,15 @@ $this->setTitle($applicationParameters->getName());
     </div>
 
 </div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#userform-groups').select2({
+            theme: 'bootstrap-5',
+            placeholder: "Initial group members",
+            multiple: true
+        });
+    });
+</script>
+

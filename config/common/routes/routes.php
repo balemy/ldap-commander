@@ -36,7 +36,6 @@ return [
 
             Route::get('/users')->action([UserController::class, 'list'])->name('user-list'),
             Route::methods([Method::GET, Method::POST], '/user/edit')->action([UserController::class, 'edit'])->name('user-edit'),
-            Route::methods([Method::GET, Method::POST], '/user/groups')->action([UserController::class, 'members'])->name('user-groups'),
             Route::methods([Method::GET, Method::POST], '/user/delete')->action([UserController::class, 'delete'])->name('user-delete'),
 
             Route::get('/groups')->action([GroupController::class, 'list'])->name('group-list'),

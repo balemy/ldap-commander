@@ -72,7 +72,6 @@ $this->setTitle($applicationParameters->getName());
                     <?php endforeach; ?>
                     <td style="width:150px">
                         <?= Html::a('Edit', $editUrl, ['class' => 'btn btn-secondary btn-sm']); ?>
-                        <?= Html::a('Groups', $urlGenerator->generate('user-groups', [], ['dn' => $user->getDn()]), ['class' => 'btn btn-secondary btn-sm']); ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

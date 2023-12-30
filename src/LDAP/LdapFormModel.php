@@ -16,7 +16,7 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
     public bool $isNewRecord = false;
 
     /**
-     * @psalm-var array<string, string>
+     * @psalm-var array<string, string|array>
      * @var string[] Properties loaded for modification
      */
     protected array $loadedProperties = [];
@@ -26,9 +26,6 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
      */
     protected array $noEntryProperties = ['parentDn'];
 
-    /**
-     * @var string[] Custom Properties
-     */
     protected array $customProperties = [];
 
     protected array $requiredObjectClasses = [];
@@ -55,6 +52,13 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
             $this->lrEntry->setAttribute('objectclass', $this->requiredObjectClasses);
             $this->isNewRecord = true;
         }
+
+        $this->init();
+    }
+
+    protected function init(): void
+    {
+
     }
 
     /**
@@ -105,7 +109,7 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
             $this->lrEntry->setFirstAttribute($name, $value);
         }
 
-        $headRdn = $this->headAttribute . '=' . $this->loadedProperties[$this->headAttribute];
+        $headRdn = $this->headAttribute . '=' . $this->getLoadedPropertyValueAsString($this->headAttribute);
         if ($this->isNewRecord) {
             $parentDn = (string)$this->getPropertyValue('parentDn');
             $this->lrEntry->inside($parentDn);
@@ -119,7 +123,7 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
         $this->lrEntry->save();
 
         if (!$this->isNewRecord && $this->lrEntry->getParentDn() !== $this->loadedProperties['parentDn']) {
-            $this->lrEntry->move($this->loadedProperties['parentDn']);
+            $this->lrEntry->move($this->getLoadedPropertyValueAsString('parentDn'));
         }
 
         $this->lrEntry->refresh();
@@ -143,6 +147,12 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
         return $this->dn ?? '';
     }
 
+    private function getLoadedPropertyValueAsString(string $property): string {
+        if (is_array($this->loadedProperties[$property])) {
+            return '';
+        }
+        return $this->loadedProperties[$property];
+    }
 
     public function getPropertyValue(string $property): mixed
     {
