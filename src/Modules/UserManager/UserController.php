@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Balemy\LdapCommander\Modules\UserManager;
 
 use Balemy\LdapCommander\ApplicationParameters;
-use Balemy\LdapCommander\LDAP\LdapService;
+use Balemy\LdapCommander\LDAP\Services\LdapService;
 use Balemy\LdapCommander\LDAP\Services\SchemaService;
 use Balemy\LdapCommander\Modules\GroupManager\Group;
 use Balemy\LdapCommander\Modules\Session\Session;
@@ -44,25 +44,15 @@ final class UserController
 
     public function list(ServerRequestInterface $request, WebControllerService $webService): ResponseInterface
     {
-        $ous = $this->ldapService->getOrganizationalUnits();
-        $ou = '';
+        $ous = array_merge(['' => 'All'], $this->getParentDns());
+        $ou = $webService->getParamAsString('ou', $request);
 
-        if (!empty($request->getQueryParams()['ou']) &&
-            is_string($request->getQueryParams()['ou']) &&
-            array_key_exists((string)$request->getQueryParams()['ou'], $ous)
-        ) {
-            $ou = (string)$request->getQueryParams()['ou'];
+        if ($ou !== '' && !in_array($ou, $ous)) {
+            throw new \Exception('Invalid OU given');
         }
-
-        if ($ou === '') {
-            $users = User::all();
-        } else {
-            $users = User::query()->in($ou)->paginate();
-        }
-
         return $this->viewRenderer->render('list', [
             'urlGenerator' => $this->urlGenerator,
-            'users' => $users,
+            'users' => ($ou === '') ? User::all() : User::query()->in($ou)->paginate(),
             'columns' => Session::getCurrentSession()->userManager->listColumns ?? [],
             'organizationalUnits' => $ous,
             'organizationalUnit' => $ou
@@ -88,7 +78,7 @@ final class UserController
         return $this->viewRenderer->render('edit', [
             'urlGenerator' => $this->urlGenerator,
             'dn' => $userModel->getDn(),
-            'parentDNs' => $this->ldapService->getOrganizationalUnits(),
+            'parentDNs' => $this->getParentDns(),
             'userForm' => $userModel,
             'userFormSchema' => new UserFormSchema(),
             'groups' => $this->getGroupList()
@@ -126,6 +116,22 @@ final class UserController
         }
 
         return $this->webService->getRedirectResponse('user-list', ['deleted' => 1]);
+    }
+
+    /**
+     * @psalm-suppress MixedArgument, MixedAssignment
+     * @return array<string, string>
+     */
+    private function getParentDns(): array
+    {
+        $userModel = new UserForm(dn: null, schemaService: $this->schemaService);
+        $requiredObjectClass = $userModel->requiredObjectClasses[0] ?? 'inetOrgPerson';
+
+        $pdns = [];
+        foreach ($this->ldapService->getParentDns($requiredObjectClass) as $dn) {
+            $pdns[$dn] = $dn;
+        }
+        return $pdns;
     }
 
     private function getDnByRequest(ServerRequestInterface $request): string|null

@@ -8,18 +8,16 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Stringable;
 use Yiisoft\Http\Header;
+use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Http\Status;
 use Yiisoft\Router\UrlGeneratorInterface;
 
 final class WebControllerService
 {
-    private ResponseFactoryInterface $responseFactory;
-    private UrlGeneratorInterface $urlGenerator;
-
-    public function __construct(ResponseFactoryInterface $responseFactory, UrlGeneratorInterface $urlGenerator)
+    public function __construct(
+        private ResponseFactoryInterface $responseFactory,
+        private UrlGeneratorInterface    $urlGenerator)
     {
-        $this->responseFactory = $responseFactory;
-        $this->urlGenerator = $urlGenerator;
     }
 
     /**
@@ -39,5 +37,16 @@ final class WebControllerService
     {
         return $this->responseFactory
             ->createResponse(Status::NOT_FOUND);
+    }
+
+    public function getParamAsString(string $name, ServerRequestInterface $request): string
+    {
+        if (!empty($request->getQueryParams()[$name]) &&
+            is_string($request->getQueryParams()[$name])
+        ) {
+            return (string)$request->getQueryParams()[$name];
+        }
+
+        return '';
     }
 }

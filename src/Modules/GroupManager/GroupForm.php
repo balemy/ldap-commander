@@ -6,7 +6,7 @@ use Balemy\LdapCommander\LDAP\LdapFormModel;
 
 class GroupForm extends LdapFormModel
 {
-    protected array $requiredObjectClasses = ['groupOfUniqueNames'];
+    public array $requiredObjectClasses = ['groupOfUniqueNames'];
 
     public function load(array $data): bool
     {

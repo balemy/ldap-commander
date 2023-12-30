@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Balemy\LdapCommander\Modules\ServerConfig\MemberOf;
 
-use Balemy\LdapCommander\LDAP\LdapService;
+use Balemy\LdapCommander\LDAP\Services\LdapService;
 use Balemy\LdapCommander\Service\WebControllerService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

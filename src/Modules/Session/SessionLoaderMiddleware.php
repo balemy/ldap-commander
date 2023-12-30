@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Balemy\LdapCommander\Modules\Session;
 
-use Balemy\LdapCommander\LDAP\LdapService;
+use Balemy\LdapCommander\LDAP\Services\LdapService;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

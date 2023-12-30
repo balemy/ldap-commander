@@ -2,8 +2,6 @@
 
 namespace Balemy\LdapCommander\LDAP\Services;
 
-use Balemy\LdapCommander\LDAP\LdapService;
-use Balemy\LdapCommander\LDAP\Schema\ObjectClass;
 use Balemy\LdapCommander\LDAP\Schema\Schema;
 
 class SchemaService

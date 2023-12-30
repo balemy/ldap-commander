@@ -8,7 +8,9 @@ use Balemy\LdapCommander\Modules\GroupManager\Group;
 
 class UserForm extends LdapFormModel
 {
-    protected array $requiredObjectClasses = ['inetorgperson'];
+    public array $requiredObjectClasses = ['inetorgperson'];
+
+
     protected string $headAttribute = 'uid';
     protected array $customProperties = ['groups'];
 

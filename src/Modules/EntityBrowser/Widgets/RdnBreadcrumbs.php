@@ -2,7 +2,7 @@
 
 namespace Balemy\LdapCommander\Modules\EntityBrowser\Widgets;
 
-use Balemy\LdapCommander\LDAP\LdapService;
+use Balemy\LdapCommander\LDAP\Services\LdapService;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Widget\Widget;
 use Yiisoft\Yii\Bootstrap5\Breadcrumbs;

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Balemy\LdapCommander\Modules\GroupManager;
 
-use Balemy\LdapCommander\LDAP\LdapService;
+use Balemy\LdapCommander\LDAP\Services\LdapService;
 use Balemy\LdapCommander\LDAP\Services\SchemaService;
 use Balemy\LdapCommander\Modules\UserManager\User;
+use Balemy\LdapCommander\Modules\UserManager\UserForm;
 use Balemy\LdapCommander\Service\WebControllerService;
 use LdapRecord\LdapRecordException;
 use LdapRecord\Models\Entry;
@@ -69,7 +70,7 @@ final class GroupController
         return $this->viewRenderer->render('edit', [
             'urlGenerator' => $this->urlGenerator,
             'dn' => $groupModel->getDn(),
-            'parentDNs' => $this->ldapService->getOrganizationalUnits(),
+            'parentDNs' => $this->getParentDns(),
             'groupModel' => $groupModel,
             'users' => $users,
         ]);
@@ -135,6 +136,21 @@ final class GroupController
         return $this->webService->getRedirectResponse('group-list', ['deleted' => 1]);
     }
 
+    /**
+     * @psalm-suppress MixedArgument, MixedAssignment
+     * @return array<string, string>
+     */
+    private function getParentDns(): array
+    {
+        $userModel = new GroupForm(dn: null, schemaService: $this->schemaService);
+        $requiredObjectClass = $userModel->requiredObjectClasses[0] ?? 'groupOfUniqueNames';
+
+        $pdns = [];
+        foreach ($this->ldapService->getParentDns($requiredObjectClass) as $dn) {
+            $pdns[$dn] = $dn;
+        }
+        return $pdns;
+    }
 
     private function getGroup(ServerRequestInterface $request): ?Group
     {

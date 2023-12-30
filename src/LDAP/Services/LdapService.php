@@ -1,7 +1,8 @@
 <?php
 
-namespace Balemy\LdapCommander\LDAP;
+namespace Balemy\LdapCommander\LDAP\Services;
 
+use Balemy\LdapCommander\LDAP\ConnectionDetails;
 use Balemy\LdapCommander\LDAP\Helper\DSN;
 use Balemy\LdapCommander\LDAP\Schema\Schema;
 use Balemy\LdapCommander\Modules\Session\LoginForm;
@@ -105,6 +106,28 @@ class LdapService
         #});
     }
 
+    /**
+     * @return string[]
+     */
+    public function getParentDns(string $childrenObjectClass, bool $fallbackToBaseDn = true): array
+    {
+        $parentDns = [];
+
+        /** @var Entry $entry */
+        foreach (Entry::query()->addSelect(['dn'])
+                     ->query('(objectClass=' . $childrenObjectClass . ')') as $entry) {
+
+            if (!in_array($entry->getParentDn(), $parentDns)) {
+                $parentDns[] = $entry->getParentDn();
+            }
+        }
+
+        if ($fallbackToBaseDn && empty($parentDns)) {
+            $parentDns[] = $this->baseDn;
+        }
+
+        return $parentDns;
+    }
 
     /**
      * @return string[]

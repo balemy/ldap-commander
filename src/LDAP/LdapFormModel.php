@@ -28,7 +28,7 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
 
     protected array $customProperties = [];
 
-    protected array $requiredObjectClasses = [];
+    public array $requiredObjectClasses = [];
 
     /**
      * @var string The current or head attribute for new entries.
@@ -147,7 +147,8 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
         return $this->dn ?? '';
     }
 
-    private function getLoadedPropertyValueAsString(string $property): string {
+    private function getLoadedPropertyValueAsString(string $property): string
+    {
         if (is_array($this->loadedProperties[$property])) {
             return '';
         }

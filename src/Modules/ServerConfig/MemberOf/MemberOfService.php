@@ -2,7 +2,7 @@
 
 namespace Balemy\LdapCommander\Modules\ServerConfig\MemberOf;
 
-use Balemy\LdapCommander\LDAP\LdapService;
+use Balemy\LdapCommander\LDAP\Services\LdapService;
 use LdapRecord\Models\Entry;
 use Yiisoft\Hydrator\Hydrator;
 

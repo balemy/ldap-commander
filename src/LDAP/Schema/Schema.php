@@ -2,7 +2,7 @@
 
 namespace Balemy\LdapCommander\LDAP\Schema;
 
-use Balemy\LdapCommander\LDAP\LdapService;
+use Balemy\LdapCommander\LDAP\Services\LdapService;
 use Balemy\LdapCommander\Timer;
 use LdapRecord\Connection;
 use Yiisoft\Json\Json;
