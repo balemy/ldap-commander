@@ -34,7 +34,6 @@ class UserForm extends LdapFormModel
         return parent::save();
     }
 
-
     public function getFormName(): string
     {
         return 'UserForm';

@@ -27,7 +27,7 @@ $this->setTitle($applicationParameters->getName());
     <div class="col-md-12">
 
         <h1>Groups</h1>
-        <a href="<?= $urlGenerator->generate('group-add'); ?>" class="btn btn-success float-end">Create new group</a>
+        <a href="<?= $urlGenerator->generate('group-edit'); ?>" class="btn btn-success float-end">Create new group</a>
         <p class="lead">
             Overview of all groups
         </p>

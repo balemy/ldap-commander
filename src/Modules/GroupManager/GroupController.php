@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Balemy\LdapCommander\Modules\GroupManager;
 
 use Balemy\LdapCommander\LDAP\LdapService;
+use Balemy\LdapCommander\LDAP\Services\SchemaService;
 use Balemy\LdapCommander\Modules\UserManager\User;
 use Balemy\LdapCommander\Service\WebControllerService;
 use LdapRecord\LdapRecordException;
@@ -14,7 +15,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Http\Method;
-use Yiisoft\Hydrator\Hydrator;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Session\Flash\FlashInterface;
 use Yiisoft\Session\SessionInterface;
@@ -30,6 +30,7 @@ final class GroupController
                                 public SessionInterface      $session,
                                 public ValidatorInterface    $validator,
                                 public AssetManager          $assetManager,
+                                public SchemaService         $schemaService,
                                 public FlashInterface        $flash
     )
     {
@@ -44,33 +45,15 @@ final class GroupController
         ]);
     }
 
-    public function add(ServerRequestInterface $request): ResponseInterface
+    public function edit(ServerRequestInterface $request, WebControllerService $webService): ResponseInterface
     {
-        $formModel = new GroupAddForm();
+        $groupModel = new GroupForm(dn: $this->getDnByRequest($request), schemaService: $this->schemaService);
+        if ($request->getMethod() === Method::POST &&
+            $groupModel->load($request->getParsedBody()) && $this->validator->validate($groupModel)->isValid()) {
+            $groupModel->save();
+            $this->flash->add('success', ['body' => 'Group successfully saved!']);
 
-        if ($request->getMethod() === Method::POST) {
-            /** @var array<string, array> $body */
-            $body = $request->getParsedBody();
-
-            if (!is_array($body['GroupAddForm']['initialMembers'])) {
-                $body['GroupAddForm']['initialMembers'] = [];
-            }
-
-            (new Hydrator())->hydrate($formModel, $body['GroupAddForm']);
-            if ($this->validator->validate($formModel)->isValid()) {
-                $entry = new Entry();
-                $entry->inside($formModel->getParentDn());
-                $entry->setAttribute('objectclass', 'groupofuniquenames');
-                $entry->setAttribute('cn', $formModel->getTitle());
-                $entry->setAttribute('description', $formModel->getDescription());
-                foreach ($formModel->getInitialMembers() as $memberDn) {
-                    $entry->addAttributeValue('uniqueMember', $memberDn);
-                }
-                $entry->save();
-
-                $this->flash->add('success', ['body' => 'Group successfully saved!']);
-                return $this->webService->getRedirectResponse('group-list', ['saved' => 1]);
-            }
+            return $this->webService->getRedirectResponse('group-edit', ['dn' => $groupModel->getDn(), 'saved' => 1]);
         }
 
         $users = [];
@@ -79,42 +62,12 @@ final class GroupController
             $users[$user->getDn() ?? ''] = $user->getDisplayName();
         }
 
-
-        return $this->viewRenderer->render('add', [
-            'urlGenerator' => $this->urlGenerator,
-            'formModel' => $formModel,
-            'users' => $users,
-            'parentDns' => $this->ldapService->getOrganizationalUnits()
-        ]);
-    }
-
-    public function edit(ServerRequestInterface $request, WebControllerService $webService): ResponseInterface
-    {
-        $group = $this->getGroup($request);
-        if ($group === null) {
-            return $this->webService->getNotFoundResponse();
-        }
-
-        $formModel = new GroupForm();
-        $formModel->loadGroup($group);
-
-        if ($request->getMethod() === Method::POST) {
-            /** @var array<string, array> $body */
-            $body = $request->getParsedBody();
-            (new Hydrator())->hydrate($formModel, $body['GroupForm']);
-            if ($this->validator->validate($formModel)->isValid()) {
-                $group->update($formModel);
-                $this->flash->add('success', ['body' => 'Group successfully saved!']);
-                return $this->webService->getRedirectResponse('group-edit', ['dn' => $group->getDn(), 'saved' => 1]);
-            }
-
-        }
-
         return $this->viewRenderer->render('edit', [
             'urlGenerator' => $this->urlGenerator,
-            'dn' => $group->getDn(),
-            'formModel' => $formModel,
-            'parentDns' => $this->ldapService->getOrganizationalUnits()
+            'dn' => $groupModel->getDn(),
+            'parentDNs' => $this->ldapService->getOrganizationalUnits(),
+            'groupModel' => $groupModel,
+            'users' => $users,
         ]);
     }
 
@@ -191,7 +144,7 @@ final class GroupController
 
     private function getDnByRequest(ServerRequestInterface $request): string|null
     {
-        if (isset($request->getQueryParams()['dn']) && is_string($request->getQueryParams()['dn'])) {
+        if (!empty($request->getQueryParams()['dn']) && is_string($request->getQueryParams()['dn'])) {
             return (string)$request->getQueryParams()['dn'];
         }
 

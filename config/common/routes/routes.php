@@ -40,7 +40,6 @@ return [
             Route::methods([Method::GET, Method::POST], '/user/delete')->action([UserController::class, 'delete'])->name('user-delete'),
 
             Route::get('/groups')->action([GroupController::class, 'list'])->name('group-list'),
-            Route::methods([Method::GET, Method::POST], '/group/add')->action([GroupController::class, 'add'])->name('group-add'),
             Route::methods([Method::GET, Method::POST], '/group/edit')->action([GroupController::class, 'edit'])->name('group-edit'),
             Route::methods([Method::GET, Method::POST], '/group/members')->action([GroupController::class, 'members'])->name('group-members'),
             Route::methods([Method::GET, Method::POST], '/group/delete')->action([GroupController::class, 'delete'])->name('group-delete'),

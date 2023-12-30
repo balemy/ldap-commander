@@ -9,8 +9,9 @@ declare(strict_types=1);
  * @var \Yiisoft\Router\CurrentRoute $currentRoute
  * @var Csrf $csrf
  * @var string $dn
- * @var string[] $parentDns
- * @var \Balemy\LdapCommander\Modules\GroupManager\GroupForm $formModel
+ * @var string[] $parentDNs
+ * @var string[] $users
+ * @var \Balemy\LdapCommander\Modules\GroupManager\GroupForm $groupModel
  */
 
 use Balemy\LdapCommander\Modules\GroupManager\SidebarWidget;
@@ -25,25 +26,38 @@ $this->setTitle($applicationParameters->getName());
 
 <div class="row">
     <div class="col-md-9">
-        <h1>Edit Group</h1>
-        <p class="lead">
-            <?= Html::encode($dn); ?>
-        </p>
+        <?php if (!$groupModel->isNewRecord): ?>
+            <h1>Edit Group</h1>
+            <p class="lead">
+                <?= Html::encode($groupModel->getDn()) ?>
+            </p>
+        <?php else: ?>
+            <h1>Create Group</h1>
+            <p class="lead">
+            </p>
+        <?php endif; ?>
         <br>
 
         <?= Html::form()->post($urlGenerator->generate('group-edit', [], ['dn' => $dn]))->csrf($csrf)->open() ?>
 
-        <?= Field::text($formModel, 'title')
+        <?= Field::text($groupModel, 'cn')
             ->autofocus()
             ->tabindex(1) ?>
 
-        <?= Field::textarea($formModel, 'description')
+        <?= Field::textarea($groupModel, 'description')
             ->addInputAttributes(['style' => 'height:150px'])
             ->tabindex(2) ?>
 
-        <?= Field::select($formModel, 'parentDn')
-            ->optionsData($parentDns)
+        <?= Field::select($groupModel, 'parentDn')
+            ->optionsData($parentDNs)
             ->tabindex(3) ?>
+
+        <?php if ($groupModel->isNewRecord): ?>
+            <?= Field::select($groupModel, 'uniqueMember')
+                ->multiple(true)
+                ->optionsData($users)
+                ->tabindex(4) ?>
+        <?php endif; ?>
 
         <?= Field::submitButton()
             ->tabindex(3)
@@ -57,3 +71,14 @@ $this->setTitle($applicationParameters->getName());
     </div>
 
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#groupform-uniquemember').select2({
+            theme: 'bootstrap-5',
+            placeholder: "Initial group members",
+            multiple: true
+        });
+    });
+</script>
+

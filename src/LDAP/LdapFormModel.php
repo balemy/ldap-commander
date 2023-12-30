@@ -11,7 +11,7 @@ use Yiisoft\Validator\RulesProviderInterface;
 
 class LdapFormModel extends FormModel implements RulesProviderInterface, DataSetInterface
 {
-    private Entry $lrEntry;
+    protected Entry $lrEntry;
 
     public bool $isNewRecord = false;
 
@@ -24,6 +24,11 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
      * @var string[] Properties which are not synced with the LR Entry object
      */
     protected array $noEntryProperties = ['parentDn'];
+
+    /**
+     * @var string[] Custom Properties
+     */
+    protected array $customProperties = [];
 
     /**
      * @var string[] Required object classes to be valid. Added for new Entries
@@ -44,10 +49,9 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
             $this->headAttribute = (string)$this->lrEntry->getHead();
             $this->loadedProperties['parentDn'] = $this->lrEntry->getParentDn();
             // ToDo: Loading only entries which implements required ObjectClass
-
         } else {
             $this->lrEntry = new Entry();
-            $this->lrEntry->setFirstAttribute('objectclass', $this->requiredObjectClasses);
+            $this->lrEntry->setAttribute('objectclass', $this->requiredObjectClasses);
             $this->isNewRecord = true;
         }
     }
@@ -86,7 +90,7 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
     public function save(): bool
     {
         foreach ($this->loadedProperties as $name => $value) {
-            if (in_array($name, $this->noEntryProperties)) {
+            if (in_array($name, $this->noEntryProperties) || in_array($name, $this->customProperties)) {
                 continue; // Skip not LrEntry Related Properties (e.g. parentDn)
             }
             if ($this->isNewRecord && empty($value)) {
@@ -149,7 +153,9 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
 
     public function getPropertyLabels(): array
     {
-        return [];
+        return [
+            'parentDn' => 'Organizational Unit'
+        ];
     }
 
     public function getPropertyHints(): array
@@ -159,9 +165,10 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
 
     public function hasProperty(string $property): bool
     {
-        if (in_array($property, ['parentDn'])) {
+        if (in_array($property, ['parentDn']) || in_array($property, $this->customProperties)) {
             return true;
         }
+
 
         if ($this->schemaService->hasAttribute($property, $this->getObjectClasses())) {
             return true;
