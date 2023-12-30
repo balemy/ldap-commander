@@ -34,7 +34,9 @@ class Schema
 
     }
 
-
+    /**
+     * @psalm-suppress DocblockTypeContradiction
+     */
     public function getObjectClass(string $name): ObjectClass
     {
         $objectClass = $this->objectClasses[strtolower($name)];

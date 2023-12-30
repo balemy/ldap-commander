@@ -17,40 +17,17 @@ class SchemaService
 
 
     /**
-     * @param ObjectClass[] $objectClassNames
-     * @param $lookupSupClasses
-     * @return array
-     * @throws \Exception
+     * @param string $attributeName
+     * @param string[] $objectClasses
+     * @return bool
      */
-    public function getObjectClassesByNames(array $objectClassNames, $lookupSupClasses = true): array
-    {
-        $objectClasses = [];
-        foreach ($objectClassNames as $objectClassName) {
-            $objectClass = $this->schema->getObjectClass($objectClassName);
-            if ($objectClass === null) {
-                throw new \Exception('Invalid Object Class: ' . $objectClassName);
-            }
-            $objectClasses[] = $objectClass;
-        }
-
-        if (!$lookupSupClasses) {
-            return $objectClasses;
-        }
-
-    }
-
-    public function hasAttribute($attributeName, array $objectClasses = []): bool
+    public function hasAttribute(string $attributeName, array $objectClasses = []): bool
     {
         $attributeName = strtolower($attributeName);
 
-        #       $attrs = [];
         foreach ($objectClasses as $objectClassName) {
             $objectClass = $this->schema->getObjectClass($objectClassName);
-            if ($objectClass === null) {
-                throw new \Exception('Invalid Object Class: ' . $objectClassName);
-            }
 
-            #          $attrs = array_merge($objectClass->getAttributeIds(true), $attrs);
             if (in_array($attributeName, $objectClass->getAttributeIds(true))) {
                 return true;
             }

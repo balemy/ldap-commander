@@ -71,6 +71,9 @@ final class UserController
         ]);
     }
 
+    /**
+     * @psalm-suppress PossiblyInvalidArgument
+     */
     public function edit(ServerRequestInterface $request, WebControllerService $webService): ResponseInterface
     {
         $userModel = new UserForm(dn: $this->getDnByRequest($request), schemaService: $this->schemaService);

@@ -36,6 +36,7 @@ class SidebarWidget extends Widget
             return '';
         }
 
+        /** @var User $user */
         $user = User::query()->addSelect(['*', '+'])->findOrFail($this->userDn);
 
         $html = Html::openTag('ul', ['class' => 'list-group']);
@@ -47,9 +48,8 @@ class SidebarWidget extends Widget
             );
         }
         if ($this->location !== SidebarLocation::Members) {
-            $memberCountBadge = '<span class="badge rounded-pill bg-primary float-end" style="text-decoration:none;margin-top:3px">' .
-                count($user->getGroups()) .
-                '</span>';
+            $memberCountBadge = '<span class="badge rounded-pill bg-primary float-end" style="text-decoration:none;margin-top:3px">'
+                . count($user->getGroups()) . '</span>';
 
             $html .= Html::tag('li',
                 Html::a('Groups' .

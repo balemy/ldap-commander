@@ -16,6 +16,7 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
     public bool $isNewRecord = false;
 
     /**
+     * @psalm-var array<string, string>
      * @var string[] Properties loaded for modification
      */
     protected array $loadedProperties = [];
@@ -30,9 +31,6 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
      */
     protected array $customProperties = [];
 
-    /**
-     * @var string[] Required object classes to be valid. Added for new Entries
-     */
     protected array $requiredObjectClasses = [];
 
     /**
@@ -41,13 +39,16 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
     protected string $headAttribute = 'cn';
 
 
+    /**
+     * @psalm-suppress PropertyTypeCoercion
+     */
     public function __construct(private ?string $dn, private SchemaService $schemaService)
     {
         if ($dn !== null) {
             /** @noinspection PhpFieldAssignmentTypeMismatchInspection */
             $this->lrEntry = Entry::query()->addSelect(['*', '+'])->findOrFail($dn);
             $this->headAttribute = (string)$this->lrEntry->getHead();
-            $this->loadedProperties['parentDn'] = $this->lrEntry->getParentDn();
+            $this->loadedProperties['parentDn'] = (string)$this->lrEntry->getParentDn();
             // ToDo: Loading only entries which implements required ObjectClass
         } else {
             $this->lrEntry = new Entry();
@@ -74,7 +75,9 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
     public function load(array $data): bool
     {
         if (is_array($data[$this->getFormName()])) {
-            foreach ($data[$this->getFormName()] as $name => $value) {
+            /** @var array<string,string> $formData */
+            $formData = $data[$this->getFormName()];
+            foreach ($formData as $name => $value) {
                 if ($this->hasProperty($name)) {
                     $this->loadedProperties[$name] = $value;
                 } else {
@@ -102,9 +105,9 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
             $this->lrEntry->setFirstAttribute($name, $value);
         }
 
-        $headRdn = $this->headAttribute . '=' . (string)$this->loadedProperties[$this->headAttribute];
+        $headRdn = $this->headAttribute . '=' . $this->loadedProperties[$this->headAttribute];
         if ($this->isNewRecord) {
-            $parentDn = $this->getPropertyValue('parentDn');
+            $parentDn = (string)$this->getPropertyValue('parentDn');
             $this->lrEntry->inside($parentDn);
             $this->lrEntry->setDn($headRdn . ',' . $parentDn);
         } else {
@@ -125,7 +128,7 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
         return true;
     }
 
-    private function isHeadAttributeChanged()
+    private function isHeadAttributeChanged(): bool
     {
         if ($this->isNewRecord) {
             return false;
@@ -196,7 +199,9 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
         return $this->hasProperty($attribute);
     }
 
+
     /**
+     * @psalm-suppress MixedReturnTypeCoercion
      * @return string[]
      */
     private function getObjectClasses(): array

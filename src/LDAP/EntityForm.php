@@ -182,9 +182,7 @@ class EntityForm extends FormModel implements RulesProviderInterface, DataSetInt
         /** @var string $objectClassName */
         foreach ($objectClasses as $objectClassName) {
             $objectClass = $this->schema->getObjectClass($objectClassName);
-            if ($objectClass !== null) {
-                $validAttributes = array_merge($validAttributes, $objectClass->getAttributeIds(true));
-            }
+            $validAttributes = array_merge($validAttributes, $objectClass->getAttributeIds(true));
         }
 
         return $validAttributes;
@@ -312,9 +310,7 @@ class EntityForm extends FormModel implements RulesProviderInterface, DataSetInt
         /** @var string $objectClassName */
         foreach ($this->getAttributeValueAsArray('objectclass') as $objectClassName) {
             $objectClass = $this->schema->getObjectClass($objectClassName);
-            if ($objectClass !== null) {
-                $requiredAttributes = ArrayHelper::merge($requiredAttributes, $objectClass->mustAttributes);
-            }
+            $requiredAttributes = ArrayHelper::merge($requiredAttributes, $objectClass->mustAttributes);
         }
 
         foreach ($this->schema->attributeTypes as $attribute => $attributeType) {

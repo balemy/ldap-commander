@@ -128,23 +128,6 @@ class Group
         return $this->getEntryValue('description') ?? '';
     }
 
-    public function update(GroupForm $formModel): bool
-    {
-        $this->entry->setFirstAttribute('cn', $formModel->getTitle());
-        $this->entry->setFirstAttribute('description', $formModel->getDescription());
-
-        if ($this->isNewRecord()) {
-            $this->entry->inside($formModel->getParentDn());
-            $this->entry->save();
-        } else {
-            $this->entry->save();
-            $this->entry->move($formModel->getParentDn());
-            $this->entry->refresh();
-        }
-
-        return true;
-    }
-
     public function __toString(): string
     {
         return $this->getDn();
@@ -153,11 +136,6 @@ class Group
     public function isNewRecord(): bool
     {
         return empty($this->entry->getDn());
-    }
-
-    public function getParentDn(): string
-    {
-        return $this->entry->getParentDn() ?? '';
     }
 
 }

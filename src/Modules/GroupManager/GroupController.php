@@ -45,10 +45,14 @@ final class GroupController
         ]);
     }
 
+    /**
+     * @psalm-suppress PossiblyInvalidArgument
+     */
     public function edit(ServerRequestInterface $request, WebControllerService $webService): ResponseInterface
     {
         $groupModel = new GroupForm(dn: $this->getDnByRequest($request), schemaService: $this->schemaService);
         if ($request->getMethod() === Method::POST &&
+            /** @psalm-suppress PossiblyInvalidArgument */
             $groupModel->load($request->getParsedBody()) && $this->validator->validate($groupModel)->isValid()) {
             $groupModel->save();
             $this->flash->add('success', ['body' => 'Group successfully saved!']);

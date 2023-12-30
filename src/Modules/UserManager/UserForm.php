@@ -10,12 +10,20 @@ class UserForm extends LdapFormModel
     protected array $requiredObjectClasses = ['inetorgperson'];
     protected string $headAttribute = 'uid';
 
+    /**
+     * @psalm-suppress MixedArrayAccess
+     * @psalm-suppress MixedAssignment
+     * @psalm-suppress MixedArrayAssignment
+     * @psalm-suppress MixedOperand
+     */
     public function load(array $data): bool
     {
-        // Auto set CN based on givenName and SN
-        $givenName = $data[$this->getFormName()]['givenName'] ?? '';
-        $sn = $data[$this->getFormName()]['sn'] ?? '';
-        $data[$this->getFormName()]['cn'] = $givenName . ' ' . $sn;
+        if (is_array($data[$this->getFormName()])) {
+            // Auto set CN based on givenName and SN
+            $givenName = $data[$this->getFormName()]['givenName'] ?? '';
+            $sn = $data[$this->getFormName()]['sn'] ?? '';
+            $data[$this->getFormName()]['cn'] = $givenName . ' ' . $sn;
+        }
 
         return parent::load($data);
     }
