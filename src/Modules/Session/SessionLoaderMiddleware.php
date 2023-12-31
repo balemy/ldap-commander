@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Balemy\LdapCommander\Modules\Session;
 
-use Balemy\LdapCommander\LDAP\Services\LdapService;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -22,10 +21,9 @@ final class SessionLoaderMiddleware implements MiddlewareInterface
 
     public function __construct(
         private ResponseFactoryInterface $responseFactory,
-        private SessionInterface         $session,
+        private SessionInterface         $httpSession,
         private UrlGeneratorInterface    $urlGenerator,
-        private SessionList              $sessionList,
-        private LdapService              $ldapService,
+        private ConfiguredSessionList    $sessionList,
         private FlashInterface           $flash
     )
     {
@@ -34,16 +32,16 @@ final class SessionLoaderMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $session = $this->sessionList->getSessionByHttpSession($this->session);
+        $configuredSession = $this->sessionList->getSessionByHttpSession($this->httpSession);
 
-        if ($session === null) {
+        if ($configuredSession === null) {
             return $this->responseFactory
                 ->createResponse(Status::FOUND)
                 ->withHeader(Header::LOCATION, $this->urlGenerator->generate('login'));
         }
 
         try {
-            $this->ldapService->connectWithDetails($session->connectionDetails);
+            $session = new Session($configuredSession);
         } catch (\Exception $ex) {
             $this->flash->add('danger', $ex->getMessage());
 
@@ -52,9 +50,7 @@ final class SessionLoaderMiddleware implements MiddlewareInterface
                 ->withHeader(Header::LOCATION, $this->urlGenerator->generate('login'));
         }
 
-
         static::$currentSession = $session;
-
         return $handler->handle($request);
     }
 }

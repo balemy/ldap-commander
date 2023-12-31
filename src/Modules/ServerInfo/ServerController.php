@@ -30,7 +30,7 @@ final class ServerController
 
     public function index(WebControllerService $webService): ResponseInterface
     {
-        $query = $this->ldapService->connection->query();
+        $query = $this->ldapService->session->lrConnection->query();
 
         $infoAttrs = [
             'namingContexts',
@@ -91,7 +91,7 @@ final class ServerController
         }
 
         return $this->viewRenderer->render('index', [
-            'objectClasses' => $this->ldapService->getSchema()->objectClasses,
+            'objectClasses' => $this->ldapService->session->schema->objectClasses,
             'urlGenerator' => $this->urlGenerator,
             'results' => $res
         ]);

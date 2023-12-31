@@ -2,7 +2,7 @@
 
 namespace Balemy\LdapCommander\LDAP\Schema;
 
-use Balemy\LdapCommander\LDAP\Services\LdapService;
+use Balemy\LdapCommander\Modules\Session\Session;
 use Balemy\LdapCommander\Timer;
 use LdapRecord\Connection;
 use Yiisoft\Json\Json;
@@ -29,7 +29,7 @@ class Schema
      */
     private $_attributeTypesBinary = null;
 
-    public function __construct(public LdapService $ldapService, private ?Timer $timer)
+    public function __construct(public Session $session, private ?Timer $timer = null)
     {
 
     }
@@ -182,7 +182,7 @@ class Schema
             $this->timer->start('schema');
         }
 
-        $query = $this->ldapService->connection->query();
+        $query = $this->session->lrConnection->query();
 
         $query->read()
             ->setBaseDn('cn=Subschema')

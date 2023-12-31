@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Balemy\LdapCommander\ViewInjection;
 
 use Balemy\LdapCommander\Modules\Session\Session;
-use Balemy\LdapCommander\Modules\Session\SessionList;
-use Balemy\LdapCommander\Modules\Session\SessionLoaderMiddleware;
 use Yiisoft\Aliases\Aliases;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Router\UrlGeneratorInterface;
@@ -25,12 +23,20 @@ final class LayoutViewInjection implements LayoutParametersInjectionInterface
 
     public function getLayoutParameters(): array
     {
+
+        try {
+            $session = Session::getCurrentSession();
+        } catch (\Exception $e) {
+            $session = null;
+        }
+
+
         return [
             'aliases' => $this->aliases,
             'assetManager' => $this->assetManager,
             'urlGenerator' => $this->urlGenerator,
             'currentRoute' => $this->currentRoute,
-            'session' => Session::getCurrentSession(),
+            'session' => $session,
         ];
     }
 }

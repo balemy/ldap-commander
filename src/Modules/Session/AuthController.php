@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Balemy\LdapCommander\Modules\Session;
 
-use Balemy\LdapCommander\LDAP\ConnectionDetails;
 use Balemy\LdapCommander\Service\WebControllerService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -12,10 +11,8 @@ use Yiisoft\Aliases\Aliases;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\FormModel\FormHydrator;
 use Yiisoft\Http\Method;
-use Yiisoft\Hydrator\Hydrator;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Session\SessionInterface;
-use Yiisoft\Validator\ValidatorInterface;
 use Yiisoft\Yii\View\ViewRenderer;
 
 final class AuthController
@@ -32,9 +29,8 @@ final class AuthController
     }
 
     public function login(ServerRequestInterface $request,
-                          ValidatorInterface     $validator,
                           FormHydrator           $formHydrator,
-                          SessionList            $sessionList,
+                          ConfiguredSessionList  $sessionList,
                           Aliases                $aliases
     ): ResponseInterface
     {

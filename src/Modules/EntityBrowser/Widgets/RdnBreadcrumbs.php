@@ -27,11 +27,11 @@ class RdnBreadcrumbs extends Widget
     public function render(): string
     {
         $parts = [];
-        if ($this->dn !== $this->ldapService->baseDn) {
-            $parts = explode(',', substr($this->dn, 0, (strlen($this->ldapService->baseDn) + 1) * -1));
+        if ($this->dn !== $this->ldapService->session->baseDn) {
+            $parts = explode(',', substr($this->dn, 0, (strlen($this->ldapService->session->baseDn) + 1) * -1));
         }
 
-        $parts[] = $this->ldapService->baseDn;
+        $parts[] = $this->ldapService->session->baseDn;
 
         $links = [];
         foreach ($parts as $i => $part) {

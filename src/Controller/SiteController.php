@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Balemy\LdapCommander\Controller;
 
-use Balemy\LdapCommander\LDAP\Services\LdapService;
 use Balemy\LdapCommander\Service\WebControllerService;
 use Psr\Http\Message\ResponseInterface;
 use Yiisoft\Assets\AssetManager;
@@ -16,7 +15,6 @@ use Yiisoft\Yii\View\ViewRenderer;
 final class SiteController
 {
     public function __construct(public ViewRenderer          $viewRenderer,
-                                public LdapService           $ldapService,
                                 public WebControllerService  $webService,
                                 public UrlGeneratorInterface $urlGenerator,
                                 public SessionInterface      $session,

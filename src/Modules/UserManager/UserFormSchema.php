@@ -15,15 +15,13 @@ final class UserFormSchema
     public function __construct()
     {
         $session = Session::getCurrentSession();
-        if ($session) {
-            $this->_rows = $session->userManager->editFields;
+        $this->_rows = $session->userManager->editFields;
 
-            /** @var array $row */
-            foreach ($this->_rows as $row) {
-                /** @var string $fieldLabel */
-                foreach ($row as $fieldKey => $fieldLabel) {
-                    $this->_fields[$fieldKey] = $fieldLabel;
-                }
+        /** @var array $row */
+        foreach ($this->_rows as $row) {
+            /** @var string $fieldLabel */
+            foreach ($row as $fieldKey => $fieldLabel) {
+                $this->_fields[$fieldKey] = $fieldLabel;
             }
         }
 

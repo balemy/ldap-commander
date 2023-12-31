@@ -8,6 +8,7 @@ use Yiisoft\FormModel\FormModel;
 use Yiisoft\Validator\Result;
 use Yiisoft\Validator\Rule\Callback;
 use Yiisoft\Validator\Rule\Required;
+use Yiisoft\Validator\Rule\StringValue;
 use Yiisoft\Validator\RulesProviderInterface;
 
 final class LoginForm extends FormModel implements RulesProviderInterface
@@ -17,7 +18,7 @@ final class LoginForm extends FormModel implements RulesProviderInterface
     private string $password = '';
 
 
-    public function __construct(public SessionList $sessionList)
+    public function __construct(public ConfiguredSessionList $sessionList)
     {
 
     }
@@ -42,6 +43,7 @@ final class LoginForm extends FormModel implements RulesProviderInterface
     {
         return [
             'sessionId' => [new Required()],
+            'username' => [new StringValue()],
             'password' => $this->passwordRules(),
         ];
     }
@@ -54,10 +56,10 @@ final class LoginForm extends FormModel implements RulesProviderInterface
                 callback: function (): Result {
                     $result = new Result();
 
-                    $session = $this->sessionList->getSessionById($this->sessionId);
-                    if ($session) {
+                    $configuredSession = $this->sessionList->getSessionById($this->sessionId);
+                    if ($configuredSession) {
                         try {
-                            if (!$session->login($this->username, $this->password)) {
+                            if (!$configuredSession->login($this->username, $this->password)) {
                                 $result->addError("Login failed!");
                             }
                         } catch (\Exception $ex) {

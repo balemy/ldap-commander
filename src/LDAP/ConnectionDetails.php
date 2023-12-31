@@ -9,6 +9,7 @@ class ConnectionDetails
         public readonly string $baseDn,
         public readonly string $adminDn,
         public readonly string $adminPassword,
+        public readonly string $adminUserFilter,
         public readonly string $configDn,
         public readonly string $configPassword,
     )
@@ -27,6 +28,7 @@ class ConnectionDetails
             baseDn: is_string($config['baseDn']) ? $config['baseDn'] : '',
             adminDn: is_string($config['adminDn']) ? $config['adminDn'] : '',
             adminPassword: is_string($config['adminPassword']) ? $config['adminPassword'] : '',
+            adminUserFilter: is_string($config['adminUserFilter']) ? $config['adminUserFilter'] : '',
             configDn: is_string($config['configDn']) ? $config['configDn'] : '',
             configPassword: is_string($config['configPassword']) ? $config['configPassword'] : '',
         );

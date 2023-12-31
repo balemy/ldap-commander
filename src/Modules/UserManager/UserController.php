@@ -6,7 +6,6 @@ namespace Balemy\LdapCommander\Modules\UserManager;
 
 use Balemy\LdapCommander\ApplicationParameters;
 use Balemy\LdapCommander\LDAP\Services\LdapService;
-use Balemy\LdapCommander\LDAP\Services\SchemaService;
 use Balemy\LdapCommander\Modules\GroupManager\Group;
 use Balemy\LdapCommander\Modules\Session\Session;
 use Balemy\LdapCommander\Service\WebControllerService;
@@ -27,7 +26,6 @@ use Yiisoft\Yii\View\ViewRenderer;
 final class UserController
 {
     public function __construct(public ViewRenderer          $viewRenderer,
-                                public LdapService           $ldapService,
                                 public WebControllerService  $webService,
                                 public UrlGeneratorInterface $urlGenerator,
                                 public SessionInterface      $session,
@@ -35,7 +33,6 @@ final class UserController
                                 public FormHydrator          $formHydrator,
                                 public AssetManager          $assetManager,
                                 public FlashInterface        $flash,
-                                public SchemaService         $schemaService,
                                 public ApplicationParameters $applicationParameters,
     )
     {
@@ -64,7 +61,11 @@ final class UserController
      */
     public function edit(ServerRequestInterface $request, WebControllerService $webService): ResponseInterface
     {
-        $userModel = new UserForm(dn: $this->getDnByRequest($request), schemaService: $this->schemaService);
+        $userModel = new UserForm(
+            dn: $this->getDnByRequest($request),
+            schemaService: Session::getCurrentSession()->getSchemaService()
+        );
+
         if ($request->getMethod() === Method::POST &&
             $userModel->load($request->getParsedBody()) && $this->validator->validate($userModel)->isValid()) {
             $userModel->save();
@@ -124,11 +125,11 @@ final class UserController
      */
     private function getParentDns(): array
     {
-        $userModel = new UserForm(dn: null, schemaService: $this->schemaService);
+        $userModel = new UserForm(dn: null, schemaService: Session::getCurrentSession()->getSchemaService());
         $requiredObjectClass = $userModel->requiredObjectClasses[0] ?? 'inetOrgPerson';
 
         $pdns = [];
-        foreach ($this->ldapService->getParentDns($requiredObjectClass) as $dn) {
+        foreach ((new LdapService())->getParentDns($requiredObjectClass) as $dn) {
             $pdns[$dn] = $dn;
         }
         return $pdns;

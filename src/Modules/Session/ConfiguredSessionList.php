@@ -5,12 +5,12 @@ namespace Balemy\LdapCommander\Modules\Session;
 use Balemy\LdapCommander\LDAP\ConnectionDetails;
 use Balemy\LdapCommander\Modules\UserManager\UserManagerConfig;
 
-final class SessionList
+final class ConfiguredSessionList
 {
     /**
-     * @var Session[]
+     * @var ConfiguredSession[]
      */
-    private $sessions = [];
+    private $configuredSessions = [];
 
 
     public function __construct(array $params)
@@ -19,13 +19,13 @@ final class SessionList
         foreach ($params as $sessionConfig) {
             $connectionDetails = ConnectionDetails::fromArray($sessionConfig['LDAP']);
             $userManagerConfig = UserManagerConfig::fromArray($sessionConfig['UserManager']);
-            $this->sessions[] = new Session($connectionDetails, $userManagerConfig);
+            $this->configuredSessions[] = new ConfiguredSession($connectionDetails, $userManagerConfig);
         }
     }
 
-    public function getSessionById(string $id): ?Session
+    public function getSessionById(string $id): ?ConfiguredSession
     {
-        foreach ($this->sessions as $session) {
+        foreach ($this->configuredSessions as $session) {
             if ($session->getId() === $id) {
                 return $session;
             }
@@ -33,12 +33,12 @@ final class SessionList
         return null;
     }
 
-    public function getSessionByHttpSession(\Yiisoft\Session\SessionInterface $session): ?Session
+    public function getSessionByHttpSession(\Yiisoft\Session\SessionInterface $session): ?ConfiguredSession
     {
 
         $sessionId = (string)$session->get('SessionId');
         if (!empty($sessionId)) {
-            foreach ($this->sessions as $session) {
+            foreach ($this->configuredSessions as $session) {
                 if ($session->getId() === $sessionId) {
                     return $session;
                 }
@@ -49,11 +49,11 @@ final class SessionList
     }
 
     /**
-     * @return Session[]
+     * @return ConfiguredSession[]
      */
     public function getAll(): array
     {
-        return $this->sessions;
+        return $this->configuredSessions;
     }
 
 }

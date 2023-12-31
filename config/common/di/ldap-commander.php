@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Balemy\LdapCommander\Modules\Session\SessionList;
+use Balemy\LdapCommander\Modules\Session\ConfiguredSessionList;
 
 /** @var array $params */
 
 return [
-    SessionList::class => [
+    ConfiguredSessionList::class => [
         '__construct()' => [
             'params' => $params['ldap-sessions'] ?? [],
         ],

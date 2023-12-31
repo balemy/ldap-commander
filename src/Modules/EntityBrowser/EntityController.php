@@ -40,7 +40,7 @@ final class EntityController
 
     public function open(ServerRequestInterface $request): ResponseInterface
     {
-        $dn = $this->getDnByRequest($request) ?? $this->ldapService->baseDn;
+        $dn = $this->getDnByRequest($request) ?? $this->ldapService->session->baseDn;
 
         if ($this->ldapService->getChildrenCount($dn) > 0) {
             return $this->webService->getRedirectResponse('entity-list', ['dn' => $dn]);
@@ -51,9 +51,9 @@ final class EntityController
 
     public function list(ServerRequestInterface $request): ResponseInterface
     {
-        $dn = $this->getDnByRequest($request) ?? $this->ldapService->baseDn;
+        $dn = $this->getDnByRequest($request) ?? $this->ldapService->session->baseDn;
 
-        $query = $this->ldapService->connection->query();
+        $query = $this->ldapService->session->lrConnection->query();
         $query->select(['cn', 'dn'])->setDn($dn)->listing();
 
         $results = $query->paginate();
@@ -85,7 +85,7 @@ final class EntityController
             $pdn = ($parentEntry !== null) ? $parentEntry->getDn() : '';
 
             $entity = new EntityForm(
-                $this->ldapService->getSchema(),
+                $this->ldapService->session->schema,
                 new Entry(),
                 true,
                 $pdn
@@ -105,7 +105,7 @@ final class EntityController
             }
 
             $entity = new EntityForm(
-                $this->ldapService->getSchema(),
+                $this->ldapService->session->schema,
                 $entry,
                 false
             );
@@ -148,9 +148,9 @@ final class EntityController
             'dn' => $entity->entry->getDn() ?? $entity->parentDn,
             'urlGenerator' => $this->urlGenerator,
             'assetManager' => $this->assetManager,
-            'schemaJsonInfo' => $this->ldapService->getSchema()->getJsonInfo(),
-            'attributeTypes' => $this->ldapService->getSchema()->attributeTypes,
-            'objectClassNames' => $this->ldapService->getSchema()->getObjectClassNames(),
+            'schemaJsonInfo' => $this->ldapService->session->schema->getJsonInfo(),
+            'attributeTypes' => $this->ldapService->session->schema->attributeTypes,
+            'objectClassNames' => $this->ldapService->session->schema->getObjectClassNames(),
             'entity' => $entity,
         ]);
     }
@@ -172,7 +172,7 @@ final class EntityController
             'dn' => $entry->getDn(),
             'urlGenerator' => $this->urlGenerator,
             'assetManager' => $this->assetManager,
-            'schemaJsonInfo' => $this->ldapService->getSchema()->getJsonInfo(),
+            'schemaJsonInfo' => $this->ldapService->session->schema->getJsonInfo(),
         ]);
     }
 
@@ -193,7 +193,7 @@ final class EntityController
             'dn' => $entry->getDn(),
             'urlGenerator' => $this->urlGenerator,
             'assetManager' => $this->assetManager,
-            'schemaJsonInfo' => $this->ldapService->getSchema()->getJsonInfo(),
+            'schemaJsonInfo' => $this->ldapService->session->schema->getJsonInfo(),
         ]);
     }
 
@@ -223,7 +223,7 @@ final class EntityController
         }
 
         return $this->webService->getRedirectResponse('entity', [
-                'dn' => $parentDn ?? $this->ldapService->baseDn,
+                'dn' => $parentDn ?? $this->ldapService->session->baseDn,
                 'deleted' => 1]
         );
     }

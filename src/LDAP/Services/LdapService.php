@@ -2,101 +2,22 @@
 
 namespace Balemy\LdapCommander\LDAP\Services;
 
-use Balemy\LdapCommander\LDAP\ConnectionDetails;
-use Balemy\LdapCommander\LDAP\Helper\DSN;
-use Balemy\LdapCommander\LDAP\Schema\Schema;
-use Balemy\LdapCommander\Modules\Session\LoginForm;
-use Balemy\LdapCommander\Timer;
-use LdapRecord\Connection;
-use LdapRecord\Container;
+use Balemy\LdapCommander\Modules\Session\Session;
 use LdapRecord\Models\Entry;
 
 class LdapService
 {
-    /**
-     * @var Connection
-     */
-    public $connection;
+    public Session $session;
 
-    /**
-     * @var Schema
-     */
-    private $schema;
-
-    /**
-     * @var string
-     */
-    public $baseDn = '';
-
-    public function __construct(public ?Timer $timer)
+    public function __construct()
     {
-        $this->connection = new Connection();
-        $this->schema = new Schema($this, $timer);
+        $this->session = Session::getCurrentSession();
     }
 
-    /**
-     * @param LoginForm $login
-     * @return void
-     * @throws \LdapRecord\Auth\BindException
-     * @throws \LdapRecord\LdapRecordException
-     */
-    public function connect(LoginForm $login)
-    {
-        $dsn = new DSN((string)$login->getPropertyValue('dsn'));
-
-        $config = [
-            'hosts' => [$dsn->getHost()],
-            'port' => $dsn->getPort(),
-            'use_ssl' => $dsn->getIsSSL(),
-            'username' => (string)$login->getPropertyValue('adminDn'),
-            'password' => (string)$login->getPropertyValue('adminPassword'),
-            'base_dn' => (string)$login->getPropertyValue('baseDn')
-        ];
-
-        $this->baseDn = $config['base_dn'];
-
-        $this->connection = new Connection($config);
-        $this->connection->connect();
-
-        Container::addConnection($this->connection, 'default');
-        Container::setDefaultConnection('default');
-
-        $this->schema->populate($this->connection);
-    }
-
-    public function connectWithDetails(ConnectionDetails $details): void
-    {
-        $dsn = new DSN($details->dsn);
-
-        $config = [
-            'hosts' => [$dsn->getHost()],
-            'port' => $dsn->getPort(),
-            'use_ssl' => $dsn->getIsSSL(),
-            'username' => $details->adminDn,
-            'password' => $details->adminPassword,
-            'base_dn' => $details->baseDn
-        ];
-
-        $this->baseDn = $config['base_dn'];
-
-        $this->connection = new Connection($config);
-        $this->connection->connect();
-
-        Container::addConnection($this->connection, 'default');
-        Container::setDefaultConnection('default');
-
-        $this->schema->populate($this->connection);
-    }
-
-    public function getSchema(): Schema
-    {
-        return $this->schema;
-
-    }
 
     public function getChildrenCount(string $dn): int
     {
-        $query = $this->connection->query();
+        $query = $this->session->lrConnection->query();
         $query->select(['cn', 'dn'])->setDn($dn)->listing();
 
         $results = $query->paginate();
@@ -123,9 +44,10 @@ class LdapService
         }
 
         if ($fallbackToBaseDn && empty($parentDns)) {
-            $parentDns[] = $this->baseDn;
+            $parentDns[] = $this->session->baseDn;
         }
 
+        /** @var string[] $parentDns */
         return $parentDns;
     }
 
@@ -148,12 +70,12 @@ class LdapService
             }
         }
 
-        if (!array_key_exists($this->baseDn, $ous)) {
-            $baseDnEntry = Entry::query()->find($this->baseDn);
+        if (!array_key_exists($this->session->baseDn, $ous)) {
+            $baseDnEntry = Entry::query()->find($this->session->baseDn);
             if ($baseDnEntry !== null) {
                 /** @var string $orgName */
                 $orgName = $baseDnEntry->getFirstAttribute('o');
-                $ous = [$this->baseDn => $orgName . ' (Base DN)'] + $ous;
+                $ous = [$this->session->baseDn => $orgName . ' (Base DN)'] + $ous;
             }
         }
 

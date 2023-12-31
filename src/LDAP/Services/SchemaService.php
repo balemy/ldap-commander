@@ -6,11 +6,9 @@ use Balemy\LdapCommander\LDAP\Schema\Schema;
 
 class SchemaService
 {
-    private Schema $schema;
 
-    public function __construct(private LdapService $ldapService)
+    public function __construct(private Schema $schema)
     {
-        $this->schema = $this->ldapService->getSchema();
     }
 
 

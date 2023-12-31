@@ -6,8 +6,8 @@ namespace Balemy\LdapCommander\Modules\GroupManager;
 
 use Balemy\LdapCommander\LDAP\Services\LdapService;
 use Balemy\LdapCommander\LDAP\Services\SchemaService;
+use Balemy\LdapCommander\Modules\Session\Session;
 use Balemy\LdapCommander\Modules\UserManager\User;
-use Balemy\LdapCommander\Modules\UserManager\UserForm;
 use Balemy\LdapCommander\Service\WebControllerService;
 use LdapRecord\LdapRecordException;
 use LdapRecord\Models\Entry;
@@ -31,7 +31,6 @@ final class GroupController
                                 public SessionInterface      $session,
                                 public ValidatorInterface    $validator,
                                 public AssetManager          $assetManager,
-                                public SchemaService         $schemaService,
                                 public FlashInterface        $flash
     )
     {
@@ -51,7 +50,10 @@ final class GroupController
      */
     public function edit(ServerRequestInterface $request, WebControllerService $webService): ResponseInterface
     {
-        $groupModel = new GroupForm(dn: $this->getDnByRequest($request), schemaService: $this->schemaService);
+        $groupModel = new GroupForm(
+            dn: $this->getDnByRequest($request),
+            schemaService: Session::getCurrentSession()->getSchemaService()
+        );
         if ($request->getMethod() === Method::POST &&
             /** @psalm-suppress PossiblyInvalidArgument */
             $groupModel->load($request->getParsedBody()) && $this->validator->validate($groupModel)->isValid()) {
@@ -120,7 +122,7 @@ final class GroupController
         }
 
         $entry = Entry::query()->find($dn);
-        if ($entry == null || !($entry instanceof Entry)) {
+        if (!($entry instanceof Entry)) {
             return $this->webService->getNotFoundResponse();
         }
 
@@ -142,7 +144,10 @@ final class GroupController
      */
     private function getParentDns(): array
     {
-        $userModel = new GroupForm(dn: null, schemaService: $this->schemaService);
+        $userModel = new GroupForm(
+            dn: null,
+            schemaService: Session::getCurrentSession()->getSchemaService()
+        );
         $requiredObjectClass = $userModel->requiredObjectClasses[0] ?? 'groupOfUniqueNames';
 
         $pdns = [];

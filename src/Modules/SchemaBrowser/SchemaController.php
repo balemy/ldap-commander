@@ -32,7 +32,7 @@ final class SchemaController
     public function index(WebControllerService $webService): ResponseInterface
     {
         return $this->viewRenderer->render('index', [
-            'objectClasses' => $this->ldapService->getSchema()->objectClasses,
+            'objectClasses' => $this->ldapService->session->schema->objectClasses,
             'urlGenerator' => $this->urlGenerator
         ]);
     }
@@ -44,7 +44,7 @@ final class SchemaController
             $oid = (string)$request->getQueryParams()['oid'];
         }
 
-        $objectClass = $this->ldapService->getSchema()->getObjectClassByOid($oid);
+        $objectClass = $this->ldapService->session->schema->getObjectClassByOid($oid);
         if ($objectClass === null) {
             return $webService->getNotFoundResponse();
         }
@@ -62,14 +62,14 @@ final class SchemaController
             $oid = (string)$request->getQueryParams()['oid'];
         }
 
-        $attribute = $this->ldapService->getSchema()->getAttributeTypeByOid($oid);
+        $attribute = $this->ldapService->session->schema->getAttributeTypeByOid($oid);
         if ($attribute === null) {
             return $webService->getNotFoundResponse();
         }
 
         return $this->viewRenderer->render('attribute', [
             'attribute' => $attribute,
-            'objectClasses' => $this->ldapService->getSchema()->getObjectClassesByAttributeType($attribute),
+            'objectClasses' => $this->ldapService->session->schema->getObjectClassesByAttributeType($attribute),
             'urlGenerator' => $this->urlGenerator,
         ]);
     }
