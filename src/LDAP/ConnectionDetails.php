@@ -28,7 +28,7 @@ class ConnectionDetails
             baseDn: is_string($config['baseDn']) ? $config['baseDn'] : '',
             adminDn: is_string($config['adminDn']) ? $config['adminDn'] : '',
             adminPassword: is_string($config['adminPassword']) ? $config['adminPassword'] : '',
-            adminUserFilter: is_string($config['adminUserFilter']) ? $config['adminUserFilter'] : '',
+            adminUserFilter: isset($config['adminUserFilter']) && is_string($config['adminUserFilter']) ? $config['adminUserFilter'] : '',
             configDn: is_string($config['configDn']) ? $config['configDn'] : '',
             configPassword: is_string($config['configPassword']) ? $config['configPassword'] : '',
         );
