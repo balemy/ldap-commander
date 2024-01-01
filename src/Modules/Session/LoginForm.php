@@ -60,7 +60,7 @@ final class LoginForm extends FormModel implements RulesProviderInterface
                     if ($configuredSession) {
                         try {
                             if (!$configuredSession->login($this->username, $this->password)) {
-                                $result->addError("Login failed!");
+                                $result->addError('Login failed!');
                             }
                         } catch (\Exception $ex) {
                             $result->addError("Login Error! " . $ex->getMessage());

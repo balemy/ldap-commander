@@ -46,6 +46,8 @@ return [
             Route::methods([Method::GET, Method::POST], '/server-config/refint/edit')->action([RefIntController::class, 'edit'])->name('server-config-refint-edit'),
             Route::methods([Method::GET, Method::POST], '/server-config/memberof/edit')->action([\Balemy\LdapCommander\Modules\ServerConfig\MemberOf\Controller::class, 'edit'])->name('server-config-memberof-edit'),
 
+            Route::methods([Method::GET, Method::POST], '/raw-query')->action([Balemy\LdapCommander\Modules\RawQuery\RawQueryController::class, 'index'])->name('raw-query'),
+
         //Route::methods([Method::GET, Method::POST], '/schema-editor/')->action([\Balemy\LdapCommander\Schema\Controller::class, 'list'])->name('schema-edit'),
         ),
     Route::methods([Method::GET, Method::POST], '/login')->action([AuthController::class, 'login'])->name('login'),

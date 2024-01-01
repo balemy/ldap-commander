@@ -103,6 +103,16 @@ $this->beginPage()
 ],
     */
     $menuItems[] = [
+        'label' => 'More',
+        'items' => [
+            [
+                'label' => 'Raw Query',
+                'url' => $urlGenerator->generate('raw-query'),
+                'active' => StringHelper::startsWith($currentRouteName, 'raw-query'),
+            ],
+        ]
+    ];
+    $menuItems[] = [
         'label' => 'Information',
         'items' => [
             [
@@ -140,7 +150,7 @@ $this->beginPage()
     <div class="d-flex">
         <?= Nav::widget()
             ->items([[
-                'label' => 'Logout',
+                'label' => 'Logout (' . $session?->connectionDetails->dsn . ')',
                 'url' => $urlGenerator->generate('logout'),
             ]])->options([
                 'class' => 'navbar-nav ml-auto'
