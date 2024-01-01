@@ -21,6 +21,7 @@ class UserForm extends LdapFormModel
         }
     }
 
+
     /**
      * @psalm-suppress MixedArrayAccess
      * @psalm-suppress MixedAssignment

@@ -177,7 +177,14 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
     public function getPropertyLabels(): array
     {
         return [
-            'parentDn' => 'Organizational Unit'
+            'cn' => 'Common Name',
+            'parentDn' => 'Organizational Unit',
+            'uid' => 'Username',
+            'givenName' => 'First name',
+            'sn' => 'Last name',
+            'l' => 'City',
+            'st' => 'State Or Province Name',
+            'c' => 'Country',
         ];
     }
 

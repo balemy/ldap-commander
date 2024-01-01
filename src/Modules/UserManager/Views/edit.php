@@ -45,9 +45,9 @@ $this->setTitle($applicationParameters->getName());
                 <?php foreach ($row as $fieldName => $fieldLabel): ?>
                     <div class="col-sm">
                         <?php if ($fieldName === 'userPassword'): ?>
-                            <?= Field::password($userForm, $fieldName) ?>
+                            <?= Field::password($userForm, $fieldName)->label($fieldLabel) ?>
                         <?php else: ?>
-                            <?= Field::text($userForm, $fieldName) ?>
+                            <?= Field::text($userForm, $fieldName)->label($fieldLabel) ?>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
