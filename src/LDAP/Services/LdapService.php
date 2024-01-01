@@ -18,13 +18,10 @@ class LdapService
     public function getChildrenCount(string $dn): int
     {
         $query = $this->session->lrConnection->query();
-        $query->select(['cn', 'dn'])->setDn($dn)->listing();
+        $query->select(['cn', 'dn'])->setDn($dn)->list();
 
         $results = $query->paginate();
         return count($results);
-
-        #return Yii::$app->cache->getOrSet('oc_' . $dn, function () use ($dn) {
-        #});
     }
 
     /**

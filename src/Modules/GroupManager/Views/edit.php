@@ -28,6 +28,9 @@ $this->setTitle($applicationParameters->getName());
     <div class="col-md-9">
         <?php if (!$groupModel->isNewRecord): ?>
             <h1>Edit Group</h1>
+            <p class="lead">
+                <?= Html::encode($groupModel->getDn()) ?>
+            </p>
             <table class="table">
                 <tr>
                     <td>DN</td>

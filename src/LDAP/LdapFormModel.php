@@ -3,7 +3,10 @@
 namespace Balemy\LdapCommander\LDAP;
 
 use Balemy\LdapCommander\LDAP\Services\SchemaService;
+use Balemy\LdapCommander\Modules\GroupManager\Group;
+use Balemy\LdapCommander\Modules\Session\Session;
 use LdapRecord\Models\Entry;
+use LdapRecord\Models\OpenLDAP\Group as LrGroup;
 use Yiisoft\FormModel\FormModel;
 use Yiisoft\Validator\DataSetInterface;
 use Yiisoft\Validator\Rule\Required;
@@ -28,7 +31,7 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
 
     protected array $customProperties = [];
 
-    public array $requiredObjectClasses = [];
+    public static array $requiredObjectClasses = [];
 
     /**
      * @var string The current or head attribute for new entries.
@@ -39,17 +42,23 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
     /**
      * @psalm-suppress PropertyTypeCoercion
      */
-    public function __construct(private ?string $dn, private SchemaService $schemaService)
+    final public function __construct(private ?string $dn, private SchemaService $schemaService, ?Entry $lrEntry = null)
     {
-        if ($dn !== null) {
-            /** @noinspection PhpFieldAssignmentTypeMismatchInspection */
-            $this->lrEntry = Entry::query()->addSelect(['*', '+'])->findOrFail($dn);
+        if ($dn !== null || $lrEntry !== null) {
+            if ($lrEntry) {
+                $this->lrEntry = $lrEntry;
+                $this->dn = $this->lrEntry->getDn();
+            } else {
+                /** @noinspection PhpFieldAssignmentTypeMismatchInspection */
+                /** @psalm-suppress PossiblyNullArgument */
+                $this->lrEntry = Entry::query()->addSelect(['*', '+'])->findOrFail($dn);
+            }
             $this->headAttribute = (string)$this->lrEntry->getHead();
             $this->loadedProperties['parentDn'] = (string)$this->lrEntry->getParentDn();
             // ToDo: Loading only entries which implements required ObjectClass
         } else {
             $this->lrEntry = new Entry();
-            $this->lrEntry->setAttribute('objectclass', $this->requiredObjectClasses);
+            $this->lrEntry->setAttribute('objectclass', static::$requiredObjectClasses);
             $this->isNewRecord = true;
         }
 
@@ -220,5 +229,21 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
         return (array)$this->lrEntry->getAttribute('objectclass');
     }
 
-
+    /**
+     * @return self[]
+     * @throws \Exception
+     */
+    public static function getAll(): array
+    {
+        $models = [];
+        /** @var Entry $entry */
+        foreach (Entry::query()->where('objectclass', '=', static::$requiredObjectClasses[0])->get() as $entry) {
+            $models[] = new static(
+                dn: null,
+                schemaService: Session::getCurrentSession()->getSchemaService(),
+                lrEntry: $entry,
+            );
+        }
+        return $models;
+    }
 }

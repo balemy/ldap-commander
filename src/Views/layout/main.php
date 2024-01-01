@@ -106,25 +106,25 @@ $this->beginPage()
         'label' => 'More',
         'items' => [
             [
-                'label' => 'Raw Query',
-                'url' => $urlGenerator->generate('raw-query'),
-                'active' => StringHelper::startsWith($currentRouteName, 'raw-query'),
-            ],
-        ]
-    ];
-    $menuItems[] = [
-        'label' => 'Information',
-        'items' => [
-            [
-                'label' => 'Schema',
+                'label' => 'Schema Browser',
                 'url' => $urlGenerator->generate('schema'),
                 'active' => StringHelper::startsWith($currentRouteName, 'schema'),
             ],
             [
-                'label' => 'Server',
+                'label' => 'Server Info',
                 'url' => $urlGenerator->generate('server'),
                 'active' => StringHelper::startsWith($currentRouteName, 'server'),
-            ]
+            ],
+            [
+                'label' => 'Raw Query',
+                'url' => $urlGenerator->generate('raw-query'),
+                'active' => StringHelper::startsWith($currentRouteName, 'raw-query'),
+            ],
+            [
+                'label' => 'Bind Users (Applications)',
+                'url' => $urlGenerator->generate('bind-user-list'),
+                'active' => StringHelper::startsWith($currentRouteName, 'bind-user'),
+            ],
         ]
     ];
 

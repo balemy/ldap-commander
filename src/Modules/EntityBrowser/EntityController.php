@@ -54,7 +54,7 @@ final class EntityController
         $dn = $this->getDnByRequest($request) ?? $this->ldapService->session->baseDn;
 
         $query = $this->ldapService->session->lrConnection->query();
-        $query->select(['cn', 'dn'])->setDn($dn)->listing();
+        $query->select(['cn', 'dn'])->setDn($dn)->list();
 
         $results = $query->paginate();
 

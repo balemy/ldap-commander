@@ -8,7 +8,7 @@ use Balemy\LdapCommander\Modules\GroupManager\Group;
 
 class UserForm extends LdapFormModel
 {
-    public array $requiredObjectClasses = ['inetorgperson'];
+    public static array $requiredObjectClasses = ['inetorgperson'];
 
 
     protected string $headAttribute = 'uid';
@@ -43,7 +43,7 @@ class UserForm extends LdapFormModel
     {
         // Auto Hash Password
         $password = $this->loadedProperties['userPassword'];
-        if (!empty($password) && is_string($password) && !str_starts_with($password, '{SSHA}')) {
+        if (!empty($password) && is_string($password) && !preg_match("/^\{\w{1,10}\}/", $password)) {
             $salt = mt_rand(0, mt_getrandmax());
             $this->loadedProperties['userPassword'] =
                 '{SSHA}' . base64_encode(sha1($password . $salt, TRUE) . $salt);

@@ -49,7 +49,11 @@ final class RawQueryController
 
             $session = Session::getCurrentSession();
             $query = trim($queryForm->query);
-            $results = $session->lrConnection->query()->rawFilter($query)->select(['dn'])->paginate();
+            try {
+                $results = $session->lrConnection->query()->rawFilter($query)->select(['dn'])->paginate();
+            } catch (\LdapRecord\LdapRecordException $ex) {
+                $this->flash->add('danger', ['body' => $ex->getMessage()]);
+            }
         }
 
         return $this->viewRenderer->render('index', [

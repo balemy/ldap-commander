@@ -8,6 +8,7 @@ use Balemy\LdapCommander\LDAP\Services\LdapService;
 use Balemy\LdapCommander\LDAP\Services\SchemaService;
 use Balemy\LdapCommander\Modules\Session\Session;
 use Balemy\LdapCommander\Modules\UserManager\User;
+use Balemy\LdapCommander\Modules\UserManager\UserForm;
 use Balemy\LdapCommander\Service\WebControllerService;
 use LdapRecord\LdapRecordException;
 use LdapRecord\Models\Entry;
@@ -144,11 +145,7 @@ final class GroupController
      */
     private function getParentDns(): array
     {
-        $userModel = new GroupForm(
-            dn: null,
-            schemaService: Session::getCurrentSession()->getSchemaService()
-        );
-        $requiredObjectClass = $userModel->requiredObjectClasses[0] ?? 'groupOfUniqueNames';
+        $requiredObjectClass = UserForm::$requiredObjectClasses[0] ?? 'groupOfUniqueNames';
 
         $pdns = [];
         foreach ($this->ldapService->getParentDns($requiredObjectClass) as $dn) {

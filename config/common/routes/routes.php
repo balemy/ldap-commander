@@ -3,13 +3,13 @@
 declare(strict_types=1);
 
 use Balemy\LdapCommander\Controller\SiteController;
-use Balemy\LdapCommander\LDAP\Middleware\LDAPConnect;
 use Balemy\LdapCommander\Modules\EntityBrowser\EntityController;
 use Balemy\LdapCommander\Modules\GroupManager\GroupController;
 use Balemy\LdapCommander\Modules\SchemaBrowser\SchemaController;
 use Balemy\LdapCommander\Modules\ServerConfig\ReferentialIntegrity\Controller as RefIntController;
 use Balemy\LdapCommander\Modules\Session\AuthController;
 use Balemy\LdapCommander\Modules\Session\SessionLoaderMiddleware;
+use Balemy\LdapCommander\Modules\SlapdConfig\Controllers\BindUserController;
 use Balemy\LdapCommander\Modules\UserManager\UserController;
 use Yiisoft\Http\Method;
 use Yiisoft\Router\Group;
@@ -47,6 +47,11 @@ return [
             Route::methods([Method::GET, Method::POST], '/server-config/memberof/edit')->action([\Balemy\LdapCommander\Modules\ServerConfig\MemberOf\Controller::class, 'edit'])->name('server-config-memberof-edit'),
 
             Route::methods([Method::GET, Method::POST], '/raw-query')->action([Balemy\LdapCommander\Modules\RawQuery\RawQueryController::class, 'index'])->name('raw-query'),
+
+            Route::get('/bind-users')->action([BindUserController::class, 'list'])->name('bind-user-list'),
+            Route::methods([Method::GET, Method::POST], '/bind-user/edit')->action([BindUserController::class, 'edit'])->name('bind-user-edit'),
+            Route::methods([Method::GET, Method::POST], '/bind-user/delete')->action([BindUserController::class, 'delete'])->name('bind-user-delete'),
+
 
         //Route::methods([Method::GET, Method::POST], '/schema-editor/')->action([\Balemy\LdapCommander\Schema\Controller::class, 'list'])->name('schema-edit'),
         ),

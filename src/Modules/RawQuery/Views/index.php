@@ -24,6 +24,7 @@ $this->setTitle($applicationParameters->getName());
     <div class="col-md-9">
         <h1>Execute LDAP Query</h1>
         <p class="lead">
+            Enter an LDAP query here which is to be executed on the server.
         </p>
 
         <br>
