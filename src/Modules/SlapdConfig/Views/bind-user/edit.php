@@ -13,6 +13,7 @@ declare(strict_types=1);
  * @var \Balemy\LdapCommander\Modules\SlapdConfig\Models\BindUser $bindUser
  */
 
+use Balemy\LdapCommander\Modules\SlapdConfig\Widgets\BindUserSidebarWidget;
 use Yiisoft\FormModel\Field;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Form;
@@ -57,5 +58,7 @@ $this->setTitle($applicationParameters->getName());
 
         <?= Form::tag()->close(); ?>
     </div>
-
+    <div class="col-md-3">
+        <?= BindUserSidebarWidget::widget([], ['$dn' => $dn]); ?>
+    </div>
 </div>

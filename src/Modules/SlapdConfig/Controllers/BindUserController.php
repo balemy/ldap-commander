@@ -85,14 +85,14 @@ final class BindUserController
 
         try {
             $entry->delete();
-            $this->flash->add('success', ['body' => 'Group successfully deleted!']);
+            $this->flash->add('success', ['body' => 'DN successfully deleted!']);
         } catch (ModelDoesNotExistException $e) {
-            $this->flash->add('danger', ['body' => 'Group does not exist! Error: ' . $e->getMessage()]);
+            $this->flash->add('danger', ['body' => 'DN does not exist! Error: ' . $e->getMessage()]);
         } catch (LdapRecordException $e) {
-            $this->flash->add('danger', ['body' => 'Group not deleted! Error: ' . $e->getMessage()]);
+            $this->flash->add('danger', ['body' => 'DN not deleted! Error: ' . $e->getMessage()]);
         }
 
-        return $this->webService->getRedirectResponse('group-list', ['deleted' => 1]);
+        return $this->webService->getRedirectResponse('bind-user-list', ['deleted' => 1]);
     }
 
     /**
