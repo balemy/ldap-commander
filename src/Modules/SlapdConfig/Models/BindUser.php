@@ -16,9 +16,6 @@ class BindUser extends LdapFormModel
 
     public function save(): bool
     {
-        if (preg_match("/php/i", "PHP is the web scripting language of choice.")) {
-            echo "A match was found.";
-        }
         // Auto Hash Password
         $password = $this->loadedProperties['userPassword'];
         if (!empty($password) && is_string($password) && !preg_match("/^\{\w{1,10}\}/", $password)) {
