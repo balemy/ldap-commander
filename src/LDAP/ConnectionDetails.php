@@ -8,9 +8,11 @@ class ConnectionDetails
         public readonly string $dsn,
         public readonly string $baseDn,
         public readonly string $adminDn,
+        #[\SensitiveParameter]
         public readonly string $adminPassword,
         public readonly string $adminUserFilter,
         public readonly string $configDn,
+        #[\SensitiveParameter]
         public readonly string $configPassword,
     )
     {

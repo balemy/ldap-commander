@@ -3,10 +3,8 @@
 namespace Balemy\LdapCommander\LDAP;
 
 use Balemy\LdapCommander\LDAP\Services\SchemaService;
-use Balemy\LdapCommander\Modules\GroupManager\Group;
 use Balemy\LdapCommander\Modules\Session\Session;
 use LdapRecord\Models\Entry;
-use LdapRecord\Models\OpenLDAP\Group as LrGroup;
 use Yiisoft\FormModel\FormModel;
 use Yiisoft\Validator\DataSetInterface;
 use Yiisoft\Validator\Rule\Required;
@@ -32,6 +30,8 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
     protected array $customProperties = [];
 
     public static array $requiredObjectClasses = [];
+
+    protected array $arrayProperties = [];
 
     /**
      * @var string The current or head attribute for new entries.
@@ -146,7 +146,13 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
         if ($this->isNewRecord) {
             return false;
         }
+
         $head = $this->headAttribute;
+
+        if (!isset($this->loadedProperties[$head])) {
+            return false;
+        }
+
         return ($this->lrEntry->getFirstAttribute($head) !== $this->loadedProperties[$head]);
 
     }
@@ -158,7 +164,7 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
 
     private function getLoadedPropertyValueAsString(string $property): string
     {
-        if (is_array($this->loadedProperties[$property])) {
+        if (!isset($this->loadedProperties[$property]) || is_array($this->loadedProperties[$property])) {
             return '';
         }
         return $this->loadedProperties[$property];
@@ -171,6 +177,9 @@ class LdapFormModel extends FormModel implements RulesProviderInterface, DataSet
             return $this->loadedProperties[$property];
         }
 
+        if (in_array($property, $this->arrayProperties)) {
+            return (array)$this->lrEntry->getAttribute($property);
+        }
         return $this->lrEntry->getFirstAttribute($property);
     }
 

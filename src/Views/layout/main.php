@@ -125,6 +125,11 @@ $this->beginPage()
                 'url' => $urlGenerator->generate('bind-user-list'),
                 'active' => StringHelper::startsWith($currentRouteName, 'bind-user'),
             ],
+            [
+                'label' => 'Server AccessControl',
+                'url' => $urlGenerator->generate('access-control'),
+                'active' => StringHelper::startsWith($currentRouteName, 'access-control'),
+            ],
         ]
     ];
 

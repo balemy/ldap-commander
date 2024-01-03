@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Balemy\LdapCommander\Modules\EntityBrowser\Assets;
+namespace Balemy\LdapCommander\Asset;
 
-use Balemy\LdapCommander\Asset\AppAsset;
-use Balemy\LdapCommander\Asset\MultiValueFormFieldAsset;
 use Yiisoft\Assets\AssetBundle;
+use Yiisoft\Yii\Bootstrap5\Assets\BootstrapAsset;
 
-final class EntityEditAsset extends AssetBundle
+final class MultiValueFormFieldAsset extends AssetBundle
 {
     public ?string $basePath = '@assets';
     public ?string $baseUrl = '@assetsUrl';
@@ -16,10 +15,9 @@ final class EntityEditAsset extends AssetBundle
 
     public array $depends = [
         AppAsset::class,
-        MultiValueFormFieldAsset::class,
     ];
 
     public array $js = [
-        'entity-edit.js',
+        'multi-value-input.js',
     ];
 }

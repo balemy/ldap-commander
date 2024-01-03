@@ -9,6 +9,7 @@ use Balemy\LdapCommander\Modules\SchemaBrowser\SchemaController;
 use Balemy\LdapCommander\Modules\ServerConfig\ReferentialIntegrity\Controller as RefIntController;
 use Balemy\LdapCommander\Modules\Session\AuthController;
 use Balemy\LdapCommander\Modules\Session\SessionLoaderMiddleware;
+use Balemy\LdapCommander\Modules\SlapdConfig\Controllers\AccessControlController;
 use Balemy\LdapCommander\Modules\SlapdConfig\Controllers\BindUserController;
 use Balemy\LdapCommander\Modules\UserManager\UserController;
 use Yiisoft\Http\Method;
@@ -52,8 +53,7 @@ return [
             Route::methods([Method::GET, Method::POST], '/bind-user/edit')->action([BindUserController::class, 'edit'])->name('bind-user-edit'),
             Route::methods([Method::GET, Method::POST], '/bind-user/delete')->action([BindUserController::class, 'delete'])->name('bind-user-delete'),
 
-
-        //Route::methods([Method::GET, Method::POST], '/schema-editor/')->action([\Balemy\LdapCommander\Schema\Controller::class, 'list'])->name('schema-edit'),
+            Route::methods([Method::GET, Method::POST], '/access-control')->action([AccessControlController::class, 'index'])->name('access-control'),
         ),
     Route::methods([Method::GET, Method::POST], '/login')->action([AuthController::class, 'login'])->name('login'),
     Route::methods([Method::GET, Method::POST], '/logout')->action([AuthController::class, 'logout'])->name('logout'),

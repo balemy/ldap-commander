@@ -40,6 +40,10 @@ $this->setTitle($applicationParameters->getName());
             <?php foreach ($results as $result): ?>
                 <?php
                 array_shift($result['objectclass']);
+
+                if (($key = array_search('top', $result['objectclass'])) !== false) {
+                    unset($result['objectclass'][$key]);
+                }
                 $title = $result['dn'];
                 $title = str_replace($dn, '<small>' . $dn . '</small>', $title);
                 ?>
