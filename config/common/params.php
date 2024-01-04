@@ -15,11 +15,11 @@ use Yiisoft\Yii\View\CsrfViewInjection;
 $ldapConfigFile = dirname(__DIR__) . '/ldap.php';
 $ldapCommanderConfig = (file_exists($ldapConfigFile)) ? (array)require($ldapConfigFile) : [];
 
-return array_merge($ldapCommanderConfig, [
+return Yiisoft\Arrays\ArrayHelper::merge($ldapCommanderConfig, [
     'app' => [
         'charset' => 'UTF-8',
         'name' => 'LDAP Commander',
-        'version' => '0.8.0',
+        'version' => '0.9.0',
     ],
     'yiisoft/aliases' => [
         'aliases' => [

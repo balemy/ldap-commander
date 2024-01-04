@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Balemy\LdapCommander\Modules\Session;
 
+use Balemy\LdapCommander\ApplicationParameters;
 use Balemy\LdapCommander\Service\WebControllerService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -31,7 +32,8 @@ final class AuthController
     public function login(ServerRequestInterface $request,
                           FormHydrator           $formHydrator,
                           ConfiguredSessionList  $sessionList,
-                          Aliases                $aliases
+                          Aliases                $aliases,
+                          ApplicationParameters  $applicationParameters,
     ): ResponseInterface
     {
         $loginForm = new LoginForm($sessionList);
@@ -48,7 +50,8 @@ final class AuthController
             'urlGenerator' => $this->urlGenerator,
             'loginForm' => $loginForm,
             'sessionList' => $loginForm->getSessionTitles(),
-            'aliases' => $aliases
+            'aliases' => $aliases,
+            'applicationParameters' => $applicationParameters,
         ]);
     }
 

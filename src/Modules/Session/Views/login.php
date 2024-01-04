@@ -12,6 +12,7 @@ use Yiisoft\Html\Tag\Form;
  * @var \Balemy\LdapCommander\Modules\Session\LoginForm $loginForm
  * @var array $sessionList
  * @var \Yiisoft\Aliases\Aliases $aliases
+ * @var \Balemy\LdapCommander\ApplicationParameters $applicationParameters
  */
 ?>
 
@@ -22,6 +23,12 @@ use Yiisoft\Html\Tag\Form;
                 <h1 class="fw-normal h3 text-center">LDAP Login</h1>
             </div>
             <div class="card-body p-5" style="">
+                <?php if (!empty($applicationParameters->loginMessage)): ?>
+                    <div class="alert alert-primary" role="alert">
+                        <?= $applicationParameters->loginMessage ?>
+                    </div>
+                <?php endif; ?>
+
                 <?php if (!empty($sessionList)): ?>
                     <?= Form::tag()->post($urlGenerator->generate('login', []))->csrf($csrf)->id('loginForm')->open() ?>
                     <div class="form-floating">

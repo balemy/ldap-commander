@@ -10,6 +10,7 @@ final class ApplicationParameters
     private string $name = 'LDAP Commander';
     private string $version = '0.0.0';
 
+    public string $loginMessage = "";
 
     public function getCharset(): string
     {
