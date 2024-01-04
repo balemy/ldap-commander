@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'app' => [
+        'loginMessage' => '<b>Demo<b> - Leave username empty, password is "secret".  Demo is reset every hour.'
+    ]
     'ldap-sessions' => [
         [
             'title' => 'Test Docker',
