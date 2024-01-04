@@ -3,6 +3,7 @@
 namespace Balemy\LdapCommander\Modules\SlapdConfig\Services;
 
 use Balemy\LdapCommander\LDAP\Helper\DSN;
+use Balemy\LdapCommander\LDAP\Schema\Schema;
 use Balemy\LdapCommander\Modules\Session\Session;
 use LdapRecord\Connection;
 use LdapRecord\Container;
@@ -14,7 +15,6 @@ class SlapdConfigService
 
     public function __construct()
     {
-
         $connectionDetails = $this->getSession()->connectionDetails;
 
         $dsn = new DSN($connectionDetails->dsn);
@@ -33,7 +33,11 @@ class SlapdConfigService
 
         Container::addConnection($this->lrConnection, 'config');
         Container::setDefaultConnection('config');
+    }
 
+    public function getDatabaseConfigDn(): string
+    {
+        return $this->getDatabaseConfigEntry()->getDn();
     }
 
     public function getDatabaseConfigEntry(): ?Entry

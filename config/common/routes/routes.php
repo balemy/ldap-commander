@@ -53,8 +53,15 @@ return [
             Route::methods([Method::GET, Method::POST], '/bind-user/edit')->action([BindUserController::class, 'edit'])->name('bind-user-edit'),
             Route::methods([Method::GET, Method::POST], '/bind-user/delete')->action([BindUserController::class, 'delete'])->name('bind-user-delete'),
 
-            Route::methods([Method::GET, Method::POST], '/access-control')->action([AccessControlController::class, 'index'])->name('access-control'),
         ),
-    Route::methods([Method::GET, Method::POST], '/login')->action([AuthController::class, 'login'])->name('login'),
+    Group::create()
+        ->middleware(SessionLoaderMiddleware::class)
+        ->middleware(\Balemy\LdapCommander\LDAP\Middlewares\ConfigConnectionMiddleware::class)
+        ->routes(
+            Route::methods([Method::GET, Method::POST], '/access-control')->action([AccessControlController::class, 'index'])->name('access-control'),
+            Route::methods([Method::GET, Method::POST], '/module-config')->action([\Balemy\LdapCommander\Modules\SlapdConfig\Controllers\ModuleConfigController::class, 'index'])->name('module-config'),
+            Route::methods([Method::GET, Method::POST], '/module-config/memberOf')->action([\Balemy\LdapCommander\Modules\SlapdConfig\Controllers\ModuleConfigController::class, 'memberOf'])->name('module-config-memberof'),
+        ),
+        Route::methods([Method::GET, Method::POST], '/login')->action([AuthController::class, 'login'])->name('login'),
     Route::methods([Method::GET, Method::POST], '/logout')->action([AuthController::class, 'logout'])->name('logout'),
 ];

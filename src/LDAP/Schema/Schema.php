@@ -24,6 +24,10 @@ class Schema
      */
     public $syntaxes = [];
 
+    private array $fixMissingObjectClasses = [
+        "( 9.9.9.9.1 NAME 'olcMemberOfConfig' DESC '' STRUCTURAL MAY ( olcMemberOfGroupOC $ olcMemberOfMemberAD $ olcMemberOfRefInt ) )"
+    ];
+
     /**
      * @var AttributeType[]|null
      */
@@ -209,7 +213,7 @@ class Schema
         }
 
         /** @var string $line */
-        foreach ($res['objectclasses'] as $line) {
+        foreach (array_merge($this->fixMissingObjectClasses, $res['objectclasses']) as $line) {
             $objectClass = ObjectClass::createByString($this, $line);
             if ($objectClass !== null) {
                 $this->objectClasses[strtolower($objectClass->name)] = $objectClass;

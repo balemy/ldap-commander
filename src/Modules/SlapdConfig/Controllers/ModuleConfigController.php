@@ -1,18 +1,18 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Balemy\LdapCommander\Modules\SlapdConfig\Controllers;
 
 use Balemy\LdapCommander\LDAP\Services\LdapService;
 use Balemy\LdapCommander\Modules\Session\Session;
 use Balemy\LdapCommander\Modules\SlapdConfig\Models\AccessControl;
+use Balemy\LdapCommander\Modules\SlapdConfig\Models\BindUser;
+use Balemy\LdapCommander\Modules\SlapdConfig\Models\MemberOf;
 use Balemy\LdapCommander\Modules\SlapdConfig\Services\SlapdConfigService;
 use Balemy\LdapCommander\Service\WebControllerService;
+use LdapRecord\Models\Entry;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Assets\AssetManager;
-use Yiisoft\FormModel\FormHydrator;
 use Yiisoft\Http\Method;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Session\Flash\FlashInterface;
@@ -20,37 +20,33 @@ use Yiisoft\Session\SessionInterface;
 use Yiisoft\Validator\ValidatorInterface;
 use Yiisoft\Yii\View\ViewRenderer;
 
-final class AccessControlController
+class ModuleConfigController
 {
     public function __construct(public ViewRenderer          $viewRenderer,
                                 public LdapService           $ldapService,
                                 public WebControllerService  $webService,
                                 public UrlGeneratorInterface $urlGenerator,
                                 public SessionInterface      $session,
-                                public FormHydrator          $formHydrator,
                                 public ValidatorInterface    $validator,
                                 public AssetManager          $assetManager,
+                                public SlapdConfigService    $configService,
                                 public FlashInterface        $flash
     )
     {
-        $this->viewRenderer = $viewRenderer->withViewPath(dirname(__DIR__) . '/Views/access-control/');
+        $this->viewRenderer = $viewRenderer->withViewPath(dirname(__DIR__) . '/Views/module-config/');
     }
 
-    /**
-     * @psalm-suppress PossiblyInvalidArgument
-     */
-    public function index(ServerRequestInterface $request, SlapdConfigService $configService): ResponseInterface
+    public function index(WebControllerService $webService): ResponseInterface
     {
-        $databaseConfigEntry = $configService->getDatabaseConfigEntry();
-        if ($databaseConfigEntry === null) {
-            throw new \Exception("Could not find LDAP database config entry!");
-        }
+        return $this->viewRenderer->render('index', [
+            'urlGenerator' => $this->urlGenerator,
+        ]);
+    }
 
-        $model = new AccessControl(
-            dn: null,
-            lrEntry: $databaseConfigEntry,
-            schemaService: Session::getCurrentSession()->getSchemaService()
-        );
+    public function memberOf(ServerRequestInterface $request, WebControllerService $webService): ResponseInterface
+    {
+        $model = MemberOf::getModel($this->configService);
+
         if ($request->getMethod() === Method::POST &&
             /** @psalm-suppress PossiblyInvalidArgument */
             $model->load($request->getParsedBody()) && $this->validator->validate($model)->isValid()) {
@@ -58,17 +54,15 @@ final class AccessControlController
             try {
                 $model->save();
                 $this->flash->add('success', ['body' => 'Successfully saved!']);
-
-                return $this->webService->getRedirectResponse('access-control', ['saved' => 1]);
+                return $this->webService->getRedirectResponse('module-config', ['saved' => 1]);
             } catch (\Exception $ex) {
                 $this->flash->add('danger', ['body' => $ex->getMessage()]);
             }
         }
 
-        return $this->viewRenderer->render('index', [
+        return $this->viewRenderer->render('member-of', [
             'urlGenerator' => $this->urlGenerator,
-            'model' => $model,
-            'assetManager' => $this->assetManager
+            'model' => $model
         ]);
     }
 

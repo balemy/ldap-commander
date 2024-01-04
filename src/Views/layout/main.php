@@ -69,39 +69,22 @@ $this->beginPage()
         'url' => $urlGenerator->generate('entity-list'),
         'active' => StringHelper::startsWith($currentRouteName, 'entity'),
     ];
+    $menuItems[] = [
+        'label' => 'Configuration',
+        'items' => [
+            [
+                'label' => 'Modules',
+                'url' => $urlGenerator->generate('module-config'),
+                'active' => StringHelper::startsWith($currentRouteName, 'module-config'),
+            ],
+            [
+                'label' => 'Access Control',
+                'url' => $urlGenerator->generate('access-control'),
+                'active' => StringHelper::startsWith($currentRouteName, 'access-control'),
+            ],
+        ]
+    ];
 
-    /*
-[
-'label' => 'Configuration',
-'items' => [
-    [
-        'label' => 'Schema Editor',
-        'url' => $urlGenerator->generate('schema-edit'),
-        'active' => StringHelper::startsWith($currentRouteName, 'schema-edit'),
-    ],
-    [
-        'label' => 'Referential Integrity',
-        'url' => $urlGenerator->generate('server-config-refint-edit'),
-        'active' => StringHelper::startsWith($currentRouteName, 'server-config-refint-edit'),
-    ],
-    [
-        'label' => 'Password Policies',
-        'url' => $urlGenerator->generate('server'),
-        'active' => StringHelper::startsWith($currentRouteName, 'server'),
-    ],
-    [
-        'label' => 'Reverse Group Membership',
-        'url' => $urlGenerator->generate('server-config-memberof-edit'),
-        'active' => StringHelper::startsWith($currentRouteName, 'server-config-memberof-edit'),
-    ],
-    [
-        'label' => 'Indexes',
-        'url' => $urlGenerator->generate('server'),
-        'active' => StringHelper::startsWith($currentRouteName, 'server'),
-    ]
-]
-],
-    */
     $menuItems[] = [
         'label' => 'More',
         'items' => [
@@ -124,11 +107,6 @@ $this->beginPage()
                 'label' => 'Bind Users (Applications)',
                 'url' => $urlGenerator->generate('bind-user-list'),
                 'active' => StringHelper::startsWith($currentRouteName, 'bind-user'),
-            ],
-            [
-                'label' => 'Server AccessControl',
-                'url' => $urlGenerator->generate('access-control'),
-                'active' => StringHelper::startsWith($currentRouteName, 'access-control'),
             ],
         ]
     ];
