@@ -2,8 +2,8 @@
 
 return [
     'app' => [
-        'loginMessage' => '<b>Demo<b> - Leave username empty, password is "secret".  Demo is reset every hour.'
-    ]
+        'loginMessage' => '<b>Demo</b> - Leave username empty, password is "secret".  Demo will be reset every hour.<br>'
+    ],
     'ldap-sessions' => [
         [
             'title' => 'Test Docker',
