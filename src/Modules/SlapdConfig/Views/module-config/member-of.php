@@ -28,8 +28,7 @@ $this->setTitle($applicationParameters->getName());
     <div class="col-md-9">
         <h1>MemberOf Overlay</h1>
         <p class="lead">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis rutrum ligula vel dictum. Sed sodales
-            odio nec mollis facilisis. Cras viverra diam a ante tristique blandit.
+            Reverse Group Membership Maintenance
         </p>
         <br>
 
@@ -40,6 +39,8 @@ $this->setTitle($applicationParameters->getName());
             <div class="col-sm-12">
                 <?= Field::text($model, 'olcMemberOfGroupOC') ?>
                 <?= Field::text($model, 'olcMemberOfMemberAD') ?>
+                <?= Field::text($model, 'olcMemberOfMemberOfAD') ?>
+                <?= Field::text($model, 'olcMemberOfDangling') ?>
                 <?= Field::text($model, 'olcMemberOfRefInt') ?>
             </div>
         </div>

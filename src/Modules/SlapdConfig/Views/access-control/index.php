@@ -28,9 +28,7 @@ $this->setTitle($applicationParameters->getName());
     <div class="col-md-9">
         <h1>Access Control</h1>
         <p class="lead">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis rutrum ligula vel dictum. Sed sodales
-            odio nec mollis facilisis. Cras viverra diam a ante tristique blandit.
-        </p>
+            As the directory gets populated with more and more data of varying sensitivity, controlling the kinds of access granted to the directory becomes more and more critical.        </p>
         <br>
 
         <?= Html::form()->post($urlGenerator->generate('access-control'))->csrf($csrf)->open() ?>

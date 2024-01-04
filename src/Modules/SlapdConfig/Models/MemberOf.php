@@ -14,10 +14,15 @@ class MemberOf extends LdapFormModel
 
     public static function getModel(SlapdConfigService $configService): self
     {
-        /** @var Entry $lrEntry */
+        // Support for older OpenLDAP Version, which renamed olcmemberof Overlay
+        if (isset($configService->getSession()->schema->objectClasses['olcmemberof'])) {
+            self::$requiredObjectClasses = ['olcMemberOf', 'olcOverlayConfig'];
+        }
+
+        /** @var Entry|null $lrEntry */
         $lrEntry = Entry::query()
             ->setConnection($configService->lrConnection)
-            ->where('objectclass', '=', 'olcMemberOfConfig')
+            ->where('objectclass', '=', self::$requiredObjectClasses[0])
             ->in($configService->getDatabaseConfigDn())
             ->first();
 
@@ -43,7 +48,9 @@ class MemberOf extends LdapFormModel
         return [
             'olcMemberOfGroupOC' => 'Group ObjectClass',
             'olcMemberOfMemberAD' => 'Member Attribute',
-            'olcMemberOfRefInt' => 'Ref. Integrity'
+            'olcMemberOfMemberOfAD' => 'MemberOf Attribute',
+            'olcMemberOfRefInt' => 'Ref. Integrity',
+            'olcMemberOfDangling' => 'Dangling'
         ];
     }
 
@@ -52,7 +59,9 @@ class MemberOf extends LdapFormModel
         return [
             'olcMemberOfGroupOC' => 'e.g. groupOfUniqueNames',
             'olcMemberOfMemberAD' => 'e.g. UniqueMember',
-            'olcMemberOfRefInt' => 'e.g. TRUE'
+            'olcMemberOfMemberOfAD' => 'e.g. memberOf',
+            'olcMemberOfRefInt' => 'e.g. TRUE',
+            'olcMemberOfDangling' => 'Possible values: ignore, drop, error'
         ];
     }
 

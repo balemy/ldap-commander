@@ -40,7 +40,7 @@ final class ConfigConnectionMiddleware implements MiddlewareInterface
     ): ResponseInterface
     {
         try {
-            $configService = new SlapdConfigService();
+            (new SlapdConfigService());
         } catch (\Exception $ex) {
 
             return $this->viewRenderer

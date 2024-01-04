@@ -39,6 +39,7 @@ class ModuleConfigController
     public function index(WebControllerService $webService): ResponseInterface
     {
         return $this->viewRenderer->render('index', [
+            'modules' => $this->configService->getLoadedModules(),
             'urlGenerator' => $this->urlGenerator,
         ]);
     }
@@ -47,8 +48,8 @@ class ModuleConfigController
     {
         $model = MemberOf::getModel($this->configService);
 
+        /** @psalm-suppress PossiblyInvalidArgument */
         if ($request->getMethod() === Method::POST &&
-            /** @psalm-suppress PossiblyInvalidArgument */
             $model->load($request->getParsedBody()) && $this->validator->validate($model)->isValid()) {
 
             try {

@@ -37,7 +37,28 @@ class SlapdConfigService
 
     public function getDatabaseConfigDn(): string
     {
-        return $this->getDatabaseConfigEntry()->getDn();
+
+        return $this->getDatabaseConfigEntry()?->getDn() ?? '';
+    }
+
+    public function getLoadedModules(): array
+    {
+        $modules = [];
+        /** @var Entry[] $entries */
+        $entries = Entry::query()
+            // ->setConnection($configService->lrConnection)
+            ->where('objectclass', '=', 'olcModuleList')
+            ->get();
+
+        foreach ($entries as $entry) {
+            $modules = array_merge($modules, (array)$entry->getAttribute('olcModuleLoad'));
+        }
+
+        $modules = array_map(function (string $e) {
+            return preg_replace("/^\{\d+\}/", '', $e);
+        }, $modules);
+
+        return $modules;
     }
 
     public function getDatabaseConfigEntry(): ?Entry

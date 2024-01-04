@@ -24,8 +24,11 @@ class Schema
      */
     public $syntaxes = [];
 
+    /**
+     * @var string[]
+     */
     private array $fixMissingObjectClasses = [
-        "( 9.9.9.9.1 NAME 'olcMemberOfConfig' DESC '' STRUCTURAL MAY ( olcMemberOfGroupOC $ olcMemberOfMemberAD $ olcMemberOfRefInt ) )"
+        "( 9.9.9.9.1 NAME 'olcMemberOfConfig' DESC '' STRUCTURAL MAY ( olcMemberOfGroupOC $ olcMemberOfMemberAD $ olcMemberOfRefInt $ olcMemberOfMemberOfAD $ olcMemberOfDangling ) )"
     ];
 
     /**
@@ -213,6 +216,7 @@ class Schema
         }
 
         /** @var string $line */
+        /** @psalm-suppress MixedArgument, MixedAssignment */
         foreach (array_merge($this->fixMissingObjectClasses, $res['objectclasses']) as $line) {
             $objectClass = ObjectClass::createByString($this, $line);
             if ($objectClass !== null) {

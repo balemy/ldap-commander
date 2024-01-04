@@ -19,14 +19,22 @@ $this->setTitle($applicationParameters->getName());
 <div class="row">
     <div class="col-md-12">
 
-        <h1>Module Configurations</h1>
+        <h1>Modules</h1>
         <p class="lead">
-            Tbd
+            A list of modules loaded by OpenLDAP. An extended configuration is available for some modules.
         </p>
 
-        <br>
         <ul>
-            <li><a href="<?= $urlGenerator->generate('module-config-memberof') ?>">MemberOf Overlay</a></li>
+
+            <?php foreach ($modules as $module): ?>
+                <li>
+                    <?php if (str_contains($module, 'memberof')): ?>
+                        <a href="<?= $urlGenerator->generate('module-config-memberof') ?>"><?= $module ?></a>
+                    <?php else: ?>
+                        <?= $module ?>
+                    <?php endif; ?>
+                </li>
+            <?php endforeach; ?>
         </ul>
 
 
