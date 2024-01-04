@@ -12,6 +12,6 @@ return [
         'charset()' => [$params['app']['charset']],
         'name()' => [$params['app']['name']],
         'version()' => [$params['app']['version']],
-        '$loginMessage' => $params['app']['loginMessage'],
+        '$loginMessage' => $params['app']['loginMessage'] ?? '',
     ],
 ];
