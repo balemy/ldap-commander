@@ -18,6 +18,11 @@ class MultiTextField extends InputField
             $values = [$values];
         }
 
+        // Make sure at least one input is rendered
+        if (count($values) === 0) {
+            $values = [''];
+        }
+
         $this->setInputId = false;
 
         $i = 0;
