@@ -5220,16 +5220,16 @@
         },
         {
             "name": "yiisoft/error-handler",
-            "version": "3.0.0",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/error-handler.git",
-                "reference": "2c80d88d1dfcd042fe037bae6ee7f51cb6d81b3a"
+                "reference": "14c7e9efe9b32491bc2051b5d7d488da0ee12bc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/error-handler/zipball/2c80d88d1dfcd042fe037bae6ee7f51cb6d81b3a",
-                "reference": "2c80d88d1dfcd042fe037bae6ee7f51cb6d81b3a",
+                "url": "https://api.github.com/repos/yiisoft/error-handler/zipball/14c7e9efe9b32491bc2051b5d7d488da0ee12bc7",
+                "reference": "14c7e9efe9b32491bc2051b5d7d488da0ee12bc7",
                 "shasum": ""
             },
             "require": {
@@ -5253,7 +5253,7 @@
                 "httpsoft/http-message": "^1.0.9",
                 "maglnet/composer-require-checker": "^4.4",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.15.10",
+                "rector/rector": "^0.18.3",
                 "roave/infection-static-analysis-plugin": "^1.16",
                 "spatie/phpunit-watcher": "^1.23",
                 "vimeo/psalm": "^4.30|^5.6",
@@ -5306,7 +5306,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-02-14T07:15:50+00:00"
+            "time": "2024-01-07T11:33:11+00:00"
         },
         {
             "name": "yiisoft/event-dispatcher",
