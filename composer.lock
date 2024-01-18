@@ -15076,28 +15076,28 @@
         },
         {
             "name": "yiisoft/translator-extractor",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/translator-extractor.git",
-                "reference": "27e7c4fdbf53dcabdeb7083a3c0ddc29ed14cada"
+                "reference": "2ddcb28226702c187344e9bbed014350b1f6f7d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/translator-extractor/zipball/27e7c4fdbf53dcabdeb7083a3c0ddc29ed14cada",
-                "reference": "27e7c4fdbf53dcabdeb7083a3c0ddc29ed14cada",
+                "url": "https://api.github.com/repos/yiisoft/translator-extractor/zipball/2ddcb28226702c187344e9bbed014350b1f6f7d4",
+                "reference": "2ddcb28226702c187344e9bbed014350b1f6f7d4",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.0",
-                "symfony/console": "^5.4|^6.0",
+                "symfony/console": "^5.4|^6.0|^7.0",
                 "yiisoft/friendly-exception": "^1.0",
                 "yiisoft/translator": "^1.0|^2.0|^3.0"
             },
             "require-dev": {
                 "maglnet/composer-require-checker": "^4.2",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.15.2",
+                "rector/rector": "^0.19",
                 "roave/infection-static-analysis-plugin": "^1.16",
                 "spatie/phpunit-watcher": "^1.23",
                 "vimeo/psalm": "^4.30|^5.6",
@@ -15148,7 +15148,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-02-17T13:40:13+00:00"
+            "time": "2024-01-18T06:33:26+00:00"
         },
         {
             "name": "yiisoft/yii-debug-api",
