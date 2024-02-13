@@ -15063,16 +15063,16 @@
         },
         {
             "name": "yiisoft/translator-extractor",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/translator-extractor.git",
-                "reference": "2ddcb28226702c187344e9bbed014350b1f6f7d4"
+                "reference": "673bb3d79dc866f3d85d97cc49e1a9a24b2bc727"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/translator-extractor/zipball/2ddcb28226702c187344e9bbed014350b1f6f7d4",
-                "reference": "2ddcb28226702c187344e9bbed014350b1f6f7d4",
+                "url": "https://api.github.com/repos/yiisoft/translator-extractor/zipball/673bb3d79dc866f3d85d97cc49e1a9a24b2bc727",
+                "reference": "673bb3d79dc866f3d85d97cc49e1a9a24b2bc727",
                 "shasum": ""
             },
             "require": {
@@ -15084,7 +15084,7 @@
             "require-dev": {
                 "maglnet/composer-require-checker": "^4.2",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.19",
+                "rector/rector": "^1.0",
                 "roave/infection-static-analysis-plugin": "^1.16",
                 "spatie/phpunit-watcher": "^1.23",
                 "vimeo/psalm": "^4.30|^5.6",
@@ -15113,6 +15113,7 @@
             "description": "Yii message extractor",
             "homepage": "https://www.yiiframework.com/",
             "keywords": [
+                "dev",
                 "extractor",
                 "i18n",
                 "internationalization"
@@ -15135,7 +15136,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-01-18T06:33:26+00:00"
+            "time": "2024-02-13T13:39:33+00:00"
         },
         {
             "name": "yiisoft/yii-debug-api",
