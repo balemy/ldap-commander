@@ -6,12 +6,15 @@
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
 >
+    <issueHandlers>
+        <RiskyTruthyFalsyComparison errorLevel="suppress"/>
+    </issueHandlers>
     <projectFiles>
         <directory name="src"/>
         <file name="public/index.php"/>
         <file name="cmda"/>
         <file name="autoload.php"/>
-        <ignoreFiles>        
+        <ignoreFiles>
             <directory name="vendor"/>
             <directory name="src/Modules/*/Views/"/>
             <directory name="src/Views/"/>

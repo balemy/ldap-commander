@@ -31,21 +31,21 @@ class AttributeType
      * @param bool $isSingleValue
      * @param bool $isUserModification
      */
-    public function __construct(public string $definition,
-                                public string $oid,
-                                public array  $names,
-                                public string $description,
-                                public string $equality,
-                                public string $syntax,
-                                public string $ordering,
-                                public string $usage,
-                                public string $sup,
-                                public string $substr,
-                                public string $xOrdered,
-                                public bool   $isSingleValue,
-                                public bool   $isUserModification)
-    {
-        return $this;
+    public function __construct(
+        public string $definition,
+        public string $oid,
+        public array $names,
+        public string $description,
+        public string $equality,
+        public string $syntax,
+        public string $ordering,
+        public string $usage,
+        public string $sup,
+        public string $substr,
+        public string $xOrdered,
+        public bool $isSingleValue,
+        public bool $isUserModification
+    ) {
     }
 
     // X-ORDERED 'VALUES'
@@ -112,8 +112,6 @@ class AttributeType
             (str_contains($string, 'SINGLE-VALUE')),
             (str_contains($string, 'NO-USER-MODIFICATION'))
         );
-
-
     }
 
 }

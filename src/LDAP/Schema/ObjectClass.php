@@ -18,19 +18,18 @@ class ObjectClass
      * @param bool $isAuxiliary
      * @param bool $isStructural
      */
-    public function __construct(private Schema $schema,
-                                public string  $definition,
-                                public string  $oid,
-                                public string  $name,
-                                public string  $description,
-                                public array   $sups,
-                                public array   $mayAttributes,
-                                public array   $mustAttributes,
-                                public bool    $isAuxiliary,
-                                public bool    $isStructural
-    )
-    {
-        return $this;
+    public function __construct(
+        private Schema $schema,
+        public string $definition,
+        public string $oid,
+        public string $name,
+        public string $description,
+        public array $sups,
+        public array $mayAttributes,
+        public array $mustAttributes,
+        public bool $isAuxiliary,
+        public bool $isStructural
+    ) {
     }
 
     public function __toString(): string
