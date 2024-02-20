@@ -6740,23 +6740,23 @@
         },
         {
             "name": "yiisoft/router",
-            "version": "3.0.0",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/router.git",
-                "reference": "9d6e5275252b89517cdb2f2374ab6375faabe33f"
+                "reference": "86ee95984109bd96548cad3f93df8ad9ca4de0b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/router/zipball/9d6e5275252b89517cdb2f2374ab6375faabe33f",
-                "reference": "9d6e5275252b89517cdb2f2374ab6375faabe33f",
+                "url": "https://api.github.com/repos/yiisoft/router/zipball/86ee95984109bd96548cad3f93df8ad9ca4de0b8",
+                "reference": "86ee95984109bd96548cad3f93df8ad9ca4de0b8",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.0",
                 "psr/event-dispatcher": "^1.0",
                 "psr/http-factory": "^1.0",
-                "psr/http-message": "^1.0",
+                "psr/http-message": "^1.0|^2.0",
                 "psr/http-server-handler": "^1.0",
                 "psr/http-server-middleware": "^1.0",
                 "yiisoft/http": "^1.2",
@@ -6768,15 +6768,17 @@
                 "nyholm/psr7": "^1.5",
                 "phpunit/phpunit": "^9.5",
                 "psr/container": "^1.1|^2.0",
-                "rector/rector": "^0.15.2",
+                "rector/rector": "^1.0",
                 "roave/infection-static-analysis-plugin": "^1.18",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.30|^5.6",
+                "vimeo/psalm": "^4.30|^5.22",
                 "yiisoft/di": "^1.0",
                 "yiisoft/dummy-provider": "^1.0.0",
+                "yiisoft/hydrator": "^1.0",
                 "yiisoft/test-support": "^3.0"
             },
             "suggest": {
+                "yiisoft/hydrator": "Needed to use `RouteArgument` attribute",
                 "yiisoft/router-fastroute": "Router implementation based on nikic/FastRoute"
             },
             "type": "library",
@@ -6822,7 +6824,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-02-17T14:57:14+00:00"
+            "time": "2024-02-20T11:39:48+00:00"
         },
         {
             "name": "yiisoft/router-fastroute",
