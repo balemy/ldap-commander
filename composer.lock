@@ -7351,16 +7351,16 @@
         },
         {
             "name": "yiisoft/validator",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/validator.git",
-                "reference": "40a1bdefb9cb506ec147ee1fafab3bcd79776afd"
+                "reference": "0537aa9db790527d1ee759400026964b3b8bd251"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/validator/zipball/40a1bdefb9cb506ec147ee1fafab3bcd79776afd",
-                "reference": "40a1bdefb9cb506ec147ee1fafab3bcd79776afd",
+                "url": "https://api.github.com/repos/yiisoft/validator/zipball/0537aa9db790527d1ee759400026964b3b8bd251",
+                "reference": "0537aa9db790527d1ee759400026964b3b8bd251",
                 "shasum": ""
             },
             "require": {
@@ -7378,13 +7378,14 @@
                 "maglnet/composer-require-checker": "^4.3",
                 "phpbench/phpbench": "^1.2",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.15.0",
+                "rector/rector": "^1.0",
                 "roave/infection-static-analysis-plugin": "^1.25",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.30|^5.0",
+                "vimeo/psalm": "^4.30|^5.22",
                 "yiisoft/di": "^1.2",
                 "yiisoft/test-support": "^3.0",
-                "yiisoft/translator-message-php": "^1.1"
+                "yiisoft/translator-message-php": "^1.1",
+                "yiisoft/yii-debug": "dev-master|dev-php80"
             },
             "suggest": {
                 "ext-intl": "Allows using IDN validation for emails",
@@ -7436,7 +7437,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2023-04-06T06:19:52+00:00"
+            "time": "2024-02-21T19:31:37+00:00"
         },
         {
             "name": "yiisoft/var-dumper",
