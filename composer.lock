@@ -4987,23 +4987,24 @@
         },
         {
             "name": "yiisoft/data-response",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/data-response.git",
-                "reference": "f680e8f9fd1f472b51149ada87c743d808f5fbf0"
+                "reference": "7de8c880d0d6629867a51c5c2529c984e50dfbc3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/data-response/zipball/f680e8f9fd1f472b51149ada87c743d808f5fbf0",
-                "reference": "f680e8f9fd1f472b51149ada87c743d808f5fbf0",
+                "url": "https://api.github.com/repos/yiisoft/data-response/zipball/7de8c880d0d6629867a51c5c2529c984e50dfbc3",
+                "reference": "7de8c880d0d6629867a51c5c2529c984e50dfbc3",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
-                "ext-json": "*",
-                "php": "^7.4|^8.0",
-                "psr/http-message": "^1.0",
+                "php": "^8.1",
+                "psr/http-factory": "^1.0",
+                "psr/http-message": "^1.0|^2.0",
+                "psr/http-server-handler": "^1.0",
                 "psr/http-server-middleware": "^1.0",
                 "yiisoft/http": "^1.2",
                 "yiisoft/json": "^1.0",
@@ -5011,10 +5012,12 @@
             },
             "require-dev": {
                 "httpsoft/http-message": "^1.0",
-                "phpunit/phpunit": "^9.5",
+                "maglnet/composer-require-checker": "^4.7",
+                "phpunit/phpunit": "^10.5",
+                "rector/rector": "^1.0",
                 "roave/infection-static-analysis-plugin": "^1.16",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.30|^5.3",
+                "vimeo/psalm": "^5.22",
                 "yiisoft/di": "^1.1"
             },
             "type": "library",
@@ -5046,7 +5049,7 @@
             "support": {
                 "chat": "https://t.me/yii3en",
                 "forum": "https://www.yiiframework.com/forum/",
-                "irc": "irc://irc.freenode.net/yii",
+                "irc": "ircs://irc.libera.chat:6697/yii",
                 "issues": "https://github.com/yiisoft/data-response/issues?state=open",
                 "source": "https://github.com/yiisoft/data-response",
                 "wiki": "https://www.yiiframework.com/wiki/"
@@ -5061,7 +5064,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-02-15T13:28:02+00:00"
+            "time": "2024-03-03T06:01:50+00:00"
         },
         {
             "name": "yiisoft/definitions",
