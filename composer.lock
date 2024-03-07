@@ -5210,16 +5210,16 @@
         },
         {
             "name": "yiisoft/error-handler",
-            "version": "3.2.0",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/error-handler.git",
-                "reference": "4d3cbcfc2d00d0b9c29dc4280144ca2c010d82d2"
+                "reference": "b5a6782723bac689d368d2b926188e33c9641d41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/error-handler/zipball/4d3cbcfc2d00d0b9c29dc4280144ca2c010d82d2",
-                "reference": "4d3cbcfc2d00d0b9c29dc4280144ca2c010d82d2",
+                "url": "https://api.github.com/repos/yiisoft/error-handler/zipball/b5a6782723bac689d368d2b926188e33c9641d41",
+                "reference": "b5a6782723bac689d368d2b926188e33c9641d41",
                 "shasum": ""
             },
             "require": {
@@ -5231,7 +5231,7 @@
                 "php": "^8.0",
                 "psr/container": "^1.0|^2.0",
                 "psr/http-factory": "^1.0",
-                "psr/http-message": "^1.0",
+                "psr/http-message": "^1.0|^2.0",
                 "psr/http-server-handler": "^1.0",
                 "psr/http-server-middleware": "^1.0",
                 "psr/log": "^1.1|^2.0|^3.0",
@@ -5243,7 +5243,7 @@
                 "httpsoft/http-message": "^1.0.9",
                 "maglnet/composer-require-checker": "^4.4",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.19.0",
+                "rector/rector": "^1.0",
                 "roave/infection-static-analysis-plugin": "^1.16",
                 "spatie/phpunit-watcher": "^1.23",
                 "vimeo/psalm": "^4.30|^5.20",
@@ -5296,7 +5296,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-01-30T13:46:19+00:00"
+            "time": "2024-03-07T07:46:58+00:00"
         },
         {
             "name": "yiisoft/event-dispatcher",
