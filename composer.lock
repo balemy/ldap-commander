@@ -8284,16 +8284,16 @@
         },
         {
             "name": "yiisoft/yii-runner",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii-runner.git",
-                "reference": "4c1cdc282e21e030dda2c043e902e704831aacac"
+                "reference": "69d8392ecc0c9e47ac7d5a56c1a8596d5c1ac896"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii-runner/zipball/4c1cdc282e21e030dda2c043e902e704831aacac",
-                "reference": "4c1cdc282e21e030dda2c043e902e704831aacac",
+                "url": "https://api.github.com/repos/yiisoft/yii-runner/zipball/69d8392ecc0c9e47ac7d5a56c1a8596d5c1ac896",
+                "reference": "69d8392ecc0c9e47ac7d5a56c1a8596d5c1ac896",
                 "shasum": ""
             },
             "require": {
@@ -8307,10 +8307,10 @@
             "require-dev": {
                 "maglnet/composer-require-checker": "^4.2",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.18.0",
+                "rector/rector": "^1.0.0",
                 "roave/infection-static-analysis-plugin": "^1.20",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.30|^5.4",
+                "vimeo/psalm": "^4.30|^5.21",
                 "yiisoft/test-support": "^3.0"
             },
             "suggest": {
@@ -8357,20 +8357,20 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2023-12-06T20:02:00+00:00"
+            "time": "2024-03-09T14:10:08+00:00"
         },
         {
             "name": "yiisoft/yii-runner-console",
-            "version": "2.1.1",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii-runner-console.git",
-                "reference": "641b7a9a9fa1bc1bb024bfad3a58060370bb3502"
+                "reference": "e92f4e72778508e7c2918f8fc8c3e75b758eb61a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii-runner-console/zipball/641b7a9a9fa1bc1bb024bfad3a58060370bb3502",
-                "reference": "641b7a9a9fa1bc1bb024bfad3a58060370bb3502",
+                "url": "https://api.github.com/repos/yiisoft/yii-runner-console/zipball/e92f4e72778508e7c2918f8fc8c3e75b758eb61a",
+                "reference": "e92f4e72778508e7c2918f8fc8c3e75b758eb61a",
                 "shasum": ""
             },
             "require": {
@@ -8380,13 +8380,13 @@
                 "yiisoft/definitions": "^1.0|^2.0|^3.0",
                 "yiisoft/di": "^1.0",
                 "yiisoft/yii-console": "^2.0",
-                "yiisoft/yii-runner": "^2.1"
+                "yiisoft/yii-runner": "^2.2"
             },
             "require-dev": {
                 "codeception/codeception": "^5.0",
                 "codeception/module-cli": "^2.0",
                 "maglnet/composer-require-checker": "^4.2",
-                "rector/rector": "^0.18.0",
+                "rector/rector": "^1.0.0",
                 "vimeo/psalm": "^4.30|^5.2"
             },
             "type": "library",
@@ -8429,7 +8429,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2023-12-26T18:16:20+00:00"
+            "time": "2024-03-10T10:06:34+00:00"
         },
         {
             "name": "yiisoft/yii-runner-http",
