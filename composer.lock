@@ -8284,16 +8284,16 @@
         },
         {
             "name": "yiisoft/yii-runner",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii-runner.git",
-                "reference": "4c1cdc282e21e030dda2c043e902e704831aacac"
+                "reference": "69d8392ecc0c9e47ac7d5a56c1a8596d5c1ac896"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii-runner/zipball/4c1cdc282e21e030dda2c043e902e704831aacac",
-                "reference": "4c1cdc282e21e030dda2c043e902e704831aacac",
+                "url": "https://api.github.com/repos/yiisoft/yii-runner/zipball/69d8392ecc0c9e47ac7d5a56c1a8596d5c1ac896",
+                "reference": "69d8392ecc0c9e47ac7d5a56c1a8596d5c1ac896",
                 "shasum": ""
             },
             "require": {
@@ -8307,10 +8307,10 @@
             "require-dev": {
                 "maglnet/composer-require-checker": "^4.2",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.18.0",
+                "rector/rector": "^1.0.0",
                 "roave/infection-static-analysis-plugin": "^1.20",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.30|^5.4",
+                "vimeo/psalm": "^4.30|^5.21",
                 "yiisoft/test-support": "^3.0"
             },
             "suggest": {
@@ -8357,7 +8357,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2023-12-06T20:02:00+00:00"
+            "time": "2024-03-09T14:10:08+00:00"
         },
         {
             "name": "yiisoft/yii-runner-console",
@@ -8433,22 +8433,22 @@
         },
         {
             "name": "yiisoft/yii-runner-http",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii-runner-http.git",
-                "reference": "0b1863b72358751a3d434376aee5deb2a0b8cedf"
+                "reference": "798c37abbcceb6b0053744b4bde0c476cd53e15e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii-runner-http/zipball/0b1863b72358751a3d434376aee5deb2a0b8cedf",
-                "reference": "0b1863b72358751a3d434376aee5deb2a0b8cedf",
+                "url": "https://api.github.com/repos/yiisoft/yii-runner-http/zipball/798c37abbcceb6b0053744b4bde0c476cd53e15e",
+                "reference": "798c37abbcceb6b0053744b4bde0c476cd53e15e",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.0",
                 "psr/http-factory": "^1.0",
-                "psr/http-message": "^1.0",
+                "psr/http-message": "^1.0|^2.0 ",
                 "yiisoft/config": "^1.1",
                 "yiisoft/definitions": "^1.0|^2.0|^3.0",
                 "yiisoft/di": "^1.0",
@@ -8458,16 +8458,17 @@
                 "yiisoft/log": "^2.0",
                 "yiisoft/log-target-file": "^3.0",
                 "yiisoft/yii-http": "^1.0",
-                "yiisoft/yii-runner": "^2.1"
+                "yiisoft/yii-runner": "^2.2"
             },
             "require-dev": {
                 "httpsoft/http-message": "^1.0",
                 "maglnet/composer-require-checker": "^4.2",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.18.0",
+                "rector/rector": "^1.0.0",
                 "roave/infection-static-analysis-plugin": "^1.25",
                 "spatie/phpunit-watcher": "^1.23",
                 "vimeo/psalm": "^4.30|^5.2",
+                "xepozz/internal-mocker": "^1.4",
                 "yiisoft/middleware-dispatcher": "^5.0",
                 "yiisoft/test-support": "^3.0"
             },
@@ -8511,7 +8512,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2023-12-25T18:16:47+00:00"
+            "time": "2024-03-10T10:08:37+00:00"
         },
         {
             "name": "yiisoft/yii-view",
