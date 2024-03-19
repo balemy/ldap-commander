@@ -332,16 +332,16 @@
         },
         {
             "name": "directorytree/ldaprecord",
-            "version": "v3.5.0",
+            "version": "v3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DirectoryTree/LdapRecord.git",
-                "reference": "2f53d491c2262c4bb3b7f631933891416b2b7ea6"
+                "reference": "06837ae8db8591cdc7f5c9e7c390e65ab7aa5dcb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DirectoryTree/LdapRecord/zipball/2f53d491c2262c4bb3b7f631933891416b2b7ea6",
-                "reference": "2f53d491c2262c4bb3b7f631933891416b2b7ea6",
+                "url": "https://api.github.com/repos/DirectoryTree/LdapRecord/zipball/06837ae8db8591cdc7f5c9e7c390e65ab7aa5dcb",
+                "reference": "06837ae8db8591cdc7f5c9e7c390e65ab7aa5dcb",
                 "shasum": ""
             },
             "require": {
@@ -404,7 +404,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-12T15:17:00+00:00"
+            "time": "2024-03-18T16:12:54+00:00"
         },
         {
             "name": "doctrine/collections",
@@ -1198,16 +1198,16 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v11.0.0",
+            "version": "v11.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
-                "reference": "c85100b2bd65633bdd7fc17ee1618d8db7050c0a"
+                "reference": "6a5cd843d209a270587d62c40d797ea35e47ed5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/collections/zipball/c85100b2bd65633bdd7fc17ee1618d8db7050c0a",
-                "reference": "c85100b2bd65633bdd7fc17ee1618d8db7050c0a",
+                "url": "https://api.github.com/repos/illuminate/collections/zipball/6a5cd843d209a270587d62c40d797ea35e47ed5d",
+                "reference": "6a5cd843d209a270587d62c40d797ea35e47ed5d",
                 "shasum": ""
             },
             "require": {
@@ -1249,11 +1249,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-03-11T17:38:40+00:00"
+            "time": "2024-03-13T20:54:13+00:00"
         },
         {
             "name": "illuminate/conditionable",
-            "version": "v11.0.0",
+            "version": "v11.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/conditionable.git",
@@ -1299,7 +1299,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v11.0.0",
+            "version": "v11.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -1347,7 +1347,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v11.0.0",
+            "version": "v11.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -1435,16 +1435,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "3.0.2",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "cf30cfceac9693bdb339ffb51f091e6039bdf10d"
+                "reference": "34ccf6f6b49c915421c7886c88c0cb77f3ebbfd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/cf30cfceac9693bdb339ffb51f091e6039bdf10d",
-                "reference": "cf30cfceac9693bdb339ffb51f091e6039bdf10d",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/34ccf6f6b49c915421c7886c88c0cb77f3ebbfd2",
+                "reference": "34ccf6f6b49c915421c7886c88c0cb77f3ebbfd2",
                 "shasum": ""
             },
             "require": {
@@ -1537,7 +1537,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-06T09:28:31+00:00"
+            "time": "2024-03-13T12:42:37+00:00"
         },
         {
             "name": "nikic/fast-route",
