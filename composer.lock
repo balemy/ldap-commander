@@ -4595,22 +4595,22 @@
         },
         {
             "name": "yiisoft/auth",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/auth.git",
-                "reference": "4e09de075e079ea6b841c7fdf09d638d8e46ca9d"
+                "reference": "497197fc2bbc2c4b2b8b35b177e0f4476fbe17ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/auth/zipball/4e09de075e079ea6b841c7fdf09d638d8e46ca9d",
-                "reference": "4e09de075e079ea6b841c7fdf09d638d8e46ca9d",
+                "url": "https://api.github.com/repos/yiisoft/auth/zipball/497197fc2bbc2c4b2b8b35b177e0f4476fbe17ee",
+                "reference": "497197fc2bbc2c4b2b8b35b177e0f4476fbe17ee",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.0",
                 "psr/http-factory": "^1.0",
-                "psr/http-message": "^1.0",
+                "psr/http-message": "^1.0|^2.0",
                 "psr/http-server-handler": "^1.0",
                 "psr/http-server-middleware": "^1.0",
                 "yiisoft/http": "^1.2",
@@ -4621,11 +4621,11 @@
                 "maglnet/composer-require-checker": "^4.2",
                 "nyholm/psr7": "^1.3",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.18",
+                "rector/rector": "^1.0",
                 "roave/infection-static-analysis-plugin": "^1.16",
                 "spatie/phpunit-watcher": "^1.23",
                 "vimeo/psalm": "^4.30|^5.8",
-                "yiisoft/yii-debug": "dev-master"
+                "yiisoft/yii-debug": "dev-master|dev-php80"
             },
             "type": "library",
             "extra": {
@@ -4654,7 +4654,7 @@
             "support": {
                 "chat": "https://t.me/yii3en",
                 "forum": "https://www.yiiframework.com/forum/",
-                "irc": "irc://irc.freenode.net/yii",
+                "irc": "ircs://irc.libera.chat:6697/yii",
                 "issues": "https://github.com/yiisoft/auth/issues?state=open",
                 "source": "https://github.com/yiisoft/auth",
                 "wiki": "https://www.yiiframework.com/wiki/"
@@ -4669,7 +4669,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-10-30T10:17:07+00:00"
+            "time": "2024-05-06T12:26:49+00:00"
         },
         {
             "name": "yiisoft/cache",
