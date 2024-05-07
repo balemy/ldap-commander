@@ -7431,24 +7431,24 @@
         },
         {
             "name": "yiisoft/user",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/user.git",
-                "reference": "b1ca4d38cc090f6235860232c87b8a45968fe055"
+                "reference": "821d8ae3ab1ae0561aae5af33c7d5d6827284b40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/user/zipball/b1ca4d38cc090f6235860232c87b8a45968fe055",
-                "reference": "b1ca4d38cc090f6235860232c87b8a45968fe055",
+                "url": "https://api.github.com/repos/yiisoft/user/zipball/821d8ae3ab1ae0561aae5af33c7d5d6827284b40",
+                "reference": "821d8ae3ab1ae0561aae5af33c7d5d6827284b40",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "^8.0",
+                "php": "^8.1",
                 "psr/event-dispatcher": "^1.0",
                 "psr/http-factory": "^1.0",
-                "psr/http-message": "^1.0",
+                "psr/http-message": "^1.0|^2.0",
                 "psr/http-server-handler": "^1.0",
                 "psr/http-server-middleware": "^1.0",
                 "psr/log": "^1.1|^2.0|^3.0",
@@ -7461,11 +7461,11 @@
             "require-dev": {
                 "httpsoft/http-message": "^1.0",
                 "maglnet/composer-require-checker": "^4.2",
-                "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.18.2",
+                "phpunit/phpunit": "^10.5",
+                "rector/rector": "^1.0.0",
                 "roave/infection-static-analysis-plugin": "^1.16",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.30|^5.6",
+                "vimeo/psalm": "^5.23",
                 "yiisoft/di": "^1.0",
                 "yiisoft/test-support": "^3.0"
             },
@@ -7497,7 +7497,7 @@
             "support": {
                 "chat": "https://t.me/yii3en",
                 "forum": "https://www.yiiframework.com/forum/",
-                "irc": "irc://irc.freenode.net/yii",
+                "irc": "ircs://irc.libera.chat:6697/yii",
                 "issues": "https://github.com/yiisoft/user/issues?state=open",
                 "source": "https://github.com/yiisoft/user",
                 "wiki": "https://www.yiiframework.com/wiki/"
@@ -7512,7 +7512,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2023-12-05T17:23:50+00:00"
+            "time": "2024-05-07T07:31:24+00:00"
         },
         {
             "name": "yiisoft/validator",
