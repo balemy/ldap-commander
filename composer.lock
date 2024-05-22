@@ -7516,16 +7516,16 @@
         },
         {
             "name": "yiisoft/validator",
-            "version": "1.3.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/validator.git",
-                "reference": "ab935493bb66fb67328ca5c4335e8c2202d2a9ad"
+                "reference": "f0f80b46180d51d1f1c520d9eadc3561ef897e95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/validator/zipball/ab935493bb66fb67328ca5c4335e8c2202d2a9ad",
-                "reference": "ab935493bb66fb67328ca5c4335e8c2202d2a9ad",
+                "url": "https://api.github.com/repos/yiisoft/validator/zipball/f0f80b46180d51d1f1c520d9eadc3561ef897e95",
+                "reference": "f0f80b46180d51d1f1c520d9eadc3561ef897e95",
                 "shasum": ""
             },
             "require": {
@@ -7604,7 +7604,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2024-04-04T11:44:53+00:00"
+            "time": "2024-05-22T13:30:41+00:00"
         },
         {
             "name": "yiisoft/var-dumper",
