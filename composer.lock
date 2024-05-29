@@ -8677,20 +8677,21 @@
         },
         {
             "name": "yiisoft/yii-view",
-            "version": "6.0.0",
+            "version": "6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii-view.git",
-                "reference": "e04324d8228e987c5e9f74513caf15fecfa63b44"
+                "reference": "72d32f61833b6bf521a3fe0bb0c242822a2c1ea2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii-view/zipball/e04324d8228e987c5e9f74513caf15fecfa63b44",
-                "reference": "e04324d8228e987c5e9f74513caf15fecfa63b44",
+                "url": "https://api.github.com/repos/yiisoft/yii-view/zipball/72d32f61833b6bf521a3fe0bb0c242822a2c1ea2",
+                "reference": "72d32f61833b6bf521a3fe0bb0c242822a2c1ea2",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.0",
+                "psr/container": "^1.0|^2.0",
                 "yiisoft/aliases": "^2.0|^3.0",
                 "yiisoft/csrf": "^1.2|^2.0",
                 "yiisoft/data-response": "^1.0|^2.0",
@@ -8704,13 +8705,14 @@
                 "maglnet/composer-require-checker": "^4.3",
                 "nyholm/psr7": "^1.5",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.15.0",
+                "rector/rector": "^1.0.0",
                 "roave/infection-static-analysis-plugin": "^1.25",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.30|^5.6",
+                "vimeo/psalm": "^4.30|^5.24",
                 "yiisoft/di": "^1.2",
                 "yiisoft/psr-dummy-provider": "^1.0",
-                "yiisoft/test-support": "^3.0"
+                "yiisoft/test-support": "^3.0",
+                "yiisoft/yii-debug": "dev-master|dev-php80"
             },
             "type": "library",
             "extra": {
@@ -8719,7 +8721,8 @@
                 },
                 "config-plugin": {
                     "params": "params.php",
-                    "di-web": "di-web.php"
+                    "di-web": "di-web.php",
+                    "events-web": "events-web.php"
                 }
             },
             "autoload": {
@@ -8740,22 +8743,22 @@
             "support": {
                 "chat": "https://t.me/yii3en",
                 "forum": "https://www.yiiframework.com/forum/",
-                "irc": "irc://irc.freenode.net/yii",
+                "irc": "ircs://irc.libera.chat:6697/yii",
                 "issues": "https://github.com/yiisoft/yii-view/issues?state=open",
                 "source": "https://github.com/yiisoft/yii-view",
                 "wiki": "https://www.yiiframework.com/wiki/"
             },
             "funding": [
                 {
-                    "url": "https://github.com/yiisoft",
+                    "url": "https://github.com/sponsors/yiisoft",
                     "type": "github"
                 },
                 {
                     "url": "https://opencollective.com/yiisoft",
-                    "type": "open_collective"
+                    "type": "opencollective"
                 }
             ],
-            "time": "2023-02-16T14:05:24+00:00"
+            "time": "2024-05-28T18:18:18+00:00"
         },
         {
             "name": "yiisoft/yii-widgets",
