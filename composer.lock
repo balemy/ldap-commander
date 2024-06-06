@@ -8678,16 +8678,16 @@
         },
         {
             "name": "yiisoft/yii-view",
-            "version": "6.1.0",
+            "version": "6.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii-view.git",
-                "reference": "72d32f61833b6bf521a3fe0bb0c242822a2c1ea2"
+                "reference": "1d09b467f308734b22c2c262a8518097a2cb098f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii-view/zipball/72d32f61833b6bf521a3fe0bb0c242822a2c1ea2",
-                "reference": "72d32f61833b6bf521a3fe0bb0c242822a2c1ea2",
+                "url": "https://api.github.com/repos/yiisoft/yii-view/zipball/1d09b467f308734b22c2c262a8518097a2cb098f",
+                "reference": "1d09b467f308734b22c2c262a8518097a2cb098f",
                 "shasum": ""
             },
             "require": {
@@ -8706,7 +8706,7 @@
                 "maglnet/composer-require-checker": "^4.3",
                 "nyholm/psr7": "^1.5",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^1.0.0",
+                "rector/rector": "1.0.*",
                 "roave/infection-static-analysis-plugin": "^1.25",
                 "spatie/phpunit-watcher": "^1.23",
                 "vimeo/psalm": "^4.30|^5.24",
@@ -8759,7 +8759,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2024-05-28T18:18:18+00:00"
+            "time": "2024-06-06T14:00:28+00:00"
         },
         {
             "name": "yiisoft/yii-widgets",
