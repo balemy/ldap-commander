@@ -7514,16 +7514,16 @@
         },
         {
             "name": "yiisoft/validator",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/validator.git",
-                "reference": "f0f80b46180d51d1f1c520d9eadc3561ef897e95"
+                "reference": "7185b20496273bcc881f28c1b73248691b8e1102"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/validator/zipball/f0f80b46180d51d1f1c520d9eadc3561ef897e95",
-                "reference": "f0f80b46180d51d1f1c520d9eadc3561ef897e95",
+                "url": "https://api.github.com/repos/yiisoft/validator/zipball/7185b20496273bcc881f28c1b73248691b8e1102",
+                "reference": "7185b20496273bcc881f28c1b73248691b8e1102",
                 "shasum": ""
             },
             "require": {
@@ -7542,7 +7542,7 @@
                 "maglnet/composer-require-checker": "^4.3",
                 "phpbench/phpbench": "^1.2",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^1.0",
+                "rector/rector": "1.0.*",
                 "roave/infection-static-analysis-plugin": "^1.25",
                 "spatie/phpunit-watcher": "^1.23",
                 "vimeo/psalm": "^4.30|^5.22",
@@ -7602,7 +7602,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2024-05-22T13:30:41+00:00"
+            "time": "2024-06-11T12:31:36+00:00"
         },
         {
             "name": "yiisoft/var-dumper",
