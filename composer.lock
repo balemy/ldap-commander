@@ -5360,16 +5360,16 @@
         },
         {
             "name": "yiisoft/error-handler",
-            "version": "3.2.1",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/error-handler.git",
-                "reference": "b5a6782723bac689d368d2b926188e33c9641d41"
+                "reference": "a263c9dea48d5a42022dd7df76706cff39e3e960"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/error-handler/zipball/b5a6782723bac689d368d2b926188e33c9641d41",
-                "reference": "b5a6782723bac689d368d2b926188e33c9641d41",
+                "url": "https://api.github.com/repos/yiisoft/error-handler/zipball/a263c9dea48d5a42022dd7df76706cff39e3e960",
+                "reference": "a263c9dea48d5a42022dd7df76706cff39e3e960",
                 "shasum": ""
             },
             "require": {
@@ -5396,7 +5396,7 @@
                 "rector/rector": "^1.0",
                 "roave/infection-static-analysis-plugin": "^1.16",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.30|^5.20",
+                "vimeo/psalm": "^4.30|^5.25",
                 "yiisoft/di": "^1.1",
                 "yiisoft/test-support": "^1.3"
             },
@@ -5431,22 +5431,22 @@
             "support": {
                 "chat": "https://t.me/yii3en",
                 "forum": "https://www.yiiframework.com/forum/",
-                "irc": "irc://irc.freenode.net/yii",
+                "irc": "ircs://irc.libera.chat:6697/yii",
                 "issues": "https://github.com/yiisoft/error-handler/issues?state=open",
                 "source": "https://github.com/yiisoft/error-handler",
                 "wiki": "https://www.yiiframework.com/wiki/"
             },
             "funding": [
                 {
-                    "url": "https://github.com/yiisoft",
+                    "url": "https://github.com/sponsors/yiisoft",
                     "type": "github"
                 },
                 {
                     "url": "https://opencollective.com/yiisoft",
-                    "type": "open_collective"
+                    "type": "opencollective"
                 }
             ],
-            "time": "2024-03-07T07:46:58+00:00"
+            "time": "2024-07-11T12:16:20+00:00"
         },
         {
             "name": "yiisoft/event-dispatcher",
