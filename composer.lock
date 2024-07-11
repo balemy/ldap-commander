@@ -5853,16 +5853,16 @@
         },
         {
             "name": "yiisoft/html",
-            "version": "3.4.0",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/html.git",
-                "reference": "9cdc6321b79c78c106fc66f2de0c0ac46bb81141"
+                "reference": "33d23d3eb0ae5b77dcd84d7945de653e980303fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/html/zipball/9cdc6321b79c78c106fc66f2de0c0ac46bb81141",
-                "reference": "9cdc6321b79c78c106fc66f2de0c0ac46bb81141",
+                "url": "https://api.github.com/repos/yiisoft/html/zipball/33d23d3eb0ae5b77dcd84d7945de653e980303fc",
+                "reference": "33d23d3eb0ae5b77dcd84d7945de653e980303fc",
                 "shasum": ""
             },
             "require": {
@@ -5871,12 +5871,12 @@
                 "yiisoft/json": "^1.0"
             },
             "require-dev": {
+                "infection/infection": "^0.26.19",
                 "maglnet/composer-require-checker": "^4.4",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.18.3",
-                "roave/infection-static-analysis-plugin": "^1.16",
+                "rector/rector": "^1.0.0",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.18|^5.0"
+                "vimeo/psalm": "^5.25"
             },
             "type": "library",
             "autoload": {
@@ -5896,7 +5896,7 @@
             "support": {
                 "chat": "https://t.me/yii3en",
                 "forum": "https://forum.yiiframework.com/",
-                "irc": "irc://irc.freenode.net/yii",
+                "irc": "ircs://irc.libera.chat:6697/yii",
                 "issues": "https://github.com/yiisoft/html/issues?state=open",
                 "source": "https://github.com/yiisoft/html",
                 "wiki": "https://www.yiiframework.com/wiki/"
@@ -5911,7 +5911,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2023-12-26T13:18:52+00:00"
+            "time": "2024-07-11T08:10:33+00:00"
         },
         {
             "name": "yiisoft/http",
