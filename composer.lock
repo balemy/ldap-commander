@@ -1135,16 +1135,16 @@
         },
         {
             "name": "httpsoft/http-message",
-            "version": "1.1.5",
+            "version": "1.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/httpsoft/http-message.git",
-                "reference": "e0c57307e0106ae6489f0b13ddd7947e9b027662"
+                "reference": "f6c88e2189b9f75f10dfaeb0a85c56ea04a53c19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/httpsoft/http-message/zipball/e0c57307e0106ae6489f0b13ddd7947e9b027662",
-                "reference": "e0c57307e0106ae6489f0b13ddd7947e9b027662",
+                "url": "https://api.github.com/repos/httpsoft/http-message/zipball/f6c88e2189b9f75f10dfaeb0a85c56ea04a53c19",
+                "reference": "f6c88e2189b9f75f10dfaeb0a85c56ea04a53c19",
                 "shasum": ""
             },
             "require": {
@@ -1194,7 +1194,7 @@
                 "issues": "https://github.com/httpsoft/http-message/issues",
                 "source": "https://github.com/httpsoft/http-message"
             },
-            "time": "2024-05-27T08:36:34+00:00"
+            "time": "2024-08-09T07:13:21+00:00"
         },
         {
             "name": "illuminate/collections",
