@@ -6697,26 +6697,28 @@
         },
         {
             "name": "yiisoft/network-utilities",
-            "version": "1.0.1",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/network-utilities.git",
-                "reference": "f65ccebdca7a5a2cddd04f6ddcf086f8691663e7"
+                "reference": "9b51434f17035ce70ba220518a9d52656b6c1cb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/network-utilities/zipball/f65ccebdca7a5a2cddd04f6ddcf086f8691663e7",
-                "reference": "f65ccebdca7a5a2cddd04f6ddcf086f8691663e7",
+                "url": "https://api.github.com/repos/yiisoft/network-utilities/zipball/9b51434f17035ce70ba220518a9d52656b6c1cb4",
+                "reference": "9b51434f17035ce70ba220518a9d52656b6c1cb4",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4|^8.0"
             },
             "require-dev": {
+                "maglnet/composer-require-checker": "^3.8|^4.4",
                 "phpunit/phpunit": "^9.5",
+                "rector/rector": "^1.2",
                 "roave/infection-static-analysis-plugin": "^1.16",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.18"
+                "vimeo/psalm": "^4.30|^5.25"
             },
             "type": "library",
             "autoload": {
@@ -6739,22 +6741,22 @@
             "support": {
                 "chat": "https://t.me/yii3en",
                 "forum": "https://www.yiiframework.com/forum/",
-                "irc": "irc://irc.freenode.net/yii",
+                "irc": "ircs://irc.libera.chat:6697/yii",
                 "issues": "https://github.com/yiisoft/network-utilities/issues?state=open",
                 "source": "https://github.com/yiisoft/network-utilities",
                 "wiki": "https://www.yiiframework.com/wiki/"
             },
             "funding": [
                 {
-                    "url": "https://github.com/yiisoft",
+                    "url": "https://github.com/sponsors/yiisoft",
                     "type": "github"
                 },
                 {
                     "url": "https://opencollective.com/yiisoft",
-                    "type": "open_collective"
+                    "type": "opencollective"
                 }
             ],
-            "time": "2022-01-27T16:06:23+00:00"
+            "time": "2024-09-02T14:07:06+00:00"
         },
         {
             "name": "yiisoft/profiler",
@@ -7514,16 +7516,16 @@
         },
         {
             "name": "yiisoft/validator",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/validator.git",
-                "reference": "f0f80b46180d51d1f1c520d9eadc3561ef897e95"
+                "reference": "7185b20496273bcc881f28c1b73248691b8e1102"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/validator/zipball/f0f80b46180d51d1f1c520d9eadc3561ef897e95",
-                "reference": "f0f80b46180d51d1f1c520d9eadc3561ef897e95",
+                "url": "https://api.github.com/repos/yiisoft/validator/zipball/7185b20496273bcc881f28c1b73248691b8e1102",
+                "reference": "7185b20496273bcc881f28c1b73248691b8e1102",
                 "shasum": ""
             },
             "require": {
@@ -7542,7 +7544,7 @@
                 "maglnet/composer-require-checker": "^4.3",
                 "phpbench/phpbench": "^1.2",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^1.0",
+                "rector/rector": "1.0.*",
                 "roave/infection-static-analysis-plugin": "^1.25",
                 "spatie/phpunit-watcher": "^1.23",
                 "vimeo/psalm": "^4.30|^5.22",
@@ -7602,7 +7604,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2024-05-22T13:30:41+00:00"
+            "time": "2024-06-11T12:31:36+00:00"
         },
         {
             "name": "yiisoft/var-dumper",
@@ -8361,16 +8363,16 @@
         },
         {
             "name": "yiisoft/yii-middleware",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii-middleware.git",
-                "reference": "d196fa77f4874b89cade728b7e4d545953f5ed43"
+                "reference": "b2a8157ae2c94847a2b2f2e3b63dc23366b5e42a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii-middleware/zipball/d196fa77f4874b89cade728b7e4d545953f5ed43",
-                "reference": "d196fa77f4874b89cade728b7e4d545953f5ed43",
+                "url": "https://api.github.com/repos/yiisoft/yii-middleware/zipball/b2a8157ae2c94847a2b2f2e3b63dc23366b5e42a",
+                "reference": "b2a8157ae2c94847a2b2f2e3b63dc23366b5e42a",
                 "shasum": ""
             },
             "require": {
@@ -8385,21 +8387,22 @@
                 "yiisoft/cookies": "^1.2",
                 "yiisoft/friendly-exception": "^1.0",
                 "yiisoft/http": "^1.2",
+                "yiisoft/network-utilities": "^1.2",
                 "yiisoft/router": "^3.0",
                 "yiisoft/session": "^2.0",
                 "yiisoft/strings": "^2.1",
-                "yiisoft/validator": "^1.0"
+                "yiisoft/validator": "^1.0|^2.0"
             },
             "require-dev": {
                 "ext-uopz": "*",
                 "httpsoft/http-message": "^1.0",
                 "maglnet/composer-require-checker": "^4.2",
                 "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.18.0",
+                "rector/rector": "^1.2",
                 "roave/infection-static-analysis-plugin": "^1.16",
                 "slope-it/clock-mock": "^0.3.6",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.30|^5.4",
+                "vimeo/psalm": "^4.30|^5.25",
                 "yiisoft/router-fastroute": "^3.0",
                 "yiisoft/test-support": "^3.0"
             },
@@ -8442,7 +8445,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2024-06-06T07:03:57+00:00"
+            "time": "2024-09-03T19:34:10+00:00"
         },
         {
             "name": "yiisoft/yii-runner",
