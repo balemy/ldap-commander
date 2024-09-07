@@ -23,7 +23,7 @@ class MultiTextField extends InputField
             $values = [''];
         }
 
-        $this->setInputId = false;
+        #$this->setInputId = false;
 
         $i = 0;
         /** @var string $val */

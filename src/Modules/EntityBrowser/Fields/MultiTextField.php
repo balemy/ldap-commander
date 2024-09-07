@@ -21,7 +21,7 @@ class MultiTextField extends InputField
             $values = [$values];
         }
 
-        $this->setInputId = false;
+        #$this->setInputId = false;
 
         $i = 0;
         /** @var string $val */
