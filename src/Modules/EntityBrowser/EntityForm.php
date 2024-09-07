@@ -357,8 +357,10 @@ class EntityForm extends FormModel implements RulesProviderInterface, DataSetInt
         return $this->getPropertyValue($attribute);
     }
 
+    /*
     public function hasAttribute(string $attribute): bool
     {
         return $this->hasProperty($attribute);
     }
+    */
 }

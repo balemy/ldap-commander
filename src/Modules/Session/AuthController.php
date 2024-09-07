@@ -14,33 +14,32 @@ use Yiisoft\FormModel\FormHydrator;
 use Yiisoft\Http\Method;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Session\SessionInterface;
-use Yiisoft\Yii\View\ViewRenderer;
+use Yiisoft\Yii\View\Renderer\ViewRenderer;
 
 final class AuthController
 {
 
-    public function __construct(public ViewRenderer          $viewRenderer,
-                                public WebControllerService  $webService,
-                                public UrlGeneratorInterface $urlGenerator,
-                                public SessionInterface      $session,
-                                public AssetManager          $assetManager,
-    )
-    {
+    public function __construct(
+        public ViewRenderer $viewRenderer,
+        public WebControllerService $webService,
+        public UrlGeneratorInterface $urlGenerator,
+        public SessionInterface $session,
+        public AssetManager $assetManager,
+    ) {
         $this->viewRenderer = $viewRenderer->withViewPath(__DIR__ . '/Views/')->withLayout('@views/layout/main-nomenu');
     }
 
-    public function login(ServerRequestInterface $request,
-                          FormHydrator           $formHydrator,
-                          ConfiguredSessionList  $sessionList,
-                          Aliases                $aliases,
-                          ApplicationParameters  $applicationParameters,
-    ): ResponseInterface
-    {
+    public function login(
+        ServerRequestInterface $request,
+        FormHydrator $formHydrator,
+        ConfiguredSessionList $sessionList,
+        Aliases $aliases,
+        ApplicationParameters $applicationParameters,
+    ): ResponseInterface {
         $loginForm = new LoginForm($sessionList);
 
         if ($request->getMethod() === Method::POST &&
-            $formHydrator->populate($loginForm, $request->getParsedBody()) && $loginForm->isValid()) {
-
+            $formHydrator->populateFromPostAndValidate($loginForm, $request) && $loginForm->isValid()) {
             $this->session->set('SessionId', $loginForm->getSessionId());
 
             return $this->webService->getRedirectResponse('home', []);

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Balemy\LdapCommander\ViewInjection;
 
 use Balemy\LdapCommander\ApplicationParameters;
-use Yiisoft\Yii\View\CommonParametersInjectionInterface;
+use Yiisoft\Yii\View\Renderer\CommonParametersInjectionInterface;
 
 final class CommonViewInjection implements CommonParametersInjectionInterface
 {

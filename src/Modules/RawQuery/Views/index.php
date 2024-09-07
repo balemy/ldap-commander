@@ -15,7 +15,7 @@ declare(strict_types=1);
 use Yiisoft\FormModel\Field;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Form;
-use Yiisoft\Yii\View\Csrf;
+use Yiisoft\Yii\View\Renderer\Csrf;
 
 $this->setTitle($applicationParameters->getName());
 ?>

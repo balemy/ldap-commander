@@ -17,7 +17,7 @@ use Yiisoft\FormModel\Field;
 use Yiisoft\FormModel\FormModelInputData;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Form;
-use Yiisoft\Yii\View\Csrf;
+use Yiisoft\Yii\View\Renderer\Csrf;
 
 $assetManager->register(\Balemy\LdapCommander\Asset\MultiValueFormFieldAsset::class);
 

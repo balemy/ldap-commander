@@ -10,7 +10,7 @@ use Yiisoft\Form\Field\SubmitButton;
 use Yiisoft\Router\CurrentRoute;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Translator\TranslatorInterface;
-use Yiisoft\Yii\View\CsrfViewInjection;
+use Yiisoft\Yii\View\Renderer\CsrfViewInjection;
 
 $ldapConfigFile = dirname(__DIR__) . '/ldap.php';
 $ldapCommanderConfig = (file_exists($ldapConfigFile)) ? (array)require($ldapConfigFile) : [];
@@ -84,7 +84,7 @@ return Yiisoft\Arrays\ArrayHelper::merge($ldapCommanderConfig, [
         ],
     ],
 
-    'yiisoft/yii-view' => [
+    'yiisoft/yii-view-renderer' => [
         'viewPath' => '@views',
         'layout' => '@views/layout/main',
         'injections' => [

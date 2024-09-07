@@ -65,7 +65,7 @@ $this->beginPage()
 </main>
 
 
-<?= $this->render('_footer', ['applicationParameters' => $applicationParameters]); ?>
+<?= $this->render('./_footer', ['applicationParameters' => $applicationParameters]); ?>
 
 <?php $this->endBody() ?>
 </body>

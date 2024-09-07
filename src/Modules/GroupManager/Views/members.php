@@ -20,7 +20,7 @@ use Yiisoft\Html\Tag\Button;
 use Yiisoft\Html\Tag\Form;
 use Yiisoft\Html\Tag\Input;
 use Yiisoft\Html\Tag\Select;
-use Yiisoft\Yii\View\Csrf;
+use Yiisoft\Yii\View\Renderer\Csrf;
 
 $this->setTitle($applicationParameters->getName());
 
@@ -33,6 +33,8 @@ $form = Form::tag()
     ->method('post')
     ->csrf($csrf)
     ->action($urlGenerator->generate('group-members', [], ['dn' => $dn]))
+
+
 ?>
 
 

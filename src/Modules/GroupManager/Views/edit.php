@@ -19,7 +19,7 @@ use Balemy\LdapCommander\Modules\GroupManager\GroupSidebarLocation;
 use Yiisoft\FormModel\Field;
 use Yiisoft\Html\Html;
 use Yiisoft\Html\Tag\Form;
-use Yiisoft\Yii\View\Csrf;
+use Yiisoft\Yii\View\Renderer\Csrf;
 
 $this->setTitle($applicationParameters->getName());
 ?>
@@ -41,7 +41,8 @@ $this->setTitle($applicationParameters->getName());
                 <tr>
                     <td>Login filter</td>
                     <td>
-                        <code>(&(uid=%s)(objectClass=inetOrgPerson)(memberOf=<?= Html::encode($groupModel->getDn()) ?>))</code>
+                        <code>(&(uid=%s)(objectClass=inetOrgPerson)(memberOf=<?= Html::encode($groupModel->getDn()) ?>
+                            ))</code>
                     </td>
                 </tr>
                 <tr>
@@ -77,6 +78,11 @@ $this->setTitle($applicationParameters->getName());
         <?php if ($groupModel->isNewRecord): ?>
             <?= Field::select($groupModel, 'uniqueMember')
                 ->multiple(true)
+                ->value(
+                    (is_array($groupModel->getAttributeValue('uniqueMember')) ? $groupModel->getAttributeValue(
+                        'uniqueMember'
+                    ) : [])
+                )
                 ->optionsData($users)
                 ->tabindex(4) ?>
         <?php endif; ?>

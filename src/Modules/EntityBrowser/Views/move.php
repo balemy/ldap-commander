@@ -20,7 +20,7 @@ use Balemy\LdapCommander\Modules\EntityBrowser\Widgets\RdnBreadcrumbs;
 use Balemy\LdapCommander\Widget\EntitySidebar;
 use Balemy\LdapCommander\Widget\EntitySidebarLocation;
 use Yiisoft\View\WebView;
-use Yiisoft\Yii\View\Csrf;
+use Yiisoft\Yii\View\Renderer\Csrf;
 
 $assetManager->register(EntityEditAsset::class);
 

@@ -9,7 +9,7 @@ use Yiisoft\Aliases\Aliases;
 use Yiisoft\Assets\AssetManager;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Router\CurrentRoute;
-use Yiisoft\Yii\View\LayoutParametersInjectionInterface;
+use Yiisoft\Yii\View\Renderer\LayoutParametersInjectionInterface;
 
 final class LayoutViewInjection implements LayoutParametersInjectionInterface
 {

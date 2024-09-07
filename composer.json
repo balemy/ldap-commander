@@ -69,8 +69,8 @@
         "yiisoft/error-handler": "^3.0",
         "yiisoft/factory": "^1.0",
         "yiisoft/files": "^2.0",
-        "yiisoft/form": "dev-master",
-        "yiisoft/form-model": "dev-master",
+        "yiisoft/form": "^1.0",
+        "yiisoft/form-model": "^1.0",
         "yiisoft/html": "^3.0",
         "yiisoft/http": "^1.2",
         "yiisoft/i18n": "^1.1",
@@ -86,20 +86,20 @@
         "yiisoft/translator": "^3.0",
         "yiisoft/translator-message-php": "^1.1",
         "yiisoft/user": "^2.1",
-        "yiisoft/validator": "^1.0",
+        "yiisoft/validator": "^2.0",
         "yiisoft/var-dumper": "^1.0",
-        "yiisoft/view": "^8.0",
+        "yiisoft/view": "^10.0",
         "yiisoft/widget": "^2.0",
         "yiisoft/yii-bootstrap5": "^3.0@dev",
         "yiisoft/yii-console": "^2.0",
         "yiisoft/yii-dataview": "^3.0@dev",
-        "yiisoft/yii-debug": "^3.0@dev",
+        "yiisoft/yii-debug": "dev-master|dev-php80",
         "yiisoft/yii-event": "^2.0",
         "yiisoft/yii-http": "^1.0",
         "yiisoft/yii-middleware": "^1.0",
         "yiisoft/yii-runner-console": "^2.0",
         "yiisoft/yii-runner-http": "^2.0",
-        "yiisoft/yii-view": "^6.0"
+        "yiisoft/yii-view-renderer": "^7.1"
     },
     "require-dev": {
         "codeception/c3": "^2.6",
@@ -132,7 +132,7 @@
         }
     },
     "extra": {
-        "branch-alias": {
+        "branc<h>-alias": {
             "dev-master": "3.0.x-dev"
         },
         "config-plugin-file": "configuration.php",

@@ -18,21 +18,21 @@ use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Session\Flash\FlashInterface;
 use Yiisoft\Session\SessionInterface;
 use Yiisoft\Validator\ValidatorInterface;
-use Yiisoft\Yii\View\ViewRenderer;
+use Yiisoft\Yii\View\Renderer\ViewRenderer;
 
 final class RawQueryController
 {
-    public function __construct(public ViewRenderer          $viewRenderer,
-                                public WebControllerService  $webService,
-                                public UrlGeneratorInterface $urlGenerator,
-                                public SessionInterface      $session,
-                                public ValidatorInterface    $validator,
-                                public FormHydrator          $formHydrator,
-                                public AssetManager          $assetManager,
-                                public FlashInterface        $flash,
-                                public ApplicationParameters $applicationParameters,
-    )
-    {
+    public function __construct(
+        public ViewRenderer $viewRenderer,
+        public WebControllerService $webService,
+        public UrlGeneratorInterface $urlGenerator,
+        public SessionInterface $session,
+        public ValidatorInterface $validator,
+        public FormHydrator $formHydrator,
+        public AssetManager $assetManager,
+        public FlashInterface $flash,
+        public ApplicationParameters $applicationParameters,
+    ) {
         $this->viewRenderer = $viewRenderer->withViewPath(__DIR__ . '/Views/');
     }
 
@@ -44,9 +44,10 @@ final class RawQueryController
         $queryForm = new QueryForm();
         $results = [];
 
-        if ($request->getMethod() === Method::POST &&
-            $formHydrator->populate($queryForm, $request->getParsedBody()) && $this->validator->validate($queryForm)->isValid()) {
-
+        if ($request->getMethod() === Method::POST && $formHydrator->populateFromPostAndValidate(
+                $queryForm,
+                $request
+            )) {
             $session = Session::getCurrentSession();
             $query = trim($queryForm->query);
             try {

@@ -3,11 +3,21 @@
 namespace Balemy\LdapCommander\Modules\GroupManager;
 
 use Balemy\LdapCommander\LDAP\LdapFormModel;
+use Yiisoft\Validator\Rule\Required;
 
 class GroupForm extends LdapFormModel
 {
     public static array $requiredObjectClasses = ['groupOfUniqueNames'];
 
+    /**
+     * @inheritDoc
+     */
+    public function getRules(): iterable
+    {
+        $rules = [];
+        $rules['cn'] = [new Required()];
+        return $rules;
+    }
     public function load(array $data): bool
     {
         /** @var array<array-key, string> $formData */
