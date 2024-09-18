@@ -5847,16 +5847,16 @@
         },
         {
             "name": "yiisoft/html",
-            "version": "3.6.0",
+            "version": "3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/html.git",
-                "reference": "efd53b3b3b4db00b71ca3249baac6a432ec126e2"
+                "reference": "968aa8b336135242bdaef9646fa3d53c3c0731f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/html/zipball/efd53b3b3b4db00b71ca3249baac6a432ec126e2",
-                "reference": "efd53b3b3b4db00b71ca3249baac6a432ec126e2",
+                "url": "https://api.github.com/repos/yiisoft/html/zipball/968aa8b336135242bdaef9646fa3d53c3c0731f7",
+                "reference": "968aa8b336135242bdaef9646fa3d53c3c0731f7",
                 "shasum": ""
             },
             "require": {
@@ -5905,7 +5905,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2024-08-23T08:13:40+00:00"
+            "time": "2024-09-18T11:48:50+00:00"
         },
         {
             "name": "yiisoft/http",
