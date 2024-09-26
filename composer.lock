@@ -5636,22 +5636,22 @@
         },
         {
             "name": "yiisoft/form",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/form.git",
-                "reference": "9679b95b239598d2391de291ab2ce14b5e074271"
+                "reference": "592c2a2bb878c34329c8f1d2cfd1235bfece479b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/form/zipball/9679b95b239598d2391de291ab2ce14b5e074271",
-                "reference": "9679b95b239598d2391de291ab2ce14b5e074271",
+                "url": "https://api.github.com/repos/yiisoft/form/zipball/592c2a2bb878c34329c8f1d2cfd1235bfece479b",
+                "reference": "592c2a2bb878c34329c8f1d2cfd1235bfece479b",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.1",
                 "yiisoft/friendly-exception": "^1.0",
-                "yiisoft/html": "^3.6",
+                "yiisoft/html": "^3.7",
                 "yiisoft/widget": "^2.2"
             },
             "require-dev": {
@@ -5705,7 +5705,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-08-26T18:54:52+00:00"
+            "time": "2024-09-26T06:47:14+00:00"
         },
         {
             "name": "yiisoft/form-model",
