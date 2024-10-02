@@ -8609,20 +8609,20 @@
         },
         {
             "name": "yiisoft/yii-view-renderer",
-            "version": "7.1.0",
+            "version": "7.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii-view-renderer.git",
-                "reference": "cb11468f554d251c2deb87bf228a302c794134a3"
+                "reference": "526b61b2f0b4469c5330e5cf90d81b7fc54be73f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii-view-renderer/zipball/cb11468f554d251c2deb87bf228a302c794134a3",
-                "reference": "cb11468f554d251c2deb87bf228a302c794134a3",
+                "url": "https://api.github.com/repos/yiisoft/yii-view-renderer/zipball/526b61b2f0b4469c5330e5cf90d81b7fc54be73f",
+                "reference": "526b61b2f0b4469c5330e5cf90d81b7fc54be73f",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.0",
+                "php": "^8.1",
                 "psr/container": "^1.0|^2.0",
                 "yiisoft/aliases": "^2.0|^3.0",
                 "yiisoft/csrf": "^1.2|^2.0",
@@ -8630,21 +8630,21 @@
                 "yiisoft/friendly-exception": "^1.0",
                 "yiisoft/html": "^2.5|^3.0",
                 "yiisoft/strings": "^2.0",
-                "yiisoft/view": "^10.0"
+                "yiisoft/view": "^10|^11"
             },
             "require-dev": {
                 "httpsoft/http-message": "^1.0",
                 "maglnet/composer-require-checker": "^4.3",
                 "nyholm/psr7": "^1.5",
-                "phpunit/phpunit": "^9.5",
-                "rector/rector": "1.0.*",
+                "phpunit/phpunit": "^10.5",
+                "rector/rector": "^1.2",
                 "roave/infection-static-analysis-plugin": "^1.25",
                 "spatie/phpunit-watcher": "^1.23",
                 "vimeo/psalm": "^4.30|^5.25",
                 "yiisoft/di": "^1.2",
                 "yiisoft/psr-dummy-provider": "^1.0",
                 "yiisoft/test-support": "^3.0",
-                "yiisoft/yii-debug": "dev-master|dev-php80"
+                "yiisoft/yii-debug": "dev-master"
             },
             "type": "library",
             "extra": {
@@ -8691,7 +8691,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2024-07-01T11:56:55+00:00"
+            "time": "2024-10-02T11:21:40+00:00"
         }
     ],
     "packages-dev": [
