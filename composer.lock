@@ -5277,21 +5277,21 @@
         },
         {
             "name": "yiisoft/di",
-            "version": "1.2.1",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/di.git",
-                "reference": "a6d889f74030a381dad337f1bd1ea9de7341bc9b"
+                "reference": "edf748bd7adfc5816df593fa43508361018e35fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/di/zipball/a6d889f74030a381dad337f1bd1ea9de7341bc9b",
-                "reference": "a6d889f74030a381dad337f1bd1ea9de7341bc9b",
+                "url": "https://api.github.com/repos/yiisoft/di/zipball/edf748bd7adfc5816df593fa43508361018e35fd",
+                "reference": "edf748bd7adfc5816df593fa43508361018e35fd",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
-                "php": "^8.0",
+                "php": "^8.1",
                 "psr/container": "^1.1|^2.0",
                 "yiisoft/definitions": "^3.0"
             },
@@ -5302,11 +5302,11 @@
                 "league/container": "^4.2",
                 "maglnet/composer-require-checker": "^4.2",
                 "phpbench/phpbench": "^1.2.0",
-                "phpunit/phpunit": "^9.5",
-                "rector/rector": "^0.14.3",
+                "phpunit/phpunit": "^10.5",
+                "rector/rector": "^1.2",
                 "roave/infection-static-analysis-plugin": "^1.25",
                 "spatie/phpunit-watcher": "^1.23",
-                "vimeo/psalm": "^4.29",
+                "vimeo/psalm": "^5.26",
                 "yiisoft/injector": "^1.0",
                 "yiisoft/test-support": "^3.0"
             },
@@ -5338,22 +5338,22 @@
             "support": {
                 "chat": "https://t.me/yii3en",
                 "forum": "https://www.yiiframework.com/forum/",
-                "irc": "irc://irc.freenode.net/yii",
+                "irc": "ircs://irc.libera.chat:6697/yii",
                 "issues": "https://github.com/yiisoft/di/issues?state=open",
                 "source": "https://github.com/yiisoft/di",
                 "wiki": "https://www.yiiframework.com/wiki/"
             },
             "funding": [
                 {
-                    "url": "https://github.com/yiisoft",
+                    "url": "https://github.com/sponsors/yiisoft",
                     "type": "github"
                 },
                 {
                     "url": "https://opencollective.com/yiisoft",
-                    "type": "open_collective"
+                    "type": "opencollective"
                 }
             ],
-            "time": "2022-12-23T16:12:56+00:00"
+            "time": "2024-10-14T06:47:35+00:00"
         },
         {
             "name": "yiisoft/error-handler",
