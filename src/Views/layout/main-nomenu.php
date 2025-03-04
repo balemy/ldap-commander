@@ -5,7 +5,6 @@ declare(strict_types=1);
 use Balemy\LdapCommander\Asset\AppAsset;
 use Balemy\LdapCommander\Widget\FlashMessage;use Yiisoft\Html\Html;
 use Yiisoft\I18n\Locale;
-use Yiisoft\Yii\Bootstrap5\Nav;
 use Yiisoft\Yii\Bootstrap5\NavBar;
 
 /**
@@ -45,14 +44,11 @@ $this->beginPage()
     <?= NavBar::widget()
         ->brandText($applicationParameters->getName())
         ->brandUrl('/')
-        ->options([
-            'class' => 'navbar navbar-dark bg-dark navbar-expand-lg text-white',
-        ])
+        ->addClass('navbar', 'navbar-dark', 'bg-dark', 'navbar-expand-lg', 'text-white')
         ->begin();
     ?>
 
     <?= NavBar::end() ?>
-
 </header>
 
 
