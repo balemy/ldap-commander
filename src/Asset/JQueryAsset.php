@@ -5,7 +5,7 @@ namespace Balemy\LdapCommander\Asset;
 use Yiisoft\Assets\AssetBundle;
 use Yiisoft\View\View;
 
-class JQueryAsset extends AssetBundle
+final class JQueryAsset extends AssetBundle
 {
     public ?string $basePath = '@assets';
 

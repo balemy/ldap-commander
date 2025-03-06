@@ -7,7 +7,7 @@ use Yiisoft\Validator\Rule\Required;
 use Yiisoft\Validator\RulesProviderInterface;
 
 
-class QueryForm extends FormModel implements RulesProviderInterface
+final class QueryForm extends FormModel implements RulesProviderInterface
 {
     public string $query = '';
 

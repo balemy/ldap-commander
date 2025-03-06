@@ -29,7 +29,7 @@ final class FlashMessage extends Widget
                 $body = (is_array($message)) ? (string)$message['body'] : $message;
 
                 $html[] = Alert::widget()
-                    ->options(['class' => "alert-{$type} shadow"])
+                    ->addClass("alert-{$type}", 'shadow')
                     ->body($body);
             }
         }

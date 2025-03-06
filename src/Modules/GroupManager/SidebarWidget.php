@@ -14,7 +14,7 @@ enum GroupSidebarLocation
     case Members;
 }
 
-class SidebarWidget extends Widget
+final class SidebarWidget extends Widget
 {
     public string $dn = '';
 

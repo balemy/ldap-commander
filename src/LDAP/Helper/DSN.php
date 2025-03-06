@@ -2,7 +2,7 @@
 
 namespace Balemy\LdapCommander\LDAP\Helper;
 
-class DSN
+final class DSN
 {
     /**
      * @var array{fragment?: string, host?: string, pass?: string, path?: string, port?: int, query?: string, scheme?: string, user?: string}|false

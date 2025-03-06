@@ -9,7 +9,7 @@ use LdapRecord\Connection;
 use LdapRecord\Container;
 use LdapRecord\Models\Entry;
 
-class SlapdConfigService
+final class SlapdConfigService
 {
     public Connection $lrConnection;
 

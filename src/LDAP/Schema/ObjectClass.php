@@ -4,7 +4,7 @@ namespace Balemy\LdapCommander\LDAP\Schema;
 
 use Yiisoft\Arrays\ArrayHelper;
 
-class ObjectClass
+final class ObjectClass
 {
     /**
      * @param Schema $schema

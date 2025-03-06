@@ -5,7 +5,7 @@ namespace Balemy\LdapCommander\Modules\SlapdConfig\Models;
 use Balemy\LdapCommander\LDAP\LdapFormModel;
 use Balemy\LdapCommander\Modules\GroupManager\Group;
 
-class BindUser extends LdapFormModel
+final class BindUser extends LdapFormModel
 {
     public static array $requiredObjectClasses = ['simpleSecurityObject', 'organizationalRole'];
 

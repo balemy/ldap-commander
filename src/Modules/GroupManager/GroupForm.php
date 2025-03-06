@@ -5,7 +5,7 @@ namespace Balemy\LdapCommander\Modules\GroupManager;
 use Balemy\LdapCommander\LDAP\LdapFormModel;
 use Yiisoft\Validator\Rule\Required;
 
-class GroupForm extends LdapFormModel
+final class GroupForm extends LdapFormModel
 {
     public static array $requiredObjectClasses = ['groupOfUniqueNames'];
 

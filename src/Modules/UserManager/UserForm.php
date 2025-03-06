@@ -6,7 +6,7 @@ use Balemy\LdapCommander\LDAP\LdapFormModel;
 use Balemy\LdapCommander\Modules\GroupManager\Group;
 
 
-class UserForm extends LdapFormModel
+final class UserForm extends LdapFormModel
 {
     public static array $requiredObjectClasses = ['inetorgperson'];
 

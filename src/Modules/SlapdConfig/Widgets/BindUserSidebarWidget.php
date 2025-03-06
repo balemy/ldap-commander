@@ -8,7 +8,7 @@ use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\View\WebView;
 use Yiisoft\Widget\Widget;
 
-class BindUserSidebarWidget extends Widget
+final class BindUserSidebarWidget extends Widget
 {
     public string $dn = '';
 

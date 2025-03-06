@@ -5,7 +5,7 @@ namespace Balemy\LdapCommander\LDAP\Services;
 use Balemy\LdapCommander\Modules\Session\Session;
 use LdapRecord\Models\Entry;
 
-class LdapService
+final class LdapService
 {
     public Session $session;
 

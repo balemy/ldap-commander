@@ -8,7 +8,7 @@ use Yiisoft\Widget\Widget;
 use Yiisoft\Yii\Bootstrap5\BreadcrumbLink;
 use Yiisoft\Yii\Bootstrap5\Breadcrumbs;
 
-class RdnBreadcrumbs extends Widget
+final class RdnBreadcrumbs extends Widget
 {
     /**
      * @var string

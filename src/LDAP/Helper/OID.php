@@ -2,7 +2,7 @@
 
 namespace Balemy\LdapCommander\LDAP\Helper;
 
-class OID
+final class OID
 {
 
     /**

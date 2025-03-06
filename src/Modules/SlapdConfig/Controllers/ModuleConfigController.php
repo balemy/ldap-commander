@@ -20,7 +20,7 @@ use Yiisoft\Session\SessionInterface;
 use Yiisoft\Validator\ValidatorInterface;
 use Yiisoft\Yii\View\Renderer\ViewRenderer;
 
-class ModuleConfigController
+final class ModuleConfigController
 {
     public function __construct(public ViewRenderer          $viewRenderer,
                                 public LdapService           $ldapService,

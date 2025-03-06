@@ -8,7 +8,7 @@ use Balemy\LdapCommander\Modules\Session\Session;
 use Balemy\LdapCommander\Modules\SlapdConfig\Services\SlapdConfigService;
 use LdapRecord\Models\Entry;
 
-class MemberOf extends LdapFormModel
+final class MemberOf extends LdapFormModel
 {
     public static array $requiredObjectClasses = ['olcMemberOfConfig', 'olcOverlayConfig'];
 

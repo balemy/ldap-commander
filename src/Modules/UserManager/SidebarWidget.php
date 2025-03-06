@@ -15,7 +15,7 @@ enum SidebarLocation
     case Members;
 }
 
-class SidebarWidget extends Widget
+final class SidebarWidget extends Widget
 {
     public ?UserForm $userForm = null;
     public string $userDn = '';

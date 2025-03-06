@@ -5,7 +5,7 @@ namespace Balemy\LdapCommander\Modules\Session;
 use Balemy\LdapCommander\LDAP\ConnectionDetails;
 use Balemy\LdapCommander\Modules\UserManager\UserManagerConfig;
 
-class ConfiguredSession
+final class ConfiguredSession
 {
     public function __construct(
         public ConnectionDetails $connectionDetails,

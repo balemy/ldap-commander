@@ -7,7 +7,7 @@ use Balemy\LdapCommander\Timer;
 use LdapRecord\Connection;
 use Yiisoft\Json\Json;
 
-class Schema
+final class Schema
 {
     /**
      * @var AttributeType[]

@@ -2,7 +2,7 @@
 
 namespace Balemy\LdapCommander\LDAP\Schema;
 
-class AttributeType
+final class AttributeType
 {
 
     /**

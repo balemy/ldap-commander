@@ -4,7 +4,7 @@ namespace Balemy\LdapCommander\LDAP\Services;
 
 use Balemy\LdapCommander\LDAP\Schema\Schema;
 
-class SchemaService
+final class SchemaService
 {
 
     public function __construct(private Schema $schema)

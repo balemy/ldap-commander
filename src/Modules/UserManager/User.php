@@ -5,7 +5,7 @@ namespace Balemy\LdapCommander\Modules\UserManager;
 use Balemy\LdapCommander\Modules\GroupManager\Group;
 
 /** @psalm-suppress PropertyNotSetInConstructor */
-class User extends \LdapRecord\Models\OpenLDAP\User
+final class User extends \LdapRecord\Models\OpenLDAP\User
 {
     public function getDisplayName(): string
     {

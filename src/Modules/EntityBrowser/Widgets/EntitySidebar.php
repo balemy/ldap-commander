@@ -15,7 +15,7 @@ enum EntitySidebarLocation
     case Add;
 }
 
-class EntitySidebar extends Widget
+final class EntitySidebar extends Widget
 {
     public string $dn;
     public EntitySidebarLocation $location = EntitySidebarLocation::ListChildren;

@@ -10,7 +10,7 @@ use Balemy\LdapCommander\Modules\UserManager\UserManagerConfig;
 use LdapRecord\Connection;
 use LdapRecord\Container;
 
-class Session
+final class Session
 {
     public Connection $lrConnection;
     public Schema $schema;

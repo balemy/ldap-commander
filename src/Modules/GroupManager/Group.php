@@ -5,7 +5,7 @@ namespace Balemy\LdapCommander\Modules\GroupManager;
 use LdapRecord\Models\Entry;
 use LdapRecord\Models\OpenLDAP\Group as LrGroup;
 
-class Group
+final class Group
 {
     private $entry;
 

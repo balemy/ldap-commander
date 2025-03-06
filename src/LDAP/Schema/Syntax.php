@@ -2,7 +2,7 @@
 
 namespace Balemy\LdapCommander\LDAP\Schema;
 
-class Syntax
+final class Syntax
 {
 
     public function __construct(

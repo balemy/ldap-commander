@@ -2,7 +2,7 @@
 
 namespace Balemy\LdapCommander\LDAP;
 
-class ConnectionDetails
+final class ConnectionDetails
 {
     final public function __construct(
         public readonly string $dsn,
