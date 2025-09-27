@@ -18,7 +18,7 @@ return [
         $collector
             ->middleware(CsrfMiddleware::class)
             ->middleware(FormatDataResponse::class)
-            ->addGroup(
+            ->addRoute(
                 Group::create()
                     ->routes(...$config->get('routes'))
             );

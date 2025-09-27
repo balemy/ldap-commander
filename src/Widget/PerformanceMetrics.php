@@ -20,7 +20,7 @@ final class PerformanceMetrics extends Widget
 
         $out = "Total Time: $time sec";
         if ($this->timer->has('schema')) {
-            $out .= ' &middot; Schema Parsing: ' . round($this->timer->get('schema'), 3) . ' sec';
+            $out .= ' &middot; Schema Parsing: ' . (string) round($this->timer->get('schema'), 3) . ' sec';
         }
 
         return $out . " &middot; Memory Usage: $memory MB";

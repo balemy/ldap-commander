@@ -5,8 +5,8 @@ namespace Balemy\LdapCommander\Modules\EntityBrowser\Widgets;
 use Balemy\LdapCommander\LDAP\Services\LdapService;
 use Yiisoft\Router\UrlGeneratorInterface;
 use Yiisoft\Widget\Widget;
-use Yiisoft\Yii\Bootstrap5\BreadcrumbLink;
-use Yiisoft\Yii\Bootstrap5\Breadcrumbs;
+use Yiisoft\Bootstrap5\BreadcrumbLink;
+use Yiisoft\Bootstrap5\Breadcrumbs;
 
 final class RdnBreadcrumbs extends Widget
 {

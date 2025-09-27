@@ -6,8 +6,8 @@ use Balemy\LdapCommander\Asset\AppAsset;
 use Balemy\LdapCommander\Widget\FlashMessage;
 use Yiisoft\Html\Html;
 use Yiisoft\I18n\Locale;
-use Yiisoft\Strings\StringHelper;use Yiisoft\Yii\Bootstrap5\Dropdown;use Yiisoft\Yii\Bootstrap5\DropdownItem;use Yiisoft\Yii\Bootstrap5\Nav;
-use Yiisoft\Yii\Bootstrap5\NavBar;use Yiisoft\Yii\Bootstrap5\NavLink;
+use Yiisoft\Strings\StringHelper;use Yiisoft\Bootstrap5\Dropdown;use Yiisoft\Bootstrap5\DropdownItem;use Yiisoft\Bootstrap5\Nav;
+use Yiisoft\Bootstrap5\NavBar; use Yiisoft\Bootstrap5\NavLink;
 
 /**
  * @var Balemy\LdapCommander\ApplicationParameters $applicationParameters

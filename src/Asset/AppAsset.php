@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Balemy\LdapCommander\Asset;
 
 use Yiisoft\Assets\AssetBundle;
-use Yiisoft\Yii\Bootstrap5\Assets\BootstrapAsset;
+use Yiisoft\Bootstrap5\Assets\BootstrapAsset;
 
 final class AppAsset extends AssetBundle
 {

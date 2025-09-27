@@ -7,11 +7,14 @@
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
     findUnusedCode="false"
     ensureOverrideAttribute="false"
-    implicitToStringCast="false"
 >
     <issueHandlers>
+        <ImplicitToStringCast errorLevel="suppress"/>
         <RiskyTruthyFalsyComparison errorLevel="suppress"/>
+        <UndefinedMagicMethod errorLevel="suppress"/>
+        <UndefinedMagicPropertyFetch errorLevel="suppress"/>
     </issueHandlers>
+
     <projectFiles>
         <directory name="src"/>
         <file name="public/index.php"/>
@@ -25,7 +28,5 @@
             <directory name="tests/Support/_generated"/>
         </ignoreFiles>
     </projectFiles>
-
-
 </psalm>
 

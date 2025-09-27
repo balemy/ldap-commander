@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Balemy\LdapCommander\Widget;
 
 use Yiisoft\Session\Flash\FlashInterface;
-use Yiisoft\Yii\Bootstrap5\Alert;
+use Yiisoft\Bootstrap5\Alert;
 use Yiisoft\Widget\Widget;
 
 final class FlashMessage extends Widget

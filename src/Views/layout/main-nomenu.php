@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Balemy\LdapCommander\Asset\AppAsset;
 use Balemy\LdapCommander\Widget\FlashMessage;use Yiisoft\Html\Html;
 use Yiisoft\I18n\Locale;
-use Yiisoft\Yii\Bootstrap5\NavBar;
+use Yiisoft\Bootstrap5\NavBar;
 
 /**
  * @var Balemy\LdapCommander\ApplicationParameters $applicationParameters

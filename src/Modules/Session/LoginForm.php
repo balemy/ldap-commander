@@ -39,6 +39,9 @@ final class LoginForm extends FormModel implements RulesProviderInterface
         ];
     }
 
+    /**
+     * @return array<string, list<\Yiisoft\Validator\RuleInterface|callable>>
+     */
     public function getRules(): array
     {
         return [
@@ -48,6 +51,9 @@ final class LoginForm extends FormModel implements RulesProviderInterface
         ];
     }
 
+    /**
+     * @return list<\Yiisoft\Validator\RuleInterface|callable>
+     */
     private function passwordRules(): array
     {
         return [
