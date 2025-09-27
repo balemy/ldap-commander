@@ -79,7 +79,7 @@ jobs:
 
       - name: Upload Codeception Output
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: codeception-output
           path: runtime/tests/_output/*
