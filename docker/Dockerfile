@@ -21,14 +21,8 @@ RUN \
     docker-php-ext-install zip && \
     php -m
 
-#-----------------------------------------------------------------------------
-# Install Caddy
-#-----------------------------------------------------------------------------
-RUN apt-get update && apt-get install -y debian-keyring debian-archive-keyring curl gnupg && \
-    curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmor -o /usr/share/keyrings/caddy-stable.gpg && \
-    curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /etc/apt/sources.list.d/caddy-stable.list && \
-    apt-get update && apt-get install caddy -y
-
+# Hole Caddy Binary aus offiziellem Image
+COPY --from=caddy:2 /usr/bin/caddy /usr/bin/caddy
 
 #--------------------------------------------------------------------------
 # Download Composer and install
@@ -51,8 +45,8 @@ ENV ENABLE_CADDY=false
 ENV HOSTNAME=localhost
 
 # Copy Caddyfile
-COPY Caddyfile /etc/caddy/Caddyfile
-COPY entrypoint.sh /entrypoint.sh
+COPY docker/Caddyfile /etc/caddy/Caddyfile
+COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # Expose both sets of ports (only used if ENABLE_CADDY=true)
