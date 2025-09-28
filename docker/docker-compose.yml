@@ -19,12 +19,18 @@ services:
   ldap-commander:
     image: balemy/ldap-commander:latest
     container_name: ldap-commander
+    environment:
+      - ENABLE_CADDY=false
+      - HOSTNAME=ldap.example.com
     ports:
       - "8080:8080"
+#      - "80:80"
+#      - "443:443"
     depends_on:
       - openldap
     volumes:
       - './config.php:/app/config/ldap.php'
+      - ./data/caddy:/data
 volumes:
   openldap_data:
     driver: local

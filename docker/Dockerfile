@@ -41,6 +41,7 @@ RUN rm -rf /var/lib/apt/lists/*
 #--------------------------------------------------------------------------
 
 # Add ENV options
+ENV XDG_DATA_HOME=/data
 ENV ENABLE_CADDY=false
 ENV HOSTNAME=localhost
 

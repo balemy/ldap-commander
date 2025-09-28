@@ -31,7 +31,19 @@ LDAP Commander is a web interface for managing LDAP servers. Currently only Open
 
 ```
 wget -O config.php https://raw.githubusercontent.com/balemy/ldap-commander/main/config/ldap.example.php
-docker run -it --net='host' -p 8080:8080 -v ./config.php:/app/config/ldap.php balemy/ldap-commander
+
+# On Port 80/443 with enabled Caddy und LetsEncrypt certs
+docker run -d -p 80:80 -p 443:443 \
+    --restart always \
+    -e ENABLE_CADDY=true \
+    -e HOSTNAME=example.com \
+    -v ./config.php:/app/config/ldap.php \
+    -v ./data/caddy:/data \
+     balemy/ldap-commander
+
+# On Port 8080
+`docker run -it --net='host'` -p 8080:8080 -v ./config.php:/app/config/ldap.php balemy/ldap-commander
+
 ````
 
 **Docker Compose (with bundled LDAP Server and Example data):**
