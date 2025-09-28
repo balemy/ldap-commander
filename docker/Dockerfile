@@ -3,6 +3,7 @@ FROM php:8.2-cli
 WORKDIR /app
 COPY . .
 
+
 RUN apt-get update
 
 #--------------------------------------------------------------------------
@@ -20,6 +21,15 @@ RUN \
     docker-php-ext-install zip && \
     php -m
 
+#-----------------------------------------------------------------------------
+# Install Caddy
+#-----------------------------------------------------------------------------
+RUN apt-get update && apt-get install -y debian-keyring debian-archive-keyring curl gnupg && \
+    curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmor -o /usr/share/keyrings/caddy-stable.gpg && \
+    curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /etc/apt/sources.list.d/caddy-stable.list && \
+    apt-get update && apt-get install caddy -y
+
+
 #--------------------------------------------------------------------------
 # Download Composer and install
 #--------------------------------------------------------------------------
@@ -35,5 +45,17 @@ RUN rm -rf /var/lib/apt/lists/*
 #--------------------------------------------------------------------------
 # Run
 #--------------------------------------------------------------------------
-CMD ["php", "/app/cmda", "serve", "0.0.0.0"]
-EXPOSE 8080
+
+# Add ENV options
+ENV ENABLE_CADDY=false
+ENV HOSTNAME=localhost
+
+# Copy Caddyfile
+COPY Caddyfile /etc/caddy/Caddyfile
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Expose both sets of ports (only used if ENABLE_CADDY=true)
+EXPOSE 8080 80 443
+
+ENTRYPOINT ["/entrypoint.sh"]
