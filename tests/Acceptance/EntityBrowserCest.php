@@ -13,8 +13,8 @@ final class EntityBrowserCest
         $I->wantTo('check login is required.');
         $I->amOnPage('/entity/browse');
 
-        $I->expectTo('LDAP Login.');
-        $I->see('LDAP Login');
+        $I->expectTo('Please sign in.');
+        $I->see('Please sign in');
     }
 
     public function testIndexPage(AcceptanceTester $I): void

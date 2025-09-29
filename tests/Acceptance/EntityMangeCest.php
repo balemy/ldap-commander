@@ -13,8 +13,8 @@ final class EntityManageCest
         $I->wantTo('check login is required.');
         $I->amOnPage('/entity/edit?dn=dc%3Dexample%2Cdc%3Dorg&new=1');
 
-        $I->expectTo('LDAP Login.');
-        $I->see('LDAP Login');
+        $I->expectTo('Please sign in.');
+        $I->see('Please sign in');
     }
 
     public function testCreateAndDeleteOU(AcceptanceTester $I): void

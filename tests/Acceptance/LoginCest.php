@@ -19,7 +19,7 @@ final class LoginCest
         $I->click('Login', '#loginForm');
 
         $I->expectTo('see logged index page.');
-        $I->dontSee('LDAP Login');
+        $I->dontSee('Please sign in');
 
         $I->expectTo('See Homepage Browse');
         $I->see('Overview of all users');
