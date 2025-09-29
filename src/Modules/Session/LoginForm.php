@@ -35,7 +35,7 @@ final class LoginForm extends FormModel implements RulesProviderInterface
     public function getPropertyHints(): array
     {
         return [
-            'username' => 'Leave empty for configured Admin DN',
+//            'username' => 'Leave empty for configured Admin DN',
         ];
     }
 

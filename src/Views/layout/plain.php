@@ -39,28 +39,8 @@ $this->beginPage()
 </head>
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
-
-<header>
-    <?= NavBar::widget()
-        ->brandText($applicationParameters->getName())
-        ->brandUrl('/')
-        ->addClass('navbar', 'navbar-dark', 'bg-dark', 'navbar-expand-lg', 'text-white')
-        ->begin();
-    ?>
-
-    <?= NavBar::end() ?>
-</header>
-
-
-<main role="main" class="flex-shrink-0">
-    <div class="container">
         <?= FlashMessage::widget() ?>
-
         <?= $content ?>
-    </div>
-</main>
-
-
 <?= $this->render('./_footer', ['applicationParameters' => $applicationParameters]); ?>
 
 <?php $this->endBody() ?>

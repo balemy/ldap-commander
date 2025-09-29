@@ -13,6 +13,7 @@ use Yiisoft\Assets\AssetManager;
 use Yiisoft\FormModel\FormHydrator;
 use Yiisoft\Http\Method;
 use Yiisoft\Router\UrlGeneratorInterface;
+use Yiisoft\Session\Flash\FlashInterface;
 use Yiisoft\Session\SessionInterface;
 use Yiisoft\Yii\View\Renderer\ViewRenderer;
 
@@ -24,9 +25,10 @@ final class AuthController
         public WebControllerService $webService,
         public UrlGeneratorInterface $urlGenerator,
         public SessionInterface $session,
+        public FlashInterface $flash,
         public AssetManager $assetManager,
     ) {
-        $this->viewRenderer = $viewRenderer->withViewPath(__DIR__ . '/Views/')->withLayout('@views/layout/main-nomenu');
+        $this->viewRenderer = $viewRenderer->withViewPath(__DIR__ . '/Views/')->withLayout('@views/layout/plain');
     }
 
     public function login(
@@ -37,6 +39,10 @@ final class AuthController
         ApplicationParameters $applicationParameters,
     ): ResponseInterface {
         $loginForm = new LoginForm($sessionList);
+
+        if (count($sessionList->getAll()) === 0) {
+            $this->flash->add('danger', ['body' => 'Configuration File missing!']);
+        }
 
         if ($request->getMethod() === Method::POST &&
             $formHydrator->populateFromPostAndValidate($loginForm, $request) && $loginForm->isValid()) {

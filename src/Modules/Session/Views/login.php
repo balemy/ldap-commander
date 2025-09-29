@@ -16,43 +16,74 @@ use Yiisoft\Html\Tag\Form;
  */
 ?>
 
-<div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="card border border-dark shadow-2-strong rounded-3  col-md-8">
-            <div class="card-header bg-dark text-white">
-                <h1 class="fw-normal h3 text-center">LDAP Login</h1>
-            </div>
-            <div class="card-body p-5" style="">
-                <?php if (!empty($applicationParameters->loginMessage)): ?>
-                    <div class="alert alert-primary" role="alert">
-                        <?= $applicationParameters->loginMessage ?>
-                    </div>
-                <?php endif; ?>
+<style>
 
-                <?php if (!empty($sessionList)): ?>
-                    <?= Form::tag()->post($urlGenerator->generate('login', []))->csrf($csrf)->id('loginForm')->open() ?>
-                    <div class="form-floating">
-                        <?= Field::select($loginForm, 'sessionId')->optionsData($sessionList)->autofocus(); ?>
-                    </div>
-                    <div class="row">
-                        <div class="col-md">
-                            <?= Field::text($loginForm, 'username')->autofocus(); ?>
-                        </div>
-                        <div class="col-md">
-                            <?= Field::password($loginForm, 'password') ?>
-                        </div>
-                    </div>
+    html,
+    body {
+        height: 100%;
+    }
 
-                    <?= Field::submitButton()->name('login-button')->content('Login') ?>
-                    <?= Form::tag()->close() ?>
-                <?php else: ?>
-                    <div class="alert alert-danger" role="alert">
-                        <p><strong>Configuration File missing!</strong></p>
-                        <p>Please create the file <code>/config/ldap.php</code> an example can be found
-                            here: <code><?= $aliases->get('@root') ?>/ldap.php</code></p>
-                    </div>
-                <?php endif; ?>
+    body {
+        display: flex;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+
+    .form-signin {
+        width: 100%;
+        max-width: 430px;
+        padding: 15px;
+        margin: auto;
+    }
+
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+
+    .form-signin .form-floating:focus-within {
+        z-index: 2;
+    }
+
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+    body {
+        text-align:center!important;
+    }
+</style>
+<main class="form-signin">
+    <?= Form::tag()->post($urlGenerator->generate('login', []))->csrf($csrf)->id('loginForm')->open() ?>
+        <img class="mb-4" src="https://dummyimage.com/300" alt="" width="72">
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+        <?php if (!empty($applicationParameters->loginMessage)): ?>
+            <div class="alert alert-primary" role="alert">
+                <?= $applicationParameters->loginMessage ?>
             </div>
+        <?php endif; ?>
+
+        <div class="form-floating">
+            <?= Field::select($loginForm, 'sessionId')->optionsData($sessionList)->autofocus(); ?>
         </div>
-    </div>
-</div>
+        <div class="form-floating">
+            <?= Field::text($loginForm, 'username')->autofocus(); ?>
+        </div>
+        <div class="form-floating">
+            <?= Field::password($loginForm, 'password') ?>
+        </div>
+
+        <?= Field::submitButton()->name('login-button')->content('Login') ?>
+        <?= Form::tag()->close() ?>
+    </form>
+</main>
+
